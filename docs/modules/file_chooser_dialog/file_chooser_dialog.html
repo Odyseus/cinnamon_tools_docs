@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>file_chooser_dialog package &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="python_modules" href="../python_modules/modules.html" />
+    <link rel="prev" title="file_chooser_dialog" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">file_chooser_dialog</a> &raquo;</li>
+        
+      <li>file_chooser_dialog package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/modules/file_chooser_dialog/file_chooser_dialog.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../python_modules/modules.html" class="btn btn-neutral float-right" title="python_modules" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="file_chooser_dialog" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-file_chooser_dialog">
+<span id="file-chooser-dialog-package"></span><h1>file_chooser_dialog package<a class="headerlink" href="#module-file_chooser_dialog" title="Permalink to this headline">¶</a></h1>
+<p>File chooser dialog.</p>
+<p>Designed mostly to be used from JavaScript code to get a dialog to choose a path from. It can
+also be used as a module if needed/wanted.</p>
+<div class="admonition-examples admonition">
+<p class="admonition-title">Examples</p>
+<p>Used as a module from Python to select a single file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">file_chooser_dialog</span> <span class="kn">import</span> <span class="n">open_dialog</span>
+
+<span class="n">pattern_filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;JSON files;*.json&quot;</span><span class="p">,</span> <span class="s2">&quot;All files;*&quot;</span><span class="p">]</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">open_dialog</span><span class="p">(</span><span class="n">return_paths</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                       <span class="n">transient_for</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># Set accordingly.</span>
+                       <span class="n">buttons_labels</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Open&quot;</span><span class="p">),</span>
+                       <span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Select a JSON file&quot;</span><span class="p">),</span>
+                       <span class="n">pattern_filters</span><span class="o">=</span><span class="n">pattern_filters</span><span class="p">,</span>
+                       <span class="n">dialog_action</span><span class="o">=</span><span class="s2">&quot;open&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>  <span class="c1"># Path to selected file.</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>  <span class="c1"># String (str).</span>
+</pre></div>
+</div>
+<p>Same as the previous example, but from the command line. The selected path will be printed to STDOUT.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./file_chooser_dialog.py --title <span class="s2">&quot;Select a JSON file&quot;</span> --pattern-filters <span class="s2">&quot;JSON files;*.json&quot;</span> <span class="s2">&quot;All files;*&quot;</span>
+</pre></div>
+</div>
+<p>Used as a module from Python to select multiple files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">file_chooser_dialog</span> <span class="kn">import</span> <span class="n">open_dialog</span>
+
+<span class="n">mimetype_filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Audio files;audio/*&quot;</span><span class="p">,</span> <span class="s2">&quot;All files;*&quot;</span><span class="p">]</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">open_dialog</span><span class="p">(</span><span class="n">return_paths</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                       <span class="n">select_multiple</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                       <span class="n">transient_for</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>  <span class="c1"># Set accordingly.</span>
+                       <span class="n">buttons_labels</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Open&quot;</span><span class="p">),</span>
+                       <span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Select audio files&quot;</span><span class="p">),</span>
+                       <span class="n">mimetype_filters</span><span class="o">=</span><span class="n">mimetype_filters</span><span class="p">,</span>
+                       <span class="n">dialog_action</span><span class="o">=</span><span class="s2">&quot;open&quot;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>  <span class="c1"># List of paths to selected files.</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>  <span class="c1"># List (list).</span>
+</pre></div>
+</div>
+<p>Same as the previous example, but from the command line. The selected paths will be printed to STDOUT
+in &quot;JSON format&quot;.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./file_chooser_dialog.py --title <span class="s2">&quot;Select audio files&quot;</span> --mimetype-filters <span class="s2">&quot;Audio files;audio/*&quot;</span> <span class="s2">&quot;All files;*&quot;</span>
+</pre></div>
+</div>
+</div>
+<dl class="function">
+<dt id="file_chooser_dialog._attach_filters">
+<code class="sig-prename descclassname">file_chooser_dialog.</code><code class="sig-name descname">_attach_filters</code><span class="sig-paren">(</span><em class="sig-param">dialog</em>, <em class="sig-param">filter_arg=[]</em>, <em class="sig-param">filter_type='pattern'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/file_chooser_dialog.html#_attach_filters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#file_chooser_dialog._attach_filters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach filters to dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dialog</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><em>object</em></a>) -- See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/FileChooserDialog.html#Gtk.FileChooserDialog" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.FileChooserDialog</span></code></a>.</p></li>
+<li><p><strong>filter_arg</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) -- Description</p></li>
+<li><p><strong>filter_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- One of &quot;pattern&quot; or &quot;mimetype&quot;.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/FileChooserDialog.html#Gtk.FileChooserDialog" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.FileChooserDialog</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_chooser_dialog.open_dialog">
+<code class="sig-prename descclassname">file_chooser_dialog.</code><code class="sig-name descname">open_dialog</code><span class="sig-paren">(</span><em class="sig-param">return_paths=False</em>, <em class="sig-param">transient_for=None</em>, <em class="sig-param">select_multiple=False</em>, <em class="sig-param">buttons_labels=''</em>, <em class="sig-param">title='Open'</em>, <em class="sig-param">pattern_filters=[]</em>, <em class="sig-param">mimetype_filters=[]</em>, <em class="sig-param">dialog_action='open'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/file_chooser_dialog.html#open_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#file_chooser_dialog.open_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open file chooser dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>return_paths</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether to return the selected paths. If false, the path/s will be printed to STDOUT.</p></li>
+<li><p><strong>transient_for</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/Window.html#Gdk.Window" title="(in Gdk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gdk.Window</span></code></a> to attach the dialog to.</p></li>
+<li><p><strong>select_multiple</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether to allow multiple paths selection.</p></li>
+<li><p><strong>buttons_labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- A string representiong the dialog's buttons labels separated by a colon. To the left of
+the colon, the <code class="docutils literal notranslate"><span class="pre">CANCEL</span></code> button label and to the right the <code class="docutils literal notranslate"><span class="pre">OK</span></code> button label. Example:
+&quot;Cancel:Save&quot;.</p></li>
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- The dialog title.</p></li>
+<li><p><strong>pattern_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>, </em><em>optional</em>) -- <p>A list of strings representing the file pattern filters that will be attached to the dialog.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Format</span><span class="p">:</span> <span class="s2">&quot;FILTER_LABEL;FILTER_1:FILTER_2:FILTER_3&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example Python.</span>
+<span class="n">pattern_filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All files;*&quot;</span><span class="p">,</span> <span class="s2">&quot;JSON files;*.json&quot;</span><span class="p">,</span> <span class="s2">&quot;Text files;*.txt&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example command line.</span>
+$ ./file_chooser_dialog.py --pattern-filters <span class="s2">&quot;All files;*&quot;</span>, <span class="s2">&quot;JSON files;*.json&quot;</span>, <span class="s2">&quot;Text files;*.txt&quot;</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>mimetype_filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>, </em><em>optional</em>) -- <p>A list of strings representing the MIME type filters that will be attached to the dialog.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Format</span><span class="p">:</span> <span class="s2">&quot;FILTER_LABEL;FILTER_1:FILTER_2:FILTER_3&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example Python.</span>
+<span class="n">mimetype_filters</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All files;*&quot;</span><span class="p">,</span> <span class="s2">&quot;Image files;image/*&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example command line.</span>
+$ ./file_chooser_dialog.py --mimetype-filters <span class="s2">&quot;All files;*&quot;</span>, <span class="s2">&quot;Image files;image/*&quot;</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>dialog_action</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- One of &quot;open&quot;, &quot;select_folder&quot; or &quot;save&quot;.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>str</em> -- The selected path when <code class="docutils literal notranslate"><span class="pre">select_multiple</span></code> is false or <code class="docutils literal notranslate"><span class="pre">dialog_action</span></code> is &quot;save&quot;.</p></li>
+<li><p><em>list</em> -- The selected paths when <code class="docutils literal notranslate"><span class="pre">select_multiple</span></code> is true and <code class="docutils literal notranslate"><span class="pre">dialog_action</span></code> is not &quot;save&quot;.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_chooser_dialog.cli">
+<code class="sig-prename descclassname">file_chooser_dialog.</code><code class="sig-name descname">cli</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/file_chooser_dialog.html#cli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#file_chooser_dialog.cli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command line interface.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">file_chooser_dialog</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">select</span><span class="o">-</span><span class="n">multiple</span><span class="p">]</span>
+                              <span class="p">[</span><span class="o">--</span><span class="n">buttons</span><span class="o">-</span><span class="n">labels</span> <span class="n">BUTTONS_LABELS</span><span class="p">]</span>
+                              <span class="p">[</span><span class="o">--</span><span class="n">title</span> <span class="n">TITLE</span><span class="p">]</span>
+                              <span class="p">[</span><span class="o">--</span><span class="n">pattern</span><span class="o">-</span><span class="n">filters</span> <span class="p">[</span><span class="n">PATTERN_FILTERS</span> <span class="p">[</span><span class="n">PATTERN_FILTERS</span> <span class="o">...</span><span class="p">]]]</span>
+                              <span class="p">[</span><span class="o">--</span><span class="n">mimetype</span><span class="o">-</span><span class="n">filters</span> <span class="p">[</span><span class="n">MIMETYPE_FILTERS</span> <span class="p">[</span><span class="n">MIMETYPE_FILTERS</span> <span class="o">...</span><span class="p">]]]</span>
+                              <span class="p">[</span><span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="nb">open</span> <span class="o">|</span> <span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="n">select</span><span class="o">-</span><span class="n">folder</span> <span class="o">|</span> <span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="n">save</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">select</span><span class="o">-</span><span class="n">multiple</span>
+  <span class="o">--</span><span class="n">buttons</span><span class="o">-</span><span class="n">labels</span> <span class="n">BUTTONS_LABELS</span>
+  <span class="o">--</span><span class="n">title</span> <span class="n">TITLE</span>
+  <span class="o">--</span><span class="n">pattern</span><span class="o">-</span><span class="n">filters</span> <span class="p">[</span><span class="n">PATTERN_FILTERS</span> <span class="p">[</span><span class="n">PATTERN_FILTERS</span> <span class="o">...</span><span class="p">]]</span>
+  <span class="o">--</span><span class="n">mimetype</span><span class="o">-</span><span class="n">filters</span> <span class="p">[</span><span class="n">MIMETYPE_FILTERS</span> <span class="p">[</span><span class="n">MIMETYPE_FILTERS</span> <span class="o">...</span><span class="p">]]</span>
+  <span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="nb">open</span>
+  <span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="n">select</span><span class="o">-</span><span class="n">folder</span>
+  <span class="o">--</span><span class="n">action</span><span class="o">-</span><span class="n">save</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python_modules/modules.html" class="btn btn-neutral float-right" title="python_modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="file_chooser_dialog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

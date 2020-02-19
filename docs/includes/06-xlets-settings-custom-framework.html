@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Xlets settings custom framework &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="file_chooser_dialog" href="../modules/file_chooser_dialog/modules.html" />
+    <link rel="prev" title="EOL ideas/plans" href="05-EOL.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Xlets settings custom framework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-changes">General changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#widget-changes-made">Widget changes made</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#todo">TODO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#done">DONE</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Xlets settings custom framework</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/includes/06-xlets-settings-custom-framework.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../modules/file_chooser_dialog/modules.html" class="btn btn-neutral float-right" title="file_chooser_dialog" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="05-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xlets-settings-custom-framework">
+<h1>Xlets settings custom framework<a class="headerlink" href="#xlets-settings-custom-framework" title="Permalink to this headline">¶</a></h1>
+<p>I created this framework for several reasons.</p>
+<ul class="simple">
+<li><p>I don't want to maintain several versions of my xlets, so I refuse to ever use <code class="docutils literal notranslate"><span class="pre">multiversion</span></code> (again) on my xlets. Which is what I would be forced to do if I were to make use of Cinnamon's native settings framework because of the always evolving nature of Cinnamon itself.</p></li>
+<li><p>And finally, I don't like the philosophy <em>the less options the better</em>.</p></li>
+</ul>
+<div class="section" id="general-changes">
+<h2>General changes<a class="headerlink" href="#general-changes" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Eradication of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Box.html#Gtk.Box" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Box</span></code></a> in favor of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Grid.html#Gtk.Grid" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Grid</span></code></a>.</p></li>
+<li><p>This implementation uses header bars instead of traditional windows with a toolbar. Why?</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Because upstream is planing to switch to this aberration belched from the bowels of corporations full of web developers playing at being software developers. SO, better get used to this garbage in preparation for when it's forced down our throats.</p></li>
+<li><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/HeaderBar.html#Gtk.HeaderBar" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.HeaderBar</span></code></a> is easier to deal with (just create one and throw all widgets inside it). So, there is the barely bright side. LOL</p></li>
+<li><p>In spite of my aversion for header bars, this framework is used for settings windows for xlets. And I create xlets whose settings are &quot;to be set and forgotten&quot;. So, one just has to tolerate the settings window once. And for xlet settings that need to be changed frequently, I always create a mechanism to set them on-the-fly, without having to open the settings window.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>This implementation remembers the last state of opened windows (window size, maximized state and selected section on the sidebar). Setting an initial size for a window that will be suitable for every single combination of font sizes, Gtk3 themes, screen resolutions just doesn't cut it for me.</p></li>
+<li><p>This implementation doesn't use JSON files for the creation of the widgets. I wanted the power and flexibility of Python scripts.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">dependency</span></code> option for a widget can be a string or a list.</p></li>
+</ul>
+</div>
+<div class="section" id="widget-changes-made">
+<h2>Widget changes made<a class="headerlink" href="#widget-changes-made" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><strong>button</strong>: This widget doesn't use the <em>proxy</em> that the Cinnamon implementation uses. Instead, it just toggles a boolean setting that can be bound to any action on the xlet side.</p></li>
+<li><p><strong>entry</strong>: This widget has the <code class="docutils literal notranslate"><span class="pre">expand-width</span></code> option set to True by default, as it should be.</p></li>
+<li><p><strong>list</strong>: This widget has several bug fixes (<strong>FIXME</strong>: remember to properly report them if and when I can reproduce them) and several improvements.</p>
+<blockquote>
+<div><ul>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">options-from-paths</span></code> option. It allows to create a combo box widget based on files found inside an specified path to a folder. This option is a dictionary with three possible properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">file-patterns</span></code>: A list of file patterns to be used by the fnmatch.filter() Python function. The names of the files that matches the patterns will be used to populate the combo box.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path-in-xlet</span></code>: A relative path to a folder inside the xlet folder that will be scanned for files using the <code class="docutils literal notranslate"><span class="pre">file-patterns</span></code> option. The items generated by files found in the folder specified by this option will be prefixed with a double colon (::).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">path-in-setting</span></code>: The name of a setting that stores a custom path to a folder to scan for files.</p></li>
+<li><p>Either the <code class="docutils literal notranslate"><span class="pre">path-in-xlet</span></code> option or the <code class="docutils literal notranslate"><span class="pre">path-in-setting</span></code> option or both can be specified, but none omitted.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">color</span></code> cell renderer. It allows to choose a color using a color chooser. The cell will be rendered with the selected color as its background color and the color <em>name</em> as its visible value. The color of the text will be black or white depending on the luminance of the background color.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">move-buttons</span></code> boolean option. It allows to show/hide the move up/down buttons on the <code class="docutils literal notranslate"><span class="pre">list</span></code> widget.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">multi-select</span></code> boolean option. It allows to select multiple rows inside the <code class="docutils literal notranslate"><span class="pre">list</span></code> widget. Mostly useful for mass deletions of items.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">immutable</span></code> option. An <em>immutable</em> <code class="docutils literal notranslate"><span class="pre">list</span></code> widget can be edited, but items in the list cannot be removed nor new ones be added.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This setting can be a boolean or a dictionary.</p></li>
+<li><p>If a dictionary, the <code class="docutils literal notranslate"><span class="pre">read-only-keys</span></code> key will allow to specify a list of column IDs whose created widgets should be set as insensitive.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Added ability to export and import the content of the list.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">apply_key</span></code> and <code class="docutils literal notranslate"><span class="pre">imp_exp_path_key</span></code> arguments.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">apply_key</span></code> is a generic setting that can be bound to a function on the xlet side to allow to apply the changes made to the list on demand.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">imp_exp_path_key</span></code> key is a generic setting that is used to store the last selected path when using the import/export dialogs.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">dialog-info-labels</span></code> option (an array/list of strings) that allows to display informative labels on the edit/add dialog. This allows to keep the window clean and at the same time keep basic information at hand.</p></li>
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> cell renderer. The cell will display the exact same name displayed in the <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> widget instead of the internal value. For example, a <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> with its shortcut set to <strong>Control+d</strong> (the actual internal value is <strong>&lt;Primary&gt;d</strong>), it will display <strong>Control+D</strong> in the <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> widget label <strong>AND</strong> in the <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> cell renderer.</p></li>
+<li><p>Implemented <code class="docutils literal notranslate"><span class="pre">apply-and-quit</span></code> boolean option. It allows to exit the settings window when the apply button on a <code class="docutils literal notranslate"><span class="pre">list</span></code> widget is clicked.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">app</span></code> cell renderer. It allows to use a <code class="docutils literal notranslate"><span class="pre">appchooser</span></code> widget to choose an application from the applications installed in a system. The value stored is the application ID and the value showed in the list is the application name.</p></li>
+<li><p>Added keyboard handling (delete/move) of items.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>keybinding</strong>: Added <code class="docutils literal notranslate"><span class="pre">num-bind</span></code> integer option that exposes for configuration the number of keybindings to create for each <code class="docutils literal notranslate"><span class="pre">keybinding</span></code> widget.</p></li>
+<li><p><strong>keybinding-with-options</strong>. A new widget that allows to attach a keybinding to a combo box. The objective is to be able to easily tie a keybinding to a predefined action. This widget is also exposed to be used with the <code class="docutils literal notranslate"><span class="pre">list</span></code> widget.</p></li>
+<li><p><strong>label</strong>: Added <code class="docutils literal notranslate"><span class="pre">use-markup</span></code> boolean option that allows to use markup in labels.</p></li>
+<li><p><strong>colorchooser</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Added ability to activate the color chooser button when clicking the row is in, just like switches.</p></li>
+<li><p>Exposed the capability for the color chooser to select color with or without alpha with the boolean option <code class="docutils literal notranslate"><span class="pre">use-alpha</span></code>.</p></li>
+<li><p>Added a button next to the widget that allows to clear its value.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>textview</strong>: Added <code class="docutils literal notranslate"><span class="pre">accept-tabs</span></code> boolean option to <code class="docutils literal notranslate"><span class="pre">textview</span></code> widget. Setting it to <strong>true</strong> will allow to insert a tab character when pressing the <kbd class="kbd docutils literal notranslate">Tab</kbd> key. Setting it to <strong>false</strong> the <kbd class="kbd docutils literal notranslate">Tab</kbd> key will move the keyboard focus out of the widget.</p></li>
+<li><p><strong>combobox</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Changed the <code class="docutils literal notranslate"><span class="pre">options</span></code> option. I inverted the definition of <code class="docutils literal notranslate"><span class="pre">options</span></code> when they are declared as a dictionary. In Cinnamon's implementation, the key in the dictionary is used as a label and the value is used as the value for that label. In this implementation, the value is used as a key in the dictionary and the label as the value of that key. This was done to be able to localize the labels declared in a Python script. If I would have left the Cinnamon implementation intact, I would have been forced to create a <em>dummy strings storage</em> for <code class="docutils literal notranslate"><span class="pre">gettext</span></code> to be able to <em>see them</em> (which would have been a chore). Additionally, in Cinnamon's implementation, one ended up using keys with spaces, which freaked me out (LOL).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> option in this implementation will have its items sorted alphabetically.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">first-option</span></code> option. It allows to specify an <code class="docutils literal notranslate"><span class="pre">options</span></code> key to be always at the top of the combobox.</p></li>
+<li><p>Exposed for configuration the <code class="docutils literal notranslate"><span class="pre">valtype</span></code> option for this widget. This was a necessity born of the change that I made to the <code class="docutils literal notranslate"><span class="pre">options</span></code> option.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I finally figure out why in Cinnamon's implementation the <code class="docutils literal notranslate"><span class="pre">options</span></code> option is implemented in an <em>unnatural</em> way. It's because when the widgets are generated from definitions found in a settings-schema.json file, the values can be defined in the type that is needed (integer, float, string or boolean). Then, when the widget is built, the type is extracted from the values themselves. Since I inverted the <code class="docutils literal notranslate"><span class="pre">options</span></code> option into a <em>natural</em> behavior, I broke that very clever feature, and that's why I exposed the <code class="docutils literal notranslate"><span class="pre">valtype</span></code> option; to be able to explicitly set a type for an option.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>appchooser</strong>: A new widget that allows to select an application from the list of installed applications on a system. The value stored in the setting for this widget is the application ID (the name of its .desktop file).</p></li>
+<li><p><strong>applist</strong>: A new widget that allows to store a list of unique applications that can be selected from the list of installed applications on a system. The value stored in the setting for this widget is an array with the list of application IDs (the name of their .desktop files).</p></li>
+<li><p><strong>filechooser</strong>: Added a button that allows to clear the path set by this widget.</p></li>
+<li><p><strong>iconchooser</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Modified to use a custom icon chooser widget that behaves similarly to the one used by Cinnamon's native settings system. Since Cinnamon's native depends on <code class="docutils literal notranslate"><span class="pre">XApp</span></code>, I created almost from scratch a widget in Python (<a class="reference internal" href="../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog" title="xlets_settings.IconChooserWidgets.IconChooserDialog"><code class="xref any py py-class docutils literal notranslate"><span class="pre">IconChooserDialog</span></code></a>).</p></li>
+<li><p>The value in the widget is always displayed inside an entry for quick edition of it without the need to open the icon chooser dialog.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-info info admonition">
+<p class="admonition-title">No longer a limitation</p>
+<ul class="wy-text-strike simple">
+<li><p>Settings windows aren't multi instance. When dealing with multiple instances of the same xlet, a setting window for each instance of an xlet will be opened. This was done to simplify the code and to not depend on features dependent on specific Cinnamon versions nor on third-party libraries like XApps.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="todo">
+<h2>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Implement the rest of widgets (<code class="docutils literal notranslate"><span class="pre">datechooser</span></code>, <code class="docutils literal notranslate"><span class="pre">fontchooser</span></code>, <code class="docutils literal notranslate"><span class="pre">scale</span></code>, <code class="docutils literal notranslate"><span class="pre">soundfilechooser</span></code> and <code class="docutils literal notranslate"><span class="pre">tween</span></code>). Since I don't use them in any of my xlets, I didn't implemented these widgets just yet. I don't think that I will ever use nor implement any of these widgets (implementing them will require at least a thousand lines of code!). <strong>Ultra low priority</strong></p></li>
+</ul>
+</div>
+<div class="section" id="done">
+<h2>DONE<a class="headerlink" href="#done" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-info info admonition">
+<p class="admonition-title">Implemented</p>
+<p>Final implementation details:</p>
+<ul class="simple">
+<li><p>Use of side bars instead of stack switchers in the header bar.</p></li>
+<li><p>At the start of the header bar, the instance switcher. If only one instance, the image of the xlet.</p></li>
+<li><p>In the middle of the header, just the xlet name as the window title and the xlet UUID and instance ID as sub-title.</p></li>
+<li><p>At the end of the header bar, the menu button to handle importing/exporting/reseting settings and optionally an item to open the xlet help page.</p></li>
+<li><p>Implemented handling of multiple xlets instances.</p></li>
+<li><p>Implemented handling of gsettings.</p></li>
+</ul>
+<ul class="wy-text-strike">
+<li><p>Implement handling of multiple xlet instances. I didn't implemented this due to its complexity and because I mostly use one instance of each xlet, so it never bothered me. But now that I'm familiar enough with the original code, I might give it a try.</p>
+<blockquote>
+<div><ul>
+<li><p>Forget about adding the window title to the header bar. If I implement this, I would have to add the instance switcher buttons at the start of the header bar, leaving no place whatsoever to display the window title.</p></li>
+<li><p>Maybe add a status bar at the bottom of the window that can hold the window title along with other information; like the instance ID perhaps? Or maybe just a simple label at the top of the window and bellow the header bar? But what I like the most so far is:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Add a button at the start of the header bar with the xlet icon as an image and the text &quot;Settings for...&quot; as a tooltip.</p></li>
+<li><p>In most cases, the image alone will serve to quickly identify to which xlet the window belongs.</p></li>
+<li><p>K.I.S.S. it. Do not add a menu nor any other action to the button.</p></li>
+<li><p>I already implemented this button without implementing multi-instance support. It was bothering me a big deal to see the title text ellipsized 90% of the time; it just made that text in that place totally useless. Like I said in point 3, in most cases the image is enough.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="admonition-warning warning admonition">
+<p class="admonition-title">Abandoned ideas</p>
+<ul class="simple">
+<li><p>Implement a <em>multi-widget widget</em>. Something similar to the <code class="docutils literal notranslate"><span class="pre">keybinding-with-options</span></code> widget. But instead of binding a combo box to a key binding, I would like to bind any type of widget to an option selector widget (a combo box or a stack switcher). Very green idea yet. <strong>Low priority</strong></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modules/file_chooser_dialog/modules.html" class="btn btn-neutral float-right" title="file_chooser_dialog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="05-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

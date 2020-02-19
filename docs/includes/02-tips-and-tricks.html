@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cinnamon tips and tricks &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development notes" href="03-development-notes.html" />
+    <link rel="prev" title="Usage" href="01-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cinnamon tips and tricks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#restarting-cinnamon">Restarting Cinnamon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-recover-from-a-frozen-locked-crashed-cinnamon">How to recover from a frozen/locked/crashed Cinnamon</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-exit-the-x-desktop-session">Step 1 - Exit the X desktop session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-perform-recovery-tasks">Step 2 - Perform recovery tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-go-back-to-the-x-desktop-session">Step 3 - Go back to the X desktop session</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#melange-looking-glass">Melange/Looking Glass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reload-themes-useful-for-theme-developers">Reload themes (useful for theme developers)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reload-cinnamon-theme">Reload Cinnamon theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reload-gtk-3-theme">Reload Gtk+ 3 theme</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#general-notes">General notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Cinnamon tips and tricks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/includes/02-tips-and-tricks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="03-development-notes.html" class="btn btn-neutral float-right" title="Development notes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01-usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cinnamon-tips-and-tricks">
+<h1>Cinnamon tips and tricks<a class="headerlink" href="#cinnamon-tips-and-tricks" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Here are listed some tips, tricks and some basic concepts related to the Cinnamon desktop environment.</p>
+</div>
+<div class="section" id="restarting-cinnamon">
+<span id="restart-cinnamon-reference"></span><h2>Restarting Cinnamon<a class="headerlink" href="#restarting-cinnamon" title="Permalink to this headline">¶</a></h2>
+<p>Restarting Cinnamon doesn't mean to shutdown the computer and starting it up again. It means the restart of the <code class="docutils literal notranslate"><span class="pre">cinnamon</span></code> process leaving all opened applications untouched. There are several ways of restarting Cinnamon:</p>
+<ol class="arabic simple">
+<li><p>With the keyboard shortcut <kbd class="kbd docutils literal notranslate">Control</kbd> + <kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">Escape</kbd>.</p></li>
+<li><p>From the <strong>Run dialog</strong> (opened using <kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">F2</kbd>). Typing <code class="docutils literal notranslate"><span class="pre">restart</span></code> or <code class="docutils literal notranslate"><span class="pre">r</span></code> and then pressing <kbd class="kbd docutils literal notranslate">Enter</kbd> will restart Cinnamon.</p></li>
+<li><p>From any panel's context menu. The <strong>Restart Cinnamon</strong> item inside the <strong>Troubleshoot</strong> sub-menu.</p></li>
+<li><p>By executing the command <code class="docutils literal notranslate"><span class="pre">nohup</span> <span class="pre">cinnamon</span> <span class="pre">--replace</span> <span class="pre">&gt;</span> <span class="pre">/dev/null</span> <span class="pre">2&gt;&amp;1</span> <span class="pre">&amp;</span></code> from a terminal.</p></li>
+</ol>
+</div>
+<div class="section" id="how-to-recover-from-a-frozen-locked-crashed-cinnamon">
+<h2>How to recover from a frozen/locked/crashed Cinnamon<a class="headerlink" href="#how-to-recover-from-a-frozen-locked-crashed-cinnamon" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I will be focusing only on trying to recover Cinnamon from a totally unresponsive state caused by xlets; not by drivers, hardware failure nor other applications.</p>
+</div>
+<p>There is one basic principle that needs to be known. Every single applet/extension/desklet installed and enabled <em>&quot;becomes part of Cinnamon&quot;</em>. Thus, any faulty applet/extension/desklet can freeze/lock/crash Cinnamon.</p>
+<p>If one is <em>lucky</em>, Cinnamon will crash and start the <a class="reference internal" href="#fallback-mode-reference"><span class="std std-ref">&quot;fallback mode&quot;</span></a>. If one is unlucky Cinnamon will be totally unresponsive.</p>
+<div class="section" id="step-1-exit-the-x-desktop-session">
+<h3>Step 1 - Exit the X desktop session<a class="headerlink" href="#step-1-exit-the-x-desktop-session" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="tl-dr">
+<h4>TL;DR;<a class="headerlink" href="#tl-dr" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p><kbd class="kbd docutils literal notranslate">Control</kbd> + <kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">F1</kbd> to go to TTY1. <a class="reference internal" href="#cannot-switch-ttys-reference"><span class="std std-ref">Can't switch TTYs?</span></a>.</p></li>
+<li><p>Log in.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">top</span></code> or <code class="docutils literal notranslate"><span class="pre">ps</span></code> to see that all running applications are still running.</p></li>
+</ol>
+</div>
+<div class="section" id="details">
+<h4>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h4>
+<p>The goal here is to safely exit the X desktop session without closing any of the applications that were running previous to Cinnamon's frozen state and then come back to it. <strong>Do not</strong> kill the X session with <kbd class="kbd docutils literal notranslate">Control</kbd> + <kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">Backspace</kbd>; it will kill the x session along with all opened applications.</p>
+</div>
+</div>
+<div class="section" id="step-2-perform-recovery-tasks">
+<h3>Step 2 - Perform recovery tasks<a class="headerlink" href="#step-2-perform-recovery-tasks" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>TL;DR;<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p>Terminate the <code class="docutils literal notranslate"><span class="pre">cinnamon</span></code> process:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">killall</span> <span class="pre">cinnamon</span></code> to terminate the process.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">killall</span> <span class="pre">-KILL</span> <span class="pre">cinnamon</span></code> to murder the process without mercy.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Backup log files and read them:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-a</span> <span class="pre">~/.cinnamon/glass.log</span> <span class="pre">~/Desktop/glass.log.bak</span></code> <a class="reference internal" href="#glass-log-reference"><span class="std std-ref">About ~/.cinnamon/glass.log file</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-a</span> <span class="pre">~/.xsession-errors</span> <span class="pre">~/Desktop/.xsession-errors.bak</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">~/.cinnamon/glass.log</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">~/.xsession-errors</span></code></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Fix the cause of the Cinnamon crash:</p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p>Remove problematic xlet/s:</p>
+<blockquote>
+<div><ol class="arabic simple" start="0">
+<li><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">~/.local/share/cinnamon/XLET_TYPE/XLET_UUID</span> <span class="pre">~/Desktop/faulty_xlet</span></code></p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<ol class="loweralpha" start="3">
+<li><p>Remove the configuration files of the problematic xlet/s.</p>
+<blockquote>
+<div><ol class="arabic simple" start="0">
+<li><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">~/.cinnamon/configs/XLET_UUID</span> <span class="pre">~/Desktop/faulty_config</span></code></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Install possible missing dependencies.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h4>Details<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p>Terminating the <code class="docutils literal notranslate"><span class="pre">cinnamon</span></code> process is optional but in some cases is absolutely necessary. If an xlet is caught in an infinite loop and it's spouting a million lines of text per second into a log file and at the same time performing a heavy task like reloading the Cinnamon theme (this actually happened to me several times! LOL), one would want to kill the <code class="docutils literal notranslate"><span class="pre">cinnamon</span></code> process <strong>ASAP</strong>. Sometimes, the process can be terminated, but some other times the process needs to be killed by force. As a rule, I always terminate it since it will be restarted when going back to the X session anyways.</p></li>
+<li><p>Backing up the log files is crucial to determine what caused Cinnamon to crash and to report the error to the author/s of the xlet/s that caused the crash. The backing up of the files is needed because they most likely will be overwritten. The <code class="docutils literal notranslate"><span class="pre">glass.log</span></code> file will be overwritten every time Cinnamon is restarted and the <code class="docutils literal notranslate"><span class="pre">.xsession-errors</span></code> is overwritten every time the X session is restarted.</p></li>
+<li><p>Depending on the circumstances under which Cinnamon came to crash, different tasks would have to be performed:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>If Cinnamon crashed while enabling an extension, adding an applet to a panel or adding a desklet to the desktop, then remove the xlet. Removing the folder of an installed and enabled xlet will cause Cinnamon to fail to load it, but it will not crash Cinnamon (at least, that has been my experience so far).</p></li>
+<li><p>If Cinnamon crashed while changing an xlet setting, then remove that xlet settings file. The next time Cinnamon starts, it will recreate that settings file with default values.</p></li>
+<li><p>If by looking at the logs one determine that the crash could be caused by a missing dependency, install that dependency. This is unlikely to happen, since most xlets with external dependencies will safely check for the presence of such dependency and inform about how to proceed in case that it is missing.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="step-3-go-back-to-the-x-desktop-session">
+<h3>Step 3 - Go back to the X desktop session<a class="headerlink" href="#step-3-go-back-to-the-x-desktop-session" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>TL;DR;<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>Start Cinnamon with <code class="docutils literal notranslate"><span class="pre">DISPLAY=:0</span> <span class="pre">cinnamon-launcher</span> <span class="pre">&amp;</span></code>.</p></li>
+<li><p>Go back to the graphical TTY with <kbd class="kbd docutils literal notranslate">Control</kbd> + <kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">F7</kbd>.</p></li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h4>Details<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>The goal here is to go back to the X desktop session that was previously frozen. Depending on the time it took to press the key combination to go back to the graphical TTY after executing the command to start Cinnamon, one could find the following scenarios:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>Cinnamon is still starting. In which case, wait for it to finish loading.</p></li>
+<li><p>A <a class="reference internal" href="#fallback-mode-reference"><span class="std std-ref">&quot;fallback mode&quot;</span></a> session and a dialog saying that Cinnamon crashed. This is most likely due to Cinnamon being started before the X session started, so it crashed. Pressing OK on the dialog should start Cinnamon normally.</p></li>
+<li><p>Cinnamon started normally.</p></li>
+<li><p>Cinnamon started and froze.</p></li>
+</ol>
+</div></blockquote>
+<p>In the case that Cinnamon started normally, it is time to gather information and report the issue/s to the xlet/s author/s.</p>
+<p>In the case that Cinnamon started and froze, more extreme measures will have to be taken. Repeat the actions described in steps 1 through 3. While on step 2 (<strong>Perform recovery tasks</strong>), one could reset all the enabled xlets or even try by reseting all Cinnamon settings.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gsettings</span> <span class="pre">reset</span> <span class="pre">org.cinnamon</span> <span class="pre">enabled-desklets</span></code>: This will remove all desklets from the desktop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gsettings</span> <span class="pre">reset</span> <span class="pre">org.cinnamon</span> <span class="pre">enabled-applets</span></code>: This will remove all third-party applets from the panel, leaving only the ones that came by default with Cinnamon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gsettings</span> <span class="pre">reset</span> <span class="pre">org.cinnamon</span> <span class="pre">enabled-applets</span></code>: This will disable all extensions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gsettings</span> <span class="pre">reset-recursively</span> <span class="pre">org.cinnamon</span></code>: This will reset all Cinnamon settings to their defaults. This will not only disable/remove all xlets, but every single Cinnamon setting (themes, fonts, panels, effects, <strong>EVERYTHING</strong>).</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="melange-looking-glass">
+<h2>Melange/Looking Glass<a class="headerlink" href="#melange-looking-glass" title="Permalink to this headline">¶</a></h2>
+<p>Looking Glass is the Cinnamon's built-in JavaScript debugger and Melange is the Gtk+ 3 interface to it. It can be accessed as follows:</p>
+<ol class="arabic simple">
+<li><p>From any panel context menu (<strong>Looking Glass</strong> item inside the <strong>Troubleshoot</strong> sub-menu).</p></li>
+<li><p>With the <kbd class="kbd docutils literal notranslate">Super</kbd> + <kbd class="kbd docutils literal notranslate">L</kbd> keyboard shortcut. The shortcut can be customized in <strong>System Settings</strong> &gt; <strong>Keyboard</strong> &gt; <strong>Shortcuts</strong> tab &gt; <strong>General</strong> &gt; <strong>Troubleshooting</strong> &gt; <strong>Toggle Looking Glass</strong> entry.</p></li>
+</ol>
+<p>From the Melange GUI one has access to several features:</p>
+<ol class="arabic simple">
+<li><p>Inspect elements of the Cinnamon UI (by pressing the button with the eyedropper icon).</p></li>
+<li><p>See the list of opened windows and inspect their properties (<strong>Windows</strong> tab).</p></li>
+<li><p>See the list of loaded xlets (applets/extensions/desklets) in the <strong>Extensions</strong> tab.</p></li>
+<li><p>See the logged messages of any level (info, error, etc.) in the <strong>Log</strong> tab.</p></li>
+<li><p>Evaluate JavaScript code from the text entry in the GUI.</p></li>
+</ol>
+</div>
+<div class="section" id="reload-themes-useful-for-theme-developers">
+<h2>Reload themes (useful for theme developers)<a class="headerlink" href="#reload-themes-useful-for-theme-developers" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="reload-cinnamon-theme">
+<h3>Reload Cinnamon theme<a class="headerlink" href="#reload-cinnamon-theme" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Cinnamon provides a command to reload its theme. Just open the <strong>Run command</strong> dialog (<kbd class="kbd docutils literal notranslate">Alt</kbd> + <kbd class="kbd docutils literal notranslate">F2</kbd>), type <code class="docutils literal notranslate"><span class="pre">rt</span></code> and press <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p></li>
+<li><p>By restarting Cinnamon (this is overkill, but it does the job too). See <a class="reference internal" href="#restart-cinnamon-reference"><span class="std std-ref">Restarting Cinnamon</span></a>.</p></li>
+</ul>
+</div>
+<div class="section" id="reload-gtk-3-theme">
+<h3>Reload Gtk+ 3 theme<a class="headerlink" href="#reload-gtk-3-theme" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>If the currently in use Gtk+ 3 theme is being edited, switching temporarily to another theme and back to the current theme will update all opened applications to use the recently edited theme (<a class="reference internal" href="#switch-gtk3-theme-reference"><span class="std std-ref">helper script</span></a>). Sometimes, a Gtk+ 3 application needs to be restarted to correctly use the newly edited theme.</p></li>
+<li><p>A Gtk+ 3 theme developer will most likely be using the right tools:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>A developer should be using <code class="docutils literal notranslate"><span class="pre">gtk3-widget-factory</span></code> (program provided by the <code class="docutils literal notranslate"><span class="pre">gtk-3-examples</span></code> package on Debian based distributions). This program exemplifies every single Gtk+ 3 widget.</p></li>
+<li><p>A developer should know that a Gtk program can be started with an specific theme that not necessarily needs to be the currently used theme. Example: <code class="docutils literal notranslate"><span class="pre">GTK_THEME=Adwaita</span> <span class="pre">gtk3-widget-factory</span></code>.</p></li>
+<li><p>A developer can test several themes at the same time without the need to change the global theme nor to restart an application. Running <code class="docutils literal notranslate"><span class="pre">GTK_DEBUG=interactive</span> <span class="pre">gtk3-widget-factory</span></code> will launch the <code class="docutils literal notranslate"><span class="pre">gtk3-widget-factory</span></code> program <em>&quot;attached&quot;</em> to the <strong>Gtk+ 3 inspector</strong>. In the <strong>Visual</strong> tab of the <strong>Gtk+ 3 inspector</strong>, one can switch the Gtk+ 3 theme of the application <em>&quot;attached&quot;</em> to it.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="general-notes">
+<h2>General notes<a class="headerlink" href="#general-notes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-info info admonition" id="fallback-mode-reference">
+<p class="admonition-title">Fallback mode and software rendering mode.</p>
+<p>Do not confuse these totally different terms.</p>
+<ul class="simple">
+<li><p><strong>Fallback mode</strong>: Cinnamon <strong>is not running</strong> and in its place there is a basic environment that allows to run programs from a graphical user interface. Normally is the Mate panel, but could also be the Gnome panel or <code class="docutils literal notranslate"><span class="pre">tint2</span></code> if they are available. It depends on the distribution which of these environments is available.</p></li>
+<li><p><strong>Software rendering mode</strong>: Cinnamon <strong>is running</strong> but without video hardware acceleration. In this mode everything is purposely running slower because Cinnamon is only using the CPU and not the GPU.</p></li>
+</ul>
+</div>
+<div class="admonition-info info admonition" id="cannot-switch-ttys-reference">
+<p class="admonition-title">Can't switch TTYs?</p>
+<p>Search the web for the term <em>&quot;can't switch TTYs with Ctrl+Alt+F(x)&quot;</em>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>It could be a graphic driver problem or a distribution that is constantly trying to reinvent the wheel by changing the shortcuts.</p>
+</div>
+</div>
+<div class="admonition-info info admonition" id="glass-log-reference">
+<p class="admonition-title">About ~/.cinnamon/glass.log file</p>
+<p>This file isn't used anymore in newer Cinnamon versions.</p>
+</div>
+<div class="admonition-info info admonition" id="switch-gtk3-theme-reference">
+<p class="admonition-title">Reload Gtk+ 3 theme</p>
+<p>Helper script to reload currently used Gtk+ 3 theme. Based on: <a class="reference external" href="https://askubuntu.com/a/1110354">Ask Ubuntu</a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> reload_gtk3_theme<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">theme</span><span class="o">=</span><span class="k">$(</span>gsettings get org.cinnamon.desktop.interface gtk-theme<span class="k">)</span>
+    gsettings <span class="nb">set</span> org.cinnamon.desktop.interface gtk-theme <span class="s1">&#39;&#39;</span>
+    sleep <span class="m">2</span>
+    gsettings <span class="nb">set</span> org.cinnamon.desktop.interface gtk-theme <span class="nv">$theme</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03-development-notes.html" class="btn btn-neutral float-right" title="Development notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01-usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

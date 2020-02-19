@@ -1,0 +1,751 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.IconChooserWidgets module &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="xlets_settings.JsonSettingsWidgets module" href="xlets_settings.JsonSettingsWidgets.html" />
+    <link rel="prev" title="xlets_settings.AppChooserWidgets module" href="xlets_settings.AppChooserWidgets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">xlets_settings</a> &raquo;</li>
+        
+          <li><a href="xlets_settings.html">xlets_settings package</a> &raquo;</li>
+        
+      <li>xlets_settings.IconChooserWidgets module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/modules/xlets_settings/xlets_settings.IconChooserWidgets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="xlets_settings.JsonSettingsWidgets.html" class="btn btn-neutral float-right" title="xlets_settings.JsonSettingsWidgets module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xlets_settings.AppChooserWidgets.html" class="btn btn-neutral float-left" title="xlets_settings.AppChooserWidgets module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-xlets_settings.IconChooserWidgets">
+<span id="xlets-settings-iconchooserwidgets-module"></span><h1>xlets_settings.IconChooserWidgets module<a class="headerlink" href="#module-xlets_settings.IconChooserWidgets" title="Permalink to this headline">¶</a></h1>
+<p>Widgets for selecting themed icons.</p>
+<dl class="class">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.IconChooserWidgets.</code><code class="sig-name descname">IconChooserDialog</code><span class="sig-paren">(</span><em class="sig-param">transient_for=None</em>, <em class="sig-param">main_app=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">gi.overrides.Gtk.Dialog</span></code></p>
+<p>GTK+ 3 Dialog to allow selection of a themed icon.</p>
+<p>Based on <a class="reference external" href="https://github.com/Tomha/python-gtk-themed-icon-chooser">python-gtk-themed-icon-chooser</a> and
+XApp's native widget.</p>
+<p>The name of the selection icon is made available as a result of the run
+method, or by the get_selected_icon_name method.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If 1000s of icons are displayed this is 1000s of widgets. They are
+loaded asynchronously to prevent blocking the main thread, but they must
+still be show()n from the main thread, which may momentarily block it. This
+can be limited by filtering the available icon selection beforehand.</p>
+</div>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Not all memory created by the dialog seems to be released.</p>
+</div>
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transient_for</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Window.html#Gtk.Window" title="(in Gtk 3.0 v3.0)"><em>Gtk.Window</em></a>) -- The window the dialog will be transient for.</p></li>
+<li><p><strong>main_app</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The main application.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run dialog to select a themed icon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An icon name or path.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._populate_sidebar">
+<code class="sig-name descname">_populate_sidebar</code><span class="sig-paren">(</span><em class="sig-param">repopulate=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._populate_sidebar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._populate_sidebar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate the dialog sidebar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>repopulate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether to repopulate the icons storage due to changes outside of the application.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._create_icon_previews">
+<code class="sig-name descname">_create_icon_previews</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._create_icon_previews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._create_icon_previews" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create icon previews to be placed in the dialog's icon box.</p>
+<p>Intended to be run in new thread. This only creates previews and adds
+them to the icon flow box, but it will not show()/display them. This is
+done by calling _display_icon_previews, which should be done in the
+main thread via GLib.idle_add.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- A string identifying a particular type of icon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._display_icon_previews">
+<code class="sig-name descname">_display_icon_previews</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._display_icon_previews"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._display_icon_previews" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display icons and clean up after _create_icon_previews is run.</p>
+<p>WARNING: This must be run from the main thread, however show_all can
+take a noticeable amount of time, so the dialog will freeze momentarily
+as this runs if there are many icons to display. This is not avoidable
+to my knowledge.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._filter_icons">
+<code class="sig-name descname">_filter_icons</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._filter_icons"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._filter_icons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter icons based on filter term, used when filter term changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._update_subtitle">
+<code class="sig-name descname">_update_subtitle</code><span class="sig-paren">(</span><em class="sig-param">count</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._update_subtitle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._update_subtitle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update dialog subttle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>count</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- The currently displayed amount of icons.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._on_category_selected">
+<code class="sig-name descname">_on_category_selected</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._on_category_selected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._on_category_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the context is changed, display the approprite icons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Halt execution.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._on_icon_selected">
+<code class="sig-name descname">_on_icon_selected</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._on_icon_selected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._on_icon_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the selected_icon property when the selection changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Halt execution.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._on_search_entry_key_pressed">
+<code class="sig-name descname">_on_search_entry_key_pressed</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">event</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._on_search_entry_key_pressed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._on_search_entry_key_pressed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the selected_icon property when the selection changes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/SearchEntry.html#Gtk.SearchEntry" title="(in Gtk 3.0 v3.0)"><em>Gtk.SearchEntry</em></a>) -- The search entry.</p></li>
+<li><p><strong>event</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gdk-3.0/classes/EventKey.html#Gdk.EventKey" title="(in Gdk 3.0 v3.0)"><em>Gdk.EventKey</em></a>) -- The event triggered.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.update_icon_preview_cb">
+<code class="sig-name descname">update_icon_preview_cb</code><span class="sig-paren">(</span><em class="sig-param">dialog</em>, <em class="sig-param">preview</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.update_icon_preview_cb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.update_icon_preview_cb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the image preview when browsing for image files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dialog</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/FileChooserDialog.html#Gtk.FileChooserDialog" title="(in Gtk 3.0 v3.0)"><em>Gtk.FileChooserDialog</em></a>) -- The dialog to browser for images.</p></li>
+<li><p><strong>preview</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Image.html#Gtk.Image" title="(in Gtk 3.0 v3.0)"><em>Gtk.Image</em></a>) -- The selected image in the dialog.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog._on_browse_button_clicked">
+<code class="sig-name descname">_on_browse_button_clicked</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">dir_path='/usr/share/icons'</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog._on_browse_button_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog._on_browse_button_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>On brose button clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Button.html#Gtk.Button" title="(in Gtk 3.0 v3.0)"><em>Gtk.Button</em></a>) -- The button clicked.</p></li>
+<li><p><strong>dir_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- The path to a folder for the dialog to use as a start folder.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.get_icon_size">
+<code class="sig-name descname">get_icon_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.get_icon_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.get_icon_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the pixel size to display icons in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Size to display icons in, in pixels.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.get_search_term">
+<code class="sig-name descname">get_search_term</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.get_search_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.get_search_term" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the string used for filtering icons by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>String used for filtering icons by name.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.get_selected_icon_name">
+<code class="sig-name descname">get_selected_icon_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.get_selected_icon_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.get_selected_icon_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the icon selected in the dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Name of the currently selected icon.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.get_main_app">
+<code class="sig-name descname">get_main_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.get_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.get_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)">Gtk.Application</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.set_icon_size">
+<code class="sig-name descname">set_icon_size</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.set_icon_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.set_icon_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the pixel size to display icons in.</p>
+<p>Dialog will not update the icon size once it has been shown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- Size to display icons in, in pixels.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.WrongType" title="xlets_settings.exceptions.WrongType"><strong>exceptions.WrongType</strong></a> -- Wrong value type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.set_search_term">
+<code class="sig-name descname">set_search_term</code><span class="sig-paren">(</span><em class="sig-param">filter_term</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.set_search_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.set_search_term" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the string used for filtering icons by name.</p>
+<p>Dialog will not update the filter term once it has been shown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filter_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- String used for filtering icons by name.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.WrongType" title="xlets_settings.exceptions.WrongType"><strong>exceptions.WrongType</strong></a> -- Wrong value type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserDialog.set_main_app">
+<code class="sig-name descname">set_main_app</code><span class="sig-paren">(</span><em class="sig-param">main_app</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserDialog.set_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserDialog.set_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>main_app</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)"><em>Gtk.Application</em></a>) -- See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.IconChooserWidgets.</code><code class="sig-name descname">IconChooserButton</code><span class="sig-paren">(</span><em class="sig-param">parent_widget</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">gi.overrides.Gtk.Button</span></code></p>
+<p>GTK + 3 Button to open dialog allowing selection of a themed icon.</p>
+<p>The name of the selected icon is emitted via the &quot;icon-selected&quot; signal
+once the dialog is closed, or via the get_selected_icon_name method.</p>
+<p>NOTE: The icon preview in the dialog and on the button may differ since
+icons can have a different appearance at different sizes.By default the
+dialog uses a larger size (32px) than the button (16px).
+set_dialog_icon_size(16) can be used to get the dialog to display the same
+icon that will be shown on the button, if you desire.</p>
+<dl class="attribute">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.dialog">
+<code class="sig-name descname">dialog</code><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>The icon chooser dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.IconChooserWidgets.IconChooserDialog" title="xlets_settings.IconChooserWidgets.IconChooserDialog">IconChooserDialog</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.icon">
+<code class="sig-name descname">icon</code><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>The icon name or path currently stored in a preference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parent_widget</strong> (<a class="reference internal" href="xlets_settings.SettingsWidgets.html#xlets_settings.SettingsWidgets.IconChooser" title="xlets_settings.SettingsWidgets.IconChooser"><em>IconChooser</em></a>) -- The main widget to which this widget is tied to.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton._on_destroy">
+<code class="sig-name descname">_on_destroy</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton._on_destroy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton._on_destroy" title="Permalink to this definition">¶</a></dt>
+<dd><p>On widget destroy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.do_get_property">
+<code class="sig-name descname">do_get_property</code><span class="sig-paren">(</span><em class="sig-param">prop</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.do_get_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.do_get_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get property override.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prop</strong> (<em>GObject.ParamSpec</em>) -- The property to handle.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The icon string.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.8)"><strong>AttributeError</strong></a> -- Wrong attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.do_set_property">
+<code class="sig-name descname">do_set_property</code><span class="sig-paren">(</span><em class="sig-param">prop</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.do_set_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.do_set_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set property override.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prop</strong> (<em>GObject.ParamSpec</em>) -- The property to handle.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The property value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.8)"><strong>AttributeError</strong></a> -- Wrong attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.ensure_dialog">
+<code class="sig-name descname">ensure_dialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.ensure_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.ensure_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that the dialog is created once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt execution.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.set_icon">
+<code class="sig-name descname">set_icon</code><span class="sig-paren">(</span><em class="sig-param">icon</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.set_icon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.set_icon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set button icon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>icon</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The icon name or path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton._show_dialog">
+<code class="sig-name descname">_show_dialog</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton._show_dialog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton._show_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the button is clicked to show a selection dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.get_dialog_icon_size">
+<code class="sig-name descname">get_dialog_icon_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.get_dialog_icon_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.get_dialog_icon_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the pixel size to display icons in.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Size to display icons in pixels.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.get_search_term">
+<code class="sig-name descname">get_search_term</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.get_search_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.get_search_term" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the string used for filtering icons by name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>String used for filtering icons by name.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.get_selected_icon_name">
+<code class="sig-name descname">get_selected_icon_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.get_selected_icon_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.get_selected_icon_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the icon selected in the dialog.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Name or path of the currently selected icon.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.get_main_app">
+<code class="sig-name descname">get_main_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.get_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.get_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)">Gtk.Application</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.set_dialog_icon_size">
+<code class="sig-name descname">set_dialog_icon_size</code><span class="sig-paren">(</span><em class="sig-param">size</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.set_dialog_icon_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.set_dialog_icon_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the pixel size to display icons in.</p>
+<p>Dialog will not update the icon size once it has been shown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- The dialog icons size.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.WrongType" title="xlets_settings.exceptions.WrongType"><strong>exceptions.WrongType</strong></a> -- Wrong value type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.set_search_term">
+<code class="sig-name descname">set_search_term</code><span class="sig-paren">(</span><em class="sig-param">search_term</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.set_search_term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.set_search_term" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the string used for filtering icons by name.</p>
+<p>If use_regex is True, the provided string will be used as the pattern
+for a regex match, otherwise basic case-insensitive matching is used.</p>
+<p>Dialog will not update the filter term once it has been shown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>search_term</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- String used for filtering icons by name.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.WrongType" title="xlets_settings.exceptions.WrongType"><strong>exceptions.WrongType</strong></a> -- Wrong value type.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets.IconChooserButton.set_main_app">
+<code class="sig-name descname">set_main_app</code><span class="sig-paren">(</span><em class="sig-param">main_app</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#IconChooserButton.set_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets.IconChooserButton.set_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>main_app</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)"><em>Gtk.Application</em></a>) -- See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.IconChooserWidgets._IconPreview">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.IconChooserWidgets.</code><code class="sig-name descname">_IconPreview</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">size</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#_IconPreview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets._IconPreview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.common.BaseGrid</span></code></a></p>
+<p>Creates a preview box for icons containing the icon and its name.</p>
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- Icon name.</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- Icon size.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.IconChooserWidgets._IconPreview.get_name">
+<code class="sig-name descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/IconChooserWidgets.html#_IconPreview.get_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.IconChooserWidgets._IconPreview.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the icon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Name of the icon.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="xlets_settings.JsonSettingsWidgets.html" class="btn btn-neutral float-right" title="xlets_settings.JsonSettingsWidgets module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xlets_settings.AppChooserWidgets.html" class="btn btn-neutral float-left" title="xlets_settings.AppChooserWidgets module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

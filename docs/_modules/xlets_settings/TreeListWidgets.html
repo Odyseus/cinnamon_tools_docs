@@ -1,0 +1,1564 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.TreeListWidgets &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+        
+      <li>xlets_settings.TreeListWidgets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for xlets_settings.TreeListWidgets</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Tree list widget.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">LIST_CLASS_TYPE_MAP : dict</span>
+<span class="sd">    Widget JSON name to class name map.</span>
+<span class="sd">LIST_PROPERTIES_MAP : dict</span>
+<span class="sd">    JSON attribute to Python keywords argument map used by the settings widgets.</span>
+<span class="sd">LIST_VARIABLE_TYPE_MAP : dict</span>
+<span class="sd">    Widget JSON name to value type map.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gdk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gdk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gio</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Pango</span>
+<span class="kn">from</span> <span class="nn">html</span> <span class="k">import</span> <span class="n">escape</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="k">import</span> <span class="n">AppChooser</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">ColorChooser</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">ComboBox</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">Entry</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">FileChooser</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">IconChooser</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">Keybinding</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">KeybindingWithOptions</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">SettingsWidget</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">SpinButton</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">Switch</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">Text</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">TextView</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="n">_</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">BaseGrid</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">contrast_rgba_color</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">display_message_dialog</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">generate_options_from_paths</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">get_keybinding_display_name</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">import_export</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">sort_combo_options</span>
+<span class="c1"># from SettingsWidgets import SoundFileChooser</span>
+
+<span class="n">LIST_VARIABLE_TYPE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># appchooser</span>
+    <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># switch</span>
+    <span class="s2">&quot;boolean&quot;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="c1"># colorchooser</span>
+    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># filechooser</span>
+    <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># spinbutton</span>
+    <span class="s2">&quot;float&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="c1"># iconfilechooser</span>
+    <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># spinbutton</span>
+    <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="c1"># keybinding</span>
+    <span class="s2">&quot;keybinding&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># keybinding-with-options</span>
+    <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># textview</span>
+    <span class="s2">&quot;multistring&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="c1"># soundfilechooser</span>
+    <span class="c1"># &quot;sound&quot;: str,</span>
+    <span class="c1"># entry</span>
+    <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">LIST_CLASS_TYPE_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;app&quot;</span><span class="p">:</span> <span class="n">AppChooser</span><span class="p">,</span>
+    <span class="s2">&quot;boolean&quot;</span><span class="p">:</span> <span class="n">Switch</span><span class="p">,</span>
+    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">ColorChooser</span><span class="p">,</span>
+    <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">FileChooser</span><span class="p">,</span>
+    <span class="s2">&quot;float&quot;</span><span class="p">:</span> <span class="n">SpinButton</span><span class="p">,</span>
+    <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="n">IconChooser</span><span class="p">,</span>
+    <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">SpinButton</span><span class="p">,</span>
+    <span class="s2">&quot;keybinding&quot;</span><span class="p">:</span> <span class="n">Keybinding</span><span class="p">,</span>
+    <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span> <span class="n">KeybindingWithOptions</span><span class="p">,</span>
+    <span class="s2">&quot;multistring&quot;</span><span class="p">:</span> <span class="n">TextView</span><span class="p">,</span>
+    <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="n">Entry</span><span class="p">,</span>
+    <span class="c1"># &quot;sound&quot;: SoundFileChooser,</span>
+<span class="p">}</span>
+
+<span class="n">LIST_PROPERTIES_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># entry and iconfilechooser: If true, expand the widget to all available space.</span>
+    <span class="s2">&quot;expand-width&quot;</span><span class="p">:</span> <span class="s2">&quot;expand_width&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: Maximum value.</span>
+    <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="s2">&quot;maxi&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: Minimum value.</span>
+    <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="s2">&quot;mini&quot;</span><span class="p">,</span>
+    <span class="c1"># filechooser: If true, enable folder selection of the file chooser. If false,</span>
+    <span class="c1"># enable file selection.</span>
+    <span class="s2">&quot;select-dir&quot;</span><span class="p">:</span> <span class="s2">&quot;dir_select&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: Adjustment amount.</span>
+    <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;step&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: How many digits to handle.</span>
+    <span class="s2">&quot;digits&quot;</span><span class="p">:</span> <span class="s2">&quot;digits&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: Adjustment amount when using the Page Up/Down keys.</span>
+    <span class="s2">&quot;page&quot;</span><span class="p">:</span> <span class="s2">&quot;page&quot;</span><span class="p">,</span>
+    <span class="c1"># list: The title for a column.</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;label&quot;</span><span class="p">,</span>
+    <span class="c1"># spinbutton: Unit type description.</span>
+    <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="s2">&quot;units&quot;</span><span class="p">,</span>
+    <span class="c1"># All widgets.</span>
+    <span class="s2">&quot;tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;tooltip&quot;</span><span class="p">,</span>
+    <span class="c1"># keybinding: Expose the number of keybindings to create.</span>
+    <span class="s2">&quot;num-bind&quot;</span><span class="p">:</span> <span class="s2">&quot;num_bind&quot;</span><span class="p">,</span>
+    <span class="c1"># colorchooser: Whether to be able to specify opacity.</span>
+    <span class="s2">&quot;use-alpha&quot;</span><span class="p">:</span> <span class="s2">&quot;use_alpha&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="list_edit_factory"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.list_edit_factory">[docs]</a><span class="k">def</span> <span class="nf">list_edit_factory</span><span class="p">(</span><span class="n">col_def</span><span class="p">,</span> <span class="n">xlet_settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edit dialog widgets factory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    col_def : dict</span>
+<span class="sd">        Column definition.</span>
+<span class="sd">    xlet_settings : JSONSettingsHandler</span>
+<span class="sd">        A ``JSONSettingsHandler``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    object</span>
+<span class="sd">        New widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># TODO: Implemente this also for &quot;normal widgets&quot;.</span>
+    <span class="k">if</span> <span class="s2">&quot;options-from-paths&quot;</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+        <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_options_from_paths</span><span class="p">(</span>
+            <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options-from-paths&quot;</span><span class="p">],</span> <span class="n">xlet_settings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;options&quot;</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;valtype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LIST_VARIABLE_TYPE_MAP</span><span class="p">[</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span>
+            <span class="n">widget_type</span> <span class="o">=</span> <span class="n">KeybindingWithOptions</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">widget_type</span> <span class="o">=</span> <span class="n">ComboBox</span>
+
+        <span class="n">options_list</span> <span class="o">=</span> <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span>
+
+        <span class="c1"># NOTE: Sort both types of options. Otherwise, items will appear in</span>
+        <span class="c1"># different order every single time the widget is re-built.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">options_list</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="n">options_list</span><span class="p">)</span>
+
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sort_combo_options</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="n">col_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first-option&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">widget_type</span> <span class="o">=</span> <span class="n">LIST_CLASS_TYPE_MAP</span><span class="p">[</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span>
+
+    <span class="k">class</span> <span class="nc">Widget</span><span class="p">(</span><span class="n">widget_type</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;New list widget.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget_value : int, str, float</span>
+<span class="sd">            The list widget value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            **kwargs</span>
+<span class="sd">                Keyword argumets.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">connect_widget_handlers</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">get_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Get range.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            None</span>
+<span class="sd">                None.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Set value.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : int, str, float</span>
+<span class="sd">                The widget value.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">widget_value</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Get value.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int, str, float</span>
+<span class="sd">                The widget value.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;widget_value&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">set_widget_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Set widget value.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : int, str, float</span>
+<span class="sd">                The widget value.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">widget_value</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on_setting_changed</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_object&quot;</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bind_object</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+                    <span class="c1"># NOTE: Needed for special IconChooser case.</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_content_widget_entry&quot;</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_widget_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Get widget value.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int, str, float</span>
+<span class="sd">                The widget value.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget_value</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_object&quot;</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_object</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">LIST_PROPERTIES_MAP</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="n">LIST_PROPERTIES_MAP</span><span class="p">[</span><span class="n">prop</span><span class="p">]]</span> <span class="o">=</span> <span class="n">col_def</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Widget</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TreeList"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList">[docs]</a><span class="k">class</span> <span class="nc">TreeList</span><span class="p">(</span><span class="n">SettingsWidget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tree list widget.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bind_dir : Gio.SettingsBindFlags, None</span>
+<span class="sd">        ``Gio.SettingsBindFlags`` flags.</span>
+<span class="sd">    content_widget : Gtk.TreeView</span>
+<span class="sd">        The main widget that will be used to represent a setting value.</span>
+<span class="sd">    model : Gtk.ListStore</span>
+<span class="sd">        The model used as storage by this widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">bind_dir</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">immutable</span><span class="o">=</span><span class="p">{},</span> <span class="n">dialog_info_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                 <span class="n">move_buttons</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multi_select</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dialog_width</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">apply_and_quit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        columns : None, optional</span>
+<span class="sd">            The columns definitions used to build ``self.content_widget``.</span>
+<span class="sd">        immutable : dict, bool, optional</span>
+<span class="sd">            Whether items in the list can be removed or new ones can be added. If a</span>
+<span class="sd">            :py:class:`dict`, two options are available. The ``read-only-keys`` key will</span>
+<span class="sd">            allow to specify a list of column IDs whose created widgets should be set as</span>
+<span class="sd">            insensitive to not allow edition. The ``allow-edition`` key can be set to True or False.</span>
+<span class="sd">            If set to True, all columns in the list will be editable, except those whose IDs are</span>
+<span class="sd">            specified in the ``read-only-keys`` key. If set to False, none of the widgets on the</span>
+<span class="sd">            list will be editable.</span>
+<span class="sd">        dialog_info_labels : list, None, optional</span>
+<span class="sd">            A list of strings. It allows to display informative labels on the edit/add dialog.</span>
+<span class="sd">            This allows to keep the window clean and at the same time keep basic information at hand.</span>
+<span class="sd">        height : int, optional</span>
+<span class="sd">            A fixed height for the tree.</span>
+<span class="sd">        move_buttons : bool, optional</span>
+<span class="sd">            Whether to display the move items up/down buttons.</span>
+<span class="sd">        multi_select : bool, optional</span>
+<span class="sd">            It allows to select multiple rows inside the widget.</span>
+<span class="sd">            Mostly useful for mass deletions of items.</span>
+<span class="sd">        dialog_width : int, optional</span>
+<span class="sd">            A minimum width for the add/edit dialog,</span>
+<span class="sd">        apply_and_quit : bool, optional</span>
+<span class="sd">            It allows to exit the settings window when the apply button on the widget is clicked.</span>
+
+<span class="sd">        Todo</span>
+<span class="sd">        ----</span>
+<span class="sd">        Find a way to make the tree expand to the available space inside its page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_spacing</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">=</span> <span class="n">columns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="o">=</span> <span class="n">immutable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_info_labels</span> <span class="o">=</span> <span class="n">dialog_info_labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="o">=</span> <span class="n">move_buttons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_width</span> <span class="o">=</span> <span class="n">dialog_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span> <span class="o">=</span> <span class="n">multi_select</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_apply_and_quit</span> <span class="o">=</span> <span class="n">apply_and_quit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_allow_edition</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="ow">or</span> \
+            <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;allow-edition&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreeView</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_grid_lines</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">TreeViewGridLines</span><span class="o">.</span><span class="n">BOTH</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SelectionMode</span><span class="o">.</span><span class="n">MULTIPLE</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;key-press-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_key_press_cb</span><span class="p">)</span>
+
+        <span class="n">scrollbox</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">()</span>
+        <span class="n">scrollbox</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">scrollbox</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">scrollbox</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">scrollbox</span><span class="o">.</span><span class="n">set_policy</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">scrollbox</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">scrollbox</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="p">)</span>
+
+        <span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column_def</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+            <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">LIST_VARIABLE_TYPE_MAP</span><span class="p">[</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]])</span>
+
+            <span class="k">if</span> <span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="p">[</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;tooltip&quot;</span><span class="p">]</span>
+
+            <span class="n">has_option_map</span> <span class="o">=</span> <span class="s2">&quot;options&quot;</span> <span class="ow">in</span> <span class="n">column_def</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="n">render_type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span> <span class="k">if</span> <span class="n">has_option_map</span> <span class="k">else</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;boolean&quot;</span><span class="p">:</span>
+                <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererToggle</span><span class="p">()</span>
+
+                <span class="k">def</span> <span class="nf">toggle_checkbox</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;Toggle checkbox.</span>
+
+<span class="sd">                    Parameters</span>
+<span class="sd">                    ----------</span>
+<span class="sd">                    widget : Gtk.CellRendererToggle</span>
+<span class="sd">                        The toggle widget.</span>
+<span class="sd">                    path : str</span>
+<span class="sd">                        String representation of :py:class:`Gtk.TreePath` describing the event location.</span>
+<span class="sd">                    col : int</span>
+<span class="sd">                        Column index.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">path</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">path</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+
+                <span class="n">renderer</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;toggled&quot;</span><span class="p">,</span> <span class="n">toggle_checkbox</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">prop_name</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
+            <span class="k">elif</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span> <span class="ow">or</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+                <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererSpin</span><span class="p">()</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;editable&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="n">digits</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="n">adjustment</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Adjustment</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">adjustment</span><span class="o">.</span><span class="n">set_upper</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">adjustment</span><span class="o">.</span><span class="n">set_lower</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;min&quot;</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">step</span> <span class="o">=</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;step&quot;</span><span class="p">]</span>
+                    <span class="n">adjustment</span><span class="o">.</span><span class="n">set_step_increment</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+
+                    <span class="c1"># NOTE: Without setting the digits property to a Gtk.CellRendererSpin()</span>
+                    <span class="c1"># that handles floats, the widget is pretty useless.</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">step</span><span class="p">)):</span>
+                        <span class="n">digits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="k">def</span> <span class="nf">edit_spin</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;Edit spin button.</span>
+
+<span class="sd">                    Parameters</span>
+<span class="sd">                    ----------</span>
+<span class="sd">                    widget : Gtk.CellRendererSpin</span>
+<span class="sd">                        The spin widget.</span>
+<span class="sd">                    path : str</span>
+<span class="sd">                        String representation of :py:class:`Gtk.TreePath` describing the event location.</span>
+<span class="sd">                    value : int, float</span>
+<span class="sd">                        The widget value.</span>
+<span class="sd">                    data : dict</span>
+<span class="sd">                        Data holding row information.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="c1"># NOTE: Stupid internationalization!</span>
+                    <span class="c1"># float(value) will fail when value is a comma-separated float. ¬¬</span>
+                    <span class="c1"># int(value) will fail when value is a comma/dot separated integer. ¬¬</span>
+                    <span class="c1"># It might not be needed to use replace() for integers, but it doesn&#39;t hurt</span>
+                    <span class="c1"># to have it. So, leave it.</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">num_parser</span> <span class="o">=</span> <span class="nb">int</span>
+
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;num_parser&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+                        <span class="n">num_parser</span> <span class="o">=</span> <span class="nb">float</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">path</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">num_parser</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+
+                <span class="n">renderer</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;edited&quot;</span><span class="p">,</span> <span class="n">edit_spin</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="s2">&quot;num_parser&quot;</span><span class="p">:</span> <span class="n">render_type</span>
+                <span class="p">})</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;digits&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="p">)</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;adjustment&quot;</span><span class="p">,</span> <span class="n">adjustment</span><span class="p">)</span>
+                <span class="n">prop_name</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span>
+            <span class="k">elif</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;icon&quot;</span><span class="p">:</span>
+                <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererPixbuf</span><span class="p">()</span>
+                <span class="n">prop_name</span> <span class="o">=</span> <span class="s2">&quot;icon_name&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererText</span><span class="p">()</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;wrap-mode&quot;</span><span class="p">,</span> <span class="n">Pango</span><span class="o">.</span><span class="n">WrapMode</span><span class="o">.</span><span class="n">WORD_CHAR</span><span class="p">)</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;wrap-width&quot;</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+                <span class="n">prop_name</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span>
+
+            <span class="n">column</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreeViewColumn</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span> <span class="n">renderer</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">set_color_func</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">rend</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">row_iter</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;Function to set color.</span>
+
+<span class="sd">                    Parameters</span>
+<span class="sd">                    ----------</span>
+<span class="sd">                    col : Gtk.CellLayout</span>
+<span class="sd">                        A ``Gtk.CellLayout``.</span>
+<span class="sd">                    rend : Gtk.CellRenderer</span>
+<span class="sd">                        The cell renderer whose value is to be set.</span>
+<span class="sd">                    model : Gtk.TreeModel</span>
+<span class="sd">                        The model.</span>
+<span class="sd">                    row_iter : Gtk.TreeIter</span>
+<span class="sd">                        A ``Gtk.TreeIter`` indicating the row to set the value for.</span>
+<span class="sd">                    data : dict</span>
+<span class="sd">                        User data passed to ``Gtk.CellLayout.set_cell_data_func()``.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">row_iter</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span>
+
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">bg_rgba</span> <span class="o">=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">RGBA</span><span class="p">()</span>
+                        <span class="n">bg_rgba</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                        <span class="n">fg_rgba</span> <span class="o">=</span> <span class="n">contrast_rgba_color</span><span class="p">(</span><span class="n">bg_rgba</span><span class="p">)</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;background-rgba&quot;</span><span class="p">,</span> <span class="n">bg_rgba</span><span class="p">)</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;foreground-rgba&quot;</span><span class="p">,</span> <span class="n">fg_rgba</span><span class="p">)</span>
+
+                <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">set_color_func</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span>
+                <span class="p">})</span>
+            <span class="k">elif</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;app&quot;</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">set_app_func</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">rend</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">row_iter</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;Function to set application.</span>
+
+<span class="sd">                    Parameters</span>
+<span class="sd">                    ----------</span>
+<span class="sd">                    col : Gtk.CellLayout</span>
+<span class="sd">                        A ``Gtk.CellLayout``.</span>
+<span class="sd">                    rend : Gtk.CellRenderer</span>
+<span class="sd">                        The cell renderer whose value is to be set.</span>
+<span class="sd">                    model : Gtk.TreeModel</span>
+<span class="sd">                        The model.</span>
+<span class="sd">                    row_iter : Gtk.TreeIter</span>
+<span class="sd">                        A ``Gtk.TreeIter`` indicating the row to set the value for.</span>
+<span class="sd">                    data : dict</span>
+<span class="sd">                        User data passed to ``Gtk.CellLayout.set_cell_data_func()``.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">row_iter</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">app_info</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">DesktopAppInfo</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">app_info</span> <span class="o">=</span> <span class="kc">None</span>
+
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">app_info</span><span class="p">,</span> <span class="n">Gio</span><span class="o">.</span><span class="n">DesktopAppInfo</span><span class="p">):</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">app_info</span><span class="o">.</span><span class="n">get_display_name</span><span class="p">())</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Invalid app&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;No app chosen&quot;</span><span class="p">))</span>
+
+                <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">set_app_func</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span>
+                <span class="p">})</span>
+
+            <span class="k">if</span> <span class="n">has_option_map</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">map_func</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">rend</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">row_iter</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                    <span class="sd">&quot;&quot;&quot;Map function.</span>
+
+<span class="sd">                    Parameters</span>
+<span class="sd">                    ----------</span>
+<span class="sd">                    col : Gtk.CellLayout</span>
+<span class="sd">                        A ``Gtk.CellLayout``.</span>
+<span class="sd">                    rend : Gtk.CellRenderer</span>
+<span class="sd">                        The cell renderer whose value is to be set.</span>
+<span class="sd">                    model : Gtk.TreeModel</span>
+<span class="sd">                        The model.</span>
+<span class="sd">                    row_iter : Gtk.TreeIter</span>
+<span class="sd">                        A ``Gtk.TreeIter`` indicating the row to set the value for.</span>
+<span class="sd">                    data : dict</span>
+<span class="sd">                        User data passed to ``Gtk.CellLayout.set_cell_data_func()``.</span>
+<span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">row_iter</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span>
+
+                    <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_def_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">kb</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;::&quot;</span><span class="p">)</span>
+                            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                                <span class="n">kb</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
+
+                            <span class="c1"># NOTE: Reduce list &quot;noise&quot;.</span>
+                            <span class="c1"># Do not set text to the cell if there is no keybinding.</span>
+                            <span class="k">if</span> <span class="n">kb</span> <span class="ow">and</span> <span class="n">val</span> <span class="o">==</span> <span class="n">opt</span><span class="p">:</span>
+                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span>
+                                    <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+                                    <span class="n">get_keybinding_display_name</span><span class="p">(</span><span class="n">kb</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;::&quot;</span> <span class="o">+</span> <span class="n">key</span>
+                                <span class="p">)</span>
+                                <span class="k">break</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                                <span class="k">break</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">map_func</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
+                    <span class="s2">&quot;col_def_type&quot;</span><span class="p">:</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+                <span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding&quot;</span><span class="p">:</span>
+                    <span class="k">def</span> <span class="nf">kb_map_func</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">rend</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">row_iter</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+                        <span class="sd">&quot;&quot;&quot;Map function.</span>
+
+<span class="sd">                        Parameters</span>
+<span class="sd">                        ----------</span>
+<span class="sd">                        col : Gtk.CellLayout</span>
+<span class="sd">                            A ``Gtk.CellLayout``.</span>
+<span class="sd">                        rend : Gtk.CellRenderer</span>
+<span class="sd">                            The cell renderer whose value is to be set.</span>
+<span class="sd">                        model : Gtk.TreeModel</span>
+<span class="sd">                            The model.</span>
+<span class="sd">                        row_iter : Gtk.TreeIter</span>
+<span class="sd">                            A ``Gtk.TreeIter`` indicating the row to set the value for.</span>
+<span class="sd">                        data : dict</span>
+<span class="sd">                            User data passed to ``Gtk.CellLayout.set_cell_data_func()``.</span>
+<span class="sd">                        &quot;&quot;&quot;</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">row_iter</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span>
+
+                        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+                            <span class="n">kbs</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">get_keybinding_display_name</span><span class="p">(</span>
+                                <span class="n">e</span><span class="p">),</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;::&quot;</span><span class="p">))</span>
+                            <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span>
+                                <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;::&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">kbs</span><span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+                    <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">kb_map_func</span><span class="p">,</span> <span class="p">{</span>
+                        <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span>
+                    <span class="p">})</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">column</span><span class="o">.</span><span class="n">add_attribute</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">prop_name</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="s2">&quot;align&quot;</span> <span class="ow">in</span> <span class="n">column_def</span><span class="p">:</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;align&quot;</span><span class="p">],</span> <span class="mf">0.5</span><span class="p">)</span>
+
+            <span class="n">column</span><span class="o">.</span><span class="n">set_resizable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">append_column</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">props</span><span class="o">.</span><span class="n">has_tooltip</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;query-tooltip&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_tooltip_cb</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListStore</span><span class="p">(</span><span class="o">*</span><span class="n">types</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+
+        <span class="n">button_toolbar</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Toolbar</span><span class="p">()</span>
+        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_icon_size</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">MENU</span><span class="p">)</span>
+        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">FILL</span><span class="p">)</span>
+        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_INLINE_TOOLBAR</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">button_toolbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">button_holder</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolItem</span><span class="p">()</span>
+        <span class="n">button_holder</span><span class="o">.</span><span class="n">set_expand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">button_holder</span><span class="p">)</span>
+        <span class="n">buttons_box</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+        <span class="n">buttons_box</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">button_holder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">buttons_box</span><span class="p">)</span>
+
+        <span class="n">button_position</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;list-add-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Add new item&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_item</span><span class="p">)</span>
+
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;list-remove-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Remove selected item&quot;</span><span class="p">))</span>
+            <span class="c1"># NOTE: Using button-release-event to be able to catch events.</span>
+            <span class="c1"># clicked event doesn&#39;t pass the event. ¬¬</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;button-release-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_remove_item_cb</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_edition</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;view-list-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Edit selected item&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;go-up-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Move selected item up&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_up</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;go-down-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Move selected item down&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_down</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-export-symbolic&quot;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-export-symbolic&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;custom-export-data-symbolic&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Export data&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">import_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-import-symbolic&quot;</span><span class="p">):</span>
+                <span class="n">import_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-import-symbolic&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">import_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;custom-import-data-symbolic&quot;</span><span class="p">)</span>
+
+            <span class="n">import_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Import data&quot;</span><span class="p">))</span>
+            <span class="n">import_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_import_data</span><span class="p">)</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">import_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">:</span>
+            <span class="n">apply_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">apply_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-save-symbolic&quot;</span><span class="p">)</span>
+            <span class="n">apply_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Apply changes&quot;</span><span class="p">))</span>
+            <span class="n">apply_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_changes</span><span class="p">)</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">apply_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_button_sensitivity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_activate_on_single_click</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;row-activated&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_row_activated</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_button_sensitivity</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TreeList.query_tooltip_cb"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList.query_tooltip_cb">[docs]</a>    <span class="k">def</span> <span class="nf">query_tooltip_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">keyboard_tip</span><span class="p">,</span> <span class="n">tooltip</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Query tooltip callback function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.TreeView</span>
+<span class="sd">            The object which received the signal.</span>
+<span class="sd">        x : int</span>
+<span class="sd">            The x coordinate of the cursor position where the request has been emitted,</span>
+<span class="sd">            relative to widget’s left side.</span>
+<span class="sd">        y : int</span>
+<span class="sd">            The y coordinate of the cursor position where the request has been emitted,</span>
+<span class="sd">            relative to widget’s top.</span>
+<span class="sd">        keyboard_tip : bool</span>
+<span class="sd">            True if the tooltip was triggered using the keyboard</span>
+<span class="sd">        tooltip : Gtk.Tooltip</span>
+<span class="sd">            A ``Gtk.Tooltip``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True if tooltip should be shown right now, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_tooltip_context</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">keyboard_tip</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">path</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">cell_x</span><span class="p">,</span> <span class="n">cell_y</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_path_at_pos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">col_title</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">get_title</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col_title</span><span class="p">):</span>
+                <span class="n">tooltip</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col_title</span><span class="p">))</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">set_tooltip_cell</span><span class="p">(</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="TreeList._on_key_press_cb"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._on_key_press_cb">[docs]</a>    <span class="k">def</span> <span class="nf">_on_key_press_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On keyboard press event.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.TreeView</span>
+<span class="sd">            The object which received the signal.</span>
+<span class="sd">        event : Gdk.EventKey</span>
+<span class="sd">            The ``Gdk.EventKey`` which triggered this signal.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True to stop other handlers from being invoked for the event.</span>
+<span class="sd">            False to propagate the event further.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span>
+        <span class="n">ctrl</span> <span class="o">=</span> <span class="n">state</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span>
+        <span class="n">symbol</span><span class="p">,</span> <span class="n">keyval</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_keyval</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Delete</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_on_remove_item_cb</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="ow">and</span> <span class="n">ctrl</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="p">(</span><span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_N</span> <span class="ow">or</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_n</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_item</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="ow">and</span> <span class="n">ctrl</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Up</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_up</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="ow">and</span> <span class="n">ctrl</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Down</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_down</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="ow">and</span> <span class="n">ctrl</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Page_Up</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_to_first_position</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="ow">and</span> <span class="n">ctrl</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Page_Down</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_to_last_position</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="TreeList._update_button_sensitivity"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._update_button_sensitivity">[docs]</a>    <span class="k">def</span> <span class="nf">_update_button_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update button sensitivity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">selected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selected</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selected</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">selected</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> \
+                    <span class="n">model</span><span class="o">.</span><span class="n">iter_previous</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">selected</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> \
+                    <span class="n">model</span><span class="o">.</span><span class="n">iter_next</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TreeList._on_row_activated"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._on_row_activated">[docs]</a>    <span class="k">def</span> <span class="nf">_on_row_activated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On row activated.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_edition</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_item</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._add_item"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._add_item">[docs]</a>    <span class="k">def</span> <span class="nf">_add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a new item.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_add_edit_dialog</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._on_remove_item_cb"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._on_remove_item_cb">[docs]</a>    <span class="k">def</span> <span class="nf">_on_remove_item_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On item removed callback function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.ToolButton</span>
+<span class="sd">            The object which received the signal.</span>
+<span class="sd">        event : Gdk.EventButton</span>
+<span class="sd">            The ``Gdk.EventButton`` which triggered this signal.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            True to stop other handlers from being invoked for the event.</span>
+<span class="sd">            False to propagate the event further.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span>
+        <span class="n">confirm_removal</span> <span class="o">=</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span>
+
+        <span class="k">if</span> <span class="n">confirm_removal</span><span class="p">:</span>
+            <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                                       <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+                                       <span class="n">message_type</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
+                                       <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">YES_NO</span><span class="p">)</span>
+
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Item removal&quot;</span><span class="p">))</span>
+
+            <span class="n">esc</span> <span class="o">=</span> <span class="n">escape</span><span class="p">(</span>
+                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Are you sure that you want to remove the selected items?&quot;</span><span class="p">))</span>
+            <span class="n">esc</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&lt;b&gt;</span><span class="si">%s</span><span class="s2">&lt;/b&gt;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Note&quot;</span><span class="p">)),</span>
+                                          <span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Press and hold Control key to remove items without confirmation.&quot;</span><span class="p">)))</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_markup</span><span class="p">(</span><span class="n">esc</span><span class="p">)</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">YES</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_remove_item</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_item</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._remove_item"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._remove_item">[docs]</a>    <span class="k">def</span> <span class="nf">_remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remove item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+                <span class="n">t_iter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">t_iter</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="n">t_iter</span><span class="p">)</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">t_iter</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._edit_item"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._edit_item">[docs]</a>    <span class="k">def</span> <span class="nf">_edit_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Edit existent item.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">paths</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">t_iter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_add_edit_dialog</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">t_iter</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">t_iter</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open_add_edit_dialog</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="n">t_iter</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">t_iter</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._move_item_up"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._move_item_up">[docs]</a>    <span class="k">def</span> <span class="nf">_move_item_up</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move item up.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">paths</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">t_iter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">iter_previous</span><span class="p">(</span><span class="n">t_iter</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">iter_previous</span><span class="p">(</span><span class="n">t_iter</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._move_item_to_first_position"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._move_item_to_first_position">[docs]</a>    <span class="k">def</span> <span class="nf">_move_item_to_first_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move item to first position.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">paths</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">move_after</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">move_after</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._move_item_down"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._move_item_down">[docs]</a>    <span class="k">def</span> <span class="nf">_move_item_down</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move item down.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">paths</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">t_iter</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">iter_next</span><span class="p">(</span><span class="n">t_iter</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">iter_next</span><span class="p">(</span><span class="n">t_iter</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._move_item_to_last_position"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._move_item_to_last_position">[docs]</a>    <span class="k">def</span> <span class="nf">_move_item_to_last_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Move item to last position.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">paths</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">move_before</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_iter</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">t_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">get_selected</span><span class="p">()</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">move_before</span><span class="p">(</span><span class="n">t_iter</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList._export_data"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._export_data">[docs]</a>    <span class="k">def</span> <span class="nf">_export_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">import_export</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;export&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">filepath</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
+                <span class="n">data_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TreeList._import_data"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._import_data">[docs]</a>    <span class="k">def</span> <span class="nf">_import_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Import data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.MalformedJSONFile</span>
+<span class="sd">            The exported file is malformed.</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            The file contains wrong data type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">import_export</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="s2">&quot;import&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="k">else</span>
+            <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="ow">and</span> <span class="n">filepath</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">,</span>
+                                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">filepath</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">filepath</span><span class="p">:</span>
+            <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">(</span>
+                <span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Import data&quot;</span><span class="p">),</span>
+                <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+                <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                         <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Overwrite&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+                         <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Append&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">YES</span><span class="p">)</span>
+            <span class="p">)</span>
+
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_default_response</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">buttons_box</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_action_area</span><span class="p">()</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;halign&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+
+            <span class="c1"># Make Cancel button the default.</span>
+            <span class="c1"># https://stackoverflow.com/q/23983975</span>
+            <span class="n">cancel_button</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_widget_for_response</span><span class="p">(</span><span class="n">response_id</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span>
+            <span class="n">cancel_button</span><span class="o">.</span><span class="n">set_can_default</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">cancel_button</span><span class="o">.</span><span class="n">grab_default</span><span class="p">()</span>
+
+            <span class="n">content_area</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_content_area</span><span class="p">()</span>
+            <span class="n">content_area</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">content_area</span><span class="o">.</span><span class="n">set_margin_start</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">content_area</span><span class="o">.</span><span class="n">set_margin_end</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">xalign</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">set_markup</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">%s</span><span class="s2">&lt;/b&gt;: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&lt;b&gt;</span><span class="si">%s</span><span class="s2">&lt;/b&gt;: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                <span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Overwrite&quot;</span><span class="p">)),</span>
+                <span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;replace the current data with the imported data.&quot;</span><span class="p">)),</span>
+                <span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Append&quot;</span><span class="p">)),</span>
+                <span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;add the imported data to the current data.&quot;</span><span class="p">)),</span>
+            <span class="p">))</span>
+            <span class="n">content_area</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+            <span class="n">content_area</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+                <span class="n">override_existent_data</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">YES</span><span class="p">:</span>
+                <span class="n">override_existent_data</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+                <span class="k">return</span>
+
+            <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data_file</span><span class="p">:</span>
+                <span class="n">raw_data</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">imported_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MalformedJSONFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+            <span class="n">existent_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">existent_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imported_data</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">override_existent_data</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="n">imported_data</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="n">existent_data</span> <span class="o">+</span> <span class="n">imported_data</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">on_setting_changed</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Wrong data type found on file &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+                <span class="n">display_message_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Error importing data&quot;</span><span class="p">),</span>
+                                       <span class="n">msg</span> <span class="o">%</span> <span class="n">filepath</span><span class="p">,</span>
+                                       <span class="n">context</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">msg</span> <span class="o">%</span> <span class="n">filepath</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">imported_data</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TreeList._apply_changes"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._apply_changes">[docs]</a>    <span class="k">def</span> <span class="nf">_apply_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply changes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        This preference widget should not have a callback attached to it (equality comparison between</span>
+<span class="sd">        objects and all that jazz). So this function is attached to another xlet preference that</span>
+<span class="sd">        can be bound to a function that can re-apply the changes made to this widget value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># NOTE: The setting controlled by this widget (TreeList) is saved in real time.</span>
+        <span class="c1"># This _apply_changes function simply toggles a setting that can have a</span>
+        <span class="c1"># callback attached (on the JavaScript side) so it can be triggered on demand</span>
+        <span class="c1"># when the Apply changes button is pressed and not every time the data in the</span>
+        <span class="c1"># widget is modified.</span>
+        <span class="c1"># This is done so because sometimes one might not desire to attach a</span>
+        <span class="c1"># callback to this widget.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">,</span>
+                                <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_and_quit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ApplicationWindow</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TreeList._open_add_edit_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._open_add_edit_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">_open_add_edit_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_row</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Open add/edit dialog.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tree_row : None, optional</span>
+<span class="sd">            A :py:class:`Gtk.TreeModelRow`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            List of values to be saved as a new column definition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tree_row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Add new entry&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Edit entry&quot;</span><span class="p">)</span>
+
+        <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                            <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+                            <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+                            <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                                     <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Save&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+                            <span class="p">)</span>
+
+        <span class="c1"># Make OK button the default.</span>
+        <span class="c1"># https://stackoverflow.com/q/23983975</span>
+        <span class="n">ok_button</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_widget_for_response</span><span class="p">(</span><span class="n">response_id</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+        <span class="n">ok_button</span><span class="o">.</span><span class="n">set_can_default</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ok_button</span><span class="o">.</span><span class="n">grab_default</span><span class="p">()</span>
+
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dialog_width</span><span class="p">,</span> <span class="n">height</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">content_area</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_content_area</span><span class="p">()</span>
+        <span class="n">content_area</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Frame</span><span class="p">()</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_VIEW</span><span class="p">)</span>
+        <span class="n">content_area</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">()</span>
+        <span class="n">frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">last_widget_pos</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col_def</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">widgets</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Separator</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">))</span>
+
+            <span class="n">settings_box</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListBox</span><span class="p">()</span>
+            <span class="n">settings_box</span><span class="o">.</span><span class="n">set_selection_mode</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SelectionMode</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">list_edit_factory</span><span class="p">(</span><span class="n">col_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+                                     <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;read-only-keys&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="p">(</span><span class="n">Switch</span><span class="p">,</span> <span class="n">ColorChooser</span><span class="p">)):</span>
+                <span class="n">settings_box</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;row-activated&quot;</span><span class="p">,</span> <span class="n">widget</span><span class="o">.</span><span class="n">clicked</span><span class="p">)</span>
+
+            <span class="c1"># NOTE: I was forced to use this condition because it was impossible for</span>
+            <span class="c1"># the content of the TextView to be edited. It was necessary to triple</span>
+            <span class="c1"># click it to gain access to it or being focused with keyboard navigation.</span>
+            <span class="c1"># With this callback set to the settings_box, the TextView content can directly</span>
+            <span class="c1"># be accessed with a single click.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">TextView</span><span class="p">):</span>
+                <span class="n">settings_box</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;row-activated&quot;</span><span class="p">,</span> <span class="n">widget</span><span class="o">.</span><span class="n">focus_the_retarded_text_view</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="p">(</span><span class="n">IconChooser</span><span class="p">,</span> <span class="n">AppChooser</span><span class="p">)):</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">set_main_app</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_main_app</span><span class="p">())</span>
+
+            <span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+            <span class="n">content</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">settings_box</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">settings_box</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tree_row</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">tree_row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">set_widget_value</span><span class="p">(</span><span class="n">tree_row</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="s2">&quot;default&quot;</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">set_widget_value</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
+
+            <span class="n">last_widget_pos</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_info_labels</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_info_labels</span><span class="p">:</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Separator</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">))</span>
+
+                <span class="n">info_label</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">use_markup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">info_label</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+                <span class="n">info_label_container</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListBox</span><span class="p">()</span>
+                <span class="n">info_label_container</span><span class="o">.</span><span class="n">set_selection_mode</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SelectionMode</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">info_label_container</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">last_widget_pos</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">info_label_container</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">info_label</span><span class="p">)</span>
+
+                <span class="n">last_widget_pos</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">content_area</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="n">widgets</span><span class="p">:</span>
+                <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">get_widget_value</span><span class="p">())</span>
+
+            <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">values</span>
+
+        <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="TreeList._list_changed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._list_changed">[docs]</a>    <span class="k">def</span> <span class="nf">_list_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;List changed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">row_info</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">:</span>
+                <span class="c1"># NOTE: Prevent storing null as a value for a preference that expects a string.</span>
+                <span class="n">row_info</span><span class="p">[</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_info</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_button_sensitivity</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList.on_setting_changed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList.on_setting_changed">[docs]</a>    <span class="k">def</span> <span class="nf">on_setting_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`JSONSettingsBackend.on_setting_changed`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">row_info</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span><span class="p">:</span>
+                <span class="n">cid</span> <span class="o">=</span> <span class="n">column</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+                    <span class="n">row_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]])</span>
+                <span class="k">elif</span> <span class="s2">&quot;default&quot;</span> <span class="ow">in</span> <span class="n">column</span><span class="p">:</span>
+                    <span class="n">row_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column</span><span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">row_info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_info</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">columns_autosize</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TreeList.connect_widget_handlers"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList.connect_widget_handlers">[docs]</a>    <span class="k">def</span> <span class="nf">connect_widget_handlers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`JSONSettingsBackend.connect_widget_handlers`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

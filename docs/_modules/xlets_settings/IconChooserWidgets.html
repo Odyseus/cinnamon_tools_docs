@@ -1,0 +1,1050 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.IconChooserWidgets &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+        
+      <li>xlets_settings.IconChooserWidgets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for xlets_settings.IconChooserWidgets</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Widgets for selecting themed icons.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
+
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gdk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;GdkPixbuf&quot;</span><span class="p">,</span> <span class="s2">&quot;2.0&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">GLib</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">GObject</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gdk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">GdkPixbuf</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Pango</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">BaseGrid</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">_</span>
+
+
+<div class="viewcode-block" id="IconChooserDialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog">[docs]</a><span class="k">class</span> <span class="nc">IconChooserDialog</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;GTK+ 3 Dialog to allow selection of a themed icon.</span>
+
+<span class="sd">    Based on `python-gtk-themed-icon-chooser \</span>
+<span class="sd">    &lt;https://github.com/Tomha/python-gtk-themed-icon-chooser&gt;`__ and</span>
+<span class="sd">    XApp&#39;s native widget.</span>
+
+<span class="sd">    The name of the selection icon is made available as a result of the run</span>
+<span class="sd">    method, or by the get_selected_icon_name method.</span>
+
+<span class="sd">    Note</span>
+<span class="sd">    ----</span>
+<span class="sd">    If 1000s of icons are displayed this is 1000s of widgets. They are</span>
+<span class="sd">    loaded asynchronously to prevent blocking the main thread, but they must</span>
+<span class="sd">    still be show()n from the main thread, which may momentarily block it. This</span>
+<span class="sd">    can be limited by filtering the available icon selection beforehand.</span>
+
+<span class="sd">    Todo</span>
+<span class="sd">    ----</span>
+<span class="sd">    Not all memory created by the dialog seems to be released.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transient_for</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">main_app</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        transient_for : Gtk.Window</span>
+<span class="sd">            The window the dialog will be transient for.</span>
+<span class="sd">        main_app : None, optional</span>
+<span class="sd">            The main application.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">transient_for</span><span class="p">,</span>
+                         <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Choose an Icon&quot;</span><span class="p">),</span>
+                         <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+                         <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                                  <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Select&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+                         <span class="p">)</span>
+        <span class="n">GLib</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_default_size</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+
+        <span class="c1"># Mark for deletion on EOL. Gtk 3.18.</span>
+        <span class="c1"># Keep call to set_css_name without the try/catch.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_css_name</span><span class="p">(</span><span class="s2">&quot;stacksidebar&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_size</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selected_icon</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="o">=</span> <span class="n">main_app</span>
+
+        <span class="c1"># Widgets start here</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headerbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_bar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">sidebar_frame</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Frame</span><span class="p">()</span>
+        <span class="n">sidebar_frame</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+        <span class="n">sidebar_frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="p">)</span>
+        <span class="n">sidebar_box_scroller</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">(</span><span class="n">hadjustment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vadjustment</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">sidebar_box_scroller</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_SIDEBAR</span><span class="p">)</span>
+        <span class="n">sidebar_box_scroller</span><span class="o">.</span><span class="n">set_policy</span><span class="p">(</span><span class="n">hscrollbar_policy</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">NEVER</span><span class="p">,</span>
+                                        <span class="n">vscrollbar_policy</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+        <span class="n">sidebar_box_scroller</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sidebar_frame</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FlowBox</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_orientation</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_column_spacing</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_row_spacing</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_homogeneous</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">set_valign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">START</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">(</span><span class="n">hadjustment</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vadjustment</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span><span class="o">.</span><span class="n">set_policy</span><span class="p">(</span><span class="n">hscrollbar_policy</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">NEVER</span><span class="p">,</span>
+                                           <span class="n">vscrollbar_policy</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">PolicyType</span><span class="o">.</span><span class="n">AUTOMATIC</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Frame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_VIEW</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">SearchEntry</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">set_placeholder_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Search...&quot;</span><span class="p">))</span>
+
+        <span class="n">browse_image_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Browse&quot;</span><span class="p">),</span> <span class="n">valign</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">browse_image_button</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;text-button&quot;</span><span class="p">)</span>
+
+        <span class="n">search_box</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+        <span class="n">search_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">search_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">browse_image_button</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">icon_selector_box</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+        <span class="n">icon_selector_box</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">icon_selector_box</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">icon_selector_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">sidebar_box_scroller</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">icon_selector_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Spinner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Spinner</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">set_valign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+
+        <span class="n">content_box</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_content_area</span><span class="p">()</span>
+        <span class="n">content_box</span><span class="o">.</span><span class="n">set_spacing</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">content_box</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">search_box</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">content_box</span><span class="o">.</span><span class="n">pack_start</span><span class="p">(</span><span class="n">icon_selector_box</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Dialog Buttons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_select_button</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_widget_for_response</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+
+        <span class="c1"># Connect Signals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_icons</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;key-press-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_search_entry_key_pressed</span><span class="p">)</span>
+        <span class="n">browse_image_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_browse_button_clicked</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;selected-rows-changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_category_selected</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;selected-children-changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_icon_selected</span><span class="p">)</span>
+
+        <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_populate_sidebar</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IconChooserDialog.run"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run dialog to select a themed icon.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            An icon name or path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">gtk_icon_theme_uptodate</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_populate_sidebar</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_select_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_on_browse_button_clicked</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">)</span>
+                <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filter_icons</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_icon_name</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._populate_sidebar"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._populate_sidebar">[docs]</a>    <span class="k">def</span> <span class="nf">_populate_sidebar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repopulate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Populate the dialog sidebar.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        repopulate : bool, optional</span>
+<span class="sd">            Whether to repopulate the icons storage due to changes outside of the application.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">repopulate</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">init_icon_chooser_data</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">icon_chooser_store</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListBoxRow</span><span class="p">()</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="s2">&quot;sidebar-item&quot;</span><span class="p">)</span>
+            <span class="n">cat_label</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="n">cat_label</span><span class="o">.</span><span class="n">set_xalign</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">cat_label</span><span class="o">.</span><span class="n">set_margin_start</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">cat_label</span><span class="o">.</span><span class="n">set_margin_end</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cat_label</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">row</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._create_icon_previews"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._create_icon_previews">[docs]</a>    <span class="k">def</span> <span class="nf">_create_icon_previews</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create icon previews to be placed in the dialog&#39;s icon box.</span>
+
+<span class="sd">        Intended to be run in new thread. This only creates previews and adds</span>
+<span class="sd">        them to the icon flow box, but it will not show()/display them. This is</span>
+<span class="sd">        done by calling _display_icon_previews, which should be done in the</span>
+<span class="sd">        main thread via GLib.idle_add.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        context : str</span>
+<span class="sd">            A string identifying a particular type of icon.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">icon</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">icon_chooser_icons</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="n">flow_child</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FlowBoxChild</span><span class="p">()</span>
+            <span class="n">flow_child</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">_IconPreview</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_size</span><span class="p">))</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">insert</span><span class="p">,</span> <span class="n">flow_child</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_display_icon_previews</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._display_icon_previews"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._display_icon_previews">[docs]</a>    <span class="k">def</span> <span class="nf">_display_icon_previews</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display icons and clean up after _create_icon_previews is run.</span>
+
+<span class="sd">        WARNING: This must be run from the main thread, however show_all can</span>
+<span class="sd">        take a noticeable amount of time, so the dialog will freeze momentarily</span>
+<span class="sd">        as this runs if there are many icons to display. This is not avoidable</span>
+<span class="sd">        to my knowledge.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">get_children</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_scroller</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">get_text</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filter_icons</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">set_position</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">get_text</span><span class="p">()))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_subtitle</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">get_children</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._filter_icons"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._filter_icons">[docs]</a>    <span class="k">def</span> <span class="nf">_filter_icons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Filter icons based on filter term, used when filter term changes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+        <span class="n">flow_box_children</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">get_children</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_subtitle</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">get_children</span><span class="p">()))</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">icons_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_subtitle</span><span class="p">(</span><span class="n">icons_count</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">flow_box_children</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">get_children</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+                    <span class="n">icons_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">icon</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">icon</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update_subtitle</span><span class="p">(</span><span class="n">icons_count</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._update_subtitle"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._update_subtitle">[docs]</a>    <span class="k">def</span> <span class="nf">_update_subtitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update dialog subttle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        count : int</span>
+<span class="sd">            The currently displayed amount of icons.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headerbar</span><span class="o">.</span><span class="n">set_subtitle</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Icons shown&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._on_category_selected"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._on_category_selected">[docs]</a>    <span class="k">def</span> <span class="nf">_on_category_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;When the context is changed, display the approprite icons.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sidebar</span><span class="o">.</span><span class="n">get_selected_rows</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_select_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selected_icon</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">get_children</span><span class="p">():</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="c1"># Place a spinner in the icon section while icons are loaded.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">get_children</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box_frame</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spinner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1"># Load icon previews for the new context asynchronously.</span>
+        <span class="n">context_label</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">icon_chooser_store</span><span class="p">[</span><span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_index</span><span class="p">()]</span>
+
+        <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_create_icon_previews</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">context</span><span class="p">,))</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._on_icon_selected"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._on_icon_selected">[docs]</a>    <span class="k">def</span> <span class="nf">_on_icon_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the selected_icon property when the selection changes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flow_box</span><span class="o">.</span><span class="n">get_selected_children</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">selection</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selected_icon</span> <span class="o">=</span> <span class="n">selection</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_children</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_select_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._on_search_entry_key_pressed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._on_search_entry_key_pressed">[docs]</a>    <span class="k">def</span> <span class="nf">_on_search_entry_key_pressed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets the selected_icon property when the selection changes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.SearchEntry</span>
+<span class="sd">            The search entry.</span>
+<span class="sd">        event : Gdk.EventKey</span>
+<span class="sd">            The event triggered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">keyval</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Escape</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_search_entry</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.update_icon_preview_cb"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.update_icon_preview_cb">[docs]</a>    <span class="k">def</span> <span class="nf">update_icon_preview_cb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialog</span><span class="p">,</span> <span class="n">preview</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update the image preview when browsing for image files.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dialog : Gtk.FileChooserDialog</span>
+<span class="sd">            The dialog to browser for images.</span>
+<span class="sd">        preview : Gtk.Image</span>
+<span class="sd">            The selected image in the dialog.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_preview_filename</span><span class="p">()</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_preview_widget_active</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">pixbuf</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">Pixbuf</span><span class="o">.</span><span class="n">new_from_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="n">pixbuf</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="k">if</span> <span class="n">pixbuf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">pixbuf</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">:</span>
+                            <span class="n">pixbuf</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">Pixbuf</span><span class="o">.</span><span class="n">new_from_file_at_size</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">pixbuf</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">:</span>
+                            <span class="n">pixbuf</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">Pixbuf</span><span class="o">.</span><span class="n">new_from_file_at_size</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="n">pixbuf</span> <span class="o">=</span> <span class="kc">None</span>
+
+                    <span class="k">if</span> <span class="n">pixbuf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">preview</span><span class="o">.</span><span class="n">set_from_pixbuf</span><span class="p">(</span><span class="n">pixbuf</span><span class="p">)</span>
+                        <span class="n">dialog</span><span class="o">.</span><span class="n">set_preview_widget_active</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog._on_browse_button_clicked"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog._on_browse_button_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">_on_browse_button_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">,</span> <span class="n">dir_path</span><span class="o">=</span><span class="s2">&quot;/usr/share/icons&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On brose button clicked.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.Button</span>
+<span class="sd">            The button clicked.</span>
+<span class="sd">        dir_path : str, optional</span>
+<span class="sd">            The path to a folder for the dialog to use as a start folder.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserDialog</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Choose an Icon&quot;</span><span class="p">),</span>
+                                       <span class="n">action</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span>
+                                       <span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                       <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                                                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Select&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">))</span>
+
+        <span class="n">filter_text</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">()</span>
+        <span class="n">filter_text</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Image files&quot;</span><span class="p">))</span>
+        <span class="n">filter_text</span><span class="o">.</span><span class="n">add_mime_type</span><span class="p">(</span><span class="s2">&quot;image/*&quot;</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">add_filter</span><span class="p">(</span><span class="n">filter_text</span><span class="p">)</span>
+
+        <span class="n">preview</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="p">()</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_preview_widget</span><span class="p">(</span><span class="n">preview</span><span class="p">)</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;update-preview&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_icon_preview_cb</span><span class="p">,</span> <span class="n">preview</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dir_path</span><span class="p">:</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_current_folder</span><span class="p">(</span><span class="n">dir_path</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_selected_icon</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="c1"># Emit the OK response to the parent dialog. So the icon chooser dialog is</span>
+            <span class="c1"># directly closed and return the selected image path.</span>
+            <span class="c1"># NOTE: It seems that without the call to GLib.idle_add, the &quot;master&quot; dialog doesn&#39;t</span>
+            <span class="c1"># have time to return properly. Who knows what the heck is happening!</span>
+            <span class="c1"># Most likely, I&#39;m asking Python to do to much.</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">response</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+
+        <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.get_icon_size"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.get_icon_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the pixel size to display icons in.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Size to display icons in, in pixels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_size</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.get_search_term"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.get_search_term">[docs]</a>    <span class="k">def</span> <span class="nf">get_search_term</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the string used for filtering icons by name.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            String used for filtering icons by name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.get_selected_icon_name"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.get_selected_icon_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected_icon_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name of the icon selected in the dialog.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Name of the currently selected icon.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selected_icon</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.get_main_app"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.get_main_app">[docs]</a>    <span class="k">def</span> <span class="nf">get_main_app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get main application.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Gtk.Application</span>
+<span class="sd">            See ``main_app`` of :any:`SettingsBox`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.set_icon_size"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.set_icon_size">[docs]</a>    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the pixel size to display icons in.</span>
+
+<span class="sd">        Dialog will not update the icon size once it has been shown.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int</span>
+<span class="sd">            Size to display icons in, in pixels.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            Wrong value type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_size</span> <span class="o">=</span> <span class="n">size</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.set_search_term"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.set_search_term">[docs]</a>    <span class="k">def</span> <span class="nf">set_search_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_term</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the string used for filtering icons by name.</span>
+
+<span class="sd">        Dialog will not update the filter term once it has been shown.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filter_term : str</span>
+<span class="sd">            String used for filtering icons by name.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            Wrong value type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">filter_term</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">filter_term</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">=</span> <span class="n">filter_term</span></div>
+
+<div class="viewcode-block" id="IconChooserDialog.set_main_app"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserDialog.set_main_app">[docs]</a>    <span class="k">def</span> <span class="nf">set_main_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main_app</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get main application.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        main_app : Gtk.Application</span>
+<span class="sd">            See ``main_app`` of :any:`SettingsBox`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="o">=</span> <span class="n">main_app</span></div></div>
+
+
+<div class="viewcode-block" id="IconChooserButton"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton">[docs]</a><span class="k">class</span> <span class="nc">IconChooserButton</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;GTK + 3 Button to open dialog allowing selection of a themed icon.</span>
+
+<span class="sd">    The name of the selected icon is emitted via the &quot;icon-selected&quot; signal</span>
+<span class="sd">    once the dialog is closed, or via the get_selected_icon_name method.</span>
+
+<span class="sd">    NOTE: The icon preview in the dialog and on the button may differ since</span>
+<span class="sd">    icons can have a different appearance at different sizes.By default the</span>
+<span class="sd">    dialog uses a larger size (32px) than the button (16px).</span>
+<span class="sd">    set_dialog_icon_size(16) can be used to get the dialog to display the same</span>
+<span class="sd">    icon that will be shown on the button, if you desire.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dialog : IconChooserDialog</span>
+<span class="sd">        The icon chooser dialog.</span>
+<span class="sd">    icon : str</span>
+<span class="sd">        The icon name or path currently stored in a preference.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__gsignals__</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;icon-selected&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">GObject</span><span class="o">.</span><span class="n">SignalFlags</span><span class="o">.</span><span class="n">RUN_FIRST</span><span class="p">,</span>
+                          <span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span>
+                          <span class="p">[</span><span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_STRING</span><span class="p">])</span>
+    <span class="p">}</span>
+
+    <span class="n">__gproperties__</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;icon&quot;</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span>
+                 <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Icon&quot;</span><span class="p">),</span>
+                 <span class="n">_</span><span class="p">(</span><span class="s2">&quot;The string representing the icon.&quot;</span><span class="p">),</span>
+                 <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                 <span class="n">GObject</span><span class="o">.</span><span class="n">ParamFlags</span><span class="o">.</span><span class="n">READWRITE</span> <span class="o">|</span> <span class="n">GObject</span><span class="o">.</span><span class="n">ParamFlags</span><span class="o">.</span><span class="n">EXPLICIT_NOTIFY</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_widget</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parent_widget : IconChooser</span>
+<span class="sd">            The main widget to which this widget is tied to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">GLib</span><span class="o">.</span><span class="n">threads_init</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span> <span class="o">=</span> <span class="n">parent_widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_icon_size</span> <span class="o">=</span> <span class="mi">32</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_dialog</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_destroy</span><span class="p">)</span>
+
+        <span class="n">GLib</span><span class="o">.</span><span class="n">idle_add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ensure_dialog</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IconChooserButton._on_destroy"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton._on_destroy">[docs]</a>    <span class="k">def</span> <span class="nf">_on_destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On widget destroy.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.do_get_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.do_get_property">[docs]</a>    <span class="k">def</span> <span class="nf">do_get_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get property override.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prop : GObject.ParamSpec</span>
+<span class="sd">            The property to handle.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The icon string.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            Wrong attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;icon&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Unknown property &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.do_set_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.do_set_property">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set property override.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prop : GObject.ParamSpec</span>
+<span class="sd">            The property to handle.</span>
+<span class="sd">        value : str</span>
+<span class="sd">            The property value.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            Wrong attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;icon&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Unknown property &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.ensure_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.ensure_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">ensure_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ensure that the dialog is created once.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span> <span class="o">=</span> <span class="n">IconChooserDialog</span><span class="p">(</span><span class="n">main_app</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_main_app</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.set_icon"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.set_icon">[docs]</a>    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set button icon.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        icon : str</span>
+<span class="sd">            The icon name or path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Delayed apply.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">icon</span><span class="p">:</span>
+                <span class="c1"># NOTE: Check for the existence of &quot;/&quot; first so os.path.isfile() is not called unnecessarily.</span>
+                <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">icon</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">icon</span><span class="p">):</span>
+                    <span class="n">valid</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">icon_size_lookup</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">)</span>
+                    <span class="n">img</span> <span class="o">=</span> <span class="n">GdkPixbuf</span><span class="o">.</span><span class="n">Pixbuf</span><span class="o">.</span><span class="n">new_from_file_at_size</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_icon</span><span class="o">.</span><span class="n">set_from_pixbuf</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_icon</span><span class="o">.</span><span class="n">set_from_icon_name</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;icon-selected&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_icon</span><span class="o">.</span><span class="n">set_from_icon_name</span><span class="p">(</span><span class="s2">&quot;edit-find-symbolic&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">:</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">source_remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="n">apply</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IconChooserButton._show_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton._show_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">_show_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called when the button is clicked to show a selection dialog.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensure_dialog</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">set_transient_for</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dialog_icon_size</span><span class="p">)</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">set_search_term</span><span class="p">(</span><span class="n">icon</span> <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.get_dialog_icon_size"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.get_dialog_icon_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_dialog_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the pixel size to display icons in.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            Size to display icons in pixels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_icon_size</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.get_search_term"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.get_search_term">[docs]</a>    <span class="k">def</span> <span class="nf">get_search_term</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the string used for filtering icons by name.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            String used for filtering icons by name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.get_selected_icon_name"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.get_selected_icon_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_selected_icon_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name of the icon selected in the dialog.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Name or path of the currently selected icon.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.get_main_app"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.get_main_app">[docs]</a>    <span class="k">def</span> <span class="nf">get_main_app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the main application.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Gtk.Application</span>
+<span class="sd">            See ``main_app`` of :any:`SettingsBox`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.set_dialog_icon_size"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.set_dialog_icon_size">[docs]</a>    <span class="k">def</span> <span class="nf">set_dialog_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the pixel size to display icons in.</span>
+
+<span class="sd">        Dialog will not update the icon size once it has been shown.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        size : int</span>
+<span class="sd">            The dialog icons size.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            Wrong value type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_icon_size</span> <span class="o">=</span> <span class="n">size</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.set_search_term"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.set_search_term">[docs]</a>    <span class="k">def</span> <span class="nf">set_search_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_term</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the string used for filtering icons by name.</span>
+
+<span class="sd">        If use_regex is True, the provided string will be used as the pattern</span>
+<span class="sd">        for a regex match, otherwise basic case-insensitive matching is used.</span>
+
+<span class="sd">        Dialog will not update the filter term once it has been shown.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        search_term : str</span>
+<span class="sd">            String used for filtering icons by name.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            Wrong value type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">search_term</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">search_term</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_search_term</span> <span class="o">=</span> <span class="n">search_term</span></div>
+
+<div class="viewcode-block" id="IconChooserButton.set_main_app"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton.set_main_app">[docs]</a>    <span class="k">def</span> <span class="nf">set_main_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">main_app</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set main application.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        main_app : Gtk.Application</span>
+<span class="sd">            See ``main_app`` of :any:`SettingsBox`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="o">=</span> <span class="n">main_app</span></div></div>
+
+
+<div class="viewcode-block" id="_IconPreview"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets._IconPreview">[docs]</a><span class="k">class</span> <span class="nc">_IconPreview</span><span class="p">(</span><span class="n">BaseGrid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a preview box for icons containing the icon and its name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Icon name.</span>
+<span class="sd">        size : int</span>
+<span class="sd">            Icon size.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tooltip</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">DIALOG</span><span class="p">)</span>
+        <span class="c1"># Gtk.Image.new_from_icon_name seems to sometimes ignore the set size,</span>
+        <span class="c1">#   leading to inconsistent icon sizes. Solution is to force a size</span>
+        <span class="c1">#   using set_pixel_size.</span>
+        <span class="n">icon</span><span class="o">.</span><span class="n">set_pixel_size</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">icon</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">icon</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">label</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_justify</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Justification</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_lines</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_line_wrap</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_line_wrap_mode</span><span class="p">(</span><span class="n">Pango</span><span class="o">.</span><span class="n">WrapMode</span><span class="o">.</span><span class="n">WORD_CHAR</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_max_width_chars</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_ellipsize</span><span class="p">(</span><span class="n">Pango</span><span class="o">.</span><span class="n">EllipsizeMode</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="_IconPreview.get_name"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets._IconPreview.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name of the icon.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Name of the icon.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_name</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

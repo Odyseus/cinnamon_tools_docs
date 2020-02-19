@@ -1,0 +1,1921 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.SettingsWidgets module &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="xlets_settings.TreeListWidgets module" href="xlets_settings.TreeListWidgets.html" />
+    <link rel="prev" title="xlets_settings.KeybindingWidgets module" href="xlets_settings.KeybindingWidgets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">xlets_settings</a> &raquo;</li>
+        
+          <li><a href="xlets_settings.html">xlets_settings package</a> &raquo;</li>
+        
+      <li>xlets_settings.SettingsWidgets module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/modules/xlets_settings/xlets_settings.SettingsWidgets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="xlets_settings.TreeListWidgets.html" class="btn btn-neutral float-right" title="xlets_settings.TreeListWidgets module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xlets_settings.KeybindingWidgets.html" class="btn btn-neutral float-left" title="xlets_settings.KeybindingWidgets module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-xlets_settings.SettingsWidgets">
+<span id="xlets-settings-settingswidgets-module"></span><h1>xlets_settings.SettingsWidgets module<a class="headerlink" href="#module-xlets_settings.SettingsWidgets" title="Permalink to this headline">¶</a></h1>
+<p>Settings widgets.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.CAN_BACKEND">
+<code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">CAN_BACKEND</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.CAN_BACKEND" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of widgets that can be used to control settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.JSON_SETTINGS_PROPERTIES_MAP">
+<code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">JSON_SETTINGS_PROPERTIES_MAP</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.JSON_SETTINGS_PROPERTIES_MAP" title="Permalink to this definition">¶</a></dt>
+<dd><p>JSON attribute to Python keywords argument map used by the settings widgets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.settings_objects">
+<code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">settings_objects</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.settings_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage for instantiated <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Settings.html#Gio.Settings" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.Settings</span></code></a> instances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsStack">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsStack</code><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsStack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">gi.repository.Gtk.Stack</span></code></p>
+<p>The stack used to switch xlets instances.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsStack.expand">
+<code class="sig-name descname">expand</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsStack.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsPage">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsPage</code><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.common.BaseGrid</span></code></a></p>
+<p>Settings sections holder.</p>
+<p>Initialization.</p>
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsPage.add_section">
+<code class="sig-name descname">add_section</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">subtitle=None</em>, <em class="sig-param">section_info={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsPage.add_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsPage.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add section to page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section title.</p></li>
+<li><p><strong>subtitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section subtitle.</p></li>
+<li><p><strong>section_info</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsSection" title="xlets_settings.SettingsWidgets.SettingsSection"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsWidgets.SettingsSection</span></code></a>, &quot;section_info&quot;.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The settings section.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsSection" title="xlets_settings.SettingsWidgets.SettingsSection">SettingsWidgets.SettingsSection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsPage.add_reveal_section">
+<code class="sig-name descname">add_reveal_section</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">subtitle=None</em>, <em class="sig-param">section_info={}</em>, <em class="sig-param">schema=None</em>, <em class="sig-param">pref_key=None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">revealer=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsPage.add_reveal_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsPage.add_reveal_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add reveal section to page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section title.</p></li>
+<li><p><strong>subtitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section subtitle.</p></li>
+<li><p><strong>section_info</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsSection" title="xlets_settings.SettingsWidgets.SettingsSection"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsWidgets.SettingsSection</span></code></a>.</p></li>
+<li><p><strong>schema</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>pref_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>revealer</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The revealer that will be attached to the section and to which the widget will
+be attached to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The settings section.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsSection" title="xlets_settings.SettingsWidgets.SettingsSection">SettingsWidgets.SettingsSection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsSection</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">subtitle=None</em>, <em class="sig-param">section_info={}</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.common.BaseGrid</span></code></a></p>
+<p>Settings section.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.always_show">
+<code class="sig-name descname">always_show</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.always_show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Always show.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.box">
+<code class="sig-name descname">box</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of <code class="docutils literal notranslate"><span class="pre">BaseGrid</span></code> that will contain all widgets in a section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid">BaseGrid</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.frame">
+<code class="sig-name descname">frame</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of <code class="docutils literal notranslate"><span class="pre">Gtk.Frame</span></code> that will contain self.box for aesthetic purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Frame.html#Gtk.Frame" title="(in Gtk 3.0 v3.0)">Gtk.Frame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.need_separator">
+<code class="sig-name descname">need_separator</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.need_separator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag that indicates if there is a need to insert a separator after a widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.revealers">
+<code class="sig-name descname">revealers</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.revealers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list were to store a created <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Revealer.html#Gtk.Revealer" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Revealer</span></code></a> inside a section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.size_group">
+<code class="sig-name descname">size_group</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.size_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/SizeGroup.html#Gtk.SizeGroup" title="(in Gtk 3.0 v3.0)">Gtk.SizeGroup</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section title.</p></li>
+<li><p><strong>subtitle</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Section subtitle.</p></li>
+<li><p><strong>section_info</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em>, </em><em>optional</em>) -- Data used to create a button at the end of the section title that opens a dialog.
+The dictionary can contain two keys. The &quot;context&quot; key can have one of three values
+(&quot;information&quot; (default), &quot;error&quot; or&quot;warning&quot;) and it will be used to decide which icon
+the button will have. And a &quot;message&quot; key that will store the text in valid markup
+that will be used on the displayed message.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.add_row">
+<code class="sig-name descname">add_row</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">col_pos</em>, <em class="sig-param">row_pos</em>, <em class="sig-param">col_span</em>, <em class="sig-param">row_span</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection.add_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.add_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a row to the section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Widget.html#Gtk.Widget" title="(in Gtk 3.0 v3.0)"><em>Gtk.Widget</em></a>) -- Widget to insert in a section row.</p></li>
+<li><p><strong>col_pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- At which column to insert a widget.</p></li>
+<li><p><strong>row_pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- At which row to insert a widget.</p></li>
+<li><p><strong>col_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- How many columns a widget will occupy.</p></li>
+<li><p><strong>row_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- How many rows a widget will occupy.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.add_reveal_row">
+<code class="sig-name descname">add_reveal_row</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">col_pos</em>, <em class="sig-param">row_pos</em>, <em class="sig-param">col_span</em>, <em class="sig-param">row_span</em>, <em class="sig-param">schema=None</em>, <em class="sig-param">pref_key=None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">check_func=None</em>, <em class="sig-param">revealer=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection.add_reveal_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.add_reveal_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a reveal row to the section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Widget.html#Gtk.Widget" title="(in Gtk 3.0 v3.0)"><em>Gtk.Widget</em></a>) -- Widget to insert in a section row.</p></li>
+<li><p><strong>col_pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- At which column to insert a widget.</p></li>
+<li><p><strong>row_pos</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- At which row to insert a widget.</p></li>
+<li><p><strong>col_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- How many columns a widget will occupy.</p></li>
+<li><p><strong>row_span</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) -- How many rows a widget will occupy.</p></li>
+<li><p><strong>schema</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>pref_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>check_func</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer"><code class="xref any py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsRevealer</span></code></a>.</p></li>
+<li><p><strong>revealer</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The revealer that will be attached to the section and to which the widget will
+be attached to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The revealer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsRevealer" title="xlets_settings.JsonSettingsWidgets.JSONSettingsRevealer">JSONSettingsRevealer</a>, <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="xlets_settings.SettingsWidgets.SettingsRevealer">xlets_settings.SettingsWidgets.SettingsRevealer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.add_note">
+<code class="sig-name descname">add_note</code><span class="sig-paren">(</span><em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection.add_note"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.add_note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a note to a section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The note text.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The note to add to a section.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Label.html#Gtk.Label" title="(in Gtk 3.0 v3.0)">Gtk.Label</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.update_always_show_state">
+<code class="sig-name descname">update_always_show_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection.update_always_show_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.update_always_show_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update always show state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt execution.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsSection.check_reveal_state">
+<code class="sig-name descname">check_reveal_state</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsSection.check_reveal_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsSection.check_reveal_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check reveal state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Halt execution.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsRevealer</code><span class="sig-paren">(</span><em class="sig-param">schema=None</em>, <em class="sig-param">pref_key=None</em>, <em class="sig-param">values=None</em>, <em class="sig-param">check_func=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsRevealer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">gi.repository.Gtk.Revealer</span></code></p>
+<p>Settings revealer widget.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.box">
+<code class="sig-name descname">box</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>An instance of <code class="docutils literal notranslate"><span class="pre">BaseGrid</span></code> that will contain all widgets inside a revealer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid">BaseGrid</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.check_func">
+<code class="sig-name descname">check_func</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.check_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that when executed will return the condition that will decide
+if the revealer is shown or hidden. It receives two arguments. The first argument is
+the current value of the pref_key preference. The second argument is a list of values
+that could be used to check the current value against.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.settings">
+<code class="sig-name descname">settings</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">Gio.Settings</span></code> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Settings.html#Gio.Settings" title="(in Gio 2.0 v2.0)">Gio.Settings</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.values">
+<code class="sig-name descname">values</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer.check_func" title="xlets_settings.SettingsWidgets.SettingsRevealer.check_func"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">SettingsRevealer.check_func</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>schema</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- gsettings schema used to instantiate <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer.settings" title="xlets_settings.SettingsWidgets.SettingsRevealer.settings"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">SettingsRevealer.settings</span></code></a>.</p></li>
+<li><p><strong>pref_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The preference key whose value will determine if the revealer is shown or hidden.</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer.values" title="xlets_settings.SettingsWidgets.SettingsRevealer.values"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">SettingsRevealer.values</span></code></a>.</p></li>
+<li><p><strong>check_func</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsRevealer.check_func" title="xlets_settings.SettingsWidgets.SettingsRevealer.check_func"><code class="xref any py py-attr docutils literal notranslate"><span class="pre">SettingsRevealer.check_func</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">widget</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsRevealer.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add widget to revealer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Widget.html#Gtk.Widget" title="(in Gtk 3.0 v3.0)"><em>Gtk.Widget</em></a>) -- The widget to add to the revealer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsRevealer.on_settings_changed">
+<code class="sig-name descname">on_settings_changed</code><span class="sig-paren">(</span><em class="sig-param">settings</em>, <em class="sig-param">pref_key</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsRevealer.on_settings_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsRevealer.on_settings_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to set the revealer visibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>settings</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Settings.html#Gio.Settings" title="(in Gio 2.0 v2.0)"><em>Gio.Settings</em></a>) -- A <code class="docutils literal notranslate"><span class="pre">Gio.Settings</span></code> instance.</p></li>
+<li><p><strong>pref_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The preference key whose value will determine if the revealer is shown or hidden.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsWidget</code><span class="sig-paren">(</span><em class="sig-param">dep_key=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.common.BaseGrid</span></code></a></p>
+<p>Main class to generate all types of widgets (be them gsettings widgets or xlets widgets).</p>
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A string on the format &quot;gsettings.schema/gsetting-key&quot;.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key">
+<code class="sig-name descname">set_dep_key</code><span class="sig-paren">(</span><em class="sig-param">dep_key</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.set_dep_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set dependency key.</p>
+<p>This is used by gsettings widgets. It works by setting a widget sensitivity instead of
+using a revealer. dep_key is a string in the format &quot;gsettings.schema/gsetting-key&quot;.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- A string on the format &quot;gsettings.schema/gsetting-key&quot;.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.add_to_size_group">
+<code class="sig-name descname">add_to_size_group</code><span class="sig-paren">(</span><em class="sig-param">group</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.add_to_size_group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.add_to_size_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add widget to A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>group</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/SizeGroup.html#Gtk.SizeGroup" title="(in Gtk 3.0 v3.0)"><em>Gtk.SizeGroup</em></a>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.fill_row">
+<code class="sig-name descname">fill_row</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.fill_row"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.fill_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill row.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.get_settings">
+<code class="sig-name descname">get_settings</code><span class="sig-paren">(</span><em class="sig-param">schema</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.get_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.get_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Settings.html#Gio.Settings" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.Settings</span></code></a> instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>schema</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- gsettings schema.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instantiated <code class="docutils literal notranslate"><span class="pre">Gio.Settings</span></code> instance.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Settings.html#Gio.Settings" title="(in Gio 2.0 v2.0)">Gio.Settings</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.get_main_app">
+<code class="sig-name descname">get_main_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.get_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.get_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)">Gtk.Application</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsWidget.set_main_app">
+<code class="sig-name descname">set_main_app</code><span class="sig-paren">(</span><em class="sig-param">main_app</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsWidget.set_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set main application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>main_app</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)"><em>Gtk.Application</em></a>) -- See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.Text">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">Text</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">align=&lt;enum GTK_ALIGN_START of type Gtk.Align&gt;</em>, <em class="sig-param">use_markup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A simple widget to display informative text.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Text.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Text.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Label.html#Gtk.Label" title="(in Gtk 3.0 v3.0)">Gtk.Label</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Text.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Text.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>align</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) -- <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/enums.html#Gtk.Align" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Align</span></code></a>.</p></li>
+<li><p><strong>use_markup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether or not to use markup in the label.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.Button">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">Button</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Button"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A button widget that when pressed bill toggle a boolean preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Button.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Button.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Button.html#Gtk.Button" title="(in Gtk 3.0 v3.0)">Gtk.Button</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Button.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Button._on_button_clicked">
+<code class="sig-name descname">_on_button_clicked</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Button._on_button_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button._on_button_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>On button clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Button.set_label">
+<code class="sig-name descname">set_label</code><span class="sig-paren">(</span><em class="sig-param">label</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Button.set_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.set_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Button.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Button.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Button.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Button.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Button.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SettingsLabel">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SettingsLabel</code><span class="sig-paren">(</span><em class="sig-param">text=None</em>, <em class="sig-param">use_markup=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsLabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">gi.overrides.Gtk.Label</span></code></p>
+<p>A label widget that will be used as description for each created widget.</p>
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Label text.</p></li>
+<li><p><strong>use_markup</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether or not to insert the text as markup.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsLabel.set_label_text">
+<code class="sig-name descname">set_label_text</code><span class="sig-paren">(</span><em class="sig-param">text</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsLabel.set_label_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsLabel.set_label_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set label text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- Label text.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SettingsLabel.set_label_markup">
+<code class="sig-name descname">set_label_markup</code><span class="sig-paren">(</span><em class="sig-param">markup</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SettingsLabel.set_label_markup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SettingsLabel.set_label_markup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set label markup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>markup</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- Label markup.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.IconChooser">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">IconChooser</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#IconChooser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A widget to choose named icons or icon files.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.bind_content_widget_entry">
+<code class="sig-name descname">bind_content_widget_entry</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.bind_content_widget_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Since I had the <em>great</em> idea of creating this setting widget with two widgets bound to the
+setting, I had to come up with this. This attribute is used by the
+<a class="reference internal" href="xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.list_edit_factory" title="xlets_settings.TreeListWidgets.list_edit_factory"><code class="xref any py py-func docutils literal notranslate"><span class="pre">TreeListWidgets.list_edit_factory</span></code></a> method to identify <a class="reference internal" href="#xlets_settings.SettingsWidgets.IconChooser" title="xlets_settings.SettingsWidgets.IconChooser"><code class="xref any py py-class docutils literal notranslate"><span class="pre">IconChooser</span></code></a> widget
+so in addition to call <code class="docutils literal notranslate"><span class="pre">set_property</span></code> on <code class="docutils literal notranslate"><span class="pre">self.bind_object</span></code>, it also calls <code class="docutils literal notranslate"><span class="pre">set_text</span></code>
+on <code class="docutils literal notranslate"><span class="pre">self.content_widget</span></code> (a <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Entry.html#Gtk.Entry" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Entry</span></code></a>) to keep both widgets in sync.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend"><code class="xref any py py-class docutils literal notranslate"><span class="pre">JSONSettingsBackend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.bind_object">
+<code class="sig-name descname">bind_object</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.bind_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend"><code class="xref any py py-class docutils literal notranslate"><span class="pre">JSONSettingsBackend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton" title="xlets_settings.IconChooserWidgets.IconChooserButton">IconChooserButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.bind_prop">
+<code class="sig-name descname">bind_prop</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.bind_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend"><code class="xref any py py-class docutils literal notranslate"><span class="pre">JSONSettingsBackend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Entry.html#Gtk.Entry" title="(in Gtk 3.0 v3.0)">Gtk.Entry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_prop</code><em class="property"> = 'icon'</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = &lt;flags 0 of type Gio.SettingsBindFlags&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_content_widget_entry</code><em class="property"> = True</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.IconChooser.set_main_app">
+<code class="sig-name descname">set_main_app</code><span class="sig-paren">(</span><em class="sig-param">main_app</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#IconChooser.set_main_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser.set_main_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set main application.</p>
+<p>This overrides the method on the root class because the widget that actually needs it is
+self.bind_object, not its container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>main_app</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Application.html#Gtk.Application" title="(in Gtk 3.0 v3.0)"><em>Gtk.Application</em></a>) -- See <code class="docutils literal notranslate"><span class="pre">main_app</span></code> of <a class="reference internal" href="xlets_settings.html#xlets_settings.SettingsBox" title="xlets_settings.SettingsBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SettingsBox</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.IconChooser._on_entry_changed">
+<code class="sig-name descname">_on_entry_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#IconChooser._on_entry_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser._on_entry_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>On text entry changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.IconChooser._on_icon_selected">
+<code class="sig-name descname">_on_icon_selected</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">icon</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#IconChooser._on_icon_selected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.IconChooser._on_icon_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>On icon selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget</strong> (<a class="reference internal" href="xlets_settings.IconChooserWidgets.html#xlets_settings.IconChooserWidgets.IconChooserButton" title="xlets_settings.IconChooserWidgets.IconChooserButton"><em>IconChooserButton</em></a>) -- The icon chooser button.</p></li>
+<li><p><strong>icon</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The icon name or path to set into the text entry.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.Entry">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">Entry</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">expand_width=True</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>An editable entry to store text into a preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Entry.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Entry.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Entry.bind_prop">
+<code class="sig-name descname">bind_prop</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Entry.bind_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.attach_backend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Entry.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Entry.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Entry.html#Gtk.Entry" title="(in Gtk 3.0 v3.0)">Gtk.Entry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Entry.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Entry.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>expand_width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- If True, expand the widget to all available space.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_prop</code><em class="property"> = 'text'</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = &lt;flags 0 of type Gio.SettingsBindFlags&gt;</em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.TextView">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">TextView</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">height=200</em>, <em class="sig-param">accept_tabs=False</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#TextView"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>An editable entry to store text in multiple lines into a preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.TextView.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.TextView.bind_object">
+<code class="sig-name descname">bind_object</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.bind_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.attach_backend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/EntryBuffer.html#Gtk.EntryBuffer" title="(in Gtk 3.0 v3.0)">Gtk.EntryBuffer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.TextView.bind_prop">
+<code class="sig-name descname">bind_prop</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.bind_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.attach_backend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.TextView.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/TextView.html#Gtk.TextView" title="(in Gtk 3.0 v3.0)">Gtk.TextView</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.TextView.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) -- Minimum list widget height.</p></li>
+<li><p><strong>accept_tabs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether the <kbd class="kbd docutils literal notranslate">Tab</kbd> key inserts a tab character (accept_tabs = True)
+or the keyboard focus is moved (accept_tabs = False).</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_prop</code><em class="property"> = 'text'</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = &lt;flags 0 of type Gio.SettingsBindFlags&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.TextView.focus_the_retarded_text_view">
+<code class="sig-name descname">focus_the_retarded_text_view</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#TextView.focus_the_retarded_text_view"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.TextView.focus_the_retarded_text_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Focus the <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/TextView.html#Gtk.TextView" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.TextView</span></code></a> when clicked.</p>
+<p>This is a workaround for <code class="docutils literal notranslate"><span class="pre">Gtk.TextView</span></code> elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>See <code class="xref py py-class docutils literal notranslate"><span class="pre">Gdk.EVENT_STOP</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.Switch">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">Switch</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Switch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A switch widget to toggle a boolean preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Switch.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Switch.bind_prop">
+<code class="sig-name descname">bind_prop</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch.bind_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.attach_backend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Switch.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Switch.html#Gtk.Switch" title="(in Gtk 3.0 v3.0)">Gtk.Switch</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Switch.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_prop</code><em class="property"> = 'active'</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = &lt;flags 0 of type Gio.SettingsBindFlags&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Switch.clicked">
+<code class="sig-name descname">clicked</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Switch.clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Switch.clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.ComboBox">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">ComboBox</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">options=[]</em>, <em class="sig-param">valtype=None</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ComboBox"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A combo box widget from which to choose any of the predefined values.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ComboBox.html#Gtk.ComboBox" title="(in Gtk 3.0 v3.0)">Gtk.ComboBox</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The model used as storage by this widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ListStore.html#Gtk.ListStore" title="(in Gtk 3.0 v3.0)">Gtk.ListStore</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The preference stored value used to set the current combo box item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>, </em><em>optional</em>) -- A list of tuples of two elements representing the options used to build
+a <a class="reference internal" href="#xlets_settings.SettingsWidgets.ComboBox" title="xlets_settings.SettingsWidgets.ComboBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ComboBox</span></code></a> widget and its derivatives.</p></li>
+<li><p><strong>valtype</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The type used to coerce a specific option type.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ComboBox._on_my_value_changed">
+<code class="sig-name descname">_on_my_value_changed</code><span class="sig-paren">(</span><em class="sig-param">widget</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ComboBox._on_my_value_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox._on_my_value_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>On value changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>widget</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ComboBox.html#Gtk.ComboBox" title="(in Gtk 3.0 v3.0)"><em>Gtk.ComboBox</em></a>) -- The widget combo box.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ComboBox._set_options">
+<code class="sig-name descname">_set_options</code><span class="sig-paren">(</span><em class="sig-param">options</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ComboBox._set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox._set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set options</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.ComboBox" title="xlets_settings.SettingsWidgets.ComboBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ComboBox</span></code></a> <code class="docutils literal notranslate"><span class="pre">options</span></code> argument.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ComboBox.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ComboBox.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ComboBox.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ComboBox.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">ColorChooser</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">use_alpha=True</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>Widget to choose a color.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ColorButton.html#Gtk.ColorButton" title="(in Gtk 3.0 v3.0)">Gtk.ColorButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>use_alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether the widget is be able to specify opacity.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser._on_clear_button_clicked">
+<code class="sig-name descname">_on_clear_button_clicked</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser._on_clear_button_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser._on_clear_button_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>On clear button clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser._on_color_set">
+<code class="sig-name descname">_on_color_set</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser._on_color_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser._on_color_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>On color set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser._set_widget_color">
+<code class="sig-name descname">_set_widget_color</code><span class="sig-paren">(</span><em class="sig-param">color_string</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser._set_widget_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser._set_widget_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set widget color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color_string</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The string color.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.clicked">
+<code class="sig-name descname">clicked</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser.clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>On clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.ColorChooser.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#ColorChooser.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.ColorChooser.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.FileChooser">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">FileChooser</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">dir_select=False</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#FileChooser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A widget to choose and store a path to a file or directory into a preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.FileChooser.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.FileChooser.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/FileChooserButton.html#Gtk.FileChooserButton" title="(in Gtk 3.0 v3.0)">Gtk.FileChooserButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.FileChooser.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>dir_select</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) -- If True, enable folder selection on the file chooser. If False,
+enable file selection.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.FileChooser._on_file_selected">
+<code class="sig-name descname">_on_file_selected</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#FileChooser._on_file_selected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser._on_file_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>On file selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.FileChooser._on_clear_button_clicked">
+<code class="sig-name descname">_on_clear_button_clicked</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#FileChooser._on_clear_button_clicked"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser._on_clear_button_clicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>On clear button clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.FileChooser.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#FileChooser.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.FileChooser.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#FileChooser.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.FileChooser.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.SpinButton">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">SpinButton</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">units=''</em>, <em class="sig-param">mini=None</em>, <em class="sig-param">maxi=None</em>, <em class="sig-param">step=1</em>, <em class="sig-param">page=None</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SpinButton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A widget to choose and store an integer or float value into a preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SpinButton.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SpinButton.bind_prop">
+<code class="sig-name descname">bind_prop</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton.bind_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.attach_backend</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SpinButton.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/SpinButton.html#Gtk.SpinButton" title="(in Gtk 3.0 v3.0)">Gtk.SpinButton</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.SpinButton.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>units</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Unit type description.</p></li>
+<li><p><strong>mini</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Minimum value.</p></li>
+<li><p><strong>maxi</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Maximum value.</p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) -- Adjustment amount.</p></li>
+<li><p><strong>page</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- Adjustment amount when using the Page Up/Down keys.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_prop</code><em class="property"> = 'value'</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = &lt;flags G_SETTINGS_BIND_GET of type Gio.SettingsBindFlags&gt;</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.SpinButton._apply_later">
+<code class="sig-name descname">_apply_later</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#SpinButton._apply_later"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.SpinButton._apply_later" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delayed apply.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.Keybinding">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">Keybinding</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">num_bind=1</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Keybinding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A widget to set and store a keybinding into a preference.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Keybinding.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Keybinding.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/Frame.html#Gtk.Frame" title="(in Gtk 3.0 v3.0)">Gtk.Frame</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.Keybinding.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>num_bind</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) -- Number of keybinding widgets.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Keybinding._on_kb_changed">
+<code class="sig-name descname">_on_kb_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Keybinding._on_kb_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding._on_kb_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>On keybinding changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Keybinding.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Keybinding.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.Keybinding.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#Keybinding.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.Keybinding.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions">
+<em class="property">class </em><code class="sig-prename descclassname">xlets_settings.SettingsWidgets.</code><code class="sig-name descname">KeybindingWithOptions</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">options=[]</em>, <em class="sig-param">valtype=None</em>, <em class="sig-param">size_group=None</em>, <em class="sig-param">dep_key=None</em>, <em class="sig-param">tooltip=''</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget" title="xlets_settings.SettingsWidgets.SettingsWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">xlets_settings.SettingsWidgets.SettingsWidget</span></code></a></p>
+<p>A widget to choose a keybinding and bind it to an option from a combo box.</p>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.bind_dir">
+<code class="sig-name descname">bind_dir</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.bind_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Gio.SettingsBindFlags</span></code> flags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.SettingsBindFlags" title="(in Gio 2.0 v2.0)">Gio.SettingsBindFlags</a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.content_widget">
+<code class="sig-name descname">content_widget</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.content_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main widget that will be used to represent a setting value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="xlets_settings.common.html#xlets_settings.common.BaseGrid" title="xlets_settings.common.BaseGrid">BaseGrid</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>The label widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsLabel" title="xlets_settings.SettingsWidgets.SettingsLabel">SettingsWidgets.SettingsLabel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The model used as storage by this widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ListStore.html#Gtk.ListStore" title="(in Gtk 3.0 v3.0)">Gtk.ListStore</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The preference stored value used to set the current combo box item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) -- The label text.</p></li>
+<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>, </em><em>optional</em>) -- A list of tuples of two elements representing the options used to build
+a <a class="reference internal" href="#xlets_settings.SettingsWidgets.ComboBox" title="xlets_settings.SettingsWidgets.ComboBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ComboBox</span></code></a> widget and its derivatives.</p></li>
+<li><p><strong>valtype</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- The type used to coerce a specific option type.</p></li>
+<li><p><strong>size_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- A <code class="docutils literal notranslate"><span class="pre">Gtk.SizeGroup</span></code>.</p></li>
+<li><p><strong>dep_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key" title="xlets_settings.SettingsWidgets.SettingsWidget.set_dep_key"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">SettingsWidget.set_dep_key</span></code></a>.</p></li>
+<li><p><strong>tooltip</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>optional</em>) -- Widget tooltip text.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">bind_dir</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions._on_kb_changed">
+<code class="sig-name descname">_on_kb_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions._on_kb_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions._on_kb_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>On keybinding changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions._on_combo_value_changed">
+<code class="sig-name descname">_on_combo_value_changed</code><span class="sig-paren">(</span><em class="sig-param">combo</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions._on_combo_value_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions._on_combo_value_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>On combo box changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>combo</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/ComboBox.html#Gtk.ComboBox" title="(in Gtk 3.0 v3.0)"><em>Gtk.ComboBox</em></a>) -- The widget combo box.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions._set_options">
+<code class="sig-name descname">_set_options</code><span class="sig-paren">(</span><em class="sig-param">options</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions._set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions._set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) -- See <a class="reference internal" href="#xlets_settings.SettingsWidgets.ComboBox" title="xlets_settings.SettingsWidgets.ComboBox"><code class="xref any py py-class docutils literal notranslate"><span class="pre">ComboBox</span></code></a> <code class="docutils literal notranslate"><span class="pre">options</span></code> argument.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.on_setting_changed">
+<code class="sig-name descname">on_setting_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions.on_setting_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.on_setting_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.on_setting_changed</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="xlets_settings.SettingsWidgets.KeybindingWithOptions.connect_widget_handlers">
+<code class="sig-name descname">connect_widget_handlers</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/SettingsWidgets.html#KeybindingWithOptions.connect_widget_handlers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsWidgets.KeybindingWithOptions.connect_widget_handlers" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers" title="xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers"><code class="xref any py py-meth docutils literal notranslate"><span class="pre">JSONSettingsBackend.connect_widget_handlers</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> -- Arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="xlets_settings.TreeListWidgets.html" class="btn btn-neutral float-right" title="xlets_settings.TreeListWidgets module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xlets_settings.KeybindingWidgets.html" class="btn btn-neutral float-left" title="xlets_settings.KeybindingWidgets module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>python_modules.cli &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>python_modules.cli</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for python_modules.cli</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Main command line application.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">docopt_doc : str</span>
+<span class="sd">    Used to store/define the docstring that will be passed to ``docopt`` as the ``doc`` argument.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">app_utils</span>
+<span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__appdescription__</span>
+<span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__appname__</span>
+<span class="kn">from</span> <span class="nn">.__init__</span> <span class="k">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="k">import</span> <span class="n">cli_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="k">import</span> <span class="n">exceptions</span>
+
+
+<span class="n">docopt_doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{__appname__}</span><span class="s2"> </span><span class="si">{__version__}</span><span class="s2"></span>
+
+<span class="si">{__appdescription__}</span><span class="s2"></span>
+
+<span class="s2">Usage:</span>
+<span class="s2">    app.py (-h | --help | --version | --manual | -r | --restart-cinnamon)</span>
+<span class="s2">    app.py menu</span>
+<span class="s2">    app.py build (-a | --all-xlets | -x &lt;name&gt; | --xlet=&lt;name&gt;)</span>
+<span class="s2">                 [-x &lt;name&gt;... | --xlet=&lt;name&gt;...]</span>
+<span class="s2">                 [-d &lt;domain&gt; | --domain=&lt;domain&gt;]</span>
+<span class="s2">                 [-o &lt;dir&gt; | --output=&lt;dir&gt;]</span>
+<span class="s2">                 [-e &lt;dir&gt; | --extra-files=&lt;dir&gt;]</span>
+<span class="s2">                 [-i | --install-localizations]</span>
+<span class="s2">                 [-n | --no-confirmation]</span>
+<span class="s2">                 [-r | --restart-cinnamon]</span>
+<span class="s2">                 [-y | --dry-run]</span>
+<span class="s2">    app.py build_themes [-t &lt;name&gt; | --theme-name=&lt;name&gt;]</span>
+<span class="s2">                        [-o &lt;dir&gt; | --output=&lt;dir&gt;]</span>
+<span class="s2">                        [-n | --no-confirmation]</span>
+<span class="s2">                        [-r | --restart-cinnamon]</span>
+<span class="s2">                        [-y | --dry-run]</span>
+<span class="s2">    app.py parse_sass [-y | --dry-run]</span>
+<span class="s2">    app.py dev &lt;sub_commands&gt;...</span>
+<span class="s2">               [-x &lt;name&gt;... | --xlet=&lt;name&gt;...]</span>
+<span class="s2">    app.py generate (system_executable | docs | docs_no_api | base_xlet |</span>
+<span class="s2">                    repo_changelog | themes_changelog | all_changelogs)</span>
+<span class="s2">                    [-f | --force-clean-build]</span>
+<span class="s2">                    [-u | --update-inventories]</span>
+<span class="s2">    app.py print_xlets_slugs</span>
+<span class="s2">    app.py repo (submodules | subtrees) (init | update) [-y | --dry-run]</span>
+
+<span class="s2">Options:</span>
+
+<span class="s2">-h, --help</span>
+<span class="s2">    Show this application basic help.</span>
+
+<span class="s2">--manual</span>
+<span class="s2">    Show this application manual page.</span>
+
+<span class="s2">--version</span>
+<span class="s2">    Show application version.</span>
+
+<span class="s2">-a, --all-xlets</span>
+<span class="s2">    Build all xlets.</span>
+
+<span class="s2">-d &lt;domain&gt;, --domain=&lt;domain&gt;</span>
+<span class="s2">    This option should be used to define a domain name for use when</span>
+<span class="s2">    building xlets.</span>
+<span class="s2">    A file named **domain_name** can also be created inside a folder named</span>
+<span class="s2">    **tmp** at the root of the repository whose only content should be the</span>
+<span class="s2">    desired domain name.</span>
+<span class="s2">    This option has precedence over the domain name found inside</span>
+<span class="s2">    the **domain_name** file.</span>
+
+<span class="s2">-e &lt;dir&gt;, --extra-files=&lt;dir&gt;</span>
+<span class="s2">    Path to a folder containing files that will be copied into an xlet folder</span>
+<span class="s2">    at build time. Read the documentation to learn how this option works.</span>
+
+<span class="s2">-f, --force-clean-build</span>
+<span class="s2">    Clear doctree cache and destination folder when building the documentation.</span>
+
+<span class="s2">-i, --install-localizations</span>
+<span class="s2">    Install xlets localizations after building xlets.</span>
+
+<span class="s2">-n, --no-confirmation</span>
+<span class="s2">    Do not ask confirmation when building an xlet and the destination already</span>
+<span class="s2">    exists. Specifying this option means that an existent destination will be</span>
+<span class="s2">    completely removed, no questions asked.</span>
+
+<span class="s2">-o &lt;dir&gt;, --output=&lt;dir&gt;</span>
+<span class="s2">    The output directory that will be used to save the built xlets.</span>
+<span class="s2">    **WARNING!!!** If the destination folder is inside a Dropbox folder, all</span>
+<span class="s2">    symbolic links will be resolved.</span>
+
+<span class="s2">-r, --restart-cinnamon</span>
+<span class="s2">    Restart Cinnamon.</span>
+
+<span class="s2">-t &lt;name&gt;, --theme-name=&lt;name&gt;</span>
+<span class="s2">    A string used to give a name to the themes. The final theme names will look</span>
+<span class="s2">    like this: **&lt;theme_name&gt;-&lt;theme_variant&gt;**.</span>
+<span class="s2">    A file named **theme_name** can also be created inside a folder named</span>
+<span class="s2">    **tmp** at the root of the repository whose only content should be the</span>
+<span class="s2">    desired theme name.</span>
+<span class="s2">    This option has precedence over the theme name found inside</span>
+<span class="s2">    the **theme_name** file.</span>
+
+<span class="s2">-u, --update-inventories</span>
+<span class="s2">    Update inventory files from their on-line resources when building the</span>
+<span class="s2">    documentation. Inventory files will be updated automatically if they don&#39;t</span>
+<span class="s2">    already exist.</span>
+
+<span class="s2">-x &lt;name&gt;, --xlet=&lt;name&gt;</span>
+<span class="s2">    Specify one or more applets/extensions to build.</span>
+
+<span class="s2">-y, --dry-run</span>
+<span class="s2">    Do not perform file system changes. Only display messages informing of the</span>
+<span class="s2">    actions that will be performed or commands that will be executed.</span>
+<span class="s2">    WARNING! Some file system changes will be performed (e.g. temporary files</span>
+<span class="s2">    creation).</span>
+
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">__appname__</span><span class="o">=</span><span class="n">__appname__</span><span class="p">,</span>
+           <span class="n">__appdescription__</span><span class="o">=</span><span class="n">__appdescription__</span><span class="p">,</span>
+           <span class="n">__version__</span><span class="o">=</span><span class="n">__version__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CommandLineInterface"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface">[docs]</a><span class="k">class</span> <span class="nc">CommandLineInterface</span><span class="p">(</span><span class="n">cli_utils</span><span class="o">.</span><span class="n">CommandLineInterfaceSuper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Command line tool.</span>
+
+<span class="sd">    It handles the arguments parsed by the ``docopt`` module.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : dict</span>
+<span class="sd">        Where ``docopt_args`` is stored.</span>
+<span class="sd">    action : method</span>
+<span class="sd">        Set the method that will be executed when calling CommandLineInterface.run().</span>
+<span class="sd">    dev_args_order : list</span>
+<span class="sd">        List used as a guide to execute functions in the order they need to.</span>
+<span class="sd">    func_names : list</span>
+<span class="sd">        A list of function names that will be used to execute those functions</span>
+<span class="sd">        in the order they were defined (passed as arguments).</span>
+<span class="sd">    repo_action : str</span>
+<span class="sd">        Which action to perform on a repository.</span>
+<span class="sd">    xlets_display_names : list</span>
+<span class="sd">        The complete or partial list of xlets as returned by :any:`get_xlets_display_names`.</span>
+<span class="sd">    xlets_helper : XletsHelperCore</span>
+<span class="sd">        An instantiated ``XletsHelperCore`` instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">func_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">dev_args_order</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;generate_meta_file&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;update_pot_files&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;update_spanish_localizations&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;create_xlets_changelogs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;create_localized_help&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;generate_trans_stats&quot;</span>
+    <span class="p">]</span>
+    <span class="n">xlets_display_names</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">xlets_helper</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">docopt_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        docopt_args : dict</span>
+<span class="sd">            The dictionary of arguments as returned by ``docopt`` parser.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">docopt_args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cli_header_blacklist</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--manual&quot;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;print_xlets_slugs&quot;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;menu&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_print_log_blacklist</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;print_xlets_slugs&quot;</span><span class="p">]</span>
+        <span class="p">]</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">__appname__</span><span class="p">,</span> <span class="s2">&quot;tmp/logs&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;build&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">]:</span>
+            <span class="n">all_xlets_display_names</span> <span class="o">=</span> <span class="n">app_utils</span><span class="o">.</span><span class="n">get_xlets_display_names</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--all-xlets&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span> <span class="o">=</span> <span class="n">all_xlets_display_names</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--xlet&quot;</span><span class="p">]:</span>
+                <span class="c1"># NOTE: Deduplicate arguments. Workaround docopt issue:</span>
+                <span class="c1"># https://github.com/docopt/docopt/issues/134</span>
+                <span class="c1"># Not perfect, but good enough for this particular usage case.</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--xlet&quot;</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="s2">&quot;Applet &quot;</span> <span class="o">+</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_xlets_display_names</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Applet &quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="s2">&quot;Extension &quot;</span> <span class="o">+</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">all_xlets_display_names</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Extension &quot;</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;print_xlets_slugs&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_xlets_slugs</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--manual&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_manual_page</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;menu&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_main_menu</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;build&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_xlets</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--all-xlets&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Building all xlets.**&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--xlet&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Building the following xlets:**&quot;</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;build_themes&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_themes</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Building all themes.**&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;parse_sass&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_sass</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Parsing SASS files.**&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">]:</span>
+            <span class="c1"># NOTE: Deduplicate arguments. Workaround docopt issue:</span>
+            <span class="c1"># https://github.com/docopt/docopt/issues/134</span>
+            <span class="n">dev_args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;&lt;sub_commands&gt;&quot;</span><span class="p">]))</span>
+            <span class="c1"># NOTE: Sort the arguments so one doesn&#39;t have to worry about the order</span>
+            <span class="c1"># in which they are passed.</span>
+            <span class="c1"># Source: https://stackoverflow.com/a/12814719.</span>
+            <span class="n">dev_args</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dev_args_order</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="c1"># NOTE: Do not pass xlets unnecessarily so in the initialization side of</span>
+            <span class="c1"># app_utils.XletsHelperCore all the xlets metadata is used and no filtering</span>
+            <span class="c1"># is done.</span>
+            <span class="n">pass_xlets</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--xlet&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xlets_helper</span> <span class="o">=</span> <span class="n">app_utils</span><span class="o">.</span><span class="n">XletsHelperCore</span><span class="p">(</span>
+                <span class="n">xlets_display_names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span> <span class="k">if</span> <span class="n">pass_xlets</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Command:** dev&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Arguments:**&quot;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">dev_args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xlets_helper</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">func_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;**Non existent function:** </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">func</span><span class="p">)</span>
+
+            <span class="c1"># NOTE: append last so all the errors caught will be printed at the end.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_names</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">func_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;log_errors&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;system_executable&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**System executable generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_executable_generation</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;docs&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;docs_no_api&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Documentation generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_docs</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;base_xlet&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Base xlet generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_xlet_generation</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;repo_changelog&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Repository changelog generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_repo_changelog</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;themes_changelog&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Themes changelog generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_themes_changelog</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;all_changelogs&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Changelogs generation...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_all_changelogs</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;repo&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repo_action</span> <span class="o">=</span> <span class="s2">&quot;init&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;init&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;update&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;update&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;submodules&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Managing repository sub-modules...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manage_repo_submodules</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;subtrees&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Managing repository sub-trees...**&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">manage_repo_subtrees</span>
+
+<div class="viewcode-block" id="CommandLineInterface.run"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Execute the assigned actions.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.KeyboardInterruption</span>
+<span class="sd">            Halt execution on Ctrl + C press.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">threads</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_names</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_names</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xlets_helper</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                    <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+                    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">thread</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+                            <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">:</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">action</span><span class="p">)</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">thread</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+                        <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log_file</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="ne">SystemExit</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_log_file</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">KeyboardInterruption</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--restart-cinnamon&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log_dry_run</span><span class="p">(</span><span class="s2">&quot;**Cinnamon will be restarted.**&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">app_utils</span><span class="o">.</span><span class="n">restart_cinnamon</span><span class="p">)</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                    <span class="n">threads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+                    <span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="n">threads</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">thread</span><span class="o">.</span><span class="n">isAlive</span><span class="p">():</span>
+                            <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.display_main_menu"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.display_main_menu">[docs]</a>    <span class="k">def</span> <span class="nf">display_main_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_menu.CLIMenu`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">app_menu</span>
+
+        <span class="n">cli_menu</span> <span class="o">=</span> <span class="n">app_menu</span><span class="o">.</span><span class="n">CLIMenu</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">cli_menu</span><span class="o">.</span><span class="n">open_main_menu</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.display_manual_page"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.display_manual_page">[docs]</a>    <span class="k">def</span> <span class="nf">display_manual_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`cli_utils.CommandLineInterfaceSuper._display_manual_page`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_display_manual_page</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span>
+                                               <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;man&quot;</span><span class="p">,</span> <span class="s2">&quot;app.py.1&quot;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.build_xlets"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.build_xlets">[docs]</a>    <span class="k">def</span> <span class="nf">build_xlets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.build_xlets`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">build_xlets</span><span class="p">(</span><span class="n">xlets_display_names</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xlets_display_names</span><span class="p">,</span>
+                              <span class="n">domain_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--domain&quot;</span><span class="p">],</span>
+                              <span class="n">build_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--output&quot;</span><span class="p">],</span>
+                              <span class="n">do_not_confirm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--no-confirmation&quot;</span><span class="p">],</span>
+                              <span class="n">install_localizations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--install-localizations&quot;</span><span class="p">],</span>
+                              <span class="n">extra_files</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--extra-files&quot;</span><span class="p">],</span>
+                              <span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">],</span>
+                              <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.build_themes"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.build_themes">[docs]</a>    <span class="k">def</span> <span class="nf">build_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.build_themes`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">build_themes</span><span class="p">(</span><span class="n">theme_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--theme-name&quot;</span><span class="p">],</span>
+                               <span class="n">build_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--output&quot;</span><span class="p">],</span>
+                               <span class="n">do_not_confirm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--no-confirmation&quot;</span><span class="p">],</span>
+                               <span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">],</span>
+                               <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.parse_sass"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.parse_sass">[docs]</a>    <span class="k">def</span> <span class="nf">parse_sass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.parse_sass`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">parse_sass</span><span class="p">(</span><span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">],</span>
+                             <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.system_executable_generation"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.system_executable_generation">[docs]</a>    <span class="k">def</span> <span class="nf">system_executable_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`cli_utils.CommandLineInterfaceSuper._system_executable_generation`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_system_executable_generation</span><span class="p">(</span>
+            <span class="n">exec_name</span><span class="o">=</span><span class="s2">&quot;cinnamon-tools-cli&quot;</span><span class="p">,</span>
+            <span class="n">app_root_folder</span><span class="o">=</span><span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span>
+            <span class="n">sys_exec_template_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="s2">&quot;system_executable&quot;</span><span class="p">),</span>
+            <span class="n">bash_completions_template_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;templates&quot;</span><span class="p">,</span> <span class="s2">&quot;bash_completions.bash&quot;</span><span class="p">),</span>
+            <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.generate_docs"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.generate_docs">[docs]</a>    <span class="k">def</span> <span class="nf">generate_docs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`sphinx_docs_utils.generate_docs`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">generate_docs</span><span class="p">(</span><span class="n">generate_api_docs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;docs&quot;</span><span class="p">],</span>
+                                <span class="n">update_inventories</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--update-inventories&quot;</span><span class="p">],</span>
+                                <span class="n">force_clean_build</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--force-clean-build&quot;</span><span class="p">],</span>
+                                <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.generate_repo_changelog"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.generate_repo_changelog">[docs]</a>    <span class="k">def</span> <span class="nf">generate_repo_changelog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.generate_repo_changelog`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">generate_repo_changelog</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.generate_themes_changelog"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.generate_themes_changelog">[docs]</a>    <span class="k">def</span> <span class="nf">generate_themes_changelog</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.generate_themes_changelog`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">generate_themes_changelog</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.generate_all_changelogs"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.generate_all_changelogs">[docs]</a>    <span class="k">def</span> <span class="nf">generate_all_changelogs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.generate_repo_changelog` and :any:`app_utils.generate_themes_changelog`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">generate_repo_changelog</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">generate_themes_changelog</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.base_xlet_generation"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.base_xlet_generation">[docs]</a>    <span class="k">def</span> <span class="nf">base_xlet_generation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.BaseXletGenerator`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">base_xlet_generetor</span> <span class="o">=</span> <span class="n">app_utils</span><span class="o">.</span><span class="n">BaseXletGenerator</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">base_xlet_generetor</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.manage_repo_submodules"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.manage_repo_submodules">[docs]</a>    <span class="k">def</span> <span class="nf">manage_repo_submodules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`git_utils.manage_repo`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.python_utils</span> <span class="k">import</span> <span class="n">git_utils</span>
+
+        <span class="n">git_utils</span><span class="o">.</span><span class="n">manage_repo</span><span class="p">(</span>
+            <span class="s2">&quot;submodule&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repo_action</span><span class="p">,</span>
+            <span class="n">cwd</span><span class="o">=</span><span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span>
+            <span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">],</span>
+            <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.manage_repo_subtrees"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.manage_repo_subtrees">[docs]</a>    <span class="k">def</span> <span class="nf">manage_repo_subtrees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`git_utils.manage_repo`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.python_utils</span> <span class="k">import</span> <span class="n">git_utils</span>
+
+        <span class="n">subtrees</span> <span class="o">=</span> <span class="p">[{</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;git@gitlab.com:Odyseus/python_utils.git&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;__app__/python_modules/python_utils&quot;</span>
+        <span class="p">}]</span>
+        <span class="n">git_utils</span><span class="o">.</span><span class="n">manage_repo</span><span class="p">(</span>
+            <span class="s2">&quot;subtree&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repo_action</span><span class="p">,</span>
+            <span class="n">cwd</span><span class="o">=</span><span class="n">app_utils</span><span class="o">.</span><span class="n">root_folder</span><span class="p">,</span>
+            <span class="n">subtrees</span><span class="o">=</span><span class="n">subtrees</span><span class="p">,</span>
+            <span class="n">dry_run</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">],</span>
+            <span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CommandLineInterface.print_xlets_slugs"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.CommandLineInterface.print_xlets_slugs">[docs]</a>    <span class="k">def</span> <span class="nf">print_xlets_slugs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See :any:`app_utils.print_xlets_slugs`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_xlets_slugs</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../modules/python_modules/python_modules.cli.html#python_modules.cli.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Initialize command line interface.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cli_utils</span><span class="o">.</span><span class="n">run_cli</span><span class="p">(</span><span class="n">flag_file</span><span class="o">=</span><span class="s2">&quot;.cinnamon-tools.flag&quot;</span><span class="p">,</span>
+                      <span class="n">docopt_doc</span><span class="o">=</span><span class="n">docopt_doc</span><span class="p">,</span>
+                      <span class="n">app_name</span><span class="o">=</span><span class="n">__appname__</span><span class="p">,</span>
+                      <span class="n">app_version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+                      <span class="n">cli_class</span><span class="o">=</span><span class="n">CommandLineInterface</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,716 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.common &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+        
+      <li>xlets_settings.common</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for xlets_settings.common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Common utilities.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">HOME : str</span>
+<span class="sd">    Path to user home.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">fnmatch</span>
+<span class="kn">import</span> <span class="nn">gettext</span>
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gdk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gdk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+
+<span class="n">HOME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
+
+<span class="n">gettext</span><span class="o">.</span><span class="n">bindtextdomain</span><span class="p">(</span><span class="s2">&quot;{{UUID}}&quot;</span><span class="p">,</span> <span class="n">HOME</span> <span class="o">+</span> <span class="s2">&quot;/.local/share/locale&quot;</span><span class="p">)</span>
+<span class="n">gettext</span><span class="o">.</span><span class="n">textdomain</span><span class="p">(</span><span class="s2">&quot;{{UUID}}&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">gettext</span><span class="o">.</span><span class="n">gettext</span>
+
+
+<div class="viewcode-block" id="BaseGrid"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.BaseGrid">[docs]</a><span class="k">class</span> <span class="nc">BaseGrid</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Grid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The base of all grids.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        tooltip : str, optional</span>
+<span class="sd">            Tooltip text.</span>
+<span class="sd">        orientation : Gtk.Orientation, optional</span>
+<span class="sd">            The widget orientation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_orientation</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
+
+<div class="viewcode-block" id="BaseGrid.set_spacing"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.BaseGrid.set_spacing">[docs]</a>    <span class="k">def</span> <span class="nf">set_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set columns/rows spacing.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        col : int</span>
+<span class="sd">            Spacing to set to columns.</span>
+<span class="sd">        row : int</span>
+<span class="sd">            Spacing to set to rows.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_column_spacing</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_row_spacing</span><span class="p">(</span><span class="n">row</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="compare_version"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.compare_version">[docs]</a><span class="k">def</span> <span class="nf">compare_version</span><span class="p">(</span><span class="n">version1</span><span class="p">,</span> <span class="n">version2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compares two version numbers.</span>
+
+<span class="sd">    Source: https://stackoverflow.com/a/12923860</span>
+
+<span class="sd">    NOTE: Keep me. Sooner or later I might need to implement Cinnamon version</span>
+<span class="sd">    specific code. ¬¬</span>
+
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1&quot;, &quot;2&quot;) &gt;&gt; compare_version(&quot;2&quot;, &quot;1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1&quot;, &quot;1&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.0&quot;, &quot;1&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1&quot;, &quot;1.000&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;12.01&quot;, &quot;12.1&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;13.0.1&quot;, &quot;13.00.02&quot;) &gt;&gt; compare_version(&quot;1.1.1.1&quot;, &quot;1.1.1.1&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.1.2&quot;, &quot;1.1.1.1&quot;) &gt;0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.3&quot;, &quot;1.1.3.000&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;3.1.1.0&quot;, &quot;3.1.2.10&quot;) &gt;&gt; compare_version(&quot;1.1&quot;, &quot;1.10&quot;) &gt;&gt; compare_version(&quot;1.1.2&quot;,&quot;1.1.2&quot;) == 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.2&quot;,&quot;1.1.1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.2&quot;,&quot;1.1.1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.1-rc2&quot;,&quot;1.1.1-rc1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.1a-rc2&quot;,&quot;1.1.1a-rc1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.10-rc1&quot;,&quot;1.1.1a-rc2&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.1.1a-rc2&quot;,&quot;1.1.2-rc1&quot;) &gt;&gt; compare_version(&quot;1.11&quot;,&quot;1.10.9&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.4&quot;,&quot;1.4-rc1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;1.4c3&quot;,&quot;1.3&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;2.8.7rel.2&quot;,&quot;2.8.7rel.1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; compare_version(&quot;2.8.7.1rel.2&quot;,&quot;2.8.7rel.1&quot;) &gt; 0</span>
+<span class="sd">    True</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    version1 : str</span>
+<span class="sd">        Description</span>
+<span class="sd">    version2 : str</span>
+<span class="sd">        Description</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    int</span>
+<span class="sd">        Description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">chn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">split_chrs</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span> <span class="n">chars</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        strings : TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        chars : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">chars</span><span class="p">:</span>
+            <span class="n">strings</span> <span class="o">=</span> <span class="n">chn</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">strings</span>
+
+    <span class="k">def</span> <span class="nf">split_digit_char</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([a-zA-Z]+)&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">splt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">split_digit_char</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">split_chrs</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="s2">&quot;.-_&quot;</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">pad</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        c1 : TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        c2 : TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        f : str, optional</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">c2</span><span class="p">):</span>
+            <span class="n">c2</span> <span class="o">+=</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">):</span>
+            <span class="n">c1</span> <span class="o">+=</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">base_code</span><span class="p">(</span><span class="n">ints</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ints : TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        base : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ints</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">base</span> <span class="o">*</span> <span class="n">res</span> <span class="o">+</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">ABS</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lst : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">cmp</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Summary</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        v1 : TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        v2 : TYPE</span>
+<span class="sd">            Description</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">splt</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">splt</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="n">pad</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c1</span><span class="p">)):</span>
+            <span class="n">pad</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">c2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="n">cc1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chn</span><span class="p">(</span><span class="n">c1</span><span class="p">)]</span>
+        <span class="n">cc2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chn</span><span class="p">(</span><span class="n">c2</span><span class="p">)]</span>
+        <span class="n">maxint</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ABS</span><span class="p">(</span><span class="n">cc1</span> <span class="o">+</span> <span class="n">cc2</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">base_code</span><span class="p">(</span><span class="n">cc1</span><span class="p">,</span> <span class="n">maxint</span><span class="p">)</span> <span class="o">-</span> <span class="n">base_code</span><span class="p">(</span><span class="n">cc2</span><span class="p">,</span> <span class="n">maxint</span><span class="p">)</span>
+
+    <span class="n">v_main_1</span><span class="p">,</span> <span class="n">v_sub_1</span> <span class="o">=</span> <span class="n">version1</span><span class="p">,</span> <span class="s2">&quot;999&quot;</span>
+    <span class="n">v_main_2</span><span class="p">,</span> <span class="n">v_sub_2</span> <span class="o">=</span> <span class="n">version2</span><span class="p">,</span> <span class="s2">&quot;999&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">v_main_1</span><span class="p">,</span> <span class="n">v_sub_1</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;rel|rc&quot;</span><span class="p">,</span> <span class="n">version1</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">v_main_2</span><span class="p">,</span> <span class="n">v_sub_2</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;rel|rc&quot;</span><span class="p">,</span> <span class="n">version2</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="n">cmp_res</span> <span class="o">=</span> <span class="p">[</span><span class="nb">cmp</span><span class="p">(</span><span class="n">v_main_1</span><span class="p">,</span> <span class="n">v_main_2</span><span class="p">),</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">v_sub_1</span><span class="p">,</span> <span class="n">v_sub_2</span><span class="p">)]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">base_code</span><span class="p">(</span><span class="n">cmp_res</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ABS</span><span class="p">(</span><span class="n">cmp_res</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="contrast_rgba_color"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.contrast_rgba_color">[docs]</a><span class="k">def</span> <span class="nf">contrast_rgba_color</span><span class="p">(</span><span class="n">rgba</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determine font color based on background color.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rgba : Gdk.RGBA</span>
+<span class="sd">        The ``Gdk.RGBA`` color from which to get its luminance.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Gdk.RGBA</span>
+<span class="sd">        Black or white.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># &lt;3 https://stackoverflow.com/a/1855903</span>
+    <span class="c1"># StackOverflow to the rescue!!!</span>
+    <span class="n">luminance</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.299</span> <span class="o">*</span> <span class="n">rgba</span><span class="o">.</span><span class="n">red</span> <span class="o">+</span> <span class="mf">0.587</span> <span class="o">*</span> <span class="n">rgba</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="mf">0.114</span> <span class="o">*</span> <span class="n">rgba</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.0</span>
+
+    <span class="k">if</span> <span class="n">luminance</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="ow">or</span> <span class="n">rgba</span><span class="o">.</span><span class="n">alpha</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Bright colors - Black font</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Dark colors - White font</span>
+
+    <span class="k">return</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">RGBA</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="import_export"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.import_export">[docs]</a><span class="k">def</span> <span class="nf">import_export</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">action_type</span><span class="p">,</span> <span class="n">last_dir</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Import/Export data from/to a :any:`TreeList` widget.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent : TreeList</span>
+<span class="sd">        The parent widget to get the top level window from.</span>
+<span class="sd">    action_type : str</span>
+<span class="sd">        Which action to perform (export or import).</span>
+<span class="sd">    last_dir : str</span>
+<span class="sd">        The last selected directory to be able to open the dialog from that location.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The selected file path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">action_type</span> <span class="o">==</span> <span class="s2">&quot;export&quot;</span><span class="p">:</span>
+        <span class="n">action_mode</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">SAVE</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Select or enter file to export to&quot;</span><span class="p">)</span>
+        <span class="n">btns</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Save&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">ACCEPT</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">action_type</span> <span class="o">==</span> <span class="s2">&quot;import&quot;</span><span class="p">:</span>
+        <span class="n">action_mode</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">OPEN</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Select a file to import&quot;</span><span class="p">)</span>
+        <span class="n">btns</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Open&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+
+    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">parent</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                                   <span class="n">title</span><span class="o">=</span><span class="n">string</span><span class="p">,</span>
+                                   <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">action</span><span class="o">=</span><span class="n">action_mode</span><span class="p">,</span>
+                                   <span class="n">buttons</span><span class="o">=</span><span class="n">btns</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">last_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_current_folder</span><span class="p">(</span><span class="n">last_dir</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">action_type</span> <span class="o">==</span> <span class="s2">&quot;export&quot;</span><span class="p">:</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_do_overwrite_confirmation</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">filter_text</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">()</span>
+    <span class="n">filter_text</span><span class="o">.</span><span class="n">add_pattern</span><span class="p">(</span><span class="s2">&quot;*.json&quot;</span><span class="p">)</span>
+    <span class="n">filter_text</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;JSON files&quot;</span><span class="p">))</span>
+
+    <span class="n">dialog</span><span class="o">.</span><span class="n">add_filter</span><span class="p">(</span><span class="n">filter_text</span><span class="p">)</span>
+
+    <span class="n">filepath</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">ACCEPT</span> <span class="ow">or</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">action_type</span> <span class="o">==</span> <span class="s2">&quot;export&quot;</span> <span class="ow">and</span> <span class="s2">&quot;.json&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filepath</span><span class="p">:</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span>
+
+    <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">filepath</span></div>
+
+
+<div class="viewcode-block" id="generate_options_from_paths"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.generate_options_from_paths">[docs]</a><span class="k">def</span> <span class="nf">generate_options_from_paths</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span> <span class="n">xlet_settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate options from paths.</span>
+
+<span class="sd">    This function dynamically generates the ``options`` option for :any:`KeybindingWithOptions` and</span>
+<span class="sd">    :any:`ComboBox` widgets based on files found inside a folder.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    opts : dict</span>
+<span class="sd">        Options used to scan a path to look for files. Possible options are:</span>
+
+<span class="sd">            - file-patterns (required): A file pattern to look for files with.</span>
+<span class="sd">            - path-in-xlet (optional): A path relative to an xlet folder.</span>
+<span class="sd">            - path-in-setting (optional): An xlet setting that stores an absolute path.</span>
+
+<span class="sd">        File names found in ``path-in-xlet`` path will be prefixed by ``::``.</span>
+
+<span class="sd">    xlet_settings : dict</span>
+<span class="sd">        Used when ``path-in-setting`` has a path stored.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        The list of options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">scan_and_generate</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span> <span class="n">add_prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Scan path and generate options.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        folder_path : str</span>
+<span class="sd">            Path to a folder.</span>
+<span class="sd">        add_prefix : bool</span>
+<span class="sd">            Whether to add a prefix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;file-patterns&quot;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">),</span> <span class="n">pattern</span><span class="p">):</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;::&quot;</span> <span class="k">if</span> <span class="n">add_prefix</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-xlet&quot;</span><span class="p">):</span>
+        <span class="n">path_in_xlet</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xlet_settings</span><span class="o">.</span><span class="n">get_xlet_meta</span><span class="p">()[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-xlet&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path_in_xlet</span><span class="p">):</span>
+            <span class="n">scan_and_generate</span><span class="p">(</span><span class="n">path_in_xlet</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-setting&quot;</span><span class="p">):</span>
+        <span class="n">setting_value</span> <span class="o">=</span> <span class="n">xlet_settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-setting&quot;</span><span class="p">))</span>
+        <span class="n">setting_value</span> <span class="o">=</span> <span class="n">setting_value</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span> <span class="k">if</span> <span class="n">setting_value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;file://&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">setting_value</span>
+
+        <span class="c1"># NOTE: Failsafe. Do not allow user&#39;s home to be added.</span>
+        <span class="k">if</span> <span class="n">setting_value</span> <span class="ow">and</span> <span class="n">setting_value</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">setting_value</span><span class="p">):</span>
+            <span class="n">scan_and_generate</span><span class="p">(</span><span class="n">setting_value</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">options</span></div>
+
+
+<div class="viewcode-block" id="display_message_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.display_message_dialog">[docs]</a><span class="k">def</span> <span class="nf">display_message_dialog</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;information&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Display a message dialog.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    widget : Gtk.Widget</span>
+<span class="sd">        The widget to get the top level window from.</span>
+<span class="sd">    title : str</span>
+<span class="sd">        The title of the dialog.</span>
+<span class="sd">    message : str</span>
+<span class="sd">        The message of the dialog.</span>
+<span class="sd">    context : str, optional</span>
+<span class="sd">        One of &quot;information&quot;, &quot;error&quot; or &quot;warning&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="o">==</span> <span class="s2">&quot;warning&quot;</span><span class="p">:</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">WARNING</span>
+    <span class="k">elif</span> <span class="n">context</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">ERROR</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">INFO</span>
+
+    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">widget</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                               <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+                               <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+                               <span class="n">message_type</span><span class="o">=</span><span class="n">message_type</span><span class="p">,</span>
+                               <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="n">dialog</span><span class="o">.</span><span class="n">set_markup</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">dialog</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+    <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="sort_combo_options"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.sort_combo_options">[docs]</a><span class="k">def</span> <span class="nf">sort_combo_options</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">first_option</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sort :any:`ComboBox` widget options.</span>
+
+<span class="sd">    If the list of tuples was built from a dictionary, the list needs to be</span>
+<span class="sd">    sorted by the item at index 1 of each tuple. If the list of tuples was</span>
+<span class="sd">    built from a list, both items in each tuple are identical, so sort also</span>
+<span class="sd">    by index 1.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    options : list</span>
+<span class="sd">        See :any:`ComboBox` ``options`` argument.</span>
+<span class="sd">    first_option : str, optional</span>
+<span class="sd">        The key to exclude from sorting and place always at the top.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        The sorted list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">only_first</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">first_option</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">opt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">options</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">first_option</span><span class="p">:</span>
+                <span class="n">only_first</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">options</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">only_first</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="get_keybinding_display_name"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.get_keybinding_display_name">[docs]</a><span class="k">def</span> <span class="nf">get_keybinding_display_name</span><span class="p">(</span><span class="n">accel_string</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get keybinding display name.</span>
+
+<span class="sd">    Converts an accelerator keyval and modifier mask into a (possibly translated) string that can</span>
+<span class="sd">    be displayed to a user.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    accel_string : str</span>
+<span class="sd">        Accel. string.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Accel. string display name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">accel_string</span>
+
+    <span class="k">if</span> <span class="n">accel_string</span><span class="p">:</span>
+        <span class="n">key</span><span class="p">,</span> <span class="n">codes</span><span class="p">,</span> <span class="n">mods</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">accelerator_parse_with_keycode</span><span class="p">(</span><span class="n">accel_string</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">codes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">accelerator_get_label_with_keycode</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">codes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mods</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

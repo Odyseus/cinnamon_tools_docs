@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.JsonSettingsWidgets &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+        
+      <li>xlets_settings.JsonSettingsWidgets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for xlets_settings.JsonSettingsWidgets</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Xlets settings widgets factory.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">OPERATIONS : list</span>
+<span class="sd">    Comparison operations.</span>
+<span class="sd">OPERATIONS_MAP : dict</span>
+<span class="sd">    Comparison operations map.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">GLib</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gio</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="k">import</span> <span class="n">AppChooser</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="k">import</span> <span class="n">AppList</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.TreeListWidgets</span> <span class="k">import</span> <span class="n">TreeList</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">BaseGrid</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">sort_combo_options</span>
+
+<span class="c1"># NOTE: JEESH!!! I hate import *!!!</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># NOTE: Defined in this module.</span>
+    <span class="s2">&quot;JSONSettingsHandler&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsRevealer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsBackend&quot;</span><span class="p">,</span>
+    <span class="c1"># NOTE: Defined in SettingsWidgets module.</span>
+    <span class="s2">&quot;CAN_BACKEND&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsAppChooser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsAppList&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsButton&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsColorChooser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsComboBox&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsEntry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsFileChooser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsIconChooser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsKeybinding&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsKeybindingWithOptions&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsTreeList&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsSpinButton&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsSwitch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;JSONSettingsTextView&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsSection&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsLabel&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsPage&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsRevealer&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsStack&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SettingsWidget&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Text&quot;</span>
+    <span class="c1"># &quot;JSONSettingsDateChooser&quot;,</span>
+    <span class="c1"># &quot;JSONSettingsEffectChooser&quot;,</span>
+    <span class="c1"># &quot;JSONSettingsFontButton&quot;,</span>
+    <span class="c1"># &quot;JSONSettingsRange&quot;,</span>
+    <span class="c1"># &quot;JSONSettingsSoundFileChooser&quot;,</span>
+    <span class="c1"># &quot;JSONSettingsTweenChooser&quot;</span>
+<span class="p">]</span>
+
+<span class="n">CAN_BACKEND</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;AppChooser&quot;</span><span class="p">)</span>  <span class="c1"># noqa | SettingsWidgets</span>
+<span class="n">CAN_BACKEND</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;AppList&quot;</span><span class="p">)</span>  <span class="c1"># noqa | SettingsWidgets</span>
+<span class="n">CAN_BACKEND</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TreeList&quot;</span><span class="p">)</span>  <span class="c1"># noqa | SettingsWidgets</span>
+
+
+<span class="n">OPERATIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;!=&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">]</span>
+
+<span class="n">OPERATIONS_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;&lt;&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">,</span> <span class="s2">&quot;&lt;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">gt</span><span class="p">,</span>
+                  <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">ge</span><span class="p">,</span> <span class="s2">&quot;!=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">ne</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">eq</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="JSONSettingsHandler"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler">[docs]</a><span class="k">class</span> <span class="nc">JSONSettingsHandler</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Xlets settings backend.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    bindings : dict</span>
+<span class="sd">        All the bindings stored when calling ``self.bind()``.</span>
+<span class="sd">    deps : dict</span>
+<span class="sd">        Dependency keys.</span>
+<span class="sd">    file_monitor : Gio.FileMonitor</span>
+<span class="sd">        A ``Gio.FileMonitor`` for the given ``self``, or None on error.</span>
+<span class="sd">    file_monitor_signal : int</span>
+<span class="sd">        Where the connection for the file monitor&#39;s ``changed`` signal is stored.</span>
+<span class="sd">    file_obj : Gio.File</span>
+<span class="sd">        A new Gio.File for the path ``self.filepath``.</span>
+<span class="sd">    filepath : str</span>
+<span class="sd">        Path to an xlet JSON configuration file.</span>
+<span class="sd">    listeners : dict</span>
+<span class="sd">        See :any:`JSONSettingsHandler.listen`.</span>
+<span class="sd">    notify_callback : method</span>
+<span class="sd">        See :any:`MainApplication.notify_dbus`.</span>
+<span class="sd">    resume_timeout : int</span>
+<span class="sd">        The ID (greater than 0) of the event source.</span>
+<span class="sd">    settings : dict</span>
+<span class="sd">        An xlet settings file content.</span>
+<span class="sd">    xlet_meta : dict</span>
+<span class="sd">        Xlet metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">notify_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xlet_meta</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Path to an xlet JSON configuration file.</span>
+<span class="sd">        notify_callback : None, optional</span>
+<span class="sd">            See :any:`MainApplication.notify_dbus`.</span>
+<span class="sd">        xlet_meta : None, optional</span>
+<span class="sd">            Xlet metadata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notify_callback</span> <span class="o">=</span> <span class="n">notify_callback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xlet_meta</span> <span class="o">=</span> <span class="n">xlet_meta</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_obj</span> <span class="o">=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">File</span><span class="o">.</span><span class="n">new_for_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_obj</span><span class="o">.</span><span class="n">monitor_file</span><span class="p">(</span><span class="n">Gio</span><span class="o">.</span><span class="n">FileMonitorFlags</span><span class="o">.</span><span class="n">SEND_MOVED</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_settings</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deps</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span>
+
+<div class="viewcode-block" id="JSONSettingsHandler.get_xlet_meta"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.get_xlet_meta">[docs]</a>    <span class="k">def</span> <span class="nf">get_xlet_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get xlet metadata.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            Xlet metadata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlet_meta</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.bind"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.bind">[docs]</a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">map_get</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">map_set</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Bind a preference to a widget property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+<span class="sd">        obj : Gtk.Widget</span>
+<span class="sd">            The widget to bind.</span>
+<span class="sd">        prop : str</span>
+<span class="sd">            The widget property.</span>
+<span class="sd">        direction : Gio.SettingsBindFlags</span>
+<span class="sd">            The ``Gio.SettingsBindFlags`` flag.</span>
+<span class="sd">        map_get : method, None, optional</span>
+<span class="sd">            A function to map between setting and bound attribute.</span>
+<span class="sd">        map_set : method, None, optional</span>
+<span class="sd">            A function to map between setting and bound attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">SET</span> <span class="o">|</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">GET</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">direction</span> <span class="o">|=</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">SET</span> <span class="o">|</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">GET</span>
+
+        <span class="n">binding_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;obj&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;prop&quot;</span><span class="p">:</span> <span class="n">prop</span><span class="p">,</span> <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="n">direction</span><span class="p">,</span>
+                        <span class="s2">&quot;map_get&quot;</span><span class="p">:</span> <span class="n">map_get</span><span class="p">,</span> <span class="s2">&quot;map_set&quot;</span><span class="p">:</span> <span class="n">map_set</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">binding_info</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">&amp;</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">GET</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_object_value</span><span class="p">(</span><span class="n">binding_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">&amp;</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">SET</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">binding_info</span><span class="p">[</span><span class="s2">&quot;oid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::&quot;</span> <span class="o">+</span> <span class="n">prop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">object_value_changed</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.listen"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.listen">[docs]</a>    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">callback</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Preference key _listeners_. Store a callback to be executed every time a preference</span>
+<span class="sd">        changes its value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+<span class="sd">        callback : method</span>
+<span class="sd">            The function to call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.get_value"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.get_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get preference value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int, str, list, float, dict</span>
+<span class="sd">            The preference value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.set_value"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.set_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set preference value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+<span class="sd">        value : int, str, list, float, dict</span>
+<span class="sd">            The preference value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_settings</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">notify_callback</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">notify_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_object_value</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">callback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.get_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.get_property">[docs]</a>    <span class="k">def</span> <span class="nf">get_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get ``self.settings`` property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+<span class="sd">        prop : str</span>
+<span class="sd">            The property to get.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int, str, list, float, dict</span>
+<span class="sd">            The property value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">props</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">props</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.has_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.has_property">[docs]</a>    <span class="k">def</span> <span class="nf">has_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">prop</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if ``self.settings`` has a property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+<span class="sd">        prop : str</span>
+<span class="sd">            The property to check.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            If the property exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">prop</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.has_key"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.has_key">[docs]</a>    <span class="k">def</span> <span class="nf">has_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if ``self.settings`` has a preference key.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference key.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            If the preference exist.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.object_value_changed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.object_value_changed">[docs]</a>    <span class="k">def</span> <span class="nf">object_value_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On object value changed.</span>
+
+<span class="sd">        Callback connected to the ``obj`` ``notify::&lt;bind_prop&gt;`` signal.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obj : Gtk.Widget</span>
+<span class="sd">            A widget whose monitored property has changed.</span>
+<span class="sd">        value : str, int, float</span>
+<span class="sd">            The widget&#39;s property value.</span>
+<span class="sd">        key : str</span>
+<span class="sd">            The preference handled by the widget.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">obj</span> <span class="o">==</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;prop&quot;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="s2">&quot;map_set&quot;</span> <span class="ow">in</span> <span class="n">info</span> <span class="ow">and</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;map_set&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;map_set&quot;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">obj</span> <span class="o">!=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_object_value</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="n">callback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.set_object_value"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.set_object_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_object_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set widget property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        info : dict</span>
+<span class="sd">            Binding information.</span>
+<span class="sd">        value : str, int, float</span>
+<span class="sd">            The new value for the widget&#39;s property.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">Gio</span><span class="o">.</span><span class="n">SettingsBindFlags</span><span class="o">.</span><span class="n">GET</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">with</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">freeze_notify</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;map_get&quot;</span> <span class="ow">in</span> <span class="n">info</span> <span class="ow">and</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;map_get&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;map_get&quot;</span><span class="p">](</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;prop&quot;</span><span class="p">])</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;obj&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;prop&quot;</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.check_settings"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.check_settings">[docs]</a>    <span class="k">def</span> <span class="nf">check_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check settings file.</span>
+
+<span class="sd">        Check if the settings stored in a settings file has changed and update all widgets.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">old_settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">:</span>
+            <span class="n">new_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">new_value</span> <span class="o">!=</span> <span class="n">old_settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_object_value</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">new_value</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">callback_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">new_value</span> <span class="o">!=</span> <span class="n">old_settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="n">callback_list</span><span class="p">:</span>
+                    <span class="n">callback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">new_value</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.get_settings"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.get_settings">[docs]</a>    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get settings from settings file.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            The settings file data.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.MalformedJSONFile</span>
+<span class="sd">            Malformed JOSN file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">settings_file</span><span class="p">:</span>
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">settings_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MalformedJSONFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">settings</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.save_settings"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.save_settings">[docs]</a>    <span class="k">def</span> <span class="nf">save_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save settings to file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pause_monitor</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">settings_file</span><span class="p">:</span>
+            <span class="n">settings_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_monitor</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.pause_monitor"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.pause_monitor">[docs]</a>    <span class="k">def</span> <span class="nf">pause_monitor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pause settings file monitor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor_signal</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_monitor_signal</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor_signal</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.resume_monitor"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.resume_monitor">[docs]</a>    <span class="k">def</span> <span class="nf">resume_monitor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Delayed resume of settings file monitor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">resume_timeout</span><span class="p">:</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">source_remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resume_timeout</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_timeout</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_resume</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.do_resume"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.do_resume">[docs]</a>    <span class="k">def</span> <span class="nf">do_resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resume settings file monitor.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Break loop execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_obj</span><span class="o">.</span><span class="n">monitor_file</span><span class="p">(</span><span class="n">Gio</span><span class="o">.</span><span class="n">FileMonitorFlags</span><span class="o">.</span><span class="n">SEND_MOVED</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor_signal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_monitor</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_settings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">SOURCE_REMOVE</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.reset_to_defaults"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.reset_to_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">reset_to_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Reset settings to their default values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;default&quot;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">do_key_update</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_settings</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.do_key_update"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.do_key_update">[docs]</a>    <span class="k">def</span> <span class="nf">do_key_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do preference key update.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            A preference key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bindings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_object_value</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listeners</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="n">callback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.load_from_file"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.load_from_file">[docs]</a>    <span class="k">def</span> <span class="nf">load_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load settings from file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            Path to a settings file.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.MalformedJSONFile</span>
+<span class="sd">            Malformed JOSN file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">settings_file</span><span class="p">:</span>
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">settings_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MalformedJSONFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;value&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">settings</span> <span class="ow">and</span> <span class="s2">&quot;value&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">do_key_update</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping key </span><span class="si">%s</span><span class="s2">: the key does not exist in </span><span class="si">%s</span><span class="s2"> or has no value&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">filepath</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_settings</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JSONSettingsHandler.save_to_file"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsHandler.save_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Save settings to file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        filepath : str</span>
+<span class="sd">            The path to a file to save the settings into.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="n">raw_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">settings_file</span><span class="p">:</span>
+            <span class="n">settings_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="JSONSettingsRevealer"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsRevealer">[docs]</a><span class="k">class</span> <span class="nc">JSONSettingsRevealer</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Revealer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;JSON settings revealer.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    box : BaseGrid</span>
+<span class="sd">        The container for the widgets that are going to be added to the revealer.</span>
+<span class="sd">    dep_keys : dict</span>
+<span class="sd">        Dependency keys storage.</span>
+<span class="sd">    ops : dict</span>
+<span class="sd">        Comparison operations storage.</span>
+<span class="sd">    settings : JSONSettingsHandler</span>
+<span class="sd">        The xlets settings handler.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">dep_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        settings : JSONSettingsHandler</span>
+<span class="sd">            The xlets settings handler.</span>
+<span class="sd">        dep_key : str, list</span>
+<span class="sd">            Dependency key/s.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.WrongType</span>
+<span class="sd">            Wrong type for ``dep_key``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dep_key</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">WrongType</span><span class="p">(</span><span class="s2">&quot;str, list&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">dep_key</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dep_key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">dep_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">dep_key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dep_keys</span> <span class="o">=</span> <span class="n">dep_key</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ops</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">d_k</span> <span class="ow">in</span> <span class="n">dep_keys</span><span class="p">:</span>
+            <span class="n">operator_found</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">OPERATIONS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">d_k</span><span class="p">:</span>
+                    <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">d_k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">op</span>
+                    <span class="n">operator_found</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+
+            <span class="c1"># If an operator is used, continue to the next dependency key.</span>
+            <span class="k">if</span> <span class="n">operator_found</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">d_k</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span><span class="p">[</span><span class="n">d_k</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span><span class="p">[</span><span class="n">d_k</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">()</span>
+        <span class="n">Gtk</span><span class="o">.</span><span class="n">Revealer</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_transition_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">RevealerTransitionType</span><span class="o">.</span><span class="n">SLIDE_DOWN</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_transition_duration</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_changed</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_changed</span><span class="p">()</span>
+
+<div class="viewcode-block" id="JSONSettingsRevealer.add"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsRevealer.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add widget to revealer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget : Gtk.Widget</span>
+<span class="sd">            A ``Gtk.Widget`` to add to the revealer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsRevealer.key_changed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsRevealer.key_changed">[docs]</a>    <span class="k">def</span> <span class="nf">key_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On key value changed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reveal_conditions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep_keys</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">dep_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">:</span>
+                    <span class="n">val_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">dep_value</span><span class="p">)</span>
+                    <span class="n">reveal_conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="n">OPERATIONS_MAP</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ops</span><span class="p">[</span><span class="n">key</span><span class="p">]](</span><span class="n">dep_value</span><span class="p">,</span> <span class="n">val_type</span><span class="p">(</span><span class="n">val</span><span class="p">)))</span>
+                <span class="k">elif</span> <span class="n">dep_value</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+                    <span class="n">reveal_conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">reveal_conditions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_reveal_child</span><span class="p">(</span><span class="nb">all</span><span class="p">(</span><span class="n">reveal_conditions</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="JSONSettingsBackend"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend">[docs]</a><span class="k">class</span> <span class="nc">JSONSettingsBackend</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;JSON settings backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JSONSettingsBackend.attach_backend"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.attach_backend">[docs]</a>    <span class="k">def</span> <span class="nf">attach_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attach backend.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_saving</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;set_rounding&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">has_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="s2">&quot;round&quot;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_rounding</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="s2">&quot;round&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_object&quot;</span><span class="p">):</span>
+            <span class="n">bind_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_object</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bind_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="n">bind_object</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span><span class="p">,</span>
+                               <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;map_get&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                               <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;map_set&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings_changed_callback</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_setting_changed</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connect_widget_handlers</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend.set_value"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.set_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set preference value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int, str, float, list</span>
+<span class="sd">            The new value for the preference.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_saving</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_saving</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend._settings_changed_callback"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend._settings_changed_callback">[docs]</a>    <span class="k">def</span> <span class="nf">_settings_changed_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Proxy function for ``self.on_setting_changed``.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_saving</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_setting_changed</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend.get_value"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.get_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get preference value.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int, str, float, list</span>
+<span class="sd">            The current preference value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend.get_range"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.get_range">[docs]</a>    <span class="k">def</span> <span class="nf">get_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get minimum/maximum range for a preference.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            A list with two elements. Minimum value at index 0 and maximum value at index 1.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">)</span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend.on_setting_changed"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.on_setting_changed">[docs]</a>    <span class="k">def</span> <span class="nf">on_setting_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method triggers at widget creation time and when a preference value was changed</span>
+<span class="sd">        externally. Its execution should update the widget (or widgets, if it&#39;s a multi-widget</span>
+<span class="sd">        widget, like the keybinding widget) using the data of the new preference value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.MethodUnimplemented</span>
+<span class="sd">            :any:`SettingsWidget` classes must implement this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MethodUnimplemented</span><span class="p">(</span><span class="s2">&quot;on_setting_changed&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="JSONSettingsBackend.connect_widget_handlers"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.JsonSettingsWidgets.html#xlets_settings.JsonSettingsWidgets.JSONSettingsBackend.connect_widget_handlers">[docs]</a>    <span class="k">def</span> <span class="nf">connect_widget_handlers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method triggers once when the widget factory function creates a new widget class</span>
+<span class="sd">        from an instance of :any:`SettingsWidget` and :any:`JSONSettingsBackend`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        exceptions.MethodUnimplemented</span>
+<span class="sd">            :any:`SettingsWidget` classes with no bind_dir property set must implement this method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MethodUnimplemented</span><span class="p">(</span><span class="s2">&quot;connect_widget_handlers&quot;</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">json_settings_factory</span><span class="p">(</span><span class="n">subclass</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;JSONSettings widgets factory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    subclass : str</span>
+<span class="sd">        A :any:`SettingsWidgets` instance.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    exceptions.CannotBackend</span>
+<span class="sd">        The widget cannot be backended.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">subclass</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAN_BACKEND</span><span class="p">:</span>  <span class="c1"># noqa | SettingsWidgets</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">CannotBackend</span><span class="p">(</span><span class="n">subclass</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">NewClass</span><span class="p">(</span><span class="nb">globals</span><span class="p">()[</span><span class="n">subclass</span><span class="p">],</span> <span class="n">JSONSettingsBackend</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;New super class.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        apply_key : str</span>
+<span class="sd">            See :any:`TreeList._apply_changes`.</span>
+<span class="sd">        imp_exp_path_key : str</span>
+<span class="sd">            See :any:`TreeList._export_data` and :any:`TreeList._import_data` .</span>
+<span class="sd">        pref_key : str</span>
+<span class="sd">            The preference key that this widget will control.</span>
+<span class="sd">        settings : JSONSettingsHandler</span>
+<span class="sd">            The xlets settings handler.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_attrs</span><span class="o">=</span><span class="p">{},</span> <span class="n">widget_kwargs</span><span class="o">=</span><span class="p">{}):</span>
+            <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            widget_attrs : dict, optional</span>
+<span class="sd">                Widget attributes.</span>
+<span class="sd">            widget_kwargs : dict, optional</span>
+<span class="sd">                Widget keyword arguments.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            None</span>
+<span class="sd">                Dummy docstring. The auto-docstrings plugin put this here erroneously.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span> <span class="o">=</span> <span class="n">widget_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pref_key&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span> <span class="o">=</span> <span class="n">widget_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;apply_key&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="o">=</span> <span class="n">widget_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;imp_exp_path_key&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">widget_attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;settings&quot;</span><span class="p">)</span>
+
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">widget_kwargs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">JSON_SETTINGS_PROPERTIES_MAP</span><span class="p">:</span>  <span class="c1"># noqa | SettingsWidgets</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">JSON_SETTINGS_PROPERTIES_MAP</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="n">widget_kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>  <span class="c1"># noqa | SettingsWidgets</span>
+                <span class="k">elif</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&quot;options&quot;</span><span class="p">:</span>
+                    <span class="n">options_list</span> <span class="o">=</span> <span class="n">widget_kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+                    <span class="c1"># NOTE: Sort both types of options. Otherwise, items will appear in</span>
+                    <span class="c1"># different order every single time the widget is re-built.</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">options_list</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="n">options_list</span><span class="p">)</span>
+
+                    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sort_combo_options</span><span class="p">(</span>
+                        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="n">widget_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first-option&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attach_backend</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">NewClass</span>
+
+
+<span class="k">for</span> <span class="n">setting_widget</span> <span class="ow">in</span> <span class="n">CAN_BACKEND</span><span class="p">:</span>  <span class="c1"># noqa | SettingsWidgets</span>
+    <span class="nb">globals</span><span class="p">()[</span><span class="s2">&quot;JSONSettings&quot;</span> <span class="o">+</span> <span class="n">setting_widget</span><span class="p">]</span> <span class="o">=</span> <span class="n">json_settings_factory</span><span class="p">(</span><span class="n">setting_widget</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

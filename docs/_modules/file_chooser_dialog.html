@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>file_chooser_dialog &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>file_chooser_dialog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for file_chooser_dialog</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;File chooser dialog.</span>
+
+<span class="sd">Designed mostly to be used from JavaScript code to get a dialog to choose a path from. It can</span>
+<span class="sd">also be used as a module if needed/wanted.</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+
+<span class="sd">Used as a module from Python to select a single file.</span>
+
+<span class="sd">.. code:: python</span>
+
+<span class="sd">    #!/usr/bin/python3</span>
+<span class="sd">    # -*- coding: utf-8 -*-</span>
+
+<span class="sd">    from file_chooser_dialog import open_dialog</span>
+
+<span class="sd">    pattern_filters = [&quot;JSON files;*.json&quot;, &quot;All files;*&quot;]</span>
+<span class="sd">    filename = open_dialog(return_paths=True,</span>
+<span class="sd">                           transient_for=None,  # Set accordingly.</span>
+<span class="sd">                           buttons_labels=_(&quot;_Cancel&quot;) + &quot;:&quot; + _(&quot;_Open&quot;),</span>
+<span class="sd">                           title=_(&quot;Select a JSON file&quot;),</span>
+<span class="sd">                           pattern_filters=pattern_filters,</span>
+<span class="sd">                           dialog_action=&quot;open&quot;)</span>
+
+<span class="sd">    print(filename)  # Path to selected file.</span>
+<span class="sd">    print(type(filename))  # String (str).</span>
+
+<span class="sd">Same as the previous example, but from the command line. The selected path will be printed to STDOUT.</span>
+
+<span class="sd">.. code:: shell</span>
+
+<span class="sd">    $ ./file_chooser_dialog.py --title &quot;Select a JSON file&quot; --pattern-filters &quot;JSON files;*.json&quot; &quot;All files;*&quot;</span>
+
+<span class="sd">Used as a module from Python to select multiple files.</span>
+
+<span class="sd">.. code:: python</span>
+
+<span class="sd">    #!/usr/bin/python3</span>
+<span class="sd">    # -*- coding: utf-8 -*-</span>
+
+<span class="sd">    from file_chooser_dialog import open_dialog</span>
+
+<span class="sd">    mimetype_filters = [&quot;Audio files;audio/*&quot;, &quot;All files;*&quot;]</span>
+<span class="sd">    filename = open_dialog(return_paths=True,</span>
+<span class="sd">                           select_multiple=True,</span>
+<span class="sd">                           transient_for=None,  # Set accordingly.</span>
+<span class="sd">                           buttons_labels=_(&quot;_Cancel&quot;) + &quot;:&quot; + _(&quot;_Open&quot;),</span>
+<span class="sd">                           title=_(&quot;Select audio files&quot;),</span>
+<span class="sd">                           mimetype_filters=mimetype_filters,</span>
+<span class="sd">                           dialog_action=&quot;open&quot;)</span>
+
+<span class="sd">    print(filename)  # List of paths to selected files.</span>
+<span class="sd">    print(type(filename))  # List (list).</span>
+
+<span class="sd">Same as the previous example, but from the command line. The selected paths will be printed to STDOUT</span>
+<span class="sd">in &quot;JSON format&quot;.</span>
+
+<span class="sd">.. code:: shell</span>
+
+<span class="sd">    $ ./file_chooser_dialog.py --title &quot;Select audio files&quot; --mimetype-filters &quot;Audio files;audio/*&quot; &quot;All files;*&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+
+
+<div class="viewcode-block" id="_attach_filters"><a class="viewcode-back" href="../modules/file_chooser_dialog/file_chooser_dialog.html#file_chooser_dialog._attach_filters">[docs]</a><span class="k">def</span> <span class="nf">_attach_filters</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">filter_arg</span><span class="o">=</span><span class="p">[],</span> <span class="n">filter_type</span><span class="o">=</span><span class="s2">&quot;pattern&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Attach filters to dialog.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dialog : object</span>
+<span class="sd">        See :py:class:`Gtk.FileChooserDialog`.</span>
+<span class="sd">    filter_arg : list</span>
+<span class="sd">        Description</span>
+<span class="sd">    filter_type : str, optional</span>
+<span class="sd">        One of &quot;pattern&quot; or &quot;mimetype&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    object</span>
+<span class="sd">        :py:class:`Gtk.FileChooserDialog`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filter_arg</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">all_filters</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+
+        <span class="nb">filter</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">()</span>
+        <span class="nb">filter</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="n">all_filters</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filter_type</span> <span class="o">==</span> <span class="s2">&quot;pattern&quot;</span><span class="p">:</span>
+                <span class="nb">filter</span><span class="o">.</span><span class="n">add_pattern</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">filter</span><span class="o">.</span><span class="n">add_mime_type</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+        <span class="n">dialog</span><span class="o">.</span><span class="n">add_filter</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dialog</span></div>
+
+
+<div class="viewcode-block" id="open_dialog"><a class="viewcode-back" href="../modules/file_chooser_dialog/file_chooser_dialog.html#file_chooser_dialog.open_dialog">[docs]</a><span class="k">def</span> <span class="nf">open_dialog</span><span class="p">(</span><span class="n">return_paths</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">transient_for</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">select_multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">buttons_labels</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Open&quot;</span><span class="p">,</span>
+                <span class="n">pattern_filters</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">mimetype_filters</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">dialog_action</span><span class="o">=</span><span class="s2">&quot;open&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Open file chooser dialog.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    return_paths : bool, optional</span>
+<span class="sd">        Whether to return the selected paths. If false, the path/s will be printed to STDOUT.</span>
+<span class="sd">    transient_for : None, optional</span>
+<span class="sd">        A :py:class:`Gdk.Window` to attach the dialog to.</span>
+<span class="sd">    select_multiple : bool, optional</span>
+<span class="sd">        Whether to allow multiple paths selection.</span>
+<span class="sd">    buttons_labels : str, optional</span>
+<span class="sd">        A string representiong the dialog&#39;s buttons labels separated by a colon. To the left of</span>
+<span class="sd">        the colon, the ``CANCEL`` button label and to the right the ``OK`` button label. Example:</span>
+<span class="sd">        &quot;Cancel:Save&quot;.</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        The dialog title.</span>
+<span class="sd">    pattern_filters : list, optional</span>
+<span class="sd">        A list of strings representing the file pattern filters that will be attached to the dialog.</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">            Format: &quot;FILTER_LABEL;FILTER_1:FILTER_2:FILTER_3&quot;</span>
+
+<span class="sd">        .. code:: python</span>
+
+<span class="sd">            # Example Python.</span>
+<span class="sd">            pattern_filters = [&quot;All files;*&quot;, &quot;JSON files;*.json&quot;, &quot;Text files;*.txt&quot;]</span>
+
+<span class="sd">        .. code:: shell</span>
+
+<span class="sd">            # Example command line.</span>
+<span class="sd">            $ ./file_chooser_dialog.py --pattern-filters &quot;All files;*&quot;, &quot;JSON files;*.json&quot;, &quot;Text files;*.txt&quot;</span>
+
+<span class="sd">    mimetype_filters : list, optional</span>
+<span class="sd">        A list of strings representing the MIME type filters that will be attached to the dialog.</span>
+
+<span class="sd">        .. code::</span>
+
+<span class="sd">            Format: &quot;FILTER_LABEL;FILTER_1:FILTER_2:FILTER_3&quot;</span>
+
+<span class="sd">        .. code:: python</span>
+
+<span class="sd">            # Example Python.</span>
+<span class="sd">            mimetype_filters = [&quot;All files;*&quot;, &quot;Image files;image/*&quot;]</span>
+
+<span class="sd">        .. code:: shell</span>
+
+<span class="sd">            # Example command line.</span>
+<span class="sd">            $ ./file_chooser_dialog.py --mimetype-filters &quot;All files;*&quot;, &quot;Image files;image/*&quot;</span>
+
+<span class="sd">    dialog_action : str, optional</span>
+<span class="sd">        One of &quot;open&quot;, &quot;select_folder&quot; or &quot;save&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        The selected path when ``select_multiple`` is false or ``dialog_action`` is &quot;save&quot;.</span>
+<span class="sd">    list</span>
+<span class="sd">        The selected paths when ``select_multiple`` is true and ``dialog_action`` is not &quot;save&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">cancel_label</span><span class="p">,</span> <span class="n">ok_label</span><span class="p">]</span> <span class="o">=</span> <span class="n">buttons_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="k">if</span> \
+        <span class="n">buttons_labels</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">,</span> <span class="s2">&quot;_Open&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">dialog_action</span> <span class="o">==</span> <span class="s2">&quot;save&quot;</span><span class="p">:</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">SAVE</span>
+    <span class="k">elif</span> <span class="n">dialog_action</span> <span class="o">==</span> <span class="s2">&quot;select_folder&quot;</span><span class="p">:</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">SELECT_FOLDER</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserAction</span><span class="o">.</span><span class="n">OPEN</span>
+
+    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserDialog</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span>
+        <span class="n">transient_for</span><span class="o">=</span><span class="n">transient_for</span><span class="p">,</span>
+        <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">cancel_label</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                 <span class="n">ok_label</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pattern_filters</span><span class="p">:</span>
+        <span class="n">_attach_filters</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">pattern_filters</span><span class="p">,</span> <span class="n">filter_type</span><span class="o">=</span><span class="s2">&quot;pattern&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mimetype_filters</span><span class="p">:</span>
+        <span class="n">_attach_filters</span><span class="p">(</span><span class="n">dialog</span><span class="p">,</span> <span class="n">mimetype_filters</span><span class="p">,</span> <span class="n">filter_type</span><span class="o">=</span><span class="s2">&quot;mimetype&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dialog_action</span> <span class="o">==</span> <span class="s2">&quot;save&quot;</span><span class="p">:</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_do_overwrite_confirmation</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dialog_action</span> <span class="o">!=</span> <span class="s2">&quot;save&quot;</span> <span class="ow">and</span> <span class="n">select_multiple</span><span class="p">:</span>
+        <span class="n">dialog</span><span class="o">.</span><span class="n">set_select_multiple</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dialog_action</span> <span class="o">!=</span> <span class="s2">&quot;save&quot;</span> <span class="ow">and</span> <span class="n">select_multiple</span><span class="p">:</span>
+            <span class="n">return_value</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">get_filenames</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">return_value</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">return_paths</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">return_value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">return_value</span><span class="p">)</span>
+
+    <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="cli"><a class="viewcode-back" href="../modules/file_chooser_dialog/file_chooser_dialog.html#file_chooser_dialog.cli">[docs]</a><span class="k">def</span> <span class="nf">cli</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Command line interface.</span>
+
+<span class="sd">    .. code::</span>
+
+<span class="sd">        usage: file_chooser_dialog.py [-h] [--select-multiple]</span>
+<span class="sd">                                      [--buttons-labels BUTTONS_LABELS]</span>
+<span class="sd">                                      [--title TITLE]</span>
+<span class="sd">                                      [--pattern-filters [PATTERN_FILTERS [PATTERN_FILTERS ...]]]</span>
+<span class="sd">                                      [--mimetype-filters [MIMETYPE_FILTERS [MIMETYPE_FILTERS ...]]]</span>
+<span class="sd">                                      [--action-open | --action-select-folder | --action-save]</span>
+
+<span class="sd">        optional arguments:</span>
+<span class="sd">          -h, --help            show this help message and exit</span>
+<span class="sd">          --select-multiple</span>
+<span class="sd">          --buttons-labels BUTTONS_LABELS</span>
+<span class="sd">          --title TITLE</span>
+<span class="sd">          --pattern-filters [PATTERN_FILTERS [PATTERN_FILTERS ...]]</span>
+<span class="sd">          --mimetype-filters [MIMETYPE_FILTERS [MIMETYPE_FILTERS ...]]</span>
+<span class="sd">          --action-open</span>
+<span class="sd">          --action-select-folder</span>
+<span class="sd">          --action-save</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">argparse</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--select-multiple&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;select_multiple&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--buttons-labels&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;buttons_labels&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--title&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--pattern-filters&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;pattern_filters&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--mimetype-filters&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;mimetype_filters&quot;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+
+    <span class="n">group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--action-open&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;dialog_action&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s2">&quot;open&quot;</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--action-select-folder&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;dialog_action&quot;</span><span class="p">,</span>
+                       <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s2">&quot;select_folder&quot;</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--action-save&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;dialog_action&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_const&quot;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="s2">&quot;save&quot;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">open_dialog</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

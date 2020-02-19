@@ -1,0 +1,313 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>xlets_settings.ansi_colors &mdash; Cinnamon Tools  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+  
+  
+
+  
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content style-external-links">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+        
+      <li>xlets_settings.ansi_colors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for xlets_settings.ansi_colors</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Utility to colorize terminal output.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">Ansi : object</span>
+<span class="sd">    :any:`ANSIColors` class initialization.</span>
+<span class="sd">color_table : dict</span>
+<span class="sd">    ANSI color table.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">color_table</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;39&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;49&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;black&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;40&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;red&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;31&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;41&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;green&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;32&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;42&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;yellow&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;33&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;43&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;blue&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;34&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;44&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;magenta&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;35&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;45&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;cyan&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;36&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;46&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-gray&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;37&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;47&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;dark-gray&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;90&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-red&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;91&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;101&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-green&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;92&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;102&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-yellow&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;93&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;103&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-blue&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;94&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;104&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-magenta&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;95&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;105&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;light-cyan&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;96&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;106&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;white&quot;</span><span class="p">:</span>
+    <span class="p">{</span><span class="s2">&quot;fg&quot;</span><span class="p">:</span> <span class="s2">&quot;97&quot;</span><span class="p">,</span> <span class="s2">&quot;bg&quot;</span><span class="p">:</span> <span class="s2">&quot;107&quot;</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="n">_bold_markdown_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\*\*([^\*\*]*)\*\*&quot;</span><span class="p">)</span>
+<span class="n">_bold_placeholder</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\033[0m\033[1;49;</span><span class="si">{code}</span><span class="s2">m\1\033[0m\033[0;49;</span><span class="si">{code}</span><span class="s2">m&quot;</span>
+
+
+<div class="viewcode-block" id="ANSIColors"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.ansi_colors.html#xlets_settings.ansi_colors.ANSIColors">[docs]</a><span class="k">class</span> <span class="nc">ANSIColors</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Class to colorize terminal output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extend</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ANSIColors._extend"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.ansi_colors.html#xlets_settings.ansi_colors.ANSIColors._extend">[docs]</a>    <span class="k">def</span> <span class="nf">_extend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Extend class&#39; functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">color_table</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_make_color_function</span><span class="p">(</span><span class="n">color_table</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s2">&quot;fg&quot;</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="ANSIColors._colorize"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.ansi_colors.html#xlets_settings.ansi_colors.ANSIColors._colorize">[docs]</a>    <span class="k">def</span> <span class="nf">_colorize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Colorize text.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str</span>
+<span class="sd">            Text to colorize.</span>
+<span class="sd">        code : str</span>
+<span class="sd">            ANSI color code.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            ANSI formatted string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0;49;</span><span class="si">%s</span><span class="s2">m&quot;</span> <span class="o">%</span> <span class="n">code</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">_bold_markdown_re</span><span class="p">,</span>
+                                               <span class="n">_bold_placeholder</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">),</span>
+                                               <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m&quot;</span></div>
+
+<div class="viewcode-block" id="ANSIColors._make_color_function"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.ansi_colors.html#xlets_settings.ansi_colors.ANSIColors._make_color_function">[docs]</a>    <span class="k">def</span> <span class="nf">_make_color_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Make color function.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code : str</span>
+<span class="sd">            ANSI color code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;Colorize text.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            text : str</span>
+<span class="sd">                Text to colorize.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                ANSI formatted string.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span></div></div>
+
+
+<span class="n">Ansi</span> <span class="o">=</span> <span class="n">ANSIColors</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016-2020, Odyseus.
+
+    </p>
+  </div>
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

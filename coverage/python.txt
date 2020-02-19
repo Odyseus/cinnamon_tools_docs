@@ -1,0 +1,7 @@
+Undocumented Python objects
+===========================
+xlets_settings.JsonSettingsWidgets
+----------------------------------
+Functions:
+ * json_settings_factory
+
