@@ -18,7 +18,7 @@
 <noscript>
 <div class="alert alert-warning" role="alert">
 <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
-<p><strong>This page uses JavaScript only to switch between the available languages, display images, smooth scrolling, etc.</strong></p>
+<p><strong>This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.</strong></p>
 <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
 </div>
 <!-- .alert.alert-warning -->
@@ -37,7 +37,7 @@
             <form class="form-inline">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text text-bold text-font-size-xx-large" for="localization-switch">⊛</span>
+                        <span class="input-group-text" for="localization-switch">🌐</span>
                     </div>
                     <select class="custom-select custom-select-sm text-bold" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
 <!-- English --><option selected data-title="Help for Argos for Cinnamon" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English (English)</option>
@@ -55,32 +55,16 @@
 
 <div class="card text-bold my-3 border-warning shadow-sm">
     <div class="card-header bg-warning text-white">Advertencia</div>
-    <div class="card-body text-warning "><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+    <div class="card-body text-warning text-font-size-large"><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
 <p>Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
 </div>
 <div class="card text-bold my-3 border-success shadow-sm">
     <div class="card-header bg-success text-white">Compatibilidad con Cinnamon</div>
-    <div class="card-body text-success text-font-size-x-large"><span class="badge  badge-success shadow-sm text-monospace">v3.0</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.2</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.4</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.6</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.8</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.0</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.2</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.4</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.6</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.8</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.0</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.2</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.4</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.6</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.8</span>
-<span class="badge  badge-success shadow-sm text-monospace">v6.0</span>
-</div>
+    <div class="card-body text-success text-font-size-large">Este xlet es compatible con Cinnamon 3.0 hasta la última versión de Cinnamon.</div>
 </div>
 <div class="card text-bold my-3 border-info shadow-sm">
     <div class="card-header bg-info text-white">Localización de xlets</div>
-    <div class="card-body text-info "><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
+    <div class="card-body text-info text-font-size-large"><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
 
 <p>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado helper.py desde una terminal abierta dentro de la carpeta del xlet.</p>
 </div>
@@ -95,13 +79,6 @@
 <li><strong>Soporte Unicode:</strong> Sólo imprima su texto en stdout. Se traducirá de la manera que usted espera.</li>
 <li><strong>Optimizado para el consumo mínimo de recursos:</strong> Incluso con varios complementos actualizando cada segundo, Argos normalmente usa menos del 1 por ciento de la CPU.</li>
 <li><strong>Totalmente documentado:</strong> <p>Ver <strong><a href="#usage-es">Uso del applet</a></strong>.</p></li>
-</ul>
-<h2>Dependencias</h2>
-<ul>
-<li><strong>Comando xdg-open:</strong> Open a URI in the user's preferred application that handles the respective URI or file type.<ul>
-<li>Distribuciones basadas en Debian y Archlinux: Distribuciones basadas en Debian y Archlinux: Este comando es instalado por el paquete llamado <strong>xdg-utils</strong>. Instalado por defecto en todas las versiones modernas de Linux Mint.</li>
-</ul>
-</li>
 </ul>
 
 <p><span id="usage-es"></span></p>
@@ -259,7 +236,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>command</code> or <code>bash</code></td>
+<td><code>command</code>, <code>bash</code></td>
 <td>El comando a ejecutar</td>
 <td><strong><a href="#about-command-bash-attributes-es">(1)</a></strong> Ejecuta un comando usando una shell por defecto especificada en las opciones de una instancia de Argos para Cinnamon o especificada por el atributo <code>shell</code>.</td>
 </tr>
@@ -386,32 +363,16 @@ Las siguientes secciones están disponibles sólo en Inglés.
 
 <div class="card text-bold my-3 border-warning shadow-sm">
     <div class="card-header bg-warning text-white">Warning</div>
-    <div class="card-body text-warning "><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
+    <div class="card-body text-warning text-font-size-large"><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
 <p>Bug reports, feature requests and contributions should be done on this xlet's repository linked next. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
 </div>
 <div class="card text-bold my-3 border-success shadow-sm">
     <div class="card-header bg-success text-white">Cinnamon compatibility</div>
-    <div class="card-body text-success text-font-size-x-large"><span class="badge  badge-success shadow-sm text-monospace">v3.0</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.2</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.4</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.6</span>
-<span class="badge  badge-success shadow-sm text-monospace">v3.8</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.0</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.2</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.4</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.6</span>
-<span class="badge  badge-info shadow-sm text-monospace">v4.8</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.0</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.2</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.4</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.6</span>
-<span class="badge  badge-warning shadow-sm text-monospace">v5.8</span>
-<span class="badge  badge-success shadow-sm text-monospace">v6.0</span>
-</div>
+    <div class="card-body text-success text-font-size-large">This xlet is compatible with Cinnamon 3.0 up to latest Cinnamon version.</div>
 </div>
 <div class="card text-bold my-3 border-info shadow-sm">
     <div class="card-header bg-info text-white">Xlets localization</div>
-    <div class="card-body text-info "><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
+    <div class="card-body text-info text-font-size-large"><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
 
 <p>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called helper.py from a terminal opened inside the xlet's folder.</p>
 </div>
@@ -426,13 +387,6 @@ Las siguientes secciones están disponibles sólo en Inglés.
 <li><strong>Unicode support:</strong> Just print your text to stdout. It will be rendered the way you expect.</li>
 <li><strong>Optimized for minimum resource consumption:</strong> Even with multiple plugins refreshing every second, Argos typically uses less than 1 percent of the CPU.</li>
 <li><strong>Fully documented:</strong> <p>See <strong><a href="#usage-en">Usage</a></strong>.</p></li>
-</ul>
-<h2>Dependencies</h2>
-<ul>
-<li><strong>xdg-open command:</strong> Open a URI in the user's preferred application that handles the respective URI or file type.<ul>
-<li>Debian and Archlinux based distributions: This command is installed with the package called <strong>xdg-utils</strong>. Installed by default in modern versions of Linux Mint.</li>
-</ul>
-</li>
 </ul>
 
 <p><span id="usage-en"></span></p>
@@ -590,7 +544,7 @@ Las siguientes secciones están disponibles sólo en Inglés.
 </thead>
 <tbody>
 <tr>
-<td><code>command</code> or <code>bash</code></td>
+<td><code>command</code>, <code>bash</code></td>
 <td>A command to execute</td>
 <td><strong><a href="#about-command-bash-attributes-en">(1)</a></strong> Runs a command using a default shell specified in the options of an instance of Argos for Cinnamon or specified by the <code>shell</code> attribute.</td>
 </tr>
@@ -725,88 +679,162 @@ The following sections are available only in English.
 <span id="xlet-changelog">
 <div class="container boxed my-3 py-3">
 <h2>Argos for Cinnamon changelog</h2>
-<h4>This change log is only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<p><strong>This change log is only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a>.</strong></p>
 <hr>
+<p><strong>Date:</strong> Tue, 11 Feb 2020 00:00:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/3fa9bdc">3fa9bdc</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Mon, 21 Jan 2019 21:48:00 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/2d5dfec">2d5dfec</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Removed leftover code of xlets initialization using a Cinnamon feature that thankfully wasn't implemented.</li>
+<li>Adaptations due to changes to global JavaScript modules.</li>
 </ul>
-<pre><code>- Updated emoji library.
-- Changed applet icon.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Fri, 21 Jun 2019 23:01:00 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/9b7e3b1">9b7e3b1</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Thu, 17 Jan 2019 14:00:29 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c910029">c910029</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Removed workarounds for older versions of Cinnamon (2.8.x and below).</li>
+<li>Added option to only execute the script assigned to an applet when the menu is opened. This is different from the <strong>ARGOS_MENU_OPEN</strong> environment variable set on execution time and that can be used inside the scripts. For the environment variable to be read, the script has to be executed. For the option set on the applet settings, the script is not executed at all unless the menu is opened.</li>
+<li>Added option to avoid ellipsation of the lines displayed on the applet. Applet text of only 3 characters was being ellipsized, which was ultra-annoying.</li>
+<li>Fixed misbehavior of the menu closing while the mouse cursor was placed over an activatable item in the menu and the menu content was updated. This was misbehaving because; when an item inside a menu is hovered, it has focus; when all items in a menu are removed, the menu loses focus; when a menu loses focus, it closes. I simply moved the focus to the menu itself before removing all its items to prevent the menu from closing.</li>
+<li>Moved the rotation interval selector found in the applet context menu outside the Extras sub-menu to keep it more accessible.</li>
+<li>Corrected not being able to set the script name as the applet label.</li>
 </ul>
-<pre><code>- Python files improvements:
-    - Simplified localization system.
-    - Homogenized/Cleaned up code.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Thu, 30 May 2019 03:46:35 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/ae5e64a">ae5e64a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Tue, 15 Jan 2019 22:38:48 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/3a99b80">3a99b80</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Minor changes due to changes in global modules.</li>
 </ul>
-<pre><code>- Modified applet initialization code in preparation for asynchronous settings initialization that will be available in the next Cinnamon version (4.2.x?).
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Thu, 23 May 2019 02:14:46 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/0806714">0806714</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Mon, 24 Dec 2018 21:58:49 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/60aefee">60aefee</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>JavaScript modules globalization. Moved functions/classes out of the xlet itself into global modules added at build time to minimize duplicated code across all xlets and facilitate maintenance.</li>
+<li>JavaScript code homogenization.</li>
+<li>Improved debugger.</li>
+<li>Added SVG icon.</li>
 </ul>
-<pre><code>- Now it is possible to specify the shell used to execute commands instead of having Bash hard-coded. A shell can be globally configured in an applet instance or specified individually for each menu item through the `shell` attribute. The argument used by a shell program that allows to execute a command is also exposed through an applet setting and can also be specified with the `shellArgument` attribute.
-- Exposed as an option the argument used by a terminal program that allows to execute a command inside a terminal window. Workaround due to retarded terminals that keep being dumbed down to the point of uselessness.
-- Removed retro compatible code that was left over when removing compatibility with Cinnamon versions older than 3.0.x.
-- Implemented a getBoolean function to simplify conditions.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Tue, 14 May 2019 14:39:50 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8630083">8630083</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Tue, 7 Aug 2018 03:36:48 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c114f50">c114f50</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Changed the <em>chained module imports</em> approach for a <em>direct module import</em> approach. This is to avoid errors caused by the garbage that is the implementation of <code>require()</code>.</li>
+<li>Better debugging and logging mechanism. Now the debugger is separated from the verbose logging, allowing to see the debugger messages without having to scroll through a million lines of text.</li>
 </ul>
-<pre><code>- Removed from the example files references to the ~/.cinnamon/glass.log file. This file doesn't exist anymore since Cinnamon version 3.6.x.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Thu, 21 Feb 2019 10:35:40 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/77f404a">77f404a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Tue, 7 Aug 2018 03:03:20 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8a25f65">8a25f65</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Added call to finalize settings when applet is removed from panel.</li>
 </ul>
-<pre><code>- Second step towards moving all JavaScript code to ES6. Convert all functions (that can be converted) to arrow functions.
-- Moved the **Emojis** variable into its own JavaScript module.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Mon, 18 Feb 2019 01:28:04 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/491c8b3">491c8b3</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Sat, 4 Aug 2018 05:16:23 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/cb6dd7e">cb6dd7e</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Made button lines behavior match that of the described by the documentation (<em>...all button lines get a dropdown menu item...</em>). In practice, this applet had the same behavior as the extension is based on; button lines would get a dropdown menu only if there were more than one button line. Argos for Cinnamon now will always create a dropdown item for each button line (respecting the <code>dropdown</code> attribute, of course).</li>
 </ul>
-<pre><code>- Eradication of **Lang** module usage in favor of arrow/standard functions. First step towards moving all JavaScript code to ES6.
-- Simplification of the procedure to set the applet icon.
-- Removed support for Cinnamon versions older than 3.0.x.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Mon, 18 Feb 2019 00:20:47 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/a581b5f">a581b5f</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Wed, 13 Jun 2018 00:59:17 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/5618e00">5618e00</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Better handling of the <code>tooltip</code> attribute. Now a standard item and an alternate item can each have their own tooltips.</li>
+<li>Made user defined attributes parsing case insensitive. This makes line definitions less strict.</li>
 </ul>
-<pre><code>- Corrected settings changed callback function due to different amount of arguments passed by different Cinnamon versions.
-</code></pre>
 <hr>
+<p><strong>Date:</strong> Sun, 17 Feb 2019 02:12:37 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8f2938b">8f2938b</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
 <ul>
-<li><strong>Date:</strong> Mon, 7 May 2018 04:54:07 -0300</li>
-<li><strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/4d36d68">4d36d68</a></li>
-<li><strong>Author:</strong> Odyseus</li>
+<li>Fixed commands execution when terminal is set to false.</li>
+<li>Added the possibility to insert separators inside sub-menus.</li>
+<li>Redesigned applet tooltip for better readability by using a grid.</li>
+<li>Added debug mode for troubleshooting.</li>
+<li>Removing some try{}catch{} blocks. When debug mode is enabled all methods are called with a try{}catch{} block.</li>
+<li>Implemented the use of GLib.get_monotonic_time() to measure execution times more precisely.</li>
+<li>Improved lines parsing by using default parameters. This avoids constantly checking for the existence of an option.</li>
+<li>Cleaned call to log function that was left over.</li>
 </ul>
-<pre><code>- Implemented key bindings common naming.
-</code></pre>
+<hr>
+<p><strong>Date:</strong> Mon, 21 Jan 2019 21:48:00 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/2d5dfec">2d5dfec</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Updated emoji library.</li>
+<li>Changed applet icon.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 17 Jan 2019 14:00:29 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c910029">c910029</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Python files improvements:<ul>
+<li>Simplified localization system.</li>
+<li>Homogenized/Cleaned up code.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 15 Jan 2019 22:38:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/3a99b80">3a99b80</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Modified applet initialization code in preparation for asynchronous settings initialization that will be available in the next Cinnamon version (4.2.x?).</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 24 Dec 2018 21:58:49 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/60aefee">60aefee</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Now it is possible to specify the shell used to execute commands instead of having Bash hard-coded. A shell can be globally configured in an applet instance or specified individually for each menu item through the <code>shell</code> attribute. The argument used by a shell program that allows to execute a command is also exposed through an applet setting and can also be specified with the <code>shellArgument</code> attribute.</li>
+<li>Exposed as an option the argument used by a terminal program that allows to execute a command inside a terminal window. Workaround due to retarded terminals that keep being dumbed down to the point of uselessness.</li>
+<li>Removed retro compatible code that was left over when removing compatibility with Cinnamon versions older than 3.0.x.</li>
+<li>Implemented a getBoolean function to simplify conditions.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 03:36:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c114f50">c114f50</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed from the example files references to the ~/.cinnamon/glass.log file. This file doesn't exist anymore since Cinnamon version 3.6.x.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 03:03:20 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8a25f65">8a25f65</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Second step towards moving all JavaScript code to ES6. Convert all functions (that can be converted) to arrow functions.</li>
+<li>Moved the <strong>Emojis</strong> variable into its own JavaScript module.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 4 Aug 2018 05:16:23 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/cb6dd7e">cb6dd7e</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Eradication of <strong>Lang</strong> module usage in favor of arrow/standard functions. First step towards moving all JavaScript code to ES6.</li>
+<li>Simplification of the procedure to set the applet icon.</li>
+<li>Removed support for Cinnamon versions older than 3.0.x.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 13 Jun 2018 00:59:17 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/5618e00">5618e00</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Corrected settings changed callback function due to different amount of arguments passed by different Cinnamon versions.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 7 May 2018 04:54:07 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/4d36d68">4d36d68</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Implemented key bindings common naming.</li>
+</ul>
 <hr>
 
 </div> <!-- .container.boxed -->
@@ -1098,7 +1126,7 @@ if there is a localization language available.
     <div class="container-fluid text-left">
         <ul class="list-unstyled">
             <li>
-                <p>Page created with <a href="https://getbootstrap.com"><b>Bootstrap</b></a> v4.1.3.</p>
+                <p>Page created with <a href="https://getbootstrap.com"><b>Bootstrap</b></a>.</p>
             </li>
             <li>
                 <p><a href="https://gitlab.com/Odyseus/flatly_bootstrap_theme"><b>Boostrap theme</b></a> based on <a href="https://bootswatch.com"><b>Bootswatch</b></a>'s <a href="https://bootswatch.com/flatly"><b>Flatly theme</b></a>.</p>
@@ -1112,7 +1140,7 @@ if there is a localization language available.
     <!--Copyright-->
     <div class="text-center py-3">
         <div class="container-fluid">
-            © 2016-2019 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
+            © 2016-2020 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
         </div>
     </div>
     <!--/.Copyright-->
