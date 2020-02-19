@@ -1,0 +1,59 @@
+<footer>
+  {% if (theme_prev_next_buttons_location == 'bottom' or theme_prev_next_buttons_location == 'both') and (next or prev) %}
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      {% if next %}
+        <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}" accesskey="n" rel="next">{{ _('Next') }} <span class="fa fa-arrow-circle-right"></span></a>
+      {% endif %}
+      {% if prev %}
+        <a href="{{ prev.link|e }}" class="btn btn-neutral float-left" title="{{ prev.title|striptags|e }}" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> {{ _('Previous') }}</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+    {%- if show_copyright %}
+      {%- if hasdoc('copyright') %}
+        {# The comments aren't extracted. I hope translators use a crystal ball!!! #}
+        {# TRANSLATORS: Example output:
+            © <a href="/path/to/copyright.html">Copyright</a> 2016-2019, Odyseus. #}
+        {% trans href='<a href="%(path)s"> %(text)s </a>'|format(path=pathto('copyright'), text=_("Copyright")), copyright=copyright|e %}&copy; {{ href }} {{ copyright }}{% endtrans %}
+      {%- else %}
+        {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}{% endtrans %}
+      {%- endif %}
+    {%- endif %}
+
+    {%- if build_id and build_url %}
+        <span class="build">
+            {# TRANSLATORS: Example output:
+                Build <a href="build_url">build_id</a>. #}
+            {% trans href='<a href="%(build_url)s">%(build_id)s</a>'|format(build_url=build_url, build_id=build_id) %}Build {{ href }}.{% endtrans %}
+        </span>
+    {%- elif commit %}
+        <span class="commit">
+            {# TRANSLATORS: Example output:
+                Revision <code>commit</code>. #}
+            {% trans code='<code>%(commit)s</code>'|format(commit=commit) %}Revision {{ code }}.{% endtrans %}
+        </span>
+    {%- elif last_updated %}
+      <span class="lastupdated">
+        {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+      </span>
+    {%- endif %}
+
+    </p>
+  </div>
+
+  {%- if show_sphinx %}
+    {# TRANSLATORS: Example output:
+        Built with <a href="sphinx_url">Sphinx</a> using a modified version of <a href="sphinx_rtd_theme_url">sphinx-rtd-theme</a>. #}
+    {% trans sphinx_link='<a href="http://sphinx-doc.org/">Sphinx</a>' ,
+    sphinx_rtd_theme_link='<a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>' %}Built with {{ sphinx_link }} using a modified version of {{ sphinx_rtd_theme_link }}.{% endtrans %}
+  {%- endif %}
+
+  {%- block extrafooter %} {% endblock %}
+
+</footer>
+
