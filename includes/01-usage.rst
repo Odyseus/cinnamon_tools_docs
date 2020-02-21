@@ -186,9 +186,9 @@ Options
         :title: How to create a custom theme variant?
 
         1. Duplicate the folder called **GreybirdBlue** inside **themes/_variants**. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.
-        2. Delete the folder called **_version_sensitive**. This folder will be recreated when parsing the SASS files.
+        2. Delete the folder called **_version_sensitive**. This folder will be recreated when parsing the |Sass| files.
         3. Edit the file called **config.py** with the desired colors. This file is commented to facilitate its edition.
-        4. Parse the SASS files using the Cinnamon Tools command line application. See :ref:`app.py parse_sass <parse-sass-command-reference>`.
+        4. Parse the |Sass| files using the Cinnamon Tools command line application. See :ref:`app.py parse_sass <parse-sass-command-reference>`.
         5. Build the themes using the Cinnamon Tools command line application. See :ref:`app.py build_themes <how-to-build-themes-reference>`.
         6. Optionally generate the theme thumbnails. As of now, the folder **VariantName/_version_insensitive** only contains thumbnails for the Cinnamon and Gtk2/Gtk3 themes. These thumbnails are used by Cinnamon's theme selectors as themes previews. The folder **VariantName/_version_insensitive** could be ignored/removed, in which case the Cinnamon's theme selectors will use blank/generic images.
 
@@ -228,7 +228,7 @@ Options
 app.py parse_sass
 -----------------
 
-This command parses the SASS files needed to create the themes found in this repository. It's only usefull for people that wants to create their own themes variants. See :ref:`requirements <parse-sass-requirement-reference>`.
+This command parses the |Sass| files needed to create the themes found in this repository. It's only usefull for people that wants to create their own themes variants. See :ref:`requirements <parse-sass-requirement-reference>`.
 
 Options
 ^^^^^^^

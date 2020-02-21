@@ -2295,7 +2295,7 @@
 
 
 <div class="viewcode-block" id="parse_sass"><a class="viewcode-back" href="../../modules/python_modules/python_modules.app_utils.html#python_modules.app_utils.parse_sass">[docs]</a><span class="k">def</span> <span class="nf">parse_sass</span><span class="p">(</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parse SASS.</span>
+    <span class="sd">&quot;&quot;&quot;Parse |Sass|.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -2334,7 +2334,7 @@
         <span class="n">template_data</span> <span class="o">=</span> <span class="n">template_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">variant_name</span> <span class="ow">in</span> <span class="n">variants</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Attempting to parse SASS files for variant: </span><span class="si">%s</span><span class="s2">**&quot;</span> <span class="o">%</span> <span class="n">variant_name</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Attempting to parse Sass files for variant: </span><span class="si">%s</span><span class="s2">**&quot;</span> <span class="o">%</span> <span class="n">variant_name</span><span class="p">)</span>
         <span class="n">variant_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variants_path</span><span class="p">,</span> <span class="n">variant_name</span><span class="p">,</span> <span class="s2">&quot;config.py&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">):</span>
@@ -2349,10 +2349,10 @@
             <span class="k">continue</span>
 
         <span class="k">for</span> <span class="n">cinnamon_version</span> <span class="ow">in</span> <span class="n">app_data</span><span class="o">.</span><span class="n">SUPPORTED_CINNAMON_THEME_VERSIONS</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Processing SASS files for Cinnamon version: </span><span class="si">%s</span><span class="s2">**&quot;</span> <span class="o">%</span> <span class="n">cinnamon_version</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Processing Sass files for Cinnamon version: </span><span class="si">%s</span><span class="s2">**&quot;</span> <span class="o">%</span> <span class="n">cinnamon_version</span><span class="p">)</span>
             <span class="n">sass_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sass_path</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">.scss&quot;</span> <span class="o">%</span>
                                           <span class="p">(</span><span class="n">variant_name</span><span class="p">,</span> <span class="n">cinnamon_version</span><span class="p">))</span>
-            <span class="c1"># NOTE: Replace the dot to be able to store an integer since I don&#39;t trust SASS comparisons.</span>
+            <span class="c1"># NOTE: Replace the dot to be able to store an integer since I don&#39;t trust Sass comparisons.</span>
             <span class="c1"># In fact, I don&#39;t trust floats in any programming language in existence.</span>
             <span class="c1"># Also replace all placeholders including the double quotes to be able to store &quot;raw data&quot;.</span>
             <span class="n">sass_file_data</span> <span class="o">=</span> <span class="n">template_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>

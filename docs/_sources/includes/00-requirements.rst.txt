@@ -17,9 +17,10 @@ Requirements
 
     .. code:: shell
 
-        git clone --recurse-submodules --shallow-submodules git_repository_url
+        git clone --recurse-submodules --shallow-submodules <cinnamon_tools_repository_url>
 
-    ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit. This is to avoid downloading a lot of unnecessary data (bootstrap 100MB+ and bootswatch 50MB+).
+    ``----recurse-submodules`` argument is also clone the sub-modules and all sub-modules that a sub-module might have.
+    ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
 
 .. contextual-admonition::
     :context: warning
@@ -38,10 +39,10 @@ Requirements
 
 .. contextual-admonition::
     :context: warning
-    :title: Cinnamon theme building from SASS sources
+    :title: Cinnamon theme building from Sass sources
 
     - **Python 3.5+**
-    - **sass**: Either of the following implementations can be used to parse SASS files.
+    - **sass**: Either of the following implementations can be used to parse |Sass| files.
 
         + Dart Sass: `See installation instructions <https://github.com/sass/dart-sass/releases>`__.
         + SassC: Install from your distribution repositories.

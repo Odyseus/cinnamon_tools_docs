@@ -4,10 +4,10 @@ Code styling/guidelines
 ***********************
 
 
-CSS/SASS
-========
+CSS/|Sass|
+==========
 
-1. CSS files that where generated from SASS sources are exempt from any styling rules. Trying to configure the output of SASS generated files is like trying to teach to talk to a rock!!! ¬¬
+1. CSS files that where generated from |Sass| sources are exempt from any styling rules. Trying to configure the output of |Sass| generated files is like trying to teach to talk to a rock!!! ¬¬
 2. Styling rules for CSS files:
 
      a) 4 spaces indentation.
@@ -24,7 +24,7 @@ CSS/SASS
      l) Prefix property values or color parameters with a leading zero (e.g., 0.5 instead of .5 and -0.5px instead of -.5px).
      m) Do not specify units for zero values, e.g., ``margin: 0;`` instead of ``margin: 0px;``.
 
-2. Styling rules for SASS files:
+2. Styling rules for |Sass| files:
 
      a) Same as CSS files.
      b) For the rest, don't even bother. Follow the rules forced by the *code formatter* in use...until it breaks due to an update that introduced *new features*. Then follow the rules forced by default by the following *code formatter* that works. It is absolutely pointless to rely on anything that it is based on web technologies and designed for and/or by web developers (in the span of just six weeks it will be broken again). ¬¬
