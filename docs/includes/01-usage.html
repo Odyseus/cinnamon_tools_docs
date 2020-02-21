@@ -416,9 +416,9 @@ Users that want to perform more in depth changes to the xlets or even create the
 <p class="admonition-title">How to create a custom theme variant?</p>
 <ol class="arabic">
 <li><p>Duplicate the folder called <strong>GreybirdBlue</strong> inside <strong>themes/_variants</strong>. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.</p></li>
-<li><p>Delete the folder called <strong>_version_sensitive</strong>. This folder will be recreated when parsing the <a href="#id8"><span class="problematic" id="id9">|Sass|</span></a> files.</p></li>
+<li><p>Delete the folder called <strong>_version_sensitive</strong>. This folder will be recreated when parsing the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files.</p></li>
 <li><p>Edit the file called <strong>config.py</strong> with the desired colors. This file is commented to facilitate its edition.</p></li>
-<li><p>Parse the <a href="#id10"><span class="problematic" id="id11">|Sass|</span></a> files using the Cinnamon Tools command line application. See <a class="reference internal" href="#parse-sass-command-reference"><span class="std std-ref">app.py parse_sass</span></a>.</p></li>
+<li><p>Parse the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files using the Cinnamon Tools command line application. See <a class="reference internal" href="#parse-sass-command-reference"><span class="std std-ref">app.py parse_sass</span></a>.</p></li>
 <li><p>Build the themes using the Cinnamon Tools command line application. See <a class="reference internal" href="#how-to-build-themes-reference"><span class="std std-ref">app.py build_themes</span></a>.</p></li>
 <li><p>Optionally generate the theme thumbnails. As of now, the folder <strong>VariantName/_version_insensitive</strong> only contains thumbnails for the Cinnamon and Gtk2/Gtk3 themes. These thumbnails are used by Cinnamon's theme selectors as themes previews. The folder <strong>VariantName/_version_insensitive</strong> could be ignored/removed, in which case the Cinnamon's theme selectors will use blank/generic images.</p>
 <blockquote>
@@ -459,7 +459,7 @@ Users that want to perform more in depth changes to the xlets or even create the
 </div>
 <div class="section" id="app-py-parse-sass">
 <span id="parse-sass-command-reference"></span><h3>app.py parse_sass<a class="headerlink" href="#app-py-parse-sass" title="Permalink to this headline">¶</a></h3>
-<p>This command parses the <a href="#id12"><span class="problematic" id="id13">|Sass|</span></a> files needed to create the themes found in this repository. It's only usefull for people that wants to create their own themes variants. See <a class="reference internal" href="00-requirements.html#parse-sass-requirement-reference"><span class="std std-ref">requirements</span></a>.</p>
+<p>This command parses the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files needed to create the themes found in this repository. It's only usefull for people that wants to create their own themes variants. See <a class="reference internal" href="00-requirements.html#parse-sass-requirement-reference"><span class="std std-ref">requirements</span></a>.</p>
 <div class="section" id="id2">
 <h4>Options<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
