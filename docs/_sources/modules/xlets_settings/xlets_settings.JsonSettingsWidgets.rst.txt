@@ -5,3 +5,4 @@ xlets\_settings.JsonSettingsWidgets module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

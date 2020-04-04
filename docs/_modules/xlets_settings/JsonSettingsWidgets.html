@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -171,17 +171,17 @@
 
 <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">GLib</span>
-<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gio</span>
-<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="k">import</span> <span class="n">Gtk</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">GLib</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">exceptions</span>
-<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="k">import</span> <span class="n">AppChooser</span>  <span class="c1"># noqa</span>
-<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="k">import</span> <span class="n">AppList</span>  <span class="c1"># noqa</span>
-<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="k">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
-<span class="kn">from</span> <span class="nn">.TreeListWidgets</span> <span class="k">import</span> <span class="n">TreeList</span>  <span class="c1"># noqa</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">BaseGrid</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">sort_combo_options</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">exceptions</span>
+<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="kn">import</span> <span class="n">AppChooser</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.AppChooserWidgets</span> <span class="kn">import</span> <span class="n">AppList</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.TreeListWidgets</span> <span class="kn">import</span> <span class="n">TreeList</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">BaseGrid</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">sort_combo_options</span>
 
 <span class="c1"># NOTE: JEESH!!! I hate import *!!!</span>
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
@@ -260,7 +260,7 @@
 <span class="sd">        Xlet metadata.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">notify_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xlet_meta</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="n">notify_callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xlet_meta</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialization.</span>
 
 <span class="sd">        Parameters</span>
@@ -671,7 +671,7 @@
 <span class="sd">        The xlets settings handler.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">dep_key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">dep_key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialization.</span>
 
 <span class="sd">        Parameters</span>
@@ -910,7 +910,7 @@
 <span class="sd">            The xlets settings handler.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_attrs</span><span class="o">=</span><span class="p">{},</span> <span class="n">widget_kwargs</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_attrs</span><span class="o">=</span><span class="p">{},</span> <span class="n">widget_kwargs</span><span class="o">=</span><span class="p">{}):</span>
             <span class="sd">&quot;&quot;&quot;Initialization.</span>
 
 <span class="sd">            Parameters</span>

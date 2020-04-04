@@ -5,3 +5,4 @@ python\_modules.localized\_help\_utils module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

@@ -5,3 +5,4 @@ python\_modules.locale\_list module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

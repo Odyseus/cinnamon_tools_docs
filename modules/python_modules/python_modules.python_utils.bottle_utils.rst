@@ -1,7 +1,7 @@
-python\_modules.python\_utils.multi\_select module
+python\_modules.python\_utils.bottle\_utils module
 ==================================================
 
-.. automodule:: python_modules.python_utils.multi_select
+.. automodule:: python_modules.python_utils.bottle_utils
    :members:
    :undoc-members:
    :show-inheritance:

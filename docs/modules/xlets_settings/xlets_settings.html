@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -266,6 +266,11 @@ from any other <a class="reference internal" href="xlets_settings.SettingsWidget
 <dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.UnkownWidgetType" title="xlets_settings.exceptions.UnkownWidgetType"><strong>exceptions.UnkownWidgetType</strong></a> -- Inform that the widget type is non existent.</p>
 </dd>
 </dl>
+<dl class="attribute">
+<dt id="xlets_settings.SettingsBox._should_set_main_app">
+<code class="sig-name descname">_should_set_main_app</code><em class="property"> = ['list', 'iconfilechooser', 'applist', 'appchooser']</em><a class="headerlink" href="#xlets_settings.SettingsBox._should_set_main_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="xlets_settings.SettingsBox.on_stack_switcher_changed">
 <code class="sig-name descname">on_stack_switcher_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings.html#SettingsBox.on_stack_switcher_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.SettingsBox.on_stack_switcher_changed" title="Permalink to this definition">¶</a></dt>
@@ -752,6 +757,11 @@ The translated icon context name (for display purposes) at index 0 and the icon 
 <dd class="field-even"><p><a class="reference internal" href="xlets_settings.exceptions.html#xlets_settings.exceptions.MissingRequiredArgument" title="xlets_settings.exceptions.MissingRequiredArgument"><strong>exceptions.MissingRequiredArgument</strong></a> -- Halt execution if any of the required arguments weren't passed.</p>
 </dd>
 </dl>
+<dl class="attribute">
+<dt id="xlets_settings.MainApplication._required_args">
+<code class="sig-name descname">_required_args</code><em class="property"> = {'application_id', 'pages_definition', 'xlet_instance_id', 'xlet_type', 'xlet_uuid'}</em><a class="headerlink" href="#xlets_settings.MainApplication._required_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="xlets_settings.MainApplication.on_gtk_app_info_monitor_changed">
 <code class="sig-name descname">on_gtk_app_info_monitor_changed</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings.html#MainApplication.on_gtk_app_info_monitor_changed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xlets_settings.MainApplication.on_gtk_app_info_monitor_changed" title="Permalink to this definition">¶</a></dt>

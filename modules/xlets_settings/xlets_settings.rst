@@ -5,6 +5,7 @@ xlets\_settings package
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:
 
 Submodules
 ----------

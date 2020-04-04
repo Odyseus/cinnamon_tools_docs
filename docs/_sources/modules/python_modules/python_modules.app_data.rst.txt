@@ -5,3 +5,4 @@ python\_modules.app\_data module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

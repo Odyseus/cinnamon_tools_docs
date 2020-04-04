@@ -5,3 +5,4 @@ file\_chooser\_dialog package
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:
