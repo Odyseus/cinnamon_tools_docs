@@ -19,8 +19,8 @@ Requirements
 
         git clone --recurse-submodules --shallow-submodules <cinnamon_tools_repository_url>
 
-    ``--recurse-submodules`` argument will also clone the sub-modules and all sub-modules that a sub-module might have.
-    ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
+    - ``--recurse-submodules`` argument will also clone the sub-modules and all sub-modules that a sub-module might have.
+    - ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
 
 .. contextual-admonition::
     :context: warning

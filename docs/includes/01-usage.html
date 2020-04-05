@@ -301,7 +301,7 @@
 </div>
 <div class="section" id="app-py-build">
 <span id="how-to-build-xlets-reference"></span><h3>app.py build<a class="headerlink" href="#app-py-build" title="Permalink to this headline">¶</a></h3>
-<p>This command is used to build all or specifics xlets. All xlets found in Cinnamon Tools' repository aren't directly usable, they need to be <em>built</em>. <em>Building</em> an xlet just means that the <em>raw xlet</em> (as found in the repository) will be copied into another location (chosen when performing the building) and a string substitution will be done that will apply a generated UUID (<code class="docutils literal notranslate"><span class="pre">xlet_name&#64;custom_domain_name</span></code>) to all files (files content and file names). It will also compile the <code class="docutils literal notranslate"><span class="pre">gsettings</span></code> files (if an xlet contains such files) and copy files common to all xlets (LICENSE.md, localizations installer script, global modules, etc.).</p>
+<p>This command is used to build all or specific xlets. All xlets found in Cinnamon Tools' repository aren't directly usable, they need to be <em>built</em>. <em>Building</em> an xlet just means that the <em>raw xlet</em> (as found in the repository) will be copied into another location (chosen when performing the building) and a string substitution will be done that will apply a generated UUID (<code class="docutils literal notranslate"><span class="pre">xlet_name&#64;custom_domain_name</span></code>) to all files (files content and file names). It will also compile the <code class="docutils literal notranslate"><span class="pre">gsettings</span></code> files (if an xlet contains such files) and copy files common to all xlets (LICENSE.md, localizations installer script, global modules, etc.).</p>
 <div class="section" id="options">
 <h4>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -332,7 +332,7 @@
 <li><p>It <strong>must not</strong> contain consecutive &quot;.&quot; (period) characters.</p></li>
 <li><p>It <strong>must not</strong> exceed 128 characters.</p></li>
 </ul>
-<p>These rules aren't necessarily standard rules to validate a domain name. But since the domain name is used to generate from files names to GTK+ application IDs, I find it easier to comply with a set of general rules.</p>
+<p>These rules aren't necessarily standard rules to validate a domain name. But since the domain name is used to generate from file names to Gtk+ application IDs, I find it easier to comply with a set of general rules.</p>
 </div>
 </div></blockquote>
 </li>
@@ -342,7 +342,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Example usage: <code class="docutils literal notranslate"><span class="pre">app.py</span> <span class="pre">build</span> <span class="pre">-x</span> <span class="pre">0ArgosForCinnamon</span> <span class="pre">-o</span> <span class="pre">/home/user_name/.local/share/cinnamon</span></code></p></li>
-<li><p>This command will build the Argos for Cinnamon applet directly into the Cinnamon's install location for xlets.</p></li>
+<li><p>This command will build the Argos for Cinnamon applet directly into Cinnamon's install location for xlets.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -482,7 +482,7 @@ Users that want to perform more in depth changes to the xlets or even create the
 <li><p><code class="docutils literal notranslate"><span class="pre">generate_meta_file</span></code>: Generates a unified metadata file with the content of the metadata.json file from all xlets. It also contains extra data for all xlets to facilitate their development.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">create_localized_help</span></code>: Generates the localized <strong>HELP.html</strong> file for all xlets. This file is a standalone HTML file that contains detailed a description and usage instructions for each xlet. It also contains their change logs and list of contributors/mentions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">generate_trans_stats</span></code>: Generates a simple table with information about missing translated strings inside the PO files.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">update_pot_files</span></code>: It re-generates all xlets POT files to reflect the changes made to the translatable strings on them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_pot_files</span></code>: It re-generates all xlets' POT files to reflect the changes made to the translatable strings on them.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">update_spanish_localizations</span></code>: It updates the <strong>es.po</strong> files from all xlets from their respective POT files.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">create_changelogs</span></code>: Generates <em>human readable</em> change logs from the Git history of changes for each xlet.</p></li>
 </ul>

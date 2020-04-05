@@ -27,11 +27,11 @@ Documentation building requirements
 
 **Note:** Deep cloning required.
 
-Cinnamon theme building from Sass sources
------------------------------------------
+Cinnamon theme building from |Sass| sources
+-------------------------------------------
 
 - **Python 3.5+**
-- **sass**: Either of the following implementations can be used to parse Sass files.
+- **sass**: Either of the following implementations can be used to parse |Sass| files.
 
     + Dart Sass: `See installation instructions <https://github.com/sass/dart-sass/releases>`__.
     + SassC: Install from your distribution repositories.

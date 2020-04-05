@@ -56,7 +56,7 @@ This command starts a |CLI| menu from which xlets and themes can be built intera
 app.py build
 ------------
 
-This command is used to build all or specifics xlets. All xlets found in Cinnamon Tools' repository aren't directly usable, they need to be *built*. *Building* an xlet just means that the *raw xlet* (as found in the repository) will be copied into another location (chosen when performing the building) and a string substitution will be done that will apply a generated UUID (``xlet_name@custom_domain_name``) to all files (files content and file names). It will also compile the ``gsettings`` files (if an xlet contains such files) and copy files common to all xlets (LICENSE.md, localizations installer script, global modules, etc.).
+This command is used to build all or specific xlets. All xlets found in Cinnamon Tools' repository aren't directly usable, they need to be *built*. *Building* an xlet just means that the *raw xlet* (as found in the repository) will be copied into another location (chosen when performing the building) and a string substitution will be done that will apply a generated UUID (``xlet_name@custom_domain_name``) to all files (files content and file names). It will also compile the ``gsettings`` files (if an xlet contains such files) and copy files common to all xlets (LICENSE.md, localizations installer script, global modules, etc.).
 
 Options
 ^^^^^^^
@@ -90,7 +90,7 @@ Options
             - It **must not** contain consecutive "." (period) characters.
             - It **must not** exceed 128 characters.
 
-            These rules aren't necessarily standard rules to validate a domain name. But since the domain name is used to generate from files names to GTK+ application IDs, I find it easier to comply with a set of general rules.
+            These rules aren't necessarily standard rules to validate a domain name. But since the domain name is used to generate from file names to Gtk+ application IDs, I find it easier to comply with a set of general rules.
 
 
 .. only:: html
@@ -100,7 +100,7 @@ Options
 - ``-o <dir>`` or ``--output=<dir>``: The output directory that will be used to save the built xlets. If not specified, the default storage location will be used.
 
     + Example usage: ``app.py build -x 0ArgosForCinnamon -o /home/user_name/.local/share/cinnamon``
-    + This command will build the Argos for Cinnamon applet directly into the Cinnamon's install location for xlets.
+    + This command will build the Argos for Cinnamon applet directly into Cinnamon's install location for xlets.
 
     .. only:: html
 
@@ -251,7 +251,7 @@ Sub-commands
 - ``generate_meta_file``: Generates a unified metadata file with the content of the metadata.json file from all xlets. It also contains extra data for all xlets to facilitate their development.
 - ``create_localized_help``: Generates the localized **HELP.html** file for all xlets. This file is a standalone HTML file that contains detailed a description and usage instructions for each xlet. It also contains their change logs and list of contributors/mentions.
 - ``generate_trans_stats``: Generates a simple table with information about missing translated strings inside the PO files.
-- ``update_pot_files``: It re-generates all xlets POT files to reflect the changes made to the translatable strings on them.
+- ``update_pot_files``: It re-generates all xlets' POT files to reflect the changes made to the translatable strings on them.
 - ``update_spanish_localizations``: It updates the **es.po** files from all xlets from their respective POT files.
 - ``create_changelogs``: Generates *human readable* change logs from the Git history of changes for each xlet.
 

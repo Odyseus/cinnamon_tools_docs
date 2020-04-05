@@ -86,7 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-development-notes.html">Development notes</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Code styling/guidelines</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#css-sass">CSS/<abbr title="Syntactically Awesome Style Sheets">Sass</abbr></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#css-sass"><abbr title="Cascading Style Sheets">CSS</abbr>/<abbr title="Syntactically Awesome Style Sheets">Sass</abbr></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#javascript">JavaScript</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python">Python</a></li>
 </ul>
@@ -169,12 +169,12 @@
   <div class="section" id="code-styling-guidelines">
 <h1>Code styling/guidelines<a class="headerlink" href="#code-styling-guidelines" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="css-sass">
-<h2>CSS/<abbr title="Syntactically Awesome Style Sheets">Sass</abbr><a class="headerlink" href="#css-sass" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p>CSS files that where generated from <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> sources are exempt from any styling rules. Trying to configure the output of <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> generated files is like trying to teach to talk to a rock!!! ¬¬</p></li>
-<li><p>Styling rules for CSS files:</p>
+<h2><abbr title="Cascading Style Sheets">CSS</abbr>/<abbr title="Syntactically Awesome Style Sheets">Sass</abbr><a class="headerlink" href="#css-sass" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><abbr title="Cascading Style Sheets">CSS</abbr> files that where generated from <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> sources are exempt from any styling rules. Trying to configure the output of <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> generated files is like trying to teach to talk to a rock!!! ¬¬</p></li>
+<li><p>Styling rules for <abbr title="Cascading Style Sheets">CSS</abbr> files:</p>
 <blockquote>
-<div><ol class="loweralpha simple">
+<div><ul class="simple">
 <li><p>4 spaces indentation.</p></li>
 <li><p>Open bracket same line as rule.</p></li>
 <li><p>Space before open bracket.</p></li>
@@ -188,37 +188,35 @@
 <li><p>Spaces after commas within rgba(), hsla(), or rect() values. If I couldn't read a the freaking parenthesis, I would go and program some garbage in C-sharp!!!</p></li>
 <li><p>Prefix property values or color parameters with a leading zero (e.g., 0.5 instead of .5 and -0.5px instead of -.5px).</p></li>
 <li><p>Do not specify units for zero values, e.g., <code class="docutils literal notranslate"><span class="pre">margin:</span> <span class="pre">0;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">margin:</span> <span class="pre">0px;</span></code>.</p></li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
-</ol>
-<ol class="arabic" start="2">
 <li><p>Styling rules for <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files:</p>
 <blockquote>
-<div><ol class="loweralpha simple">
-<li><p>Same as CSS files.</p></li>
+<div><ul class="simple">
+<li><p>Same as <abbr title="Cascading Style Sheets">CSS</abbr> files.</p></li>
 <li><p>For the rest, don't even bother. Follow the rules forced by the <em>code formatter</em> in use...until it breaks due to an update that introduced <em>new features</em>. Then follow the rules forced by default by the following <em>code formatter</em> that works. It is absolutely pointless to rely on anything that it is based on web technologies and designed for and/or by web developers (in the span of just six weeks it will be broken again). ¬¬</p></li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
-</ol>
+</ul>
 </div>
 <div class="section" id="javascript">
 <h2>JavaScript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h2>
-<p>This is an abhorrent/always-evolving/never-finished language with an abhorrent release cycle whose only goal seems to be the destruction of software development (cursed the day that web developers started contaminating the software industry!!!). Guidelines will never have a chance to survive the countless stupid implementations by the countless JS engines.</p>
-<ol class="arabic">
-<li><p>Until the <em>geniuses</em> at Mozilla and/or Gnome decide to FINALLY agree in a common AND unique implementation of JS classes, KEEP using <em>prototypes</em>.</p></li>
+<p>This is an abhorrent/always-evolving/never-finished language with an abhorrent release cycle whose only goal seems to be the destruction of software development (cursed the day that web developers started contaminating the software industry!!!). Guidelines will never have a chance to survive the countless stupid implementations by the countless <abbr title="JavaScript">JS</abbr> engines.</p>
+<ul>
+<li><p>Until the <em>geniuses</em> at Mozilla and/or Gnome decide to FINALLY agree in a common AND unique implementation of <abbr title="JavaScript">JS</abbr> classes, KEEP using <em>prototypes</em>.</p></li>
 <li><p>To avoid strict warnings triggered by SpiderMonkey:</p>
 <blockquote>
-<div><ol class="loweralpha simple">
+<div><ul class="simple">
 <li><p>Define all symbols that are meant to be exported with <strong>var</strong>. Use <strong>let</strong> or <strong>const</strong> to define symbols that are going to be used only at a module context.</p></li>
 <li><p>All properties should be defined.</p></li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
 <li><p>Code styling:</p>
 <blockquote>
-<div><ol class="loweralpha">
+<div><ul>
 <li><p>Imports defined with PascalCase whether they are defined with <strong>let</strong>, <strong>var</strong> or <strong>const</strong>.</p></li>
 <li><p>Constants defined with uppercase and low dashes.</p></li>
 <li><p>Variables/Functions defined with camelCase.</p></li>
@@ -227,41 +225,41 @@
 <li><p>End simple statements with a semicolon.</p></li>
 <li><p>Rules for complex (compound) statements:</p>
 <blockquote>
-<div><ol class="arabic simple" start="0">
+<div><ul class="simple">
 <li><p>Put opening bracket at the end of the first line.</p></li>
 <li><p>Use one space before the opening bracket.</p></li>
 <li><p>Put closing bracket on a new line, without leading spaces.</p></li>
 <li><p>Do not end complex statement with a semicolon.</p></li>
 <li><p>Always use brackets, no exceptions.</p></li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
 <li><p>General rules for object definitions:</p>
 <blockquote>
-<div><ol class="arabic simple" start="0">
+<div><ul class="simple">
 <li><p>Place the opening bracket on the same line as the object name.</p></li>
 <li><p>Use colon plus one space between each property and its value.</p></li>
 <li><p>Use quotes around string values, not around numeric values.</p></li>
 <li><p>Do not add a comma after the last property-value pair.</p></li>
 <li><p>Place the closing bracket on a new line, without leading spaces.</p></li>
 <li><p>Always end an object definition with a semicolon.</p></li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
-</ol>
+</ul>
 </div></blockquote>
 </li>
-</ol>
+</ul>
 </div>
 <div class="section" id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>THERE IS ONLY PYTHON 3!!! NOTHING ELSE EXISTS!!!</p></li>
 <li><p>The minimum Python 3 version supported is the one shipped with Ubuntu LTS versions until <abbr title="end-of-life">EOL</abbr>.</p></li>
 <li><p>The maximum Python 3 version supported is the one considered by Python developers as stable.</p></li>
 <li><p>THERE IS ONLY PYTHON 3!!! NOTHING ELSE EXISTS!!!</p></li>
 <li><p>REPEAT PREVIOUS UNTIL THE END OF TIMES!!!</p></li>
-</ol>
+</ul>
 </div>
 </div>
 
