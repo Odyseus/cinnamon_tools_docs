@@ -39,26 +39,20 @@
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="780">
-            Python
-        </text>
+              textLength="780">Python</text>
         <text x="510"
               y="260"
               transform="scale(.1)"
-              textLength="780">
-            Python
-        </text>
+              textLength="780">Python</text>
         <text x="1330"
               y="280"
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="540">
-            3.7+
-        </text>
+              textLength="540">3.5+</text>
         <text x="1330"
               y="260"
               transform="scale(.1)"
-              textLength="540">3.7+</text>
+              textLength="540">3.5+</text>
     </g>
 </svg>

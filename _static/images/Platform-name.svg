@@ -39,28 +39,20 @@
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="940">
-            Platform
-        </text>
+              textLength="940">Platform</text>
         <text x="590"
               y="260"
               transform="scale(.1)"
-              textLength="940">
-            Platform
-        </text>
+              textLength="940">Platform</text>
         <text x="1810"
               y="280"
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="1180">
-            GNU/Linux
-        </text>
+              textLength="1180">GNU/Linux</text>
         <text x="1810"
               y="260"
               transform="scale(.1)"
-              textLength="1180">
-            GNU/Linux
-        </text>
+              textLength="1180">GNU/Linux</text>
     </g>
 </svg>

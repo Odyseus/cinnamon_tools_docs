@@ -25,7 +25,7 @@
     <g clip-path="url(#a)">
         <path fill="#555"
               d="M0 0h130v36H0z" />
-        <path fill="#439cf7"
+        <path fill="#6fab34"
               d="M130 0h74v36H130z" />
         <path fill="url(#b)"
               d="M0 0h204v36H0z" />
@@ -39,26 +39,20 @@
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="1100">
-            Cinnamon
-        </text>
+              textLength="1100">Cinnamon</text>
         <text x="670"
               y="260"
               transform="scale(.1)"
-              textLength="1100">
-            Cinnamon
-        </text>
+              textLength="1100">Cinnamon</text>
         <text x="1650"
               y="280"
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="540">
-            4.4+
-        </text>
+              textLength="540">3.0+</text>
         <text x="1650"
               y="260"
               transform="scale(.1)"
-              textLength="540">4.4+</text>
+              textLength="540">3.0+</text>
     </g>
 </svg>
