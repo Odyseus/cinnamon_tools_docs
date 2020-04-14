@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="172"
+     height="36">
+    <linearGradient id="b"
+                    x2="0"
+                    y2="100%">
+        <stop offset="0"
+              stop-color="#fff"
+              stop-opacity=".7" />
+        <stop offset=".1"
+              stop-color="#aaa"
+              stop-opacity=".1" />
+        <stop offset=".9"
+              stop-opacity=".3" />
+        <stop offset="1"
+              stop-opacity=".5" />
+    </linearGradient>
+    <clipPath id="a">
+        <rect width="172"
+              height="36"
+              rx="4"
+              fill="#fff" />
+    </clipPath>
+    <g clip-path="url(#a)">
+        <path fill="#555"
+              d="M0 0h98v36H0z" />
+        <path fill="#ffc91e"
+              d="M98 0h74v36H98z" />
+        <path fill="url(#b)"
+              d="M0 0h172v36H0z" />
+    </g>
+    <g fill="#fff"
+       text-anchor="middle"
+       font-family="sans-serif"
+       font-size="220">
+        <text x="510"
+              y="280"
+              fill="#010101"
+              fill-opacity=".3"
+              transform="scale(.1)"
+              textLength="780">
+            Python
+        </text>
+        <text x="510"
+              y="260"
+              transform="scale(.1)"
+              textLength="780">
+            Python
+        </text>
+        <text x="1330"
+              y="280"
+              fill="#010101"
+              fill-opacity=".3"
+              transform="scale(.1)"
+              textLength="540">
+            3.7+
+        </text>
+        <text x="1330"
+              y="260"
+              transform="scale(.1)"
+              textLength="540">3.7+</text>
+    </g>
+</svg>
