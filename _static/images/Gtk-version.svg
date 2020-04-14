@@ -39,20 +39,20 @@
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="290">Gtk+</text>
+              textLength="580">Gtk+</text>
         <text x="410"
               y="260"
               transform="scale(.1)"
-              textLength="290">Gtk+</text>
+              textLength="580">Gtk+</text>
         <text x="1190"
               y="280"
               fill="#010101"
               fill-opacity=".3"
               transform="scale(.1)"
-              textLength="330">3.18+</text>
+              textLength="660">3.18+</text>
         <text x="1190"
               y="260"
               transform="scale(.1)"
-              textLength="330">3.18+</text>
+              textLength="660">3.18+</text>
     </g>
 </svg>
