@@ -184,7 +184,7 @@
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">sort_combo_options</span>
 
 <span class="c1"># NOTE: JEESH!!! I hate import *!!!</span>
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># noqa</span>
     <span class="c1"># NOTE: Defined in this module.</span>
     <span class="s2">&quot;JSONSettingsHandler&quot;</span><span class="p">,</span>
     <span class="s2">&quot;JSONSettingsRevealer&quot;</span><span class="p">,</span>
@@ -635,7 +635,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">do_key_update</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping key </span><span class="si">%s</span><span class="s2">: the key does not exist in </span><span class="si">%s</span><span class="s2"> or has no value&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">filepath</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Skipping key </span><span class="si">%s</span><span class="s2">: the key does not exist in </span><span class="si">%s</span><span class="s2"> or has no value&quot;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">filepath</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">save_settings</span><span class="p">()</span></div>
 

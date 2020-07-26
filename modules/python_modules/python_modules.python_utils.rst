@@ -12,6 +12,7 @@ Subpackages
 
 .. toctree::
 
+   python_modules.python_utils.case_conversion
    python_modules.python_utils.schemas
 
 Submodules
@@ -25,6 +26,7 @@ Submodules
    python_modules.python_utils.cmd_utils
    python_modules.python_utils.exceptions
    python_modules.python_utils.file_utils
+   python_modules.python_utils.fix_imports
    python_modules.python_utils.git_utils
    python_modules.python_utils.hash_utils
    python_modules.python_utils.json_schema_utils
