@@ -33,8 +33,8 @@ If one is *lucky*, Cinnamon will crash and start the :ref:`"fallback mode" <fall
 Step 1 - Exit the X desktop session
 -----------------------------------
 
-TL;DR;
-~~~~~~
+Summary
+~~~~~~~
 
 1. :kbd:`Control` + :kbd:`Alt` + :kbd:`F1` to go to TTY1. :ref:`Can't switch TTYs? <cannot-switch-ttys-reference>`.
 2. Log in.
@@ -48,8 +48,8 @@ The goal here is to safely exit the X desktop session without closing any of the
 Step 2 - Perform recovery tasks
 -------------------------------
 
-TL;DR;
-~~~~~~
+Summary
+~~~~~~~
 
 1. Terminate the ``cinnamon`` process:
 
@@ -89,8 +89,8 @@ Details
 Step 3 - Go back to the X desktop session
 -----------------------------------------
 
-TL;DR;
-~~~~~~
+Summary
+~~~~~~~
 
 1. Start Cinnamon with ``DISPLAY=:0 cinnamon-launcher &``.
 2. Go back to the graphical TTY with :kbd:`Control` + :kbd:`Alt` + :kbd:`F7`.
@@ -107,7 +107,7 @@ The goal here is to go back to the X desktop session that was previously frozen.
 
 In the case that Cinnamon started normally, it is time to gather information and report the issue/s to the xlet/s author/s.
 
-In the case that Cinnamon started and froze, more extreme measures will have to be taken. Repeat the actions described in steps 1 through 3. While on step 2 (**Perform recovery tasks**), one could reset all the enabled xlets or even try by reseting all Cinnamon settings.
+In the case that Cinnamon started and froze, more extreme measures will have to be taken. Repeat the actions described in steps 1 through 3. While on step 2 (**Perform recovery tasks**), one could reset all the enabled xlets or even try reseting all Cinnamon settings.
 
 1. ``gsettings reset org.cinnamon enabled-desklets``: This will remove all desklets from the desktop.
 2. ``gsettings reset org.cinnamon enabled-applets``: This will remove all third-party applets from the panel, leaving only the ones that came by default with Cinnamon.
@@ -149,6 +149,38 @@ Reload Gtk+ 3 theme
     1. A developer should be using ``gtk3-widget-factory`` (program provided by the ``gtk-3-examples`` package on Debian based distributions). This program exemplifies every single Gtk+ 3 widget.
     2. A developer should know that a Gtk program can be started with an specific theme that not necessarily needs to be the currently used theme. Example: ``GTK_THEME=Adwaita gtk3-widget-factory``.
     3. A developer can test several themes at the same time without the need to change the global theme nor to restart an application. Running ``GTK_DEBUG=interactive gtk3-widget-factory`` will launch the ``gtk3-widget-factory`` program *"attached"* to the **Gtk+ 3 inspector**. In the **Visual** tab of the **Gtk+ 3 inspector**, one can switch the Gtk+ 3 theme of the application *"attached"* to it.
+
+Gtk Inspector
+=============
+
+- The inspector can be launched attached to a Gtk application with the command ``GTK_DEBUG=interactive application``.
+- To be able to launch the inspector with keyboard shortcuts (useful to inspect menus) , the package ``libgtk-3-dev`` (Debian-naming) or ``gtk3-devel`` (Fedora-naming) needs to be installed and the following **gsetting** needs to be activated:
+
+    .. code-block:: shell
+
+        gsettings set org.gtk.Settings.Debug enable-inspector-keybinding true
+
+- Known keybindings:
+
+    + :kbd:`Control` + :kbd:`Shift` + :kbd:`D`: Open Gtk inspector attached to the currently focused application.
+    + :kbd:`Control` + :kbd:`Shift` + :kbd:`I`: Inspect the widget directly bellow the mouse cursor.
+
+Modifying a shell ``$PATH``
+===========================
+
+- ``PATH`` is an environmental variable in Linux and other Unix-like operating systems that tells the shell which directories to search for executable files (i.e., ready-to-run programs) in response to commands issued by a user.
+- When a terminal emulator is opened and a shell is instantiated, a shell initialization file is executed in which one can extend the ``PATH`` environmental variable.
+- Each shell has its own initialization file:
+
+    + Bash: ``~/.bashrc``
+    + Zsh: ``~/.zshrc``
+    + Any other shell: |RTFM|
+- Add ``export PATH="/new_directory:$PATH"`` anywhere on the shell initialization file, where **new_directory** is the absolute path to the directory one wants to add.
+- Restart any terminal emulator that was opened prior to the edit for the new ``PATH`` environmental variable to take effect.
+
+.. note::
+
+    Other shells may have other mechanisms to expand the ``PATH`` environmental variable. Just |RTFM|.
 
 General notes
 =============

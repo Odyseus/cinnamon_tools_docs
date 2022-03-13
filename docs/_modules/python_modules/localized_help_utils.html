@@ -1,65 +1,29 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>python_modules.localized_help_utils &mdash; Cinnamon Tools  documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,17 +31,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
@@ -88,70 +42,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
       <li>python_modules.localized_help_utils</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for python_modules.localized_help_utils</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/python3</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;Utils for the localized_help_creator module.</span>
+<span class="sd">&quot;&quot;&quot;Utilities for the localized_help_creator module.</span>
 
 <span class="sd">.. note::</span>
 
@@ -162,10 +80,14 @@
 <span class="sd">----------</span>
 <span class="sd">BOXED_CONTAINER : str</span>
 <span class="sd">    Boxed container template.</span>
+<span class="sd">COLLAPSIBLE : str</span>
+<span class="sd">    Collapsible container template.</span>
 <span class="sd">HTML_DOC : str</span>
 <span class="sd">    HTML document template.</span>
 <span class="sd">LOCALE_SECTION : str</span>
 <span class="sd">    Localized section template.</span>
+<span class="sd">OLD_CHANGELOGS : list</span>
+<span class="sd">    List of old changelogs.</span>
 <span class="sd">OPTION : str</span>
 <span class="sd">    Option tag template.</span>
 <span class="sd">README_DOC : str</span>
@@ -189,98 +111,109 @@
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="o">*</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)))</span>
 
 
-<span class="n">HTML_DOC</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="n">HTML_DOC</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
 <span class="s2">&lt;html&gt;</span>
 
-<span class="s2">&lt;head&gt;</span>
-<span class="s2">    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span>
-<span class="s2">    &lt;title&gt;</span><span class="si">{title}</span><span class="s2">&lt;/title&gt;</span>
-<span class="s2">    &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;./icon.png&quot;&gt;</span>
-<span class="s2">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
-<span class="s2">    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;./assets/css/bootstrap.min.css&quot;&gt;</span>
-<span class="s2">    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;./assets/css/bootstrap-tweaks.css&quot;&gt;</span>
-<span class="s2">    &lt;style type=&quot;text/css&quot;&gt;</span>
-<span class="si">{css_custom}</span><span class="s2"></span>
-<span class="s2">    &lt;/style&gt;</span>
-<span class="s2">&lt;/head&gt;</span>
+<span class="s2">    &lt;head&gt;</span>
+<span class="s2">        &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</span>
+<span class="s2">        &lt;title&gt;</span><span class="se">{{</span><span class="s2">title</span><span class="se">}}</span><span class="s2">&lt;/title&gt;</span>
+<span class="s2">        &lt;link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;./icon.png&quot;&gt;</span>
+<span class="s2">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s2">        &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;./assets/css/bootstrap.min.css&quot;&gt;</span>
+<span class="s2">        &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;./assets/css/bootstrap-tweaks.css&quot;&gt;</span>
+<span class="s2">        &lt;style type=&quot;text/css&quot;&gt;</span>
+<span class="se">{{</span><span class="s2">css_custom</span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">        &lt;/style&gt;</span>
+<span class="s2">    &lt;/head&gt;</span>
 
-<span class="s2">&lt;body&gt;</span>
-<span class="s2">&lt;div id=&quot;mainarea&quot;&gt;</span>
-<span class="s2">    &lt;nav class=&quot;text-bold py-0 navbar navbar-expand-sm navbar-dark bg-gradient-primary fixed-top&quot; role=&quot;navigation&quot;&gt;</span>
-<span class="s2">        &lt;div class=&quot;container-fluid&quot;&gt;</span>
-<span class="s2">            &lt;div class=&quot;nav navbar-nav mr-auto&quot;&gt;</span>
-<span class="s2">                &lt;!-- The preventDefault() calls are to avoid changing the address in the address bar. --&gt;</span>
-<span class="s2">                &lt;a id=&quot;nav-xlet-help&quot; class=&quot;navbar-brand nav-link&quot; onclick=&quot;event.preventDefault();&quot; href=&quot;#xlet-help&quot;&gt;Help&lt;/a&gt;</span>
-<span class="s2">                &lt;a id=&quot;nav-xlet-contributors&quot; class=&quot;navbar-brand nav-link&quot; onclick=&quot;event.preventDefault();&quot; href=&quot;#xlet-contributors&quot;&gt;Contributors&lt;/a&gt;</span>
-<span class="s2">                &lt;a id=&quot;nav-xlet-changelog&quot; class=&quot;navbar-brand nav-link&quot; onclick=&quot;event.preventDefault();&quot; href=&quot;#xlet-changelog&quot;&gt;Changelog&lt;/a&gt;</span>
-<span class="s2">            &lt;/div&gt;</span>
-<span class="s2">            &lt;form class=&quot;form-inline&quot;&gt;</span>
-<span class="s2">                &lt;div class=&quot;input-group input-group-sm&quot;&gt;</span>
-<span class="s2">                    &lt;div class=&quot;input-group-prepend&quot;&gt;</span>
-<span class="s2">                        &lt;span class=&quot;input-group-text&quot; for=&quot;localization-switch&quot;&gt;🌐&lt;/span&gt;</span>
+<span class="s2">    &lt;body&gt;</span>
+<span class="s2">        &lt;div id=&quot;mainarea&quot;&gt;</span>
+<span class="s2">            &lt;nav id=&quot;main-navbar&quot;</span>
+<span class="s2">                 class=&quot;navbar navbar-expand-sm navbar-dark bg-primary fixed-top py-0&quot;</span>
+<span class="s2">                 role=&quot;navigation&quot;&gt;</span>
+<span class="s2">                &lt;div class=&quot;container-fluid&quot;&gt;</span>
+<span class="s2">                    &lt;div class=&quot;nav navbar-nav mr-auto&quot;&gt;</span>
+<span class="s2">                        &lt;a id=&quot;nav-xlet-help&quot;</span>
+<span class="s2">                           class=&quot;nav-link&quot;</span>
+<span class="s2">                           onclick=&quot;event.preventDefault();&quot;</span>
+<span class="s2">                           href=&quot;#xlet-help&quot;&gt;Help&lt;/a&gt;</span>
+<span class="s2">                        &lt;a id=&quot;nav-xlet-contributors&quot;</span>
+<span class="s2">                           class=&quot;nav-link&quot;</span>
+<span class="s2">                           onclick=&quot;event.preventDefault();&quot;</span>
+<span class="s2">                           href=&quot;#xlet-contributors&quot;&gt;Contributors&lt;/a&gt;</span>
+<span class="s2">                        &lt;a id=&quot;nav-xlet-changelogs&quot;</span>
+<span class="s2">                           class=&quot;nav-link&quot;</span>
+<span class="s2">                           onclick=&quot;event.preventDefault();&quot;</span>
+<span class="s2">                           href=&quot;#xlet-changelogs&quot;&gt;Changelogs&lt;/a&gt;</span>
 <span class="s2">                    &lt;/div&gt;</span>
-<span class="s2">                    &lt;select class=&quot;custom-select custom-select-sm text-bold&quot; id=&quot;localization-switch&quot;&gt;</span>
-<span class="si">{options}</span><span class="s2"></span>
-<span class="s2">                    &lt;/select&gt;</span>
+<span class="s2">                    &lt;form&gt;</span>
+<span class="s2">                        &lt;div class=&quot;input-group input-group-sm&quot;&gt;</span>
+<span class="s2">                            &lt;span class=&quot;input-group-text&quot;</span>
+<span class="s2">                                  id=&quot;localization-switch-image&quot;&gt;🌐&lt;/span&gt;</span>
+<span class="s2">                            &lt;select class=&quot;form-select form-select-sm&quot;</span>
+<span class="s2">                                    id=&quot;localization-switch&quot;</span>
+<span class="s2">                                    aria-describedby=&quot;localization-switch-image&quot;&gt;</span>
+<span class="se">{{</span><span class="s2">options</span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">                            &lt;/select&gt;</span>
+<span class="s2">                        &lt;/div&gt;</span>
+<span class="s2">                    &lt;/form&gt;</span>
 <span class="s2">                &lt;/div&gt;</span>
-<span class="s2">            &lt;/form&gt;</span>
+<span class="s2">            &lt;/nav&gt;</span>
+<span class="s2">            &lt;div id=&quot;no-js-main&quot;</span>
+<span class="s2">                 class=&quot;alert alert-warning mx-5&quot;</span>
+<span class="s2">                 role=&quot;alert&quot;&gt;</span>
+<span class="s2">                &lt;p&gt;&lt;strong&gt;Oh snap! This page needs JavaScript enabled to display correctly.&lt;/strong&gt;&lt;/p&gt;</span>
+<span class="s2">                &lt;p&gt;&lt;strong&gt;This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.&lt;/strong&gt;&lt;/p&gt;</span>
+<span class="s2">                &lt;p&gt;&lt;strong&gt;There are no tracking services of any kind and never will be (at least, not from my side).&lt;/strong&gt;&lt;/p&gt;</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;span id=&quot;xlet-help&quot;&gt;&lt;/span&gt;</span>
+<span class="s2">            &lt;div class=&quot;container boxed my-3 py-3&quot;&gt;</span>
+<span class="se">{{</span><span class="s2">sections</span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;span id=&quot;xlet-contributors&quot;&gt;&lt;/span&gt;</span>
+<span class="se">{{</span><span class="s2">contributors</span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">            &lt;span id=&quot;xlet-changelogs&quot;&gt;&lt;/span&gt;</span>
+<span class="se">{{</span><span class="s2">changelog</span><span class="se">}}</span><span class="s2"></span>
 <span class="s2">        &lt;/div&gt;</span>
-<span class="s2">    &lt;/nav&gt;</span>
-<span class="s2">&lt;span id=&quot;xlet-help&quot;&gt;</span>
-<span class="s2">&lt;div class=&quot;container boxed my-3 py-3&quot;&gt;</span>
-<span class="s2">&lt;noscript&gt;</span>
-<span class="s2">    &lt;div class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt;</span>
-<span class="s2">        &lt;p&gt;&lt;strong&gt;Oh snap! This page needs JavaScript enabled to display correctly.&lt;/strong&gt;&lt;/p&gt;</span>
-<span class="s2">        &lt;p&gt;&lt;strong&gt;This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.&lt;/strong&gt;&lt;/p&gt;</span>
-<span class="s2">        &lt;p&gt;&lt;strong&gt;There are no tracking services of any kind and never will be (at least, not from my side).&lt;/strong&gt;&lt;/p&gt;</span>
-<span class="s2">    &lt;/div&gt;</span>
-<span class="s2">    &lt;!-- .alert.alert-danger --&gt;</span>
-<span class="s2">&lt;/noscript&gt;</span>
-<span class="si">{sections}</span><span class="s2"></span>
-<span class="s2">&lt;/div&gt; &lt;!-- .container.boxed --&gt;</span>
-<span class="s2">&lt;span id=&quot;xlet-contributors&quot;&gt;</span>
-<span class="si">{contributors}</span><span class="s2"></span>
-<span class="s2">&lt;span id=&quot;xlet-changelog&quot;&gt;</span>
-<span class="si">{changelog}</span><span class="s2"></span>
-<span class="s2">&lt;/div&gt; &lt;!-- #mainarea --&gt;</span>
-<span class="s2">&lt;!--Footer--&gt;</span>
-<span class="s2">&lt;footer class=&quot;text-bold text-white navbar-dark bg-gradient-primary px-3 pt-4 mt-4&quot;&gt;</span>
-<span class="s2">    &lt;!--Footer Links--&gt;</span>
-<span class="s2">    &lt;div class=&quot;container-fluid text-left&quot;&gt;</span>
-<span class="s2">        &lt;ul class=&quot;list-unstyled&quot;&gt;</span>
-<span class="s2">            &lt;li&gt;</span>
-<span class="s2">                &lt;p&gt;Page created with &lt;a href=&quot;https://getbootstrap.com&quot;&gt;Bootstrap&lt;/a&gt;.&lt;/p&gt;</span>
-<span class="s2">            &lt;/li&gt;</span>
-<span class="s2">            &lt;li&gt;</span>
-<span class="s2">                &lt;p&gt;Boostrap theme created with &lt;a href=&quot;https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator&quot;&gt;Bootstrap Theme Generator&lt;/a&gt; and based on &lt;a href=&quot;https://bootswatch.com&quot;&gt;Bootswatch&lt;/a&gt;&#39;s &lt;a href=&quot;https://bootswatch.com/flatly&quot;&gt;Flatly theme&lt;/a&gt;.&lt;/p&gt;</span>
-<span class="s2">            &lt;/li&gt;</span>
-<span class="s2">            &lt;li&gt;</span>
-<span class="s2">                &lt;p&gt;&lt;a href=&quot;https://github.com/julienetie/smooth-scroll&quot;&gt;Smooth Scroll plugin&lt;/a&gt; provided by &lt;a href=&quot;https://github.com/julienetie&quot;&gt;Julien Etienne&lt;/a&gt;.&lt;/p&gt;</span>
-<span class="s2">            &lt;/li&gt;</span>
-<span class="s2">        &lt;/ul&gt;</span>
-<span class="s2">    &lt;/div&gt;</span>
-<span class="s2">    &lt;!--/.Footer Links--&gt;</span>
-<span class="s2">    &lt;!--Copyright--&gt;</span>
-<span class="s2">    &lt;div class=&quot;text-center py-3&quot;&gt;</span>
-<span class="s2">        &lt;div class=&quot;container-fluid&quot;&gt;</span>
-<span class="s2">            © 2016-</span><span class="si">%s</span><span class="s2"> &lt;a href=&quot;</span><span class="si">%s</span><span class="s2">&quot;&gt;Odyseus&lt;/a&gt;</span>
-<span class="s2">        &lt;/div&gt;</span>
-<span class="s2">    &lt;/div&gt;</span>
-<span class="s2">    &lt;!--/.Copyright--&gt;</span>
-<span class="s2">&lt;/footer&gt;</span>
-<span class="s2">&lt;!--/.Footer--&gt;</span>
-<span class="s2">&lt;script type=&quot;text/javascript&quot; defer src=&quot;./assets/js/localizations-handler.min.js&quot;&gt;&lt;/script&gt;</span>
-<span class="s2">&lt;script type=&quot;text/javascript&quot;&gt;</span>
-<span class="si">{js_custom}</span><span class="s2"></span>
-<span class="s2">&lt;/script&gt;</span>
-<span class="s2">&lt;/body&gt;</span>
+<span class="s2">        &lt;footer class=&quot;fw-bold text-white navbar-dark bg-primary px-3 pt-4 mt-4&quot;&gt;</span>
+<span class="s2">            &lt;div class=&quot;container-fluid text-left&quot;&gt;</span>
+<span class="s2">                &lt;ul class=&quot;list-unstyled&quot;&gt;</span>
+<span class="s2">                    &lt;li&gt;</span>
+<span class="s2">                        &lt;p&gt;Page created with &lt;a href=&quot;https://getbootstrap.com&quot;&gt;Bootstrap&lt;/a&gt;.&lt;/p&gt;</span>
+<span class="s2">                    &lt;/li&gt;</span>
+<span class="s2">                    &lt;li&gt;</span>
+<span class="s2">                        &lt;p&gt;Boostrap theme created with &lt;a href=&quot;https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator&quot;&gt;Bootstrap Theme Generator&lt;/a&gt; and based on &lt;a href=&quot;https://bootswatch.com&quot;&gt;Bootswatch&lt;/a&gt;&#39;s &lt;a href=&quot;https://bootswatch.com/flatly&quot;&gt;Flatly theme&lt;/a&gt;.&lt;/p&gt;</span>
+<span class="s2">                    &lt;/li&gt;</span>
+<span class="s2">                    &lt;li&gt;</span>
+<span class="s2">                        &lt;p&gt;&lt;a href=&quot;https://github.com/julienetie/smooth-scroll&quot;&gt;Smooth Scroll plugin&lt;/a&gt; provided by &lt;a href=&quot;https://github.com/julienetie&quot;&gt;Julien Etienne&lt;/a&gt;.&lt;/p&gt;</span>
+<span class="s2">                    &lt;/li&gt;</span>
+<span class="s2">                &lt;/ul&gt;</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">            &lt;div class=&quot;text-center py-3&quot;&gt;</span>
+<span class="s2">                &lt;div class=&quot;container-fluid&quot;&gt;</span>
+<span class="s2">                    © 2016-</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s2"> &lt;a href=&quot;</span><span class="si">{</span><span class="n">app_data</span><span class="o">.</span><span class="n">URLS</span><span class="p">[</span><span class="s2">&quot;repo&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;&gt;Odyseus&lt;/a&gt;</span>
+<span class="s2">                &lt;/div&gt;</span>
+<span class="s2">            &lt;/div&gt;</span>
+<span class="s2">        &lt;/footer&gt;</span>
+<span class="s2">        &lt;script type=&quot;text/javascript&quot; defer src=&quot;./assets/js/main.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">        &lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="se">{{</span><span class="s2">js_custom</span><span class="se">}}</span><span class="s2"></span>
+<span class="s2">        &lt;/script&gt;</span>
+<span class="s2">    &lt;/body&gt;</span>
+
 <span class="s2">&lt;/html&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
-       <span class="n">app_data</span><span class="o">.</span><span class="n">URLS</span><span class="p">[</span><span class="s2">&quot;repo&quot;</span><span class="p">])</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">BOXED_CONTAINER</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;div class=&quot;container boxed my-3 py-3&quot;&gt;</span>
 <span class="si">{0}</span><span class="s2"></span>
 <span class="s2">&lt;/div&gt; &lt;!-- .container.boxed --&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">COLLAPSIBLE</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;button type=&quot;button&quot; class=&quot;btn btn-primary collapsible&quot;&gt;</span><span class="si">{collapsible_label}</span><span class="s2">&lt;/button&gt;</span>
+<span class="s2">&lt;div class=&quot;collapsible-content&quot;&gt;</span>
+<span class="si">{collapsible_content}</span><span class="s2"></span>
+<span class="s2">&lt;/div&gt;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
 
@@ -306,8 +239,16 @@
 <span class="si">{readme_content}</span><span class="s2"></span>
 <span class="s2">&quot;&quot;&quot;</span>
 
+<span class="c1"># WARNING: Order of te items is important.</span>
+<span class="c1"># From most recent (the highest number) to oldest (the lowest number).</span>
+<span class="n">OLD_CHANGELOGS</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CHANGELOG-1.md&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CHANGELOG-0.md&quot;</span>
+<span class="p">}]</span>
 
-<div class="viewcode-block" id="XletMetadata"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.XletMetadata">[docs]</a><span class="k">class</span> <span class="nc">XletMetadata</span><span class="p">():</span>
+
+<div class="viewcode-block" id="XletMetadata"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.XletMetadata">[docs]</a><span class="k">class</span> <span class="nc">XletMetadata</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Xlet metadata.</span>
 
 <span class="sd">    Attributes</span>
@@ -335,7 +276,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">xlet_meta</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="Translations"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.Translations">[docs]</a><span class="k">class</span> <span class="nc">Translations</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Translations"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.Translations">[docs]</a><span class="k">class</span> <span class="nc">Translations</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Translations mechanism.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -345,7 +286,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_translations</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_null</span> <span class="o">=</span> <span class="n">gettext</span><span class="o">.</span><span class="n">NullTranslations</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Translations.store"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.Translations.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">localedir</span><span class="p">,</span> <span class="n">languages</span><span class="p">):</span>
+<div class="viewcode-block" id="Translations.store"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.Translations.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">localedir</span><span class="p">,</span> <span class="n">languages</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Store all translations.</span>
 
 <span class="sd">        Parameters</span>
@@ -363,13 +304,13 @@
                                                    <span class="n">localedir</span><span class="p">,</span>
                                                    <span class="p">[</span><span class="n">lang</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No translations found for language code &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lang</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No translations found for language code &#39;</span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
                 <span class="n">translations</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="k">if</span> <span class="n">translations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_translations</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span> <span class="o">=</span> <span class="n">translations</span></div>
 
-<div class="viewcode-block" id="Translations.get"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.Translations.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">languages</span><span class="p">):</span>
+<div class="viewcode-block" id="Translations.get"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.Translations.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">languages</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get translations.</span>
 
 <span class="sd">        Parameters</span>
@@ -388,7 +329,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_null</span></div></div>
 
 
-<div class="viewcode-block" id="get_time_zone"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_time_zone">[docs]</a><span class="k">def</span> <span class="nf">get_time_zone</span><span class="p">():</span>
+<div class="viewcode-block" id="get_time_zone"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_time_zone">[docs]</a><span class="k">def</span> <span class="nf">get_time_zone</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Get time zone.</span>
 
 <span class="sd">    Returns</span>
@@ -417,7 +358,7 @@
         <span class="k">return</span> <span class="s2">&quot;+0000&quot;</span></div>
 
 
-<div class="viewcode-block" id="get_timestamp"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_timestamp">[docs]</a><span class="k">def</span> <span class="nf">get_timestamp</span><span class="p">():</span>
+<div class="viewcode-block" id="get_timestamp"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_timestamp">[docs]</a><span class="k">def</span> <span class="nf">get_timestamp</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Get time stamp.</span>
 
 <span class="sd">    Returns a time stamp in the same format used by xgettex.</span>
@@ -438,10 +379,10 @@
     <span class="n">MI</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0:02d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">now</span><span class="o">.</span><span class="n">minute</span><span class="p">)</span>
     <span class="n">ZONE</span> <span class="o">=</span> <span class="n">get_time_zone</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">MO</span><span class="p">,</span> <span class="n">DA</span><span class="p">,</span> <span class="n">HO</span><span class="p">,</span> <span class="n">MI</span><span class="p">,</span> <span class="n">ZONE</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">MO</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">DA</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">HO</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">MI</span><span class="si">}{</span><span class="n">ZONE</span><span class="si">}</span><span class="s2">&quot;</span></div>
 
 
-<div class="viewcode-block" id="validate_po_file"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.validate_po_file">[docs]</a><span class="k">def</span> <span class="nf">validate_po_file</span><span class="p">(</span><span class="n">pofile_path</span><span class="p">,</span> <span class="n">lang_name</span><span class="p">,</span> <span class="n">xlet_meta</span><span class="p">,</span> <span class="n">xlet_slug</span><span class="p">):</span>
+<div class="viewcode-block" id="validate_po_file"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.validate_po_file">[docs]</a><span class="k">def</span> <span class="nf">validate_po_file</span><span class="p">(</span><span class="n">pofile_path</span><span class="p">,</span> <span class="n">lang_name</span><span class="p">,</span> <span class="n">xlet_meta</span><span class="p">,</span> <span class="n">xlet_slug</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Validate .po file.</span>
 
 <span class="sd">    Parameters</span>
@@ -498,7 +439,7 @@
         <span class="n">po_file</span><span class="o">.</span><span class="n">save</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="save_file"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.save_file">[docs]</a><span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="save_file"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.save_file">[docs]</a><span class="k">def</span> <span class="nf">save_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Save file.</span>
 
 <span class="sd">    Parameters</span>
@@ -518,7 +459,7 @@
 
 <span class="c1"># Complex Bootstrap elements.</span>
 
-<div class="viewcode-block" id="get_bootstrap_alert"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_bootstrap_alert">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_alert</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">heading</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">bold_text</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="get_bootstrap_alert"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_bootstrap_alert">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_alert</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">heading</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">bold_text</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get bootstrap alert.</span>
 
 <span class="sd">    Parameters</span>
@@ -531,26 +472,22 @@
 <span class="sd">    heading : str, optional</span>
 <span class="sd">        A title for the alert.</span>
 <span class="sd">    bold_text : bool, optional</span>
-<span class="sd">        Whether to use the &quot;text-bold&quot; class or not.</span>
+<span class="sd">        Whether to use the &quot;fw-bold&quot; class or not.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
 <span class="sd">        A bootstrap alert.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;&lt;h4 class=&quot;alert-heading&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/h4&gt;&#39;</span> <span class="o">%</span> <span class="n">heading</span><span class="p">)</span> <span class="k">if</span> <span class="n">heading</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">&lt;div class=&quot;alert alert-</span><span class="si">{context}</span><span class="s2"> </span><span class="si">{bold_text}</span><span class="s2"> shadow-sm&quot; role=&quot;alert&quot;&gt;</span>
-<span class="si">{heading}</span><span class="s2"></span>
-<span class="si">{content}</span><span class="s2"></span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;div class=&quot;alert alert-</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s2">&quot;fw-bold&quot;</span> <span class="k">if</span> <span class="n">bold_text</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s2"> shadow-sm&quot; role=&quot;alert&quot;&gt;</span>
+<span class="si">{</span><span class="sa">f</span><span class="s1">&#39;&lt;h4 class=&quot;alert-heading&quot;&gt;</span><span class="si">{</span><span class="n">heading</span><span class="si">}</span><span class="s1">&lt;/h4&gt;&#39;</span> <span class="k">if</span> <span class="n">heading</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s2"></span>
+<span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2"></span>
 <span class="s2">&lt;/div&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-           <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
-           <span class="n">heading</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
-           <span class="n">bold_text</span><span class="o">=</span><span class="s2">&quot;text-bold&quot;</span> <span class="k">if</span> <span class="n">bold_text</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+<span class="s2">&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="get_bootstrap_card"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_bootstrap_card">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_card</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+<div class="viewcode-block" id="get_bootstrap_card"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_bootstrap_card">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_card</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
                        <span class="n">header</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
                        <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
                        <span class="n">body_extra_classes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -579,19 +516,13 @@
 <span class="sd">    str</span>
 <span class="sd">        A bootstrap card.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;div class=&quot;card text-bold my-</span><span class="si">{marging_y}</span><span class="s2"> border-</span><span class="si">{context}</span><span class="s2"> shadow-sm&quot;&gt;</span>
-<span class="s2">    &lt;div class=&quot;card-header bg-</span><span class="si">{context}</span><span class="s2"> </span><span class="si">{white_header}</span><span class="s2">&quot;&gt;</span><span class="si">{header}</span><span class="s2">&lt;/div&gt;</span>
-<span class="s2">    &lt;div class=&quot;card-body text-</span><span class="si">{context}</span><span class="s2"> </span><span class="si">{body_extra_classes}</span><span class="s2">&quot;&gt;</span><span class="si">{body}</span><span class="s2">&lt;/div&gt;</span>
-<span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-        <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
-        <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
-        <span class="n">body_extra_classes</span><span class="o">=</span><span class="n">body_extra_classes</span><span class="p">,</span>
-        <span class="n">marging_y</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">marging_y</span><span class="p">),</span>
-        <span class="n">white_header</span><span class="o">=</span><span class="s2">&quot;text-white&quot;</span> <span class="k">if</span> <span class="n">white_header</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;card fw-bold my-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">marging_y</span><span class="p">)</span><span class="si">}</span><span class="s2"> border-</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> shadow-sm&quot;&gt;</span>
+<span class="s2">    &lt;div class=&quot;card-header bg-</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s2">&quot;text-white&quot;</span> <span class="k">if</span> <span class="n">white_header</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="n">header</span><span class="si">}</span><span class="s2">&lt;/div&gt;</span>
+<span class="s2">    &lt;div class=&quot;card-body text-</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">body_extra_classes</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s2">&lt;/div&gt;</span>
+<span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="get_bootstrap_badge"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_bootstrap_badge">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_badge</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_classes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_pill</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="get_bootstrap_badge"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_bootstrap_badge">[docs]</a><span class="k">def</span> <span class="nf">get_bootstrap_badge</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">extra_classes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">is_pill</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get bootstrap badge.</span>
 
 <span class="sd">    Parameters</span>
@@ -604,21 +535,18 @@
 <span class="sd">    extra_classes : str, optional</span>
 <span class="sd">        Extra classes to set to the &lt;img&gt; element.</span>
 <span class="sd">    is_pill : bool, optional</span>
-<span class="sd">        Whether to use the &quot;badge-pill&quot; class or not.</span>
+<span class="sd">        Whether to use the &quot;rounded-pill&quot; class or not.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    srt</span>
 <span class="sd">        A bootstrap badge.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;span class=&quot;badge </span><span class="si">{is_pill}</span><span class="s2"> badge-</span><span class="si">{context}</span><span class="s2"> shadow-sm </span><span class="si">{extra_classes}</span><span class="s2">&quot;&gt;</span><span class="si">{content}</span><span class="s2">&lt;/span&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
-           <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span>
-           <span class="n">extra_classes</span><span class="o">=</span><span class="n">extra_classes</span><span class="p">,</span>
-           <span class="n">is_pill</span><span class="o">=</span><span class="s2">&quot;badge-pill&quot;</span> <span class="k">if</span> <span class="n">is_pill</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;span class=&quot;badge </span><span class="si">{</span><span class="s2">&quot;rounded-pill&quot;</span> <span class="k">if</span> <span class="n">is_pill</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s2"> badge-</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> shadow-sm </span><span class="si">{</span><span class="n">extra_classes</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="n">content</span><span class="si">}</span><span class="s2">&lt;/span&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="get_image_container"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_creator.get_image_container">[docs]</a><span class="k">def</span> <span class="nf">get_image_container</span><span class="p">(</span><span class="n">extra_classes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">centered</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="get_image_container"><a class="viewcode-back" href="../../modules/python_modules/python_modules.localized_help_utils.html#python_modules.localized_help_utils.get_image_container">[docs]</a><span class="k">def</span> <span class="nf">get_image_container</span><span class="p">(</span><span class="n">extra_classes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">centered</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get image container.</span>
 
 <span class="sd">    Parameters</span>
@@ -638,10 +566,8 @@
 <span class="sd">        An &lt;img&gt; element or a container with an &lt;img&gt; element.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">container</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;img-centered-container&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/div&gt;&#39;</span> <span class="k">if</span> <span class="n">centered</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span>
-    <span class="k">return</span> <span class="n">container</span> <span class="o">%</span> <span class="s2">&quot;&quot;&quot;&lt;img </span><span class="si">{src}</span><span class="s2"> class=&quot;img-fluid </span><span class="si">{extra_classes}</span><span class="s2">&quot; alt=&quot;</span><span class="si">{alt}</span><span class="s2">&quot;&gt;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alt</span><span class="o">=</span><span class="n">alt</span><span class="p">,</span>
-           <span class="n">src</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;src=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">src</span><span class="p">)</span> <span class="k">if</span> <span class="n">src</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-           <span class="n">extra_classes</span><span class="o">=</span><span class="n">extra_classes</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">container</span> <span class="o">%</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;img </span><span class="si">{</span><span class="sa">f</span><span class="s1">&#39;src=&quot;</span><span class="si">{</span><span class="n">src</span><span class="si">}</span><span class="s1">&quot;&#39;</span> <span class="k">if</span> <span class="n">src</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="si">}</span><span class="s2"> class=&quot;img-fluid </span><span class="si">{</span><span class="n">extra_classes</span><span class="si">}</span><span class="s2">&quot; alt=&quot;</span><span class="si">{</span><span class="n">alt</span><span class="si">}</span><span class="s2">&quot;&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -649,21 +575,19 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -675,10 +599,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

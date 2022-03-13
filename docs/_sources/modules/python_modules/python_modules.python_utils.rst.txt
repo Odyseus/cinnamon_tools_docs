@@ -3,7 +3,6 @@ python\_modules.python\_utils package
 
 .. automodule:: python_modules.python_utils
    :members:
-   :undoc-members:
    :show-inheritance:
    :private-members:
 
@@ -11,14 +10,18 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    python_modules.python_utils.case_conversion
+   python_modules.python_utils.css_props_case_correction
    python_modules.python_utils.schemas
+   python_modules.python_utils.sublime_text_utils
 
 Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    python_modules.python_utils.ansi_colors
    python_modules.python_utils.bottle_utils
@@ -42,3 +45,4 @@ Submodules
    python_modules.python_utils.sphinx_docs_utils
    python_modules.python_utils.string_utils
    python_modules.python_utils.template_utils
+   python_modules.python_utils.yaml_utils

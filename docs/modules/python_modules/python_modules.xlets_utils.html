@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python_modules.xlets_utils module &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="xlets_settings" href="../xlets_settings/modules.html" />
+    <link rel="prev" title="python_modules.theme_utils module" href="python_modules.theme_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">python_modules</a> &raquo;</li>
+          <li><a href="python_modules.html">python_modules package</a> &raquo;</li>
+      <li>python_modules.xlets_utils module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/python_modules/python_modules.xlets_utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="python_modules.theme_utils.html" class="btn btn-neutral float-left" title="python_modules.theme_utils module" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../xlets_settings/modules.html" class="btn btn-neutral float-right" title="xlets_settings" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-python_modules.xlets_utils">
+<span id="python-modules-xlets-utils-module"></span><h1>python_modules.xlets_utils module<a class="headerlink" href="#module-python_modules.xlets_utils" title="Permalink to this headline">¶</a></h1>
+<p>Module with utility functions and classes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.root_folder">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">root_folder</span></span><a class="headerlink" href="#python_modules.xlets_utils.root_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main folder containing the application. All commands must be executed from this location
+without exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.validate_options_1">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">validate_options_1</span></span><a class="headerlink" href="#python_modules.xlets_utils.validate_options_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to validate numeric input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.validate_options_1_2">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">validate_options_1_2</span></span><a class="headerlink" href="#python_modules.xlets_utils.validate_options_1_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to validate numeric input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">XletsHelperCore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlets_display_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Xlets core functions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.all_xlets_meta">
+<span class="sig-name descname"><span class="pre">all_xlets_meta</span></span><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.all_xlets_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>All xlets meta data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem">LogSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.xlets_display_names">
+<span class="sig-name descname"><span class="pre">xlets_display_names</span></span><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.xlets_display_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>The complete list of xlets as returned by <a class="reference internal" href="#python_modules.xlets_utils.get_xlets_display_names" title="python_modules.xlets_utils.get_xlets_display_names"><code class="xref any py py-func docutils literal notranslate"><span class="pre">get_xlets_display_names</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.xlets_meta">
+<span class="sig-name descname"><span class="pre">xlets_meta</span></span><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.xlets_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>The metadata of all xlets in this repository.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xlets_display_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) -- The complete list of xlets as returned by <a class="reference internal" href="#python_modules.xlets_utils.get_xlets_display_names" title="python_modules.xlets_utils.get_xlets_display_names"><code class="xref any py py-func docutils literal notranslate"><span class="pre">get_xlets_display_names</span></code></a>.</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem"><em>LogSystem</em></a>) -- The logger.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore._store_xlets_meta">
+<span class="sig-name descname"><span class="pre">_store_xlets_meta</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore._store_xlets_meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore._store_xlets_meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set xlets metadata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.generate_meta_file">
+<span class="sig-name descname"><span class="pre">generate_meta_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.generate_meta_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.generate_meta_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>See <a class="reference internal" href="python_modules.app_utils.html#python_modules.app_utils.generate_meta_file" title="python_modules.app_utils.generate_meta_file"><code class="xref any py py-func docutils literal notranslate"><span class="pre">app_utils.generate_meta_file</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.check_js_modules">
+<span class="sig-name descname"><span class="pre">check_js_modules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.check_js_modules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.check_js_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check JavaScript modules.</p>
+<p>This function checks if a JS module defined in an xlet configuration file is actually
+used/imported by an xlet. It also checks if an xlet used/imported by an xlet is actually
+defined in an xlet configuration file.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Deal with JS files inside an xlet folder that might not need to be checked. For example,
+JS files belonging to HTML assets don't need to be checked.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.create_xlets_changelogs">
+<span class="sig-name descname"><span class="pre">create_xlets_changelogs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.create_xlets_changelogs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.create_xlets_changelogs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create xlets change logs.</p>
+<p>Generate the CHANGELOG.md files for all xlets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.update_pot_files">
+<span class="sig-name descname"><span class="pre">update_pot_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.update_pot_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.update_pot_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update POT files.</p>
+<p>Update all .pot files from all xlets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SystemExit" title="(in Python v3.10)"><strong>SystemExit</strong></a> -- Halt execution if the make-cinnamon-xlet-pot-cli command is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.create_localized_help">
+<span class="sig-name descname"><span class="pre">create_localized_help</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.create_localized_help"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.create_localized_help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create localized help.</p>
+<p>Execute the create_localized_help.py script for each xlet to generate their
+HELP.html files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.update_repository_readme">
+<span class="sig-name descname"><span class="pre">update_repository_readme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.update_repository_readme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.update_repository_readme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update repository README file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.generate_trans_stats">
+<span class="sig-name descname"><span class="pre">generate_trans_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.generate_trans_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.generate_trans_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate translations statistics.</p>
+<p>Generates files that contain the amount of untranslated strings an xlet has.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SystemExit" title="(in Python v3.10)"><strong>SystemExit</strong></a> -- Halt execution if the msgmerge command is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.update_spanish_localizations">
+<span class="sig-name descname"><span class="pre">update_spanish_localizations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.update_spanish_localizations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.update_spanish_localizations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update Spanish localizations.</p>
+<p>Update all Spanish localizations from all xlets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SystemExit" title="(in Python v3.10)"><strong>SystemExit</strong></a> -- Halt execution if the msgmerge command is not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore._store_error">
+<span class="sig-name descname"><span class="pre">_store_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlet_slug</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore._store_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore._store_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store error for later logging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xlet_slug</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Xlet slug.</p></li>
+<li><p><strong>function_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- The name of the function that raised the error.</p></li>
+<li><p><strong>error</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- The error message.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletsHelperCore.log_errors">
+<span class="sig-name descname"><span class="pre">log_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletsHelperCore.log_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletsHelperCore.log_errors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log all stored errors.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.build_xlets">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">build_xlets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlets_display_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">build_output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_not_confirm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">install_localizations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_menu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#build_xlets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.build_xlets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build xlets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xlets_display_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) -- The list of xlets to build.</p></li>
+<li><p><strong>domain_name</strong> (<em>None</em><em>, </em><em>optional</em>) -- The domain name to use to build the xlets.</p></li>
+<li><p><strong>build_output</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) -- Path to the folder were the built xlets are stored.</p></li>
+<li><p><strong>do_not_confirm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether to ask for overwrite confirmation when an xlet destination exists or not.</p></li>
+<li><p><strong>install_localizations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether or not to install xlet localizations.</p></li>
+<li><p><strong>extra_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) -- Path to a folder containing files that will be copied into an xlet folder at build time.</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem"><em>LogSystem</em></a>) -- The logger.</p></li>
+<li><p><strong>from_menu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether this function was called from the CLI menu or not.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SystemExit" title="(in Python v3.10)"><strong>SystemExit</strong></a> -- Halt execution if the domain name cannot be obtained.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">XletBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlet_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">do_not_confirm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">install_localizations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>XletBuilder class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem">LogSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialize.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xlet_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) -- The xlet data to handle.</p></li>
+<li><p><strong>do_not_confirm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) -- Whether to ask for overwrite confirmation when an xlet destination exists or not.</p></li>
+<li><p><strong>install_localizations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- Whether or not to install xlet localizations.</p></li>
+<li><p><strong>extra_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) -- Path to a folder containing files that will be copied into an xlet folder at build time.</p></li>
+<li><p><strong>logger</strong> (<a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem"><em>LogSystem</em></a>) -- The logger.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build xlet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whether the xlet was built or not.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._get_replacement_data">
+<span class="sig-name descname"><span class="pre">_get_replacement_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._get_replacement_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._get_replacement_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get replacement data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of replacements.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._do_copy">
+<span class="sig-name descname"><span class="pre">_do_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._do_copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._do_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy xlet files into its final destination.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not raise inside this function. Return True or False so other instances
+of this class can continue operating. For example, if one is building several
+xlets and decides not to overwrite one of them, just continue building the rest
+of the xlets.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt build operation.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._handle_config_data">
+<span class="sig-name descname"><span class="pre">_handle_config_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._handle_config_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._handle_config_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle xlet configuration file if any.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._copy_file_or_folder">
+<span class="sig-name descname"><span class="pre">_copy_file_or_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._copy_file_or_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._copy_file_or_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy file or folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Source path.</p></li>
+<li><p><strong>dst</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Destination path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._modify_metadata">
+<span class="sig-name descname"><span class="pre">_modify_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._modify_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._modify_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify metadata.json file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._compile_schemas">
+<span class="sig-name descname"><span class="pre">_compile_schemas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._compile_schemas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._compile_schemas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compile schema files if any.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._copy_extra_files">
+<span class="sig-name descname"><span class="pre">_copy_extra_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._copy_extra_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._copy_extra_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy extra files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt execution.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._set_executable">
+<span class="sig-name descname"><span class="pre">_set_executable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._set_executable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._set_executable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set files as executable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt execution.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.XletBuilder._install_po_files">
+<span class="sig-name descname"><span class="pre">_install_po_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#XletBuilder._install_po_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.XletBuilder._install_po_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Install xlets .po files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Halt execution.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.get_xlets_display_names">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">get_xlets_display_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#get_xlets_display_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.get_xlets_display_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get xlets dirs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of xlets directory names prefixed with their &quot;types&quot;.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">BaseXletGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#BaseXletGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base xlet generator.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator.base_xlet_path">
+<span class="sig-name descname"><span class="pre">base_xlet_path</span></span><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator.base_xlet_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the base application (the template).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator.logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>The logger.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem">LogSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator.new_xlet_destination">
+<span class="sig-name descname"><span class="pre">new_xlet_destination</span></span><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator.new_xlet_destination" title="Permalink to this definition">¶</a></dt>
+<dd><p>The path to the new generated application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator.xlet_data">
+<span class="sig-name descname"><span class="pre">xlet_data</span></span><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator.xlet_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Storage for xlet data that will be used to generate a base xlet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>Initialization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>logger</strong> (<a class="reference internal" href="python_modules.python_utils.log_system.html#python_modules.python_utils.log_system.LogSystem" title="python_modules.python_utils.log_system.LogSystem"><em>LogSystem</em></a>) -- The logger.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#BaseXletGenerator.generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator._do_setup">
+<span class="sig-name descname"><span class="pre">_do_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#BaseXletGenerator._do_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator._do_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#SystemExit" title="(in Python v3.10)"><strong>SystemExit</strong></a> -- Halt execution if the destination exists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.BaseXletGenerator._do_copy">
+<span class="sig-name descname"><span class="pre">_do_copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#BaseXletGenerator._do_copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.BaseXletGenerator._do_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do copy.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.xlets_utils.print_xlets_slugs">
+<span class="sig-prename descclassname"><span class="pre">python_modules.xlets_utils.</span></span><span class="sig-name descname"><span class="pre">print_xlets_slugs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/xlets_utils.html#print_xlets_slugs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.xlets_utils.print_xlets_slugs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print xlets slugs.</p>
+<p>This method is called by the Bash completions script to auto-complete
+xlets slugs for the <code class="docutils literal notranslate"><span class="pre">--xlet-name=</span></code> and <code class="docutils literal notranslate"><span class="pre">-x</span></code> CLI options.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python_modules.theme_utils.html" class="btn btn-neutral float-left" title="python_modules.theme_utils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../xlets_settings/modules.html" class="btn btn-neutral float-right" title="xlets_settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

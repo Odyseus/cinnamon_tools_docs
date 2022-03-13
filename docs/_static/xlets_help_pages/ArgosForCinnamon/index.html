@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>Help for Argos for Cinnamon</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap-tweaks.css">
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+        <div id="mainarea">
+            <nav id="main-navbar"
+                 class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top py-0"
+                 role="navigation">
+                <div class="container-fluid">
+                    <div class="nav navbar-nav mr-auto">
+                        <a id="nav-xlet-help"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-help">Help</a>
+                        <a id="nav-xlet-contributors"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-contributors">Contributors</a>
+                        <a id="nav-xlet-changelogs"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-changelogs">Changelogs</a>
+                    </div>
+                    <form>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"
+                                  id="localization-switch-image">🌐</span>
+                            <select class="form-select form-select-sm"
+                                    id="localization-switch"
+                                    aria-describedby="localization-switch-image">
+<!-- English --><option selected data-title="Help for Argos for Cinnamon" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelogs" value="en">English (English)</option>
+<!-- Español --><option data-title="Ayuda para Argos para Cinnamon" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Changelogs" value="es">Español (Spanish)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div id="no-js-main"
+                 class="alert alert-warning mx-5"
+                 role="alert">
+                <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
+                <p><strong>This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.</strong></p>
+                <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
+            </div>
+            <span id="xlet-help"></span>
+            <div class="container boxed my-3 py-3">
+
+<div id="es" class="localization-content" hidden="true">
+<h1>Ayuda para Argos para Cinnamon</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Advertencia</div>
+    <div class="card-body text-warning text-font-size-large"><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<p>Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Compatibilidad con Cinnamon</div>
+    <div class="card-body text-success text-font-size-large">Este xlet es compatible con Cinnamon 5.0 hasta la última versión de Cinnamon.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Localización de xlets</div>
+    <div class="card-body text-info text-font-size-large"><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
+
+<p>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado helper.py desde una terminal abierta dentro de la carpeta del xlet.</p>
+</div>
+</div>
+<h2>Descripción</h2>
+<p>Argos para Cinnamon es un applet que convierte la salida estándar de archivos de comando en menúes desplegables del panel. Está inspirado y es totalmente compatible con la extensión para Gnome Shell llamada <a href="https://github.com/pew/argos">Argos</a> por <a href="https://github.com/pew">Philipp Emanuel Weidmann</a>, que a su vez está inspirada y es totalmente compatible con la aplicación <a href="https://github.com/matryer/bitbar">BitBar</a> para macOS. Argos para Cinnamon soporta muchos <a href="https://github.com/matryer/bitbar-plugins">complementos de BitBar</a> sin modificaciones, lo que le da acceso a una gran biblioteca de archivos de comandos bien probados, además de ser capaz de escribir el suyo propio.</p>
+<h2>Características principales</h2>
+<ul>
+<li><strong>100% API compatible con BitBar 1.9.2:</strong> Todos los complementos para BitBar que corren en Linux (por ejemplo, que no contienen código específico de macOS) van a funcionar con Argos (si no funcionan, es un error en Argos). Ver <strong><a href="#bitbar-plugins-with-argos-for-cinnamon-es">Complementos de BitBar con Argos para Cinnamon</a></strong>.</li>
+<li><strong>Más allá de BitBar:</strong> Argos puede hacer todo lo que BitBar puede hacer, pero también algunas cosas que BitBar no puede hacer (todavía). Continuar leyendo esta documentación para más detalles.</li>
+<li><strong>Motor de ejecución asincrónica sofisticado:</strong> No importa cuánto tiempo tomen sus archivos de comandos en ejecutarse, Argos las programará inteligentemente y evitará el bloqueo.</li>
+<li><strong>Soporte Unicode:</strong> Sólo imprima su texto en stdout. Se traducirá de la manera que usted espera.</li>
+<li><strong>Optimizado para el consumo mínimo de recursos:</strong> Incluso con varios complementos actualizando cada segundo, Argos normalmente usa menos del 1 por ciento de la CPU.</li>
+<li><strong>Totalmente documentado:</strong> <p>Ver <strong><a href="#usage-es">Uso del applet</a></strong>.</p></li>
+</ul>
+
+<p><span id="usage-es"></span></p>
+<h2>Uso del applet</h2>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<p>Voy a usar las palabras <em>complemento</em> o <em>archivo de comandos</em> cuando me refiera a un archivo de comandos asociado a una instancia del applet <strong>Argos para Cinnamon</strong>.</p>
+
+</div><p>Después de colocar una nueva instancia de <strong>Argos para Cinnamon</strong> en un panel, uno de los archivos de comandos de ejemplo proporcionados por este applet se adjuntará automáticamente a él y se creará un menú basado en la salida del complemento ejecutado. Estos archivos de comandos de ejemplo contienen varios ejemplos de lo que <strong>Argos para Cinnamon</strong> es capaz de hacer.</p>
+<p>Un applet recién colocado tendrá un intervalo de ejecución inicial de 0 segundos (cero segundos) y un intervalo inicial de rotación de texto de applet de 3 segundos (tres segundos). El intervalo de ejecución se establece en 0 segundos porque la secuencia de comandos de ejemplo inicial no tiene ningún dato dinámico que requiera actualización. Y el intervalo de rotación de texto de applet se establece en 3 segundos para que la rotación de texto del archivo de comandos de ejemplo se pueda ver en acción.</p>
+<p>Para los archivos de comandos que muestran datos no dinámicos, no se necesita un intervalo de ejecución. Pero si su archivo de comandos muestra datos dinámicos (un reloj por ejemplo), entonces se debe especificar un intervalo de ejecución y/o de rotación de texto del applet. Ambos valores se pueden establecer desde el menú contextual del applet.</p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<p>Los tres archivos de comandos de ejemplo proporcionados por este applet producirán exactamente la misma salida, pero se crean utilizando tres idiomas diferentes (<strong>bash_examples.bash</strong>, <strong>python_examples.py</strong> y <strong>ruby_examples.rb</strong>).</p>
+
+</div><div class="alert alert-warning fw-bold shadow-sm" role="alert">
+
+<strong>Nunca guarde sus complementos/archivos de comandos personalizados dentro de la carpeta de este applet. De lo contrario, los perderá todos cuando haya una actualización para el applet.</strong>
+</div><h3>Formato del nombre de archivo</h3>
+<p><strong>Argos para Gnome Shell</strong> analiza el nombre de archivo de los archivos de comandos para extraer cierto conjunto de preferencias. <strong>Argos para Cinnamon</strong> no analiza el nombre de los archivos de comandos de tal manera (ni de ninguna otra manera). Todas las configuraciones del applet se pueden realizar desde la ventana de configuración del applet y/o desde el menú contextual del applet.</p>
+<h3>Formato de salida</h3>
+<p>Los complementos de Argos son ejecutables (como archivos de comandos de shell <strong>(*)</strong>) que imprimen líneas de salida estándar de la siguiente forma:
+<code>TEXT | ATTRIBUTE_1=VALUE ATTRIBUTE_2=VALUE ...</code></p>
+<p>Todos los atributos son opcionales, por lo que los complementos más básicos simplemente imprimen líneas que consisten en texto que se mostrará. Para incluir espacios en blanco, los valores de atributo se pueden citar utilizando la misma convención empleada por la mayoría de los shells de línea de comandos.</p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<strong>(*) No sólo archivos de comandos shell, sino también archivos de comandos python, archivos de comandos ruby ​​o cualquier otro archivos de comandos en cualquier otro idioma que pueda imprimir a salida estándar.</strong>
+</div><h3>Representación</h3>
+<p>Las líneas que contienen sólo guiones (<code>---</code>) son <em>separadores</em>.</p>
+<p>Las líneas sobre el primer separador pertenecen al propio botón del applet. Si hay varias líneas de este tipo, se muestran sucesivamente, cada una de ellas durante un intervalo de tiempo configurable (intervalo de rotación) antes de pasar a la siguiente. Además, todas las líneas de botones obtienen un elemento de menú desplegable, excepto si su atributo <code>dropdown</code> está establecido en <code>false</code>.</p>
+<p>Las líneas debajo del primer separador se representan como elementos del menú desplegable. Otros separadores crean separadores gráficos de elementos del menú.</p>
+<p>Las líneas que comienzan con <code>--</code> son representadas como un submenú asociado con la línea sin sangría precedente. <strong>Argos para Cinnamon</strong> soporta un número ilimitado de submenús anidados.</p>
+<p><a href="http://www.emoji-cheat-sheet.com">Códigos emoji</a> como <code>:horse:</code> y <code>:smile:</code> en el texto de línea se sustituyen por sus caracteres Unicode correspondientes (a menos que el atributo <code>emojize</code> sea establecido en <code>false</code>). Tener en cuenta que Cinnamon "sin parchear" todavía no soporta emojis multicolor.</p>
+<p><a href="https://en.wikipedia.org/wiki/ANSI_escape_code#graphics">Secuencias de escape ANSI SGR</a> y <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">etiquetas de marcado Pango</a> pueden ser utilizadas para darle estilo al texto. Esto puede desactivarse estableciendo los atributos <code>ansi</code> y <code>useMarkup</code>, respectivamente, en <code>false</code>.</p>
+<p>Los escapes de barra invertida como <code>\n</code> y <code>\t</code> en el texto de línea se convierten a sus caracteres correspondientes (nueva línea y tabulador en este caso), lo que puede evitarse si se establece el atributo <code>unescape</code> en <code>false</code>. Las salidas de nueva línea se pueden utilizar para crear elementos de menú de varias líneas.</p>
+<h2>Atributos de línea</h2>
+<h3>Visualización</h3>
+<p>Controla cómo se representa la línea.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Atributo</th>
+<th>Valor</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color</code></td>
+<td>Representación hexadecimal RGB/RGBA o nombre de color</td>
+<td>Establece el color de texto para el ítem.</td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>Nombre de fuente</td>
+<td>Establece la fuente para el ítem.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>Tamaño de fuente en puntos (points).</td>
+<td>Establece el tamaño de fuente para el ítem.</td>
+</tr>
+<tr>
+<td><code>iconName</code></td>
+<td>Nombre de ícono</td>
+<td>Establece un ícono para el elemento de menú. Consulte la <a href="https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html">especificación de nombres de íconos en freedesktop.org</a> para obtener una lista de nombres estándar, o ejecutar <a href="https://developer.gnome.org/gtk3/unstable/gtk3-icon-browser.html">gtk3-icon-browser</a> para ver los nombres de todos los íconos soportados por el tema de íconos en use. <strong>Argos only</strong>. <strong>Argos para Cinnamon</strong> también soporta una ruta a un archivo de ìcono (las rutas que comienzan con <code>~ /</code> se expandirán a la carpeta del usuario).</td>
+</tr>
+<tr>
+<td><code>image</code>, <code>templateImage</code></td>
+<td>Archivo de imagen codificado en Base-64</td>
+<td>Procesa una imagen dentro del elemento. La imagen se coloca a la izquierda del texto y a la derecha del icono. Cinnamon no tiene un concepto de <em>plantilla de imágenes</em>, por lo que <code>image</code> y <code>templateImage</code> son intercambiables en Argos.</td>
+</tr>
+<tr>
+<td><code>imageWidth</code>, <code>imageHeight</code></td>
+<td>Ancho/Altura en píxeles</td>
+<td>Establece las dimensiones de la imagen. Si solo se especifica una dimensión, se mantiene la relación de aspecto original de la imagen. <strong>Argos solamente</strong>.</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>Longitud en caracteres</td>
+<td>Truncar el texto de línea al número especificado de caracteres, elipsando la parte truncada.</td>
+</tr>
+<tr>
+<td><code>trim</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, conserva los espacios en blanco al inicio y al final de la línea de texto. Habilitado por defecto si no es especificado.</td>
+</tr>
+<tr>
+<td><code>dropdown</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado y la línea es una línea para el botón (ver arriba), excluya que se muestre en el menú desplegable. Habilitado por defecto si no es especificado.</td>
+</tr>
+<tr>
+<td><code>alternate</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si habilitado, el elemento se oculta de forma predeterminada y se muestra en lugar del elemento anterior cuando se pulsa la tecla <kbd>Alt</kbd>.</td>
+</tr>
+<tr>
+<td><code>emojize</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, deshabilita la sustitución de <code>:emoji_name:</code> con caracteres emoji en el texto de línea. Habilitado por defecto si no es especificado.</td>
+</tr>
+<tr>
+<td><code>ansi</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, desactivar la interpretación de las secuencias de escape ANSI en el texto de línea. Habilitado por defecto si no es especificado.</td>
+</tr>
+<tr>
+<td><code>useMarkup</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, deshabilita la interpretación del marcado de Pango en el texto de línea.  <strong>Argos solamente.</strong> Habilitado por defecto si no es especificado.</td>
+</tr>
+<tr>
+<td><code>unescape</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, deshabilitar la interpretación de los escapes de barra invertida como <code>\n</code> en el texto de línea.  <strong>Argos solamente</strong>. Habilitado por defecto si no es especificado.</td>
+</tr>
+</tbody>
+</table>
+<p>Atributos disponibles en <strong>Argos para Cinnamon</strong> solamente.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Atributo</th>
+<th>Valor</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tooltip</code></td>
+<td>Texto a mostrar como información sobre herramientas</td>
+<td>Establece la información de herramientas para el elemento.</td>
+</tr>
+<tr>
+<td><code>iconSize</code></td>
+<td>Un número entero de 12 a 512</td>
+<td>Establece el tamaño del ícono para el ítem de menú si lo hay. El tamaño de los íconos de los ítems de menú pueden ser definidos globalmente en las preferencias de una instancia de Argos para Cinnamon.</td>
+</tr>
+<tr>
+<td><code>iconIsSymbolic</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si habilitado, la versión simbólica de <code>iconName</code> será usada en el ítem (si existe). Este atributo is ignorado si el ícono definido en <code>iconName</code> es una ruta a un archivo de ícono.</td>
+</tr>
+</tbody>
+</table>
+<h3>Acciones</h3>
+<p>Defina las acciones a realizar cuando el usuario hace clic en el elemento de menú de la línea.</p>
+<p>Los atributos de acción no son mutuamente exclusivos. Cualquier combinación de ellos puede estar asociada con el mismo elemento, y todas las acciones se ejecutan cuando se hace clic en el elemento.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Atributo</th>
+<th>Valor</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command</code>, <code>bash</code></td>
+<td>El comando a ejecutar</td>
+<td><strong><a href="#about-command-bash-attributes-es">(1)</a></strong> Ejecuta un comando usando una shell por defecto especificada en las opciones de una instancia de Argos para Cinnamon o especificada por el atributo <code>shell</code>.</td>
+</tr>
+<tr>
+<td><code>shell</code></td>
+<td>Camino o nombre de ejecutable de un programa shell</td>
+<td>Este atributo anula la shell especificada por defecto en las opciones de una instancia de Argos para Cinnamon. Este atributo debería ser usado sólo si uno decide usar shells diferentes para ejecutar comandos dentro del menú creado por una instancia de Argos para Cinnamon.</td>
+</tr>
+<tr>
+<td><code>shellArgument</code></td>
+<td>Argumento para pasar a un programa shell</td>
+<td>El argumento usado por un programa shell que permite ejecutar un comando. En la mayoría de las shells es '-c'. Este atributo anula el argumento de shell especificado en las preferencias de una instancia de Argos para Cinnamon. Este atributo debería ser usado sólo si el argumento para shell especificado en las preferencias de una instancia de Argos para Cinnamon no es compatible con la shell especificada por el atributo <code>shell</code>.</td>
+</tr>
+<tr>
+<td><code>terminal</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si deshabilitado, ejecuta el comando especificado en los atributos <code>command</code> o <code>bash</code> en el fondo (i.e. sin abrir una ventana de terminal). Si <code>true</code>, una terminal será abierta para ejecutar un comando y se quedará abierta.</td>
+</tr>
+<tr>
+<td><code>param1</code>, <code>param2</code>, ...</td>
+<td>Argumentos de la línea de comandos</td>
+<td>Argumentos que se pasarán al comando especificado en los atributos <code>command</code> o <code>bash</code>. <em>Nota: Se proporciona solo para compatibilidad con BitBar. Argos permite colocar argumentos directamente en la cadena de comando.</em></td>
+</tr>
+<tr>
+<td><code>href</code></td>
+<td>URI</td>
+<td>Abre una URI en la aplicación registrada para manejarla. Las URIs que empiezan con <code>http: //</code> lanzan el navegador web, mientras que las URIs que empiezan con <code>file: //</code> abren el archivo con su aplicación predeterminada asociada. <strong>Argos for Cinnamon</strong> también admite rutas que comienzan con <code>~ /</code> que se expandirán automáticamente a la carpeta del usuario.</td>
+</tr>
+<tr>
+<td><code>eval</code></td>
+<td>Código JavaScript</td>
+<td>Pasa el código a la función JavaScript <code>eval</code>.  <strong>Argos solamente</strong>.</td>
+</tr>
+<tr>
+<td><code>refresh</code></td>
+<td><strong><a href="#about-boolean-attributes-es">(2)</a></strong> Valor booleano</td>
+<td>Si habilitado, vuelve a ejecutar el complemento, actualizando su salida.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="about-command-bash-attributes-es"></span></p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading"><strong>(1)</strong> Sobre los atributos <code>command</code> y <code>bash</code>.</h4>
+<p>Estos atributos son mutuamente excluyentes. Agregué el atributo <code>command</code> porque no tenía mucho sentido que se llamara <code>bash</code> cuando Argos for Cinnamon puede usar cualquier shell, no solo Bash. Dejé el atributo <code>bash</code> para que cualquier archivo de comandos escrito para BitBar o para la extensión original Argos para Gnome-Shell puedan usarse sin modificaciones. Nunca eliminaré el atributo <code>bash</code> mientras las dos herramientas mencionadas anteriormente sigan usándolo.</p>
+
+</div><p><span id="about-boolean-attributes-es"></span></p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading"><strong>(2)</strong> Sobre los valores booleanos</h4>
+<p>Cualquier atributo booleano puede tener un valor de <code>true</code> o <code>1</code> (uno) para habilitar una opción/característica. O un valor de <code>false</code> o <code>0</code> (cero) para deshabilitar una opción/característica. Los valores son insensibles a mayúsculas y minúsculas. Cualquier otro valor será considerado como <code>false</code>.</p>
+
+</div><h3>Variables de entorno</h3>
+<p>Los complementos se ejecutan con las siguientes variables de entorno especiales establecidas:</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Nombre</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ARGOS_VERSION</code></td>
+<td>Número de versión del applet Argos para Cinnamon. La presencia de esta variable de entorno también se puede utilizar para determinar que el complemento se está ejecutando realmente en Argos para Cinnamon, en lugar de BitBar o <a href="https://github.com/lipido/kargos">kargos</a>.</td>
+</tr>
+<tr>
+<td><code>ARGOS_MENU_OPEN</code></td>
+<td><code>true</code> si el menú desplegable estaba abierto en el momento en que se ejecutó el complemento, y <code>false</code> en caso contrario.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="bitbar-plugins-with-argos-for-cinnamon-es"></span></p>
+<h2>Complementos de BitBar con Argos para Cinnamon</h2>
+<div class="alert alert-warning fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading">¡¡¡ADVERTENCIA!!! ¡NO REALIZAR PRUEBAS ALEATORIAS CON ARCHIVOS DE COMANDOS!</h4>
+<ol>
+<li>Aplicar sentido común. Leer y entender lo que hace un archivo de comandos y lo exigente que podría ser.</li>
+<li>Probar archivos de comandos desconocidos en un entorno desde el que pueda recuperarse fácilmente (como por ejemplo, una máquina virtual).</li>
+<li>He encontrado un caso específico en el que un archivo de comandos puede congelar y finalmente bloquear Cinnamon. Es un archivo de comandos que descarga una imagen GIF desde Internet, la convierte en Base64 y luego esa imagen codificada se inserta en un elemento de menú utilizando el atributo <em>image</em>. No voy a proporcionar un enlace a ese script, pero si se ha seguido el primer consejo que he enumerado aquí, cuando ese archivo de comandos es encontrado, se sabrá de lo que hablo.</li>
+</ol>
+
+</div><p>Estas capturas de pantalla muestran cómo algunas secuencias de comandos del repositorio de complementos de BitBar se ven cuando son procesadas por Argos en comparación con la representación <em>canónica</em> de BitBar (capturas de pantalla de macOS tomadas de <a href="https://getbitbar.com">https://getbitbar.com</a>).</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Complemento</th>
+<th style="text-align:center">BitBar en macOS</th>
+<th style="text-align:center">Argos para Cinnamon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Network/ping.10s.sh"><strong>Ping</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/image-ping-bitbar.png" class="img-fluid" alt="Ping/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/image-ping-argos.png" class="img-fluid" alt="Ping/Argos"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Finance/gfinance.5m.py"><strong>Stock Ticker</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/stock-ticker-bitbar.png" class="img-fluid" alt="Stock Ticker/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/stock-ticker-argos.png" class="img-fluid" alt="Stock Ticker/BitBar"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Time/worldclock.1s.sh"><strong>World Clock</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/world-clock-bitbar.png" class="img-fluid" alt="World Clock/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/world-clock-argos.png" class="img-fluid" alt="World Clock/BitBar"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Tutorial/ansi.sh"><strong>ANSI</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/ansi-bitbar.png" class="img-fluid" alt="ANSI/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/ansi-argos.png" class="img-fluid" alt="ANSI/BitBar"></td>
+</tr>
+</tbody>
+</table>
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+Las siguientes secciones están disponibles sólo en Inglés.
+</div>
+
+</div> <!-- .localization-content -->
+
+
+<div id="en" class="localization-content" >
+<h1>Help for Argos for Cinnamon</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Warning</div>
+    <div class="card-body text-warning text-font-size-large"><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
+<p>Bug reports, feature requests and contributions should be done on this xlet's repository linked next. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Cinnamon compatibility</div>
+    <div class="card-body text-success text-font-size-large">This xlet is compatible with Cinnamon 5.0 up to latest Cinnamon version.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Xlets localization</div>
+    <div class="card-body text-info text-font-size-large"><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
+
+<p>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called helper.py from a terminal opened inside the xlet's folder.</p>
+</div>
+</div>
+<h2>Description</h2>
+<p>Argos for Cinnamon is an applet that turns executables' standard output into panel dropdown menus. It is inspired by, and fully compatible with, the Gnome Shell extension called <a href="https://github.com/p-e-w/argos">Argos</a> by <a href="https://github.com/p-e-w">Philipp Emanuel Weidmann</a>, which in turn is inspired by, and fully compatible with, the <a href="https://github.com/matryer/bitbar">BitBar</a> application for macOS. Argos for Cinnamon supports many <a href="https://github.com/matryer/bitbar-plugins">BitBar plugins</a> without modifications, giving you access to a large library of well-tested scripts in addition to being able to write your own.</p>
+<h2>Key features</h2>
+<ul>
+<li><strong>100% API compatible with BitBar 1.9.2:</strong> All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug). See <strong><a href="#bitbar-plugins-with-argos-for-cinnamon-en">BitBar plugins with Argos for Cinnamon</a></strong>.</li>
+<li><strong>Beyond BitBar:</strong> Argos can do everything that BitBar can do, but also some things that BitBar can't do (yet). See the documentation for details.</li>
+<li><strong>Sophisticated asynchronous execution engine:</strong> No matter how long your scripts take to run, Argos will schedule them intelligently and prevent blocking.</li>
+<li><strong>Unicode support:</strong> Just print your text to stdout. It will be rendered the way you expect.</li>
+<li><strong>Optimized for minimum resource consumption:</strong> Even with multiple plugins refreshing every second, Argos typically uses less than 1 percent of the CPU.</li>
+<li><strong>Fully documented:</strong> <p>See <strong><a href="#usage-en">Usage</a></strong>.</p></li>
+</ul>
+
+<p><span id="usage-en"></span></p>
+<h2>Usage</h2>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<p>I will use the words <em>plugin</em> or <em>script</em> when referring to a script file associated with an instance of <strong>Argos for Cinnamon</strong> applet.</p>
+
+</div><p>After placing a new instance of <strong>Argos for Cinnamon</strong> into a panel, one of the example scripts provided by this applet will be automatically attached to it and a menu will be created based on the output of the executed plugin. These example scripts contain various examples of what <strong>Argos for Cinnamon</strong> can do.</p>
+<p>A just placed applet will have an initial execution interval of 0 seconds (zero seconds) and an initial applet text rotation interval of 3 seconds (three seconds). The execution interval is set to 0 seconds because the initial example script doesn't have any dynamic data that requires update. And the applet text rotation interval is set to 3 seconds so the text rotation of the example script can be seen in action.</p>
+<p>For scripts that display non dynamic data, it isn't needed an execution interval. But if your script displays dynamic data (a clock for example), then an execution and/or applet text rotation interval needs to be specified. Both of these values can be set from the applet context menu.</p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<p>The three example scripts provided by this applet will produce the exact same output, but they are created using three different languages (<strong>bash_examples.bash</strong>, <strong>python_examples.py</strong> and <strong>ruby_examples.rb</strong>).</p>
+
+</div><div class="alert alert-warning fw-bold shadow-sm" role="alert">
+
+<strong>Never save your custom plugins/scripts inside this applet folder. Otherwise, you will loose them all when there is an update for the applet.</strong>
+</div><h3>File name format</h3>
+<p><strong>Argos for Gnome Shell</strong> parses the script's file name to extract certain set of preferences. <strong>Argos for Cinnamon</strong> doesn't parse the script's file name in such way (nor in any other way). All the applet settings can be set from the applet settings window and/or from the applet context menu.</p>
+<h3>Output format</h3>
+<p>Argos plugins are executables (such as shell scripts <strong>(*)</strong>) that print to standard output lines of the following form:
+<code>TEXT | ATTRIBUTE_1=VALUE ATTRIBUTE_2=VALUE ...</code></p>
+<p>All attributes are optional, so the most basic plugins simply print lines consisting of text to be displayed. To include whitespace, attribute values may be quoted using the same convention employed by most command line shells.</p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+<strong>(*) Not just shell scripts, but also python scripts, ruby scripts or any other script in any other language that can print to standard output.</strong>
+</div><h3>Rendering</h3>
+<p>Lines containing only dashes (<code>---</code>) are <em>separators</em>.</p>
+<p>Lines above the first separator belong to the applet button itself. If there are multiple such lines, they are displayed in succession, each of them for a configurable amount of time (rotation interval) before switching to the next. Additionally, all button lines get a dropdown menu item, except if their <code>dropdown</code> attribute is set to <code>false</code>.</p>
+<p>Lines below the first separator are rendered as dropdown menu items. Further separators create graphical separator menu items.</p>
+<p>Lines beginning with <code>--</code> are rendered in a submenu associated with the preceding unindented line. <strong>Argos for Cinnamon</strong> supports unlimited number of nested submenus.</p>
+<p><a href="http://www.emoji-cheat-sheet.com">Emoji codes</a> like <code>:horse:</code> and <code>:smile:</code> in the line text are replaced with their corresponding Unicode characters (unless the <code>emojize</code> attribute is set to <code>false</code>). Note that unpatched Cinnamon does not yet support multicolor emoji.</p>
+<p><a href="https://en.wikipedia.org/wiki/ANSI_escape_code#graphics">ANSI SGR escape sequences</a> and <a href="https://developer.gnome.org/pango/stable/PangoMarkupFormat.html">Pango markup</a> tags may be used for styling. This can be disabled by setting the <code>ansi</code> and <code>useMarkup</code> attributes, respectively, to <code>false</code>.</p>
+<p>Backslash escapes such as <code>\n</code> and <code>\t</code> in the line text are converted to their corresponding characters (newline and tab in this case), which can be prevented by setting the <code>unescape</code> attribute to <code>false</code>. Newline escapes can be used to create multi-line menu items.</p>
+<h2>Line attributes</h2>
+<h3>Display</h3>
+<p>Control how the line is rendered.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Attribute</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color</code></td>
+<td>Hex RGB/RGBA or color name</td>
+<td>Sets the text color for the item.</td>
+</tr>
+<tr>
+<td><code>font</code></td>
+<td>Font name</td>
+<td>Sets the font for the item.</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>Font size in points</td>
+<td>Sets the font size for the item.</td>
+</tr>
+<tr>
+<td><code>iconName</code></td>
+<td>Icon name</td>
+<td>Sets a menu icon for the item. See the <a href="https://specifications.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html">freedesktop.org icon naming specification</a> for a list of names that should work anywhere, or run <a href="https://developer.gnome.org/gtk3/unstable/gtk3-icon-browser.html">gtk3-icon-browser</a> to see the names of all icons in your current icon theme. <strong>Argos only</strong>. <strong>Argos for Cinnamon</strong> also supports a path to an icon file (paths starting with <code>~/</code> will be expanded to the user's home folder).</td>
+</tr>
+<tr>
+<td><code>image</code>, <code>templateImage</code></td>
+<td>Base64-encoded image file</td>
+<td>Renders an image inside the item. The image is positioned to the left of the text and to the right of the icon. Cinnamon does not have a concept of <em>template images</em>, so <code>image</code> and <code>templateImage</code> are interchangeable in Argos.</td>
+</tr>
+<tr>
+<td><code>imageWidth</code>, <code>imageHeight</code></td>
+<td>Width/height in pixels</td>
+<td>Sets the dimensions of the image. If only one dimension is specified, the image's original aspect ratio is maintained. <strong>Argos only</strong>.</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>Length in characters</td>
+<td>Truncate the line text to the specified number of characters, ellipsizing the truncated part.</td>
+</tr>
+<tr>
+<td><code>trim</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, preserve leading and trailing whitespace of the line text. Enabled by default if not specified.</td>
+</tr>
+<tr>
+<td><code>dropdown</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled and the line is a button line (see above), exclude it from being displayed in the dropdown menu. Enabled by default if not specified.</td>
+</tr>
+<tr>
+<td><code>alternate</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If enabled, the item is hidden by default, and shown in place of the preceding item when the <kbd>Alt</kbd> key is pressed.</td>
+</tr>
+<tr>
+<td><code>emojize</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, disable substitution of <code>:emoji_name:</code> with emoji characters in the line text. Enabled by default if not specified.</td>
+</tr>
+<tr>
+<td><code>ansi</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, disable interpretation of ANSI escape sequences in the line text. Enabled by default if not specified.</td>
+</tr>
+<tr>
+<td><code>useMarkup</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, disable interpretation of Pango markup in the line text. <strong>Argos only</strong>. Enabled by default if not specified.</td>
+</tr>
+<tr>
+<td><code>unescape</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, disable interpretation of backslash escapes such as <code>\n</code> in the line text. <strong>Argos only</strong>. Enabled by default if not specified.</td>
+</tr>
+</tbody>
+</table>
+<p>Attributes available on <strong>Argos for Cinnamon</strong> only.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Attribute</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tooltip</code></td>
+<td>Text to display as toolip</td>
+<td>Sets the tooltip for the item.</td>
+</tr>
+<tr>
+<td><code>iconSize</code></td>
+<td>An integer from 12 to 512</td>
+<td>Sets the size for the menu item's icon if any. The size for menu item icons can be defined globally in the settings of an instance of Argos for Cinnamon.</td>
+</tr>
+<tr>
+<td><code>iconIsSymbolic</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If enabled, the symbolic version of <code>iconName</code> will be used on the item (if exists). This attribute is ignored if the icon defined in <code>iconName</code> is a path to an icon file.</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions</h3>
+<p>Define actions to be performed when the user clicks on the line's menu item.</p>
+<p>Action attributes are <em>not</em> mutually exclusive. Any combination of them may be associated with the same item, and all actions are executed when the item is clicked.</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Attribute</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command</code>, <code>bash</code></td>
+<td>A command to execute</td>
+<td><strong><a href="#about-command-bash-attributes-en">(1)</a></strong> Runs a command using a default shell specified in the options of an instance of Argos for Cinnamon or specified by the <code>shell</code> attribute.</td>
+</tr>
+<tr>
+<td><code>shell</code></td>
+<td>Path or executable name of a shell program</td>
+<td>This attribute overrides the default shell set on the settings of an instance of Argos for Cinnamon. This attribute should only be used if one decides to use different shells to execute commands whithin the menu created by an instance of Argos for Cinnamon.</td>
+</tr>
+<tr>
+<td><code>shellArgument</code></td>
+<td>Argument to pass to a shell program</td>
+<td>The argument used by a shell program that allows to execute a command. In most shells is '-c'. This attribute overrides the shell argument set on the settings of an instance of Argos for Cinnamon. This attribute should only be used if the shell argument set on the settings of an instance of Argos for Cinnamon isn't compatible with the shell specified in the <code>shell</code> attribute.</td>
+</tr>
+<tr>
+<td><code>terminal</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If disabled, runs the command specified in the <code>command</code> or <code>bash</code> attributes in the background (i.e. without opening a terminal window). If enabled, a terminal will be opened to execute a command and will be kept open.</td>
+</tr>
+<tr>
+<td><code>param1</code>, <code>param2</code>, ...</td>
+<td>Command line arguments</td>
+<td>Arguments to be passed to the command specified in the <code>command</code> or <code>bash</code> attributes. <em>Note: Provided for compatibility with BitBar only. Argos allows placing arguments directly in the command string.</em></td>
+</tr>
+<tr>
+<td><code>href</code></td>
+<td>URI</td>
+<td>Opens a URI in the application registered to handle it. URIs starting with <code>http://</code> launch the web browser, while <code>file://</code> URIs open the file in its associated default application. <strong>Argos for Cinnamon</strong> also supports paths starting with <code>~/</code> that will be automatically expanded to the user's home folder.</td>
+</tr>
+<tr>
+<td><code>eval</code></td>
+<td>JavaScript code</td>
+<td>Passes the code to JavaScript's <code>eval</code> function. <strong>Argos only</strong>.</td>
+</tr>
+<tr>
+<td><code>refresh</code></td>
+<td><strong><a href="#about-boolean-attributes-en">(2)</a></strong> Boolean value</td>
+<td>If enabled, re-runs the plugin, updating its output.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="about-command-bash-attributes-en"></span></p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading"><strong>(1)</strong> About the <code>command</code> and <code>bash</code> attributes</h4>
+<p>These attributes are mutually exclusive. I added the <code>command</code> attribute because it didn't make much sense to have it named <code>bash</code> when Argos for Cinnamon can use any shell, not just Bash. I left the <code>bash</code> attribute so any scripts written for BitBar or for the original Argos for Gnome Shell extension can be used without modifications. I will never remove the <code>bash</code> attribute while the two previously mentioned tools keep using it.</p>
+
+</div><p><span id="about-boolean-attributes-en"></span></p>
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading"><strong>(2)</strong> About boolean attributes</h4>
+<p>Any boolean attribute can have a value of <code>true</code> or <code>1</code> (one) to enable a feature/option. Or a value of <code>false</code> or <code>0</code> (zero) to disable a feature/option. Values are case-insensitive. Any other value will be considered <code>false</code>.</p>
+
+</div><h3>Environment variables</h3>
+<p>Plugin executables are run with the following special environment variables set:</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Name</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ARGOS_VERSION</code></td>
+<td>Version number of the Argos for Cinnamon applet. The presence of this environment variable can also be used to determine that the plugin is actually running in Argos, rather than BitBar or <a href="https://github.com/lipido/kargos">kargos</a>.</td>
+</tr>
+<tr>
+<td><code>ARGOS_MENU_OPEN</code></td>
+<td><code>true</code> if the dropdown menu was open at the time the plugin was run, and <code>false</code> otherwise.</td>
+</tr>
+</tbody>
+</table>
+<p><span id="bitbar-plugins-with-argos-for-cinnamon-en"></span></p>
+<h2>BitBar plugins with Argos for Cinnamon</h2>
+<div class="alert alert-warning fw-bold shadow-sm" role="alert">
+<h4 class="alert-heading">WARNING!!! DO NOT RANDOMLY TEST SCRIPTS!!!</h4>
+<ol>
+<li>Apply common sense. Read and understand what a script does and how demanding it could be.</li>
+<li>Test unknown scripts on an environment from which you can recover easily (for example, a virtual machine).</li>
+<li>I found one specific case in which a script can freeze and ultimately crash Cinnamon. It's a script that downloads a GIF image from the internet, converts it to Base64 and then that encoded image is inserted into a menu item using the <em>image</em> attribute. I will not provide a link to that script, but if you follow the very first advice that I listed here, when you see that script, you will know.</li>
+</ol>
+
+</div><p>These screenshots show how some scripts from the BitBar plugin repository look when rendered by Argos compared to the "canonical" BitBar rendering (macOS screenshots taken from <a href="https://getbitbar.com">https://getbitbar.com</a>).</p>
+<table class="table table-bordered">
+<thead><tr>
+<th>Plugin</th>
+<th style="text-align:center">BitBar on macOS</th>
+<th style="text-align:center">Argos on Cinnamon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Network/ping.10s.sh"><strong>Ping</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/image-ping-bitbar.png" class="img-fluid" alt="Ping/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/image-ping-argos.png" class="img-fluid" alt="Ping/Argos"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Finance/gfinance.5m.py"><strong>Stock Ticker</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/stock-ticker-bitbar.png" class="img-fluid" alt="Stock Ticker/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/stock-ticker-argos.png" class="img-fluid" alt="Stock Ticker/BitBar"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Time/worldclock.1s.sh"><strong>World Clock</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/world-clock-bitbar.png" class="img-fluid" alt="World Clock/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/world-clock-argos.png" class="img-fluid" alt="World Clock/BitBar"></td>
+</tr>
+<tr>
+<td><a href="https://getbitbar.com/plugins/Tutorial/ansi.sh"><strong>ANSI</strong></a></td>
+<td style="text-align:center"><img src="./assets/images/ansi-bitbar.png" class="img-fluid" alt="ANSI/BitBar"></td>
+<td style="text-align:center"><img src="./assets/images/ansi-argos.png" class="img-fluid" alt="ANSI/BitBar"></td>
+</tr>
+</tbody>
+</table>
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+The following sections are available only in English.
+</div>
+
+</div> <!-- .localization-content -->
+
+            </div>
+            <span id="xlet-contributors"></span>
+<div class="container boxed my-3 py-3">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/p-e-w">Philipp Emanuel Weidmann</a>:</strong> Author of the gnome-shell extension called <a href="https://github.com/p-e-w/argos">Argos</a>.</li>
+<li><strong><a href="https://github.com/muan">Mu-An Chiou)</a>:</strong> Author of the <a href="https://github.com/muan/emojilib">emoji keyword library</a>.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+            <span id="xlet-changelogs"></span>
+<div class="container boxed my-3 py-3">
+<h2>Argos for Cinnamon changelogs</h2>
+<p><strong>These change logs are only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a>.</strong></p>
+<hr>
+
+</div> <!-- .container.boxed -->
+<div class="container boxed my-3 py-3">
+
+<button type="button" class="btn btn-primary collapsible">Display more history</button>
+<div class="collapsible-content">
+<p><br/>
+<br/></p>
+<hr>
+<p><strong>Date:</strong> Tue, 11 Feb 2020 00:00:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/3fa9bdc">3fa9bdc</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed leftover code of xlets initialization using a Cinnamon feature that thankfully wasn't implemented.</li>
+<li>Adaptations due to changes to global JavaScript modules.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Fri, 21 Jun 2019 23:01:00 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/9b7e3b1">9b7e3b1</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed workarounds for older versions of Cinnamon (2.8.x and below).</li>
+<li>Added option to only execute the script assigned to an applet when the menu is opened. This is different from the <strong>ARGOS_MENU_OPEN</strong> environment variable set on execution time and that can be used inside the scripts. For the environment variable to be read, the script has to be executed. For the option set on the applet settings, the script is not executed at all unless the menu is opened.</li>
+<li>Added option to avoid ellipsation of the lines displayed on the applet. Applet text of only 3 characters was being ellipsized, which was ultra-annoying.</li>
+<li>Fixed misbehavior of the menu closing while the mouse cursor was placed over an activatable item in the menu and the menu content was updated. This was misbehaving because; when an item inside a menu is hovered, it has focus; when all items in a menu are removed, the menu loses focus; when a menu loses focus, it closes. I simply moved the focus to the menu itself before removing all its items to prevent the menu from closing.</li>
+<li>Moved the rotation interval selector found in the applet context menu outside the Extras sub-menu to keep it more accessible.</li>
+<li>Corrected not being able to set the script name as the applet label.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 30 May 2019 03:46:35 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/ae5e64a">ae5e64a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Minor changes due to changes in global modules.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 23 May 2019 02:14:46 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/0806714">0806714</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>JavaScript modules globalization. Moved functions/classes out of the xlet itself into global modules added at build time to minimize duplicated code across all xlets and facilitate maintenance.</li>
+<li>JavaScript code homogenization.</li>
+<li>Improved debugger.</li>
+<li>Added SVG icon.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 14 May 2019 14:39:50 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8630083">8630083</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Changed the <em>chained module imports</em> approach for a <em>direct module import</em> approach. This is to avoid errors caused by the garbage that is the implementation of <code>require()</code>.</li>
+<li>Better debugging and logging mechanism. Now the debugger is separated from the verbose logging, allowing to see the debugger messages without having to scroll through a million lines of text.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 21 Feb 2019 10:35:40 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/77f404a">77f404a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Added call to finalize settings when applet is removed from panel.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 18 Feb 2019 01:28:04 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/491c8b3">491c8b3</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Made button lines behavior match that of the described by the documentation (<em>...all button lines get a dropdown menu item...</em>). In practice, this applet had the same behavior as the extension is based on; button lines would get a dropdown menu only if there were more than one button line. Argos for Cinnamon now will always create a dropdown item for each button line (respecting the <code>dropdown</code> attribute, of course).</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 18 Feb 2019 00:20:47 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/a581b5f">a581b5f</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Better handling of the <code>tooltip</code> attribute. Now a standard item and an alternate item can each have their own tooltips.</li>
+<li>Made user defined attributes parsing case insensitive. This makes line definitions less strict.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sun, 17 Feb 2019 02:12:37 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8f2938b">8f2938b</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Fixed commands execution when terminal is set to false.</li>
+<li>Added the possibility to insert separators inside sub-menus.</li>
+<li>Redesigned applet tooltip for better readability by using a grid.</li>
+<li>Added debug mode for troubleshooting.</li>
+<li>Removing some try{}catch{} blocks. When debug mode is enabled all methods are called with a try{}catch{} block.</li>
+<li>Implemented the use of GLib.get_monotonic_time() to measure execution times more precisely.</li>
+<li>Improved lines parsing by using default parameters. This avoids constantly checking for the existence of an option.</li>
+<li>Cleaned call to log function that was left over.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 21 Jan 2019 21:48:00 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/2d5dfec">2d5dfec</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Updated emoji library.</li>
+<li>Changed applet icon.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 17 Jan 2019 14:00:29 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c910029">c910029</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Python files improvements:<ul>
+<li>Simplified localization system.</li>
+<li>Homogenized/Cleaned up code.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 15 Jan 2019 22:38:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/3a99b80">3a99b80</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Modified applet initialization code in preparation for asynchronous settings initialization that will be available in the next Cinnamon version (4.2.x?).</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 24 Dec 2018 21:58:49 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/60aefee">60aefee</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Now it is possible to specify the shell used to execute commands instead of having Bash hard-coded. A shell can be globally configured in an applet instance or specified individually for each menu item through the <code>shell</code> attribute. The argument used by a shell program that allows to execute a command is also exposed through an applet setting and can also be specified with the <code>shellArgument</code> attribute.</li>
+<li>Exposed as an option the argument used by a terminal program that allows to execute a command inside a terminal window. Workaround due to retarded terminals that keep being dumbed down to the point of uselessness.</li>
+<li>Removed retro compatible code that was left over when removing compatibility with Cinnamon versions older than 3.0.x.</li>
+<li>Implemented a getBoolean function to simplify conditions.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 03:36:48 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c114f50">c114f50</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed from the example files references to the ~/.cinnamon/glass.log file. This file doesn't exist anymore since Cinnamon version 3.6.x.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 03:03:20 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8a25f65">8a25f65</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Second step towards moving all JavaScript code to ES6. Convert all functions (that can be converted) to arrow functions.</li>
+<li>Moved the <strong>Emojis</strong> variable into its own JavaScript module.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 4 Aug 2018 05:16:23 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/cb6dd7e">cb6dd7e</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Eradication of <strong>Lang</strong> module usage in favor of arrow/standard functions. First step towards moving all JavaScript code to ES6.</li>
+<li>Simplification of the procedure to set the applet icon.</li>
+<li>Removed support for Cinnamon versions older than 3.0.x.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 13 Jun 2018 00:59:17 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/5618e00">5618e00</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Corrected settings changed callback function due to different amount of arguments passed by different Cinnamon versions.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 7 May 2018 04:54:07 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/4d36d68">4d36d68</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Implemented key bindings common naming.</li>
+</ul>
+<hr>
+<h2>Old repository history</h2>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 24 Jul 2017 01:17:56 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Added possibility to log **stderr** output when an instance of Argos for Cinnamon applet executes
+its assigned script. Code based on a
+suggestion by [edaubert](https://github.com/edaubert).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 9 Jul 2017 22:54:06 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fixed wrongly handled paths when selecting a script from the applet settings window. Fixes #127
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 9 Jul 2017 11:00:34 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos For Cinnamon applet
+- Commented out the unused TryExec function to prevent a warning.
+- Initialization of the PopupSubMenuMenuItem prototype with an empty label to prevent an error that
+will be caused when a change in Cinnamon gets merged. ¬¬
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 6 Jun 2017 22:28:36 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Better handling of **Settings.BindingDirection**. Just to avoid surprises when that constant is
+removed on future versions of Cinnamon.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 16:12:18 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Removed the two broken *internal links* inside the help file. Since I couldn't fix their behavior,
+I simply removed them and added some *literal references*.
+- Updated localization template, Spanish localization and help file due to changes to the
+create_localized_help.py script.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:29:42 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 19:32:35 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fixed an issue that kept an empty label visible on Cinnamon 3.4.x, adding extra spacing to the
+elements of the applet when it shouldn't.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 31 May 2017 09:09:42 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated screenshot.png file. Trying an animated PNG that represents a little better what Argos for
+Cinnamon can do.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 07:18:07 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Added missing icon.png and screenshot.png files used by the Spices website.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 17:06:41 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:45:50 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 02:07:10 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated README and metadata.json file due to new localization.
+- Updated localization template and Spanish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 00:07:10 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Execute the attached script exposing the script's current working directory. This allows us to use
+the current working directory in our scripts.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:31:49 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Corrected a validation error on some .po files generated by the use of the % sign in a Python
+string.
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:01:35 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:47:39 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 26 May 2017 04:50:19 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon
+- More tweaks/fixes to comply with Cinnamon 3.4.x with CJS 3.4.x installed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 26 May 2017 01:24:01 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Reverted back the use of the **TryExec** function because it is causing freezes under Cinnamon
+3.4.x with CJS 3.4.x installed (¬¬). Comming back to it when and if CJS finally decides to throw an
+actually useful error message (¬¬).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 25 May 2017 08:36:02 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fixed a bug that prevented to correctly run commands when the *terminal* attribute was set to
+true.
+- Changed a variable name on the python_examples.py file to correctly reflect that this is an applet
+and not an extension.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 23 May 2017 06:05:21 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Last prototype.
+- Added a mechanism to remember the last used directory when choosing scripts.
+- Cleaned up code. Mainly removed all `try{}catch{}` blocks used for debugging in preparation for
+stable release.
+- Completed Spanish localization of the help file.
+- Cleaned up the example scripts.
+
+LANGUAGE  UNTRANSLATED
+es.po     0
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 17 May 2017 16:07:58 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Removed CJS 3.4 warnings and fixed errors exposed by the use of CJS 3.4.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 22:47:54 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Some minor code clean up.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:52:00 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:36:34 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fourth prototype.
+- Changed an internal function that it's used to execute custom commands to use a callback. This
+allows for me to display a notification in case a command failed to execute.
+- Changed the unit used to display the **Script execution time** and **Output process** time on this
+applet tooltip from seconds to milliseconds.
+- Cleaned up the metadata.json file.
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 15:10:03 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated help file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 12:19:33 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Third prototype.
+- Added tooltip to applet. It will display the script name, the execution interval, the rotation
+interval, the amount of time that the script took to launch and the amount of time that the applet
+took to process the script's output.
+- Tested applet on all versions of Cinnamon.
+- Implemented plural forms on some translatable strings. **@translators:** Keep an eye on those in
+case there are errors.
+- *Strictified* all comparisons. Shortcut for *I changed all == to ===*, etc.
+- Implemented a better/more informative way of informing about missing dependencies.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 3 May 2017 05:06:34 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon
+- Second prototype.
+- Added localization support for the python_examples.py script and switched to it as the default
+script when the applet is first placed in a panel. This allows to create an example menu localized
+if there is a localization language available.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 30 Apr 2017 11:37:42 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Initial prototype.
+</code></pre>
+<hr>
+
+</div>
+
+</div> <!-- .container.boxed -->
+
+        </div>
+        <footer class="fw-bold text-white navbar-dark bg-primary px-3 pt-4 mt-4">
+            <div class="container-fluid text-left">
+                <ul class="list-unstyled">
+                    <li>
+                        <p>Page created with <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+                    </li>
+                    <li>
+                        <p>Boostrap theme created with <a href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Theme Generator</a> and based on <a href="https://bootswatch.com">Bootswatch</a>'s <a href="https://bootswatch.com/flatly">Flatly theme</a>.</p>
+                    </li>
+                    <li>
+                        <p><a href="https://github.com/julienetie/smooth-scroll">Smooth Scroll plugin</a> provided by <a href="https://github.com/julienetie">Julien Etienne</a>.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center py-3">
+                <div class="container-fluid">
+                    © 2016-2022 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" defer src="../../js/main.js"></script>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+
+</html>

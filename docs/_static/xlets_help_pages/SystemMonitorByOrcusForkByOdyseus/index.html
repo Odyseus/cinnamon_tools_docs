@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>Help for System Monitor (Fork By Odyseus)</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap-tweaks.css">
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+        <div id="mainarea">
+            <nav id="main-navbar"
+                 class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top py-0"
+                 role="navigation">
+                <div class="container-fluid">
+                    <div class="nav navbar-nav mr-auto">
+                        <a id="nav-xlet-help"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-help">Help</a>
+                        <a id="nav-xlet-contributors"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-contributors">Contributors</a>
+                        <a id="nav-xlet-changelogs"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-changelogs">Changelogs</a>
+                    </div>
+                    <form>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"
+                                  id="localization-switch-image">🌐</span>
+                            <select class="form-select form-select-sm"
+                                    id="localization-switch"
+                                    aria-describedby="localization-switch-image">
+<!-- English --><option selected data-title="Help for System Monitor (Fork By Odyseus)" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelogs" value="en">English (English)</option>
+<!-- Español --><option data-title="Ayuda para Monitor de Sistema (Modificado por Odyseus)" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Changelogs" value="es">Español (Spanish)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div id="no-js-main"
+                 class="alert alert-warning mx-5"
+                 role="alert">
+                <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
+                <p><strong>This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.</strong></p>
+                <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
+            </div>
+            <span id="xlet-help"></span>
+            <div class="container boxed my-3 py-3">
+
+<div id="es" class="localization-content" hidden="true">
+<h1>Ayuda para Monitor de Sistema (Modificado por Odyseus)</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Advertencia</div>
+    <div class="card-body text-warning text-font-size-large"><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<p>Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Compatibilidad con Cinnamon</div>
+    <div class="card-body text-success text-font-size-large">Este xlet es compatible con Cinnamon 5.0 hasta la última versión de Cinnamon.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Localización de xlets</div>
+    <div class="card-body text-info text-font-size-large"><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
+
+<p>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado helper.py desde una terminal abierta dentro de la carpeta del xlet.</p>
+</div>
+</div>
+<h2>Descripción</h2>
+<p>Este applet está basado en el applet <a href="https://cinnamon-spices.linuxmint.com/applets/view/88">System Monitor</a> por Josef Michálek (también conocido como Orcus).</p>
+<h2>Diferencias con el original</h2>
+<ul>
+<li>Se agregó un atajo de teclado para poder lanzar un comando personalizado.</li>
+<li>Se agregó una opción para ocultar el fondo de los gráficos, no solo configurarlo de forma transparente.</li>
+<li>Añadida opción para cambiar el orden de los gráficos.</li>
+</ul>
+<h2>Dependencias</h2>
+<ul>
+<li><strong>GTop:</strong> La biblioteca gtop lee información acerca de procesos y el estado del sistema.<ul>
+<li><strong>Distribuciones basadas en Debian:</strong> Distribuciones basadas en Debian: El paquete es llamado <strong>gir1.2-gtop-2.0</strong>.</li>
+<li><strong>Distribuciones basadas en Archlinux:</strong> Distribuciones basadas en Archlinux: El paquete es <strong>libgtop</strong>.</li>
+<li><strong>Distribuciones basadas en Fedora:</strong> El paquete es llamado <strong>libgtop2</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Reiniciar Cinnamon luego de haber instalado los paquetes para que el applet los reconozca.</strong></p>
+
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+Las siguientes secciones están disponibles sólo en Inglés.
+</div>
+
+</div> <!-- .localization-content -->
+
+
+<div id="en" class="localization-content" >
+<h1>Help for System Monitor (Fork By Odyseus)</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Warning</div>
+    <div class="card-body text-warning text-font-size-large"><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
+<p>Bug reports, feature requests and contributions should be done on this xlet's repository linked next. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Cinnamon compatibility</div>
+    <div class="card-body text-success text-font-size-large">This xlet is compatible with Cinnamon 5.0 up to latest Cinnamon version.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Xlets localization</div>
+    <div class="card-body text-info text-font-size-large"><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
+
+<p>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called helper.py from a terminal opened inside the xlet's folder.</p>
+</div>
+</div>
+<h2>Description</h2>
+<p>This applet is a fork of <a href="https://cinnamon-spices.linuxmint.com/applets/view/88">System Monitor</a> applet by Josef Michálek (a.k.a. Orcus).</p>
+<h2>Differences with the original applet</h2>
+<ul>
+<li>Added keyboard shortcut to be able to launch a custom command.</li>
+<li>Added option to hide the graphs background, not just set it transparent.</li>
+<li>Added option to change the graphs order.</li>
+</ul>
+<h2>Dependencies</h2>
+<ul>
+<li><strong>GTop:</strong> The gtop library reads information about processes and the state of the system.<ul>
+<li><strong>Debian based distributions:</strong> The package is called <strong>gir1.2-gtop-2.0</strong>.</li>
+<li><strong>Archlinux based distributions:</strong> The package is called <strong>libgtop</strong>.</li>
+<li><strong>Fedora based distributions:</strong> The package is called <strong>libgtop2</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Restart Cinnamon after installing the packages for the applet to recognize them.</strong></p>
+
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+The following sections are available only in English.
+</div>
+
+</div> <!-- .localization-content -->
+
+            </div>
+            <span id="xlet-contributors"></span>
+<div class="container boxed my-3 py-3">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/orcuscz">OrcusCZ</a>:</strong> Author of the original applet.</li>
+<li><strong><a href="https://github.com/buzz">buzz</a>:</strong> Bug fixes.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+            <span id="xlet-changelogs"></span>
+<div class="container boxed my-3 py-3">
+<h2>System Monitor (Fork By Odyseus) changelogs</h2>
+<p><strong>These change logs are only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a>.</strong></p>
+<hr>
+
+</div> <!-- .container.boxed -->
+<div class="container boxed my-3 py-3">
+
+<button type="button" class="btn btn-primary collapsible">Display more history</button>
+<div class="collapsible-content">
+<p><br/>
+<br/></p>
+<hr>
+<p><strong>Date:</strong> Tue, 18 Feb 2020 04:54:34 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/94193b3">94193b3</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Adaptations due to changes to the custom settings framework.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 12 Feb 2020 22:47:37 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/4a43cb7">4a43cb7</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Adaptations due to changes to the custom settings framework.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 10 Feb 2020 23:16:24 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8f573c7">8f573c7</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed a couple of unused imports.</li>
+<li>Removed leftover code of xlets initialization using a Cinnamon feature that thankfully wasn't implemented.</li>
+<li>Implemented the use of the <code>xdgOpen</code> function from the <code>globalUtils.js</code> JavaScript module.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 27 Jan 2020 02:42:00 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/6d81829">6d81829</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<h2>Countermeasures for using an external settings application</h2>
+<ul>
+<li>Removed condition used to selectively override the applet's Configure context menu item depending on Cinnamon version used. This condition caused to not open the settings window on newer Cinnamon versions.</li>
+<li>Added button to the settings-schema.json file so the <em>real</em> settings window can be opened from Cinnamon's native settings window. Trying to open the correct xlet settings from the xlets manager isn't possible, so I added this button.</li>
+<li>Removed <code>external-configuration-app</code> key from the metadata.json file so the built-in mechanism to open xlet settings doesn't fail silently without displaying error messages.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Fri, 21 Jun 2019 23:05:27 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/0a45561">0a45561</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<h2>Applet rewrite</h2>
+<p>WARNING: This update is a complete rewrite of the applet and it will reset some of the settings of an existent instance of this applet to their default values.</p>
+<ul>
+<li>Re-based from the version of the original author to take advantage of the performance improvements.</li>
+<li>Redesigned applet tooltip to display information symmetrically.</li>
+<li>Added option to change the order of the graphs in the applet.</li>
+<li>Enabled support for vertical panels. Vertical panels were already supported since a previous re-base from the original applet, but I forgot to actually set the proper flag for the applet to be allowed to be placed in a vertical panel.</li>
+<li>Implemented the use of a custom framework to handle the applet settings to take advantage of features not existent on Cinnamon's native settings system.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 30 May 2019 03:48:27 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/49ddf9d">49ddf9d</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Minor changes due to changes in global modules.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 23 May 2019 02:16:40 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/7dff940">7dff940</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>JavaScript modules globalization. Moved functions/classes out of the xlet itself into global modules added at build time to minimize duplicated code across all xlets and facilitate maintenance.</li>
+<li>JavaScript code homogenization.</li>
+<li>Implemented debugger.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 28 Feb 2019 20:04:42 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/129b973">129b973</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Updated CONTRIBUTORS.md file to properly give credit.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 15 Jan 2019 22:36:25 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/8e3131d">8e3131d</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Modified applet initialization code in preparation for asynchronous settings initialization that will be available in the next Cinnamon version (4.2.x?).</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 8 Jan 2019 21:40:45 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/2b83e21">2b83e21</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Fixed strict mode warning.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 04:35:43 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/e4bde9a">e4bde9a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Fixed the use of the wrong <code>for</code> loop type (<code>in</code> was used instead of <code>of</code>) that triggered errors when changing the size of an applet graphic.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 4 Aug 2018 05:14:05 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/11ddf15">11ddf15</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Eradication of <strong>Lang</strong> module usage in favor of arrow/standard functions. First step towards moving all JavaScript code to ES6.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 13 Jun 2018 01:10:47 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/0879c48">0879c48</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Implemented one settings changed callback to <em>rule them all</em>. At the same time, make the callback work homogeneously on all versions of Cinnamon.</li>
+<li>Added option to display CPU usage decimals in applet tooltip. Upstream feature.</li>
+<li>Fixed the rendering, where some lines were half pixel off and therefore a bit blurry. All graphs should now be pixel perfect. Upstream fix.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 9 May 2018 01:12:44 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/00df64f">00df64f</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Rebased from the new applet version from the original author.<ul>
+<li>Support for vertical panels.</li>
+<li>Changed settings are applied on-the-fly without the need to restart Cinnamon.</li>
+</ul>
+</li>
+<li>Eradicated <em>multiversion</em>. I made the applet be supported on multiple versions of Cinnamon without the need to use Cinnamon's <em>multiversion</em> feature.</li>
+<li>Added keyboard shortcut to be able to launch a custom command.</li>
+<li>Added option to hide the graphs background, not just set it transparent.</li>
+</ul>
+<hr>
+<h2>Old repository history</h2>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 6 Jun 2017 22:30:49 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Better handling of **Settings.BindingDirection**. Just to avoid surprises when that constant is
+removed on future versions of Cinnamon.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:40:15 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 09:03:06 +0200</li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>SysmonitorByOrcus: Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 30 May 2017 19:53:26 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:55:30 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Updated README, metadata.json file and help file due to new localization.
+- Updated localization template and Spanish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 07:22:08 +0200</li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>SysmonitorByOrcus: add sv.po
+Add Swedish translation
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:34:55 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:02:13 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:53:43 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 17 May 2017 16:13:29 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Removed CJS 3.4 warnings and fixed errors exposed by the use of CJS 3.4.
+- Moved some prototypes into a separate "modules file".
+- Added some untranslated strings.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:41:45 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 14 May 2017 18:57:18 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:56:07 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  35
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:25:03 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Cleaned up metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 13:28:17 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Minor code tweaks.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 4 May 2017 18:21:08 +0200</li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0SystemMonitorByOrcusFork@odyseus.ong-hr: Update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 2 May 2017 08:27:11 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Improved some trasnlatable strings. Just removed some white spaces and added some informational
+comments.
+- Removed *multiversion* because it is not worth the trouble.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 22 Apr 2017 23:07:42 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 13 Apr 2017 04:06:04 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Fixed the display of **Load average** and **Swap**
+graphics
+- Added localized help
+- Changed contributors key on metadata.json file from a string to an array for better readability
+- Some minor code clean up.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Apr 2017 00:23:28 +0200</li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0SystemMonitorByOrcusFork@odyseus.ong: update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 28 Mar 2017 00:09:40 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Better handling of dependencies.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 12 Mar 2017 20:42:38 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #30 from giwhub/giwhub-patch-1
+Add Chinese translation for System Monitor (Fork By Odyseus)
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 12 Mar 2017 18:08:27 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 5 Feb 2017 15:16:44 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Fixed system freeze on applet removal on Cinnamon 3.2.x
+- Cleaned code of unused constants and functions.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 27 Jan 2017 11:40:53 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applet - Cleaned some irrelevant files
+- Updated READMEs
+- Updated metadata.json
+- Updated some applet icons.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 23:50:00 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Fixed some broken links.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 20:29:22 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Formatted repository to conform Spices repository.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 15 Dec 2016 20:29:12 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[System Monitor (Fork By Odyseus) applet] - Re-added compatibility for Cinnamon 2.8.8 (Linux Mint
+17.3). Compatibility for this version of Cinnamon was accidentally lost when the dependency on
+NetworkManager was removed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 17:03:24 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Removed dependency on NetworkManager.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 16:17:16 +0200</li>
+<li><strong>Author:</strong> Mirko Dietrich</li>
+</ul>
+<pre><code>Remove dependency to NetworkManager (fixes #5)
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 03:35:15 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Corrected some terms and removed BASICS.md in favor of Wiki.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 3 Oct 2016 00:12:50 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>White space cleaning.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 25 Sep 2016 01:37:02 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Added support for localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 14 Sep 2016 14:23:03 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 15:17:56 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit...
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 14:55:18 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 12 Aug 2016 05:34:24 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 02:02:19 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 02:00:40 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.......
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 00:40:39 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+
+</div>
+
+</div> <!-- .container.boxed -->
+
+        </div>
+        <footer class="fw-bold text-white navbar-dark bg-primary px-3 pt-4 mt-4">
+            <div class="container-fluid text-left">
+                <ul class="list-unstyled">
+                    <li>
+                        <p>Page created with <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+                    </li>
+                    <li>
+                        <p>Boostrap theme created with <a href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Theme Generator</a> and based on <a href="https://bootswatch.com">Bootswatch</a>'s <a href="https://bootswatch.com/flatly">Flatly theme</a>.</p>
+                    </li>
+                    <li>
+                        <p><a href="https://github.com/julienetie/smooth-scroll">Smooth Scroll plugin</a> provided by <a href="https://github.com/julienetie">Julien Etienne</a>.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center py-3">
+                <div class="container-fluid">
+                    © 2016-2022 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" defer src="../../js/main.js"></script>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+
+</html>

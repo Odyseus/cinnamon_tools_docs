@@ -15,6 +15,7 @@ intersphinx_mapping = {
     "gio": ("https://lazka.github.io/pgi-docs/Gio-2.0", "inventories/gio-objects.inv"),
     "glib": ("https://lazka.github.io/pgi-docs/GLib-2.0", "inventories/glib-objects.inv"),
     "gtk": ("https://lazka.github.io/pgi-docs/Gtk-3.0", "inventories/gtk-objects.inv"),
+    "notify": ("https://lazka.github.io/pgi-docs/Notify-0.7", "inventories/notify-objects.inv"),
     "python": ("https://docs.python.org/3", "inventories/python-objects.inv")
 }
 

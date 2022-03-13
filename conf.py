@@ -111,7 +111,9 @@ html_favicon = "_static/cinnamon-logo.svg"
 
 html_experimental_html5_writer = True
 
-html_add_permalinks = "¶"
+html_permalinks = True
+
+html_permalinks_icon = "¶"
 
 html_copy_source = True
 

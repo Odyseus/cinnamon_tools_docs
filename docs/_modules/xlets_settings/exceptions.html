@@ -1,65 +1,29 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xlets_settings.exceptions &mdash; Cinnamon Tools  documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,17 +31,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
@@ -88,70 +42,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
           <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
-        
       <li>xlets_settings.exceptions</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for xlets_settings.exceptions</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/python3</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Miscellaneous exceptions.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -226,21 +143,6 @@
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="WrongPythonVersion"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.WrongPythonVersion">[docs]</a><span class="k">class</span> <span class="nc">WrongPythonVersion</span><span class="p">(</span><span class="n">ExceptionWhitoutTraceBack</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;WrongPythonVersion</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Minimum Python version supported: 3.5&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialization.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        msg : str, optional</span>
-<span class="sd">            Message that the exception should display.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="MissingRequiredArgument"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.MissingRequiredArgument">[docs]</a><span class="k">class</span> <span class="nc">MissingRequiredArgument</span><span class="p">(</span><span class="n">ExceptionWhitoutTraceBack</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;MissingRequiredArgument</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -272,7 +174,7 @@
 <span class="sd">        received : str, optional</span>
 <span class="sd">            Received type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> expected, </span><span class="si">%s</span><span class="s2"> received&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">received</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s1"> expected, </span><span class="si">{</span><span class="n">received</span><span class="si">}</span><span class="s1"> received.&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">,</span> <span class="n">exit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
@@ -289,7 +191,7 @@
 <span class="sd">        file_path : str, optional</span>
 <span class="sd">            A file path.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Failed to parse JSON data for file &lt;</span><span class="si">%s</span><span class="s2">&gt;.&quot;</span> <span class="o">%</span> <span class="n">file_path</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Failed to parse JSON data for file &lt;</span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s1">&gt;.&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
 
@@ -306,9 +208,20 @@
 <span class="sd">        subclass : str, optional</span>
 <span class="sd">            A property name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The &lt;</span><span class="si">%s</span><span class="s2">&gt; subclass cannot be backended.&quot;</span> <span class="o">%</span> <span class="n">subclass</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;The &lt;</span><span class="si">{</span><span class="n">subclass</span><span class="si">}</span><span class="s1">&gt; subclass cannot be backended.&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PEBCAK"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.PEBCAK">[docs]</a><span class="k">class</span> <span class="nc">PEBCAK</span><span class="p">(</span><span class="n">ExceptionWhitoutTraceBack</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;CannotBackend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="o">=</span><span class="s2">&quot;PEBCAK&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="UnkownWidgetType"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.UnkownWidgetType">[docs]</a><span class="k">class</span> <span class="nc">UnkownWidgetType</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -323,13 +236,30 @@
 <span class="sd">        widget_type : str, optional</span>
 <span class="sd">            A property name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;**The &lt;</span><span class="si">%s</span><span class="s2">&gt; widget type doesn&#39;t exist.**&quot;</span> <span class="o">%</span> <span class="n">widget_type</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;UnkownWidgetType: The &lt;</span><span class="si">{</span><span class="n">widget_type</span><span class="si">}</span><span class="s2">&gt; widget type doesn&#39;t exist.&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MethodUnimplemented"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.MethodUnimplemented">[docs]</a><span class="k">class</span> <span class="nc">MethodUnimplemented</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;MethodUnimplemented</span>
+<div class="viewcode-block" id="MissingPreferenceKey"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.MissingPreferenceKey">[docs]</a><span class="k">class</span> <span class="nc">MissingPreferenceKey</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;CannotBackend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_pref_key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget_pref_key : str, optional</span>
+<span class="sd">            The missing preference key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;MissingPreferenceKey: &lt;</span><span class="si">{</span><span class="n">widget_pref_key</span><span class="si">}</span><span class="s1">&gt; preference key is not defined in settings-schema.json file.&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MethodNotimplemented"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.exceptions.html#xlets_settings.exceptions.MethodNotimplemented">[docs]</a><span class="k">class</span> <span class="nc">MethodNotimplemented</span><span class="p">(</span><span class="n">ExceptionWhitoutTraceBack</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;MethodNotimplemented</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -342,7 +272,7 @@
 <span class="sd">        cls : str, optional</span>
 <span class="sd">            A class name.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The &lt;</span><span class="si">%s</span><span class="s2">&gt; method in class &lt;</span><span class="si">%s</span><span class="s2">&gt; needs to be implemented.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;The &lt;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1">&gt; method in class &lt;</span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s1">&gt; needs to be implemented.&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
@@ -352,21 +282,19 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -378,10 +306,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

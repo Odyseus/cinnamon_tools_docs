@@ -5,7 +5,11 @@ Requirements
 Xlets/Themes building requirements
 ----------------------------------
 
-No mayor requirements are needed to build xlets/themes other than Python 3.5+.
+No mayor requirements are needed to build xlets/themes other than Python 3.7+. End users can simply perform the following steps:
+
+1. Download the source code from CinnamonTools' repository or from any of its mirrors and unpack it.
+2. Open a terminal from inside the extracted source code and run the command ``./app.py menu``.
+3. The CLI menu is completely interactive, just follow instructions.
 
 Development tasks requirements
 ------------------------------
@@ -16,29 +20,34 @@ Almost all development tasks require the Cinnamon Tools' repository to be *deep 
 
     git clone --recurse-submodules --shallow-submodules <cinnamon_tools_repository_url>
 
-``--recurse-submodules`` argument will also clone the sub-modules and all sub-modules that a sub-module might have.
-``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
+- ``--recurse-submodules`` argument will also clone the sub-modules and all sub-modules that a sub-module might have.
+- ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
 
 Documentation building requirements
 -----------------------------------
 
-- **Python 3.5+**
-- **sphinx>=1.8.1**: ``sudo pip3 install sphinx`` or install from your distribution repositories.
+- **Python 3.7+**
+- **sphinx>=1.8.1**: install from your distribution repositories.
 
 **Note:** Deep cloning required.
 
-Cinnamon theme building from |Sass| sources
--------------------------------------------
+Gtk 3 and Cinnamon themes building from |Sass| sources
+------------------------------------------------------
 
-- **Python 3.5+**
-- **sass**: Either of the following implementations can be used to parse |Sass| files.
+- **Python 3.7+**
+- **Dart Sass**: `Download the appropiate release <https://github.com/sass/dart-sass/releases>`__ and `see installation instructions <https://github.com/sass/dart-sass#standalone>`__.
 
-    + Dart Sass: `See installation instructions <https://github.com/sass/dart-sass/releases>`__.
-    + SassC: Install from your distribution repositories.
+Gtk and Cinnamon themes thumbnails generation
+---------------------------------------------
 
-**Note:** Deep cloning required.
+- **ImageMagic**: Install from your distribution repositories.
 
 Xlets help pages building optional requirement
 ----------------------------------------------
 
-- **pyuca**: ``sudo pip3 install pyuca`` or install from your distribution repositories.
+- **pyuca**: install from your distribution repositories.
+
+Python virtual environment
+--------------------------
+
+A Python virtual environment can be created inside the **.venv** folder at the root of the repository. The **.venv** folder is already ignored in the repository's **.gitignore** file. The virtual environment is recommended, but not required since I designed the main Python application **to work with all Python 3 versions in existence** (or NONE AT ALL).

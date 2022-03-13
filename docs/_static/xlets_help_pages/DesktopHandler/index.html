@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>Help for Desktop Handler</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap-tweaks.css">
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+        <div id="mainarea">
+            <nav id="main-navbar"
+                 class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top py-0"
+                 role="navigation">
+                <div class="container-fluid">
+                    <div class="nav navbar-nav mr-auto">
+                        <a id="nav-xlet-help"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-help">Help</a>
+                        <a id="nav-xlet-contributors"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-contributors">Contributors</a>
+                        <a id="nav-xlet-changelogs"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-changelogs">Changelogs</a>
+                    </div>
+                    <form>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"
+                                  id="localization-switch-image">🌐</span>
+                            <select class="form-select form-select-sm"
+                                    id="localization-switch"
+                                    aria-describedby="localization-switch-image">
+<!-- English --><option selected data-title="Help for Desktop Handler" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelogs" value="en">English (English)</option>
+<!-- Español --><option data-title="Ayuda para Manejador de escritorio" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Changelogs" value="es">Español (Spanish) (84%)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div id="no-js-main"
+                 class="alert alert-warning mx-5"
+                 role="alert">
+                <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
+                <p><strong>This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.</strong></p>
+                <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
+            </div>
+            <span id="xlet-help"></span>
+            <div class="container boxed my-3 py-3">
+
+<div id="es" class="localization-content" hidden="true">
+<h1>Ayuda para Manejador de escritorio</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Advertencia</div>
+    <div class="card-body text-warning text-font-size-large"><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<p>Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Compatibilidad con Cinnamon</div>
+    <div class="card-body text-success text-font-size-large">Este xlet es compatible con Cinnamon 5.0 hasta la última versión de Cinnamon.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Localización de xlets</div>
+    <div class="card-body text-info text-font-size-large"><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
+
+<p>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado helper.py desde una terminal abierta dentro de la carpeta del xlet.</p>
+</div>
+</div>
+<h2>Descripción</h2>
+<p>Este applet está basado en la extensión <a href="https://cinnamon-spices.linuxmint.com/extensions/view/32">Smart Panel</a> y en el applet <a href="https://cinnamon-spices.linuxmint.com/applets/view/165">Show Desktop ++</a>, ambos escritos por <strong>mohammad-sn</strong>. Yo <em>mezclé</em> ambos en un applet porque no siempre hay espacio en el panel para realizar las acciones agregadas por <strong>Smart Panel</strong>. La extensión <strong>Smart Panel</strong> se puede instalar y activar al mismo tiempo que este applet para tener aún más acciones de escritorio.</p>
+<p>An intended effect of using this applet is that it includes the features of the <strong>Scale</strong>, <strong>Expo</strong>, <strong>Show desktop</strong> and <strong>Windows Quick List</strong> applets, and partially some of <strong>Workspace switcher</strong> applet features (all applets shipped with Cinnamon by default).</p>
+<h2>Características</h2>
+<ul>
+<li>The applet icon, label, width (height on vertical panels) can be customized. <strong>(*)</strong></li>
+<li>Scroll over applet actions.<ul>
+<li>Ajustar opacidad de ventanas</li>
+<li>Cambiar entre ventanas</li>
+<li>Alternar entre espacios de trabajo</li>
+<li>Activar Mostrar escritorio</li>
+</ul>
+</li>
+<li>Hover over applet actions.<ul>
+<li>Desktop Peek</li>
+<li>Visualizar áreas de trabajo</li>
+<li>Lanzar conmutador de aplicaciones</li>
+<li>Visión general</li>
+<li>Activar Mostrar escritorio</li>
+</ul>
+</li>
+<li>Posibilidad de realizar diferentes acciones al desplazarse hacia arriba y hacia abajo.</li>
+<li>Posibilidad de realizar diferentes acciones en el clic izquierdo y central.</li>
+<li>Acciones para los desplazamientos arriba/abajo y/o los clics izquierdo/central.<ul>
+<li>Visualizar áreas de trabajo</li>
+<li>Lanzar conmutador de aplicaciones</li>
+<li>Visión general</li>
+<li>Ejecutar 1.º comando personalizado</li>
+<li>Ejecutar 2.º comando personalizado</li>
+<li>Ejecutar 3.º comando personalizado</li>
+<li>Ejecutar 4.º comando personalizado</li>
+<li>Mostrar Escritorio</li>
+</ul>
+</li>
+<li>Posibilidad de crear un menú de lista de ventanas.</li>
+<li>Clic Izquierdo/Medio/Derecho en el applet se puede configurar para abrir el menú de la lista de ventanas.</li>
+<li>Desktop peek functionality with configurable levels of opacity and blur.</li>
+</ul>
+
+('',)
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+Las siguientes secciones están disponibles sólo en Inglés.
+</div>
+
+</div> <!-- .localization-content -->
+
+
+<div id="en" class="localization-content" >
+<h1>Help for Desktop Handler</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Warning</div>
+    <div class="card-body text-warning text-font-size-large"><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
+<p>Bug reports, feature requests and contributions should be done on this xlet's repository linked next. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Cinnamon compatibility</div>
+    <div class="card-body text-success text-font-size-large">This xlet is compatible with Cinnamon 5.0 up to latest Cinnamon version.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Xlets localization</div>
+    <div class="card-body text-info text-font-size-large"><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
+
+<p>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called helper.py from a terminal opened inside the xlet's folder.</p>
+</div>
+</div>
+<h2>Description</h2>
+<p>This applet is based on <a href="https://cinnamon-spices.linuxmint.com/extensions/view/32">Smart Panel</a> extension and <a href="https://cinnamon-spices.linuxmint.com/applets/view/165">Show Desktop ++</a> applet, both authored by  <strong>mohammad-sn</strong>. I <em>mixed</em> both of them into an applet because there is not always room on the panel to perform the actions added by <strong>Smart Panel</strong>. The <strong>Smart Panel</strong> extension can still be installed and activated at the same time than this applet to have even more desktop actions.</p>
+<p>An intended effect of using this applet is that it includes the features of the <strong>Scale</strong>, <strong>Expo</strong>, <strong>Show desktop</strong> and <strong>Windows Quick List</strong> applets, and partially some of <strong>Workspace switcher</strong> applet features (all applets shipped with Cinnamon by default).</p>
+<h2>Features</h2>
+<ul>
+<li>The applet icon, label, width (height on vertical panels) can be customized. <strong>(*)</strong></li>
+<li>Scroll over applet actions.<ul>
+<li>Adjust opacity of windows</li>
+<li>Switch between windows</li>
+<li>Switch between workspaces</li>
+<li>Toggle Show desktop</li>
+</ul>
+</li>
+<li>Hover over applet actions.<ul>
+<li>Desktop Peek</li>
+<li>Expo</li>
+<li>Launch App Switcher</li>
+<li>Overview</li>
+<li>Toggle Show desktop</li>
+</ul>
+</li>
+<li>Posibility to perform different actions for scrolling up and down.</li>
+<li>Posibility to perform different actions on left and middle click.</li>
+<li>Actions for up/down scroll and/or left/middle clicks.<ul>
+<li>Expo</li>
+<li>Launch App Switcher</li>
+<li>Overview</li>
+<li>Run 1st Custom Command</li>
+<li>Run 2nd Custom Command</li>
+<li>Run 3rd Custom Command</li>
+<li>Run 4rd Custom Command</li>
+<li>Show Desktop</li>
+</ul>
+</li>
+<li>Posibility to create a windows list menu.</li>
+<li>Left/Middle/Right click on applet can be configured to open the windows list menu.</li>
+<li>Desktop peek functionality with configurable levels of opacity and blur.</li>
+</ul>
+
+('',)
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+The following sections are available only in English.
+</div>
+
+</div> <!-- .localization-content -->
+
+            </div>
+            <span id="xlet-contributors"></span>
+<div class="container boxed my-3 py-3">
+<h2>Contributors/Mentions</h2>
+
+</div> <!-- .container.boxed -->
+
+            <span id="xlet-changelogs"></span>
+<div class="container boxed my-3 py-3">
+<h2>Desktop Handler changelogs</h2>
+<p><strong>These change logs are only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a>.</strong></p>
+<hr>
+
+</div> <!-- .container.boxed -->
+<div class="container boxed my-3 py-3">
+
+<button type="button" class="btn btn-primary collapsible">Display more history</button>
+<div class="collapsible-content">
+<p><br/>
+<br/></p>
+<hr>
+<p><strong>Date:</strong> Mon, 10 Feb 2020 23:56:56 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/4d1f03e">4d1f03e</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Removed leftover code of xlets initialization using a Cinnamon feature that thankfully wasn't implemented.</li>
+<li>Implemented the use of the <code>xdgOpen</code> function from the <code>globalUtils.js</code> JavaScript module.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Fri, 21 Jun 2019 23:02:09 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/984a0d6">984a0d6</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Corrected typo in settings-schema.json file.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 30 May 2019 03:47:16 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/7346c65">7346c65</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Minor changes due to changes in global modules.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 23 May 2019 02:15:46 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/20a83f2">20a83f2</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>JavaScript modules globalization. Moved functions/classes out of the xlet itself into global modules added at build time to minimize duplicated code across all xlets and facilitate maintenance.</li>
+<li>JavaScript code homogenization.</li>
+<li>Implemented debugger.</li>
+<li>Added an ID to the custom confirmation dialog to avoid conflictive styling with other xlets.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 15 Jan 2019 22:37:49 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/7525419">7525419</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Modified applet initialization code in preparation for asynchronous settings initialization that will be available in the next Cinnamon version (4.2.x?).</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 7 Aug 2018 03:06:49 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/b3398ba">b3398ba</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Second step towards moving all JavaScript code to ES6. Convert all functions (that can be converted) to arrow functions.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 4 Aug 2018 05:15:41 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/0b0574c">0b0574c</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Eradication of <strong>Lang</strong> module usage in favor of arrow/standard functions. First step towards moving all JavaScript code to ES6.</li>
+<li>Removed support for Cinnamon versions older than 3.0.x.</li>
+<li>Minor code cleanup.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 13 Jun 2018 01:00:54 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/5c56c7a">5c56c7a</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Corrected settings changed callback function due to different amount of arguments passed by different Cinnamon versions.</li>
+</ul>
+<hr>
+<h2>Old repository history</h2>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 24 Jul 2017 01:09:43 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 5 Jul 2017 17:40:41 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Fixed typo that caused the impossibility to open the applet settings window from its context menu.
+Fixes #126
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 6 Jun 2017 22:29:26 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Better handling of **Settings.BindingDirection**. Just to avoid surprises when that constant is
+removed on future versions of Cinnamon.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:31:37 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 09:08:41 +0200</li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>DesktopHandler: Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 30 May 2017 19:48:47 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:46:40 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Updated localization template and Spanish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:33:55 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:02:46 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:50:09 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 16 May 2017 13:18:24 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+sv.po     0
+hr.po     13
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 16 May 2017 09:01:53 +0200</li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>0DesktopHandler@odyseus.ong: Create sv.po
+Swedish translation!
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:39:55 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+hr.po     13
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 14 May 2017 18:54:29 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:53:45 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  17
+es.po     0
+hr.po     13
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 May 2017 13:14:28 +0200</li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0DesktopHandler@odyseus.ong.hr: update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:26:58 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Cleaned up metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 13:26:42 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Minor code tweaks.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 3 May 2017 11:23:38 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Removed *multiversion* because it is not worth the trouble.
+- Moved some prototypes into a separate "modules file".
+- Improved the behaviour of the option "Keep menu open while closing windows". Now the menu is kept
+open when closing windows and will use the method of reopening the menu only as a *fallback*.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 30 Apr 2017 02:05:51 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Cleaned metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 13 Apr 2017 13:42:17 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet - Added localized help.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 18 Mar 2017 04:43:26 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #34 from giwhub/giwhub-patch-5
+Add Chinese translation for Desktop Handler
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 18 Mar 2017 15:27:55 +0800</li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 27 Jan 2017 11:40:53 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applet - Cleaned some irrelevant files
+- Updated READMEs
+- Updated metadata.json
+- Updated some applet icons.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 25 Jan 2017 18:43:08 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Desktop Handler applet] - Fixed a Cjs warning when switching workspaces.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 23:50:00 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Fixed some broken links.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 20:29:22 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Formatted repository to conform Spices repository.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 23 Dec 2016 06:11:41 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Desktop Handler applet] - Improved support for Cinnamon 3.2.x
+- Improved icon display on window list menu
+- Fixed missing icon on window list menu
+- Fixed some missing translated strings
+- Fixed the applications switcher option.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 03:35:15 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Corrected some terms and removed BASICS.md in favor of Wiki.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 3 Oct 2016 00:12:50 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>White space cleaning.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 25 Sep 2016 01:37:02 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Added support for localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 14 Sep 2016 14:23:03 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 Aug 2016 06:48:34 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 Aug 2016 07:54:47 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 12 Aug 2016 05:34:24 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 12 Aug 2016 03:07:12 -0300</li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit....
+</code></pre>
+<hr>
+
+</div>
+
+</div> <!-- .container.boxed -->
+
+        </div>
+        <footer class="fw-bold text-white navbar-dark bg-primary px-3 pt-4 mt-4">
+            <div class="container-fluid text-left">
+                <ul class="list-unstyled">
+                    <li>
+                        <p>Page created with <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+                    </li>
+                    <li>
+                        <p>Boostrap theme created with <a href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Theme Generator</a> and based on <a href="https://bootswatch.com">Bootswatch</a>'s <a href="https://bootswatch.com/flatly">Flatly theme</a>.</p>
+                    </li>
+                    <li>
+                        <p><a href="https://github.com/julienetie/smooth-scroll">Smooth Scroll plugin</a> provided by <a href="https://github.com/julienetie">Julien Etienne</a>.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center py-3">
+                <div class="container-fluid">
+                    © 2016-2022 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" defer src="../../js/main.js"></script>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+
+</html>

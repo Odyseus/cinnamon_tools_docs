@@ -1,65 +1,29 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xlets_settings.common &mdash; Cinnamon Tools  documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,17 +31,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
@@ -88,70 +42,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
           <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
-        
       <li>xlets_settings.common</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for xlets_settings.common</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/python3</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Common utilities.</span>
 
@@ -159,26 +76,52 @@
 <span class="sd">----------</span>
 <span class="sd">HOME : str</span>
 <span class="sd">    Path to user home.</span>
+<span class="sd">MAIN_APP : MainApplication</span>
+<span class="sd">    The main application.</span>
+<span class="sd">OPERATIONS : list</span>
+<span class="sd">    Comparison operations.</span>
+<span class="sd">OPERATIONS_MAP : dict</span>
+<span class="sd">    Comparison operations map.</span>
+<span class="sd">USE_HEADER_BARS_ON_DIALOGS : bool</span>
+<span class="sd">    Whether to use header bars on dialogs.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">fnmatch</span>
 <span class="kn">import</span> <span class="nn">gettext</span>
 <span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">operator</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gtk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
 <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gdk&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0&quot;</span><span class="p">)</span>
 
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">GLib</span>
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gdk</span>
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
-<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
 
+<span class="n">MAIN_APP</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># NOTE: This variable is in place for when a global setting is available on Cinnamon (with any luck)</span>
+<span class="c1"># like it&#39;s available now on Mate.</span>
+<span class="n">USE_HEADER_BARS_ON_DIALOGS</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">HOME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span>
 
-<span class="n">gettext</span><span class="o">.</span><span class="n">bindtextdomain</span><span class="p">(</span><span class="s2">&quot;{{UUID}}&quot;</span><span class="p">,</span> <span class="n">HOME</span> <span class="o">+</span> <span class="s2">&quot;/.local/share/locale&quot;</span><span class="p">)</span>
+<span class="n">gettext</span><span class="o">.</span><span class="n">bindtextdomain</span><span class="p">(</span><span class="s2">&quot;{{UUID}}&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">HOME</span><span class="si">}</span><span class="s2">/.local/share/locale&quot;</span><span class="p">)</span>
 <span class="n">gettext</span><span class="o">.</span><span class="n">textdomain</span><span class="p">(</span><span class="s2">&quot;{{UUID}}&quot;</span><span class="p">)</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">gettext</span><span class="o">.</span><span class="n">gettext</span>
+
+
+<span class="c1"># CRITICAL: Do not change the order of the items inside this list.</span>
+<span class="n">OPERATIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;=&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;!=&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">]</span>
+
+<span class="n">OPERATIONS_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;!=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">ne</span><span class="p">,</span>
+    <span class="s2">&quot;&lt;&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">lt</span><span class="p">,</span>
+    <span class="s2">&quot;&lt;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">le</span><span class="p">,</span>
+    <span class="s2">&quot;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">eq</span><span class="p">,</span>
+    <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">gt</span><span class="p">,</span>
+    <span class="s2">&quot;&gt;=&quot;</span><span class="p">:</span> <span class="n">operator</span><span class="o">.</span><span class="n">ge</span>
+<span class="p">}</span>
 
 
 <div class="viewcode-block" id="BaseGrid"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.BaseGrid">[docs]</a><span class="k">class</span> <span class="nc">BaseGrid</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Grid</span><span class="p">):</span>
@@ -211,6 +154,72 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_column_spacing</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_row_spacing</span><span class="p">(</span><span class="n">row</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="IntelligentGtkDialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.IntelligentGtkDialog">[docs]</a><span class="k">class</span> <span class="nc">IntelligentGtkDialog</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Intelligent dialog.</span>
+
+<span class="sd">    An instance of :any:`Gtk.Dialog` that remembers the size it had the last time it was opened.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_widget</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parent_widget : SettingsWidget.</span>
+<span class="sd">            The widget used to store the size of the dialog. The widget has to have the</span>
+<span class="sd">            ``dialog_width`` and ``dialog_height`` properties set to set a default size for the dialog.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Keyword arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span> <span class="o">=</span> <span class="n">parent_widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_default_size</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">parent_widget</span><span class="o">.</span><span class="n">dialog_width</span><span class="p">,</span>
+                              <span class="n">height</span><span class="o">=</span><span class="n">parent_widget</span><span class="o">.</span><span class="n">dialog_height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;check-resize&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_check_resize</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IntelligentGtkDialog._on_check_resize"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.IntelligentGtkDialog._on_check_resize">[docs]</a>    <span class="k">def</span> <span class="nf">_on_check_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;``check-resize`` signal callback delayed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            Remove source.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span><span class="o">.</span><span class="n">dialog_width</span> <span class="o">!=</span> <span class="n">width</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span><span class="o">.</span><span class="n">dialog_width</span> <span class="o">=</span> <span class="n">width</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span><span class="o">.</span><span class="n">dialog_height</span> <span class="o">!=</span> <span class="n">height</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent_widget</span><span class="o">.</span><span class="n">dialog_height</span> <span class="o">=</span> <span class="n">height</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">SOURCE_REMOVE</span></div>
+
+<div class="viewcode-block" id="IntelligentGtkDialog.on_check_resize"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.IntelligentGtkDialog.on_check_resize">[docs]</a>    <span class="k">def</span> <span class="nf">on_check_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;``check-resize`` signal callback.</span>
+
+<span class="sd">        Attempt to store the current dialog size when the dialog is re-sized. Delayed to avoid</span>
+<span class="sd">        executing code a trillion times per second.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        *args</span>
+<span class="sd">            Arguments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">:</span>
+            <span class="n">GLib</span><span class="o">.</span><span class="n">source_remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">timeout_add</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_check_resize</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="compare_version"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.compare_version">[docs]</a><span class="k">def</span> <span class="nf">compare_version</span><span class="p">(</span><span class="n">version1</span><span class="p">,</span> <span class="n">version2</span><span class="p">):</span>
@@ -263,9 +272,9 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    version1 : str</span>
-<span class="sd">        Description</span>
+<span class="sd">        The first version to be compared.</span>
 <span class="sd">    version2 : str</span>
-<span class="sd">        Description</span>
+<span class="sd">        The second version to be compared.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -429,10 +438,40 @@
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">pass</span>
 
-    <span class="n">cmp_res</span> <span class="o">=</span> <span class="p">[</span><span class="nb">cmp</span><span class="p">(</span><span class="n">v_main_1</span><span class="p">,</span> <span class="n">v_main_2</span><span class="p">),</span> <span class="nb">cmp</span><span class="p">(</span><span class="n">v_sub_1</span><span class="p">,</span> <span class="n">v_sub_2</span><span class="p">)]</span>
+    <span class="n">cmp_res</span> <span class="o">=</span> <span class="p">[</span><span class="n">cmp</span><span class="p">(</span><span class="n">v_main_1</span><span class="p">,</span> <span class="n">v_main_2</span><span class="p">),</span> <span class="n">cmp</span><span class="p">(</span><span class="n">v_sub_1</span><span class="p">,</span> <span class="n">v_sub_2</span><span class="p">)]</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">base_code</span><span class="p">(</span><span class="n">cmp_res</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">ABS</span><span class="p">(</span><span class="n">cmp_res</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="check_version"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.check_version">[docs]</a><span class="k">def</span> <span class="nf">check_version</span><span class="p">(</span><span class="n">version1</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">version2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check version.</span>
+
+<span class="sd">    This function is a proxy to the compare_version function to allow a more &quot;natural&quot; usage.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    version1 : str</span>
+<span class="sd">        The first version to be compared.</span>
+<span class="sd">    op : str</span>
+<span class="sd">        The comparison operator.</span>
+<span class="sd">    version2 : str</span>
+<span class="sd">        The second version to be compared.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        The result of the comparison.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    err</span>
+<span class="sd">        Halt execution.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">OPERATIONS_MAP</span><span class="p">[</span><span class="n">op</span><span class="p">](</span><span class="n">compare_version</span><span class="p">(</span><span class="n">version1</span><span class="p">,</span> <span class="n">version2</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">err</span></div>
 
 
 <div class="viewcode-block" id="contrast_rgba_color"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.contrast_rgba_color">[docs]</a><span class="k">def</span> <span class="nf">contrast_rgba_color</span><span class="p">(</span><span class="n">rgba</span><span class="p">):</span>
@@ -488,11 +527,13 @@
         <span class="n">btns</span> <span class="o">=</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
                 <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Open&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
 
-    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">parent</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
-                                   <span class="n">title</span><span class="o">=</span><span class="n">string</span><span class="p">,</span>
-                                   <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">action</span><span class="o">=</span><span class="n">action_mode</span><span class="p">,</span>
-                                   <span class="n">buttons</span><span class="o">=</span><span class="n">btns</span><span class="p">)</span>
+    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">FileChooserDialog</span><span class="p">(</span>
+        <span class="n">transient_for</span><span class="o">=</span><span class="n">get_toplevel_window</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">string</span><span class="p">,</span>
+        <span class="n">use_header_bar</span><span class="o">=</span><span class="n">get_global</span><span class="p">(</span><span class="s2">&quot;USE_HEADER_BARS_ON_DIALOGS&quot;</span><span class="p">),</span>
+        <span class="n">action</span><span class="o">=</span><span class="n">action_mode</span><span class="p">,</span>
+        <span class="n">buttons</span><span class="o">=</span><span class="n">btns</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">last_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">dialog</span><span class="o">.</span><span class="n">set_current_folder</span><span class="p">(</span><span class="n">last_dir</span><span class="p">)</span>
@@ -513,7 +554,7 @@
         <span class="n">filepath</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">action_type</span> <span class="o">==</span> <span class="s2">&quot;export&quot;</span> <span class="ow">and</span> <span class="s2">&quot;.json&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">filepath</span><span class="p">:</span>
-            <span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s2">&quot;.json&quot;</span>
+            <span class="n">filepath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filepath</span><span class="si">}</span><span class="s2">.json&quot;</span>
 
     <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
 
@@ -557,9 +598,11 @@
 <span class="sd">        add_prefix : bool</span>
 <span class="sd">            Whether to add a prefix.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;::&quot;</span> <span class="k">if</span> <span class="n">add_prefix</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
         <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;file-patterns&quot;</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">fnmatch</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">),</span> <span class="n">pattern</span><span class="p">):</span>
-                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;::&quot;</span> <span class="k">if</span> <span class="n">add_prefix</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">)</span>
+                <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">file_name</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-xlet&quot;</span><span class="p">):</span>
         <span class="n">path_in_xlet</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">xlet_settings</span><span class="o">.</span><span class="n">get_xlet_meta</span><span class="p">()[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span> <span class="n">opts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path-in-xlet&quot;</span><span class="p">))</span>
@@ -572,13 +615,52 @@
         <span class="n">setting_value</span> <span class="o">=</span> <span class="n">setting_value</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span> <span class="k">if</span> <span class="n">setting_value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;file://&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">setting_value</span>
 
         <span class="c1"># NOTE: Failsafe. Do not allow user&#39;s home to be added.</span>
-        <span class="k">if</span> <span class="n">setting_value</span> <span class="ow">and</span> <span class="n">setting_value</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">setting_value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">setting_value</span> <span class="ow">and</span> <span class="n">setting_value</span> <span class="o">!=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span>
+                <span class="s2">&quot;~&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">setting_value</span><span class="p">):</span>
             <span class="n">scan_and_generate</span><span class="p">(</span><span class="n">setting_value</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">options</span></div>
 
 
-<div class="viewcode-block" id="display_message_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.display_message_dialog">[docs]</a><span class="k">def</span> <span class="nf">display_message_dialog</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;information&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="handle_combobox_options"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.handle_combobox_options">[docs]</a><span class="k">def</span> <span class="nf">handle_combobox_options</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">first_option</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xlet_settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sort_options</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Handle combobox options.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    options : None, optional</span>
+<span class="sd">        The options key of a combobox widget definition.</span>
+<span class="sd">    first_option : str, optional</span>
+<span class="sd">        The option that should always be listed first in the combobox.</span>
+<span class="sd">    xlet_settings : None, optional</span>
+<span class="sd">        A :any:`JSONSettingsHandler` instance.</span>
+<span class="sd">    sort_options : bool, optional</span>
+<span class="sd">        If the options should be sorted.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        Handled combobox options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">handled_options</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">handled_options</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;file-patterns&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;file-patterns&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">handled_options</span> <span class="o">=</span> <span class="n">generate_options_from_paths</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">xlet_settings</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">handled_options</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">options</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+    <span class="c1"># NOTE: Sort options. Otherwise, items will appear in</span>
+    <span class="c1"># different order every single time the widget is re-built.</span>
+    <span class="k">if</span> <span class="n">sort_options</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sort_combo_options</span><span class="p">(</span><span class="n">handled_options</span><span class="p">,</span> <span class="n">first_option</span><span class="p">)</span>
+
+    <span class="c1"># NOTE: Do not sort if it isn&#39;t needed.</span>
+    <span class="k">return</span> <span class="n">handled_options</span></div>
+
+
+<div class="viewcode-block" id="display_message_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.display_message_dialog">[docs]</a><span class="k">def</span> <span class="nf">display_message_dialog</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Display a message dialog.</span>
 
 <span class="sd">    Parameters</span>
@@ -596,14 +678,21 @@
         <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">WARNING</span>
     <span class="k">elif</span> <span class="n">context</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span>
         <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">ERROR</span>
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">context</span> <span class="o">==</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">QUESTION</span>
+    <span class="k">elif</span> <span class="n">context</span> <span class="o">==</span> <span class="s2">&quot;info&quot;</span><span class="p">:</span>
         <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">INFO</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">message_type</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">OTHER</span>
 
-    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">widget</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
-                               <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-                               <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
-                               <span class="n">message_type</span><span class="o">=</span><span class="n">message_type</span><span class="p">,</span>
-                               <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+    <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span>
+        <span class="n">transient_for</span><span class="o">=</span><span class="n">get_toplevel_window</span><span class="p">(</span><span class="n">widget</span><span class="p">),</span>
+        <span class="n">use_header_bar</span><span class="o">=</span><span class="n">get_global</span><span class="p">(</span><span class="s2">&quot;USE_HEADER_BARS_ON_DIALOGS&quot;</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+        <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+        <span class="n">message_type</span><span class="o">=</span><span class="n">message_type</span><span class="p">,</span>
+        <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">OK</span>
+    <span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -643,7 +732,7 @@
                 <span class="k">del</span> <span class="n">options</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="k">break</span>
 
-    <span class="k">return</span> <span class="n">only_first</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">only_first</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="get_keybinding_display_name"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.get_keybinding_display_name">[docs]</a><span class="k">def</span> <span class="nf">get_keybinding_display_name</span><span class="p">(</span><span class="n">accel_string</span><span class="p">):</span>
@@ -672,26 +761,92 @@
     <span class="k">return</span> <span class="n">text</span></div>
 
 
+<div class="viewcode-block" id="set_global"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.set_global">[docs]</a><span class="k">def</span> <span class="nf">set_global</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set global variable.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : str</span>
+<span class="sd">        The variable name.</span>
+<span class="sd">    value : Any</span>
+<span class="sd">        The variable value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">globals</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
+
+
+<div class="viewcode-block" id="get_global"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.get_global">[docs]</a><span class="k">def</span> <span class="nf">get_global</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get global variable.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : str</span>
+<span class="sd">        The variable name.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Any</span>
+<span class="sd">        The value stored in the global variable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">key</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_main_app"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.get_main_app">[docs]</a><span class="k">def</span> <span class="nf">get_main_app</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;get main application.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    MainApplication</span>
+<span class="sd">        The main application.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">MAIN_APP</span></div>
+
+
+<div class="viewcode-block" id="get_toplevel_window"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.common.html#xlets_settings.common.get_toplevel_window">[docs]</a><span class="k">def</span> <span class="nf">get_toplevel_window</span><span class="p">(</span><span class="n">widget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a top level window.</span>
+
+<span class="sd">    This is mainly used for setting the ``transient_for`` parameter when creating instances of</span>
+<span class="sd">    a :any:`Gtk.Dialog`. Since some widgets on this framework open dialogs from another dialogs,</span>
+<span class="sd">    I can&#39;t set dialogs to always use the main application window.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    widget : Gtk.Widget</span>
+<span class="sd">        A widget from which to get a top level window.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    MainApplication</span>
+<span class="sd">        The main application.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">toplevel</span> <span class="o">=</span> <span class="n">widget</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">toplevel</span><span class="p">,</span> <span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ApplicationWindow</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Window</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">toplevel</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">MAIN_APP</span><span class="o">.</span><span class="n">window</span></div>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="k">pass</span>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -703,10 +858,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

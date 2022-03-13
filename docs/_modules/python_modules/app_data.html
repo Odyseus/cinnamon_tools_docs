@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python_modules.app_data &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>python_modules.app_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for python_modules.app_data</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">CHANGELOG_HEADER_REPO : str</span>
+<span class="sd">    Base Markdown template for the repository&#39;s CHANGELOG.md file.</span>
+<span class="sd">CHANGELOG_HEADER_THEMES : str</span>
+<span class="sd">    Base Markdown template for the theme&#39;s CHANGELOG.md file.</span>
+<span class="sd">CHANGELOG_HEADER_XLETS : str</span>
+<span class="sd">    Base Markdown template for the xlets&#39;s CHANGELOG.md file.</span>
+<span class="sd">COMMON_HELP_ASSETS : list</span>
+<span class="sd">    Common files needed to render the HELP.html file for xlets.</span>
+<span class="sd">EXISTENT_XLET_DESTINATION_MSG : str</span>
+<span class="sd">    Message displayed when a build xlet/theme task tries to copy files into an existent location.</span>
+<span class="sd">EXTRA_COMMON_FILES : list</span>
+<span class="sd">    Extra common files that need to be copied into an xlet folder at build time.</span>
+<span class="sd">GIT_LOG_CMD_REPO : str</span>
+<span class="sd">    Command to generate the repository&#39;s CHANGELOG.md file.</span>
+<span class="sd">GIT_LOG_CMD_THEMES : str</span>
+<span class="sd">    Command to generate the theme&#39;s CHANGELOG.md file.</span>
+<span class="sd">GIT_LOG_CMD_XLETS : str</span>
+<span class="sd">    Command to generate the xlets&#39; CHANGELOG.md file.</span>
+<span class="sd">LOCALIZED_STRINGS : dict</span>
+<span class="sd">    Localized strings storage.</span>
+<span class="sd">MISSING_THEME_OR_DOMAIN_NAME_MSG : str</span>
+<span class="sd">    Message used to inform of a missing theme or domain name when building themes/xlets.</span>
+<span class="sd">PATHS : dict</span>
+<span class="sd">    Paths storage.</span>
+<span class="sd">PYTHON_SHEBANGS : dict</span>
+<span class="sd">    Different shebangs for development and distribution.</span>
+<span class="sd">README_LIST_ITEM_TEMPLATE : str</span>
+<span class="sd">    Template used to create links to each xlet help page inside the repository&#39;s README.md file.</span>
+<span class="sd">root_folder : str</span>
+<span class="sd">    The main folder containing the application. All commands must be executed from this location</span>
+<span class="sd">    without exceptions.</span>
+<span class="sd">SUPPORTED_CINNAMON_VERSION_MAX : float</span>
+<span class="sd">    Maximum Cinnamon version number.</span>
+<span class="sd">SUPPORTED_CINNAMON_VERSION_MIN : float</span>
+<span class="sd">    Minimum Cinnamon version number.</span>
+<span class="sd">THEME_BOOLEAN_DEFINITIONS : dict</span>
+<span class="sd">    Theme building data.</span>
+<span class="sd">THEME_BUILD_DATA : str</span>
+<span class="sd">    The template used to display theme&#39;s latest used values from a previous build task.</span>
+<span class="sd">THEME_CSS_DEFINITIONS : list</span>
+<span class="sd">    Theme building data.</span>
+<span class="sd">THEME_SASS_PARSING_DATA : list</span>
+<span class="sd">    Theme building data.</span>
+<span class="sd">URLS : dict</span>
+<span class="sd">    URLs storage.</span>
+<span class="sd">XLET_DIR_IGNORED_PATTERNS : list</span>
+<span class="sd">    A list of file patterns to ignore when building xlets.</span>
+<span class="sd">XLET_EXEC_FILES : list</span>
+<span class="sd">    Common files that need to be set as executables.</span>
+<span class="sd">XLET_EXTRA_FILES_IGNORED_PATTERNS : list</span>
+<span class="sd">    A list of file patterns to ignore from the path declared when passing the --extra-files</span>
+<span class="sd">    CLI argument at xlets build time.</span>
+<span class="sd">XLET_MODULES_MAP : dict</span>
+<span class="sd">    A mapping of module names.</span>
+<span class="sd">XLETS_BUILD_DATA : str</span>
+<span class="sd">    The template used to display xlets&#39; latest used values from a previous build task.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">file_utils</span>
+
+<span class="n">root_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="o">*</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))))))</span>
+
+<span class="n">SUPPORTED_CINNAMON_VERSION_MIN</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+<span class="n">SUPPORTED_CINNAMON_VERSION_MAX</span> <span class="o">=</span> <span class="mf">7.0</span>
+
+<span class="n">PYTHON_SHEBANGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="s2">&quot;#!/usr/bin/env python3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dist&quot;</span><span class="p">:</span> <span class="s2">&quot;#!/usr/bin/python3&quot;</span>
+<span class="p">}</span>
+
+<span class="n">THEME_CSS_DEFINITIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@csd_shadow_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;0 3px 5px @csd_shadow_spread@px rgba(0, 0, 0, @csd_shadow_opacity@)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@csd_backdrop_shadow_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;0 3px 5px @csd_backdrop_shadow_spread@px rgba(0, 0, 0, @csd_backdrop_shadow_opacity@)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@popover_shadow_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;0 1px 2px @popover_shadow_spread@px rgba(0, 0, 0, @popover_shadow_opacity@)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@undershoots_tb_back_image_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;linear-gradient(to left, rgba(255, 255, 255, @undershoots_opacity@) 50%, rgba(0, 0, 0, @undershoots_opacity@) 50%)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@undershoots_lr_back_image_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;linear-gradient(to top, rgba(255, 255, 255, @undershoots_opacity@) 50%, rgba(0, 0, 0, @undershoots_opacity@) 50%)&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@undershoots_padding_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s2">&quot;@undershoots_distance@px&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;&quot;@tooltip_border_definition@&quot;&#39;</span><span class="p">,</span>
+     <span class="s1">&#39;1px solid &quot;@tooltip_border_rgba_color@&quot;&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">THEME_BOOLEAN_DEFINITIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;display_gtk_2_scrollbar_arrows&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="kc">True</span><span class="p">:</span> <span class="s1">&#39;include &quot;styles/display-scrollbar-arrows.rc&quot;&#39;</span><span class="p">,</span>
+        <span class="kc">False</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;display_gtk_3_scrollbar_arrows&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="kc">True</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="kc">False</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">THEME_SASS_PARSING_DATA</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cinnamon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;5.0&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;version_sensitive&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;sass_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;destination_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cssfile&quot;</span><span class="p">:</span> <span class="s2">&quot;cinnamon.css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thumb_size&quot;</span><span class="p">:</span> <span class="s2">&quot;120x80&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gtk 3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;3.24&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;version_sensitive&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;sass_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;destination_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk-3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cssfile&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk-contained.css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thumb_size&quot;</span><span class="p">:</span> <span class="s2">&quot;120x35&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Gtk 4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;4.0&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;version_sensitive&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;sass_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;destination_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk-4.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cssfile&quot;</span><span class="p">:</span> <span class="s2">&quot;gtk-contained.css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;thumb_size&quot;</span><span class="p">:</span> <span class="s2">&quot;120x35&quot;</span>
+<span class="p">}]</span>
+
+<span class="n">URLS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="s2">&quot;https://gitlab.com/Odyseus/CinnamonTools&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;repo_docs&quot;</span><span class="p">:</span> <span class="s2">&quot;https://odyseus.gitlab.io/cinnamon_tools_docs&quot;</span>
+<span class="p">}</span>
+
+<span class="n">PATHS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;xlets_install_location&quot;</span><span class="p">:</span> <span class="n">file_utils</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="s2">&quot;.local&quot;</span><span class="p">,</span> <span class="s2">&quot;share&quot;</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">)),</span>
+    <span class="s2">&quot;js_modules&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;javascript_modules&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;docs_sources&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;cinnamon_tools_docs&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;docs_built&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;cinnamon_tools_docs&quot;</span><span class="p">,</span> <span class="s2">&quot;docs&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;domain_storage_file&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;domain_name&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;theme_name_storage_file&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;theme_name&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;all_xlets_meta_file&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;xlets_metadata.json&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;themes_folder&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;themes&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;themes&quot;</span><span class="p">,</span> <span class="s2">&quot;_variants&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;theme_latest_build_data_file&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;theme_latest_default_data.json&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;xlets_latest_build_data_file&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;xlets_latest_default_data.json&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">XLET_MODULES_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;javascript_modules&quot;</span><span class="p">:</span> <span class="s2">&quot;js_modules&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python_modules&quot;</span><span class="p">:</span> <span class="s2">&quot;python_modules&quot;</span>
+<span class="p">}</span>
+
+<span class="n">XLET_EXEC_FILES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;appletHelper.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;extensionHelper.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_chooser_dialog.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;helper.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;python_modules/html_tags_stripper.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;settings.py&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">MISSING_THEME_OR_DOMAIN_NAME_MSG</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;**</span><span class="si">{capital}</span><span class="s2">NameNotSet:**</span>
+
+<span class="s2">The command line option **--</span><span class="si">{lower}</span><span class="s2">-name=&lt;name&gt;** should be used to define a </span><span class="si">{lower}</span><span class="s2"></span>
+<span class="s2">name for use when building </span><span class="si">{types}</span><span class="s2">.</span>
+
+<span class="s2">Or a file named **</span><span class="si">{lower}</span><span class="s2">_name** should be created inside a folder named **tmp** at</span>
+<span class="s2">the root of the repository whose only content should be the desired </span><span class="si">{lower}</span><span class="s2"> name.</span>
+
+<span class="s2">The `--</span><span class="si">{lower}</span><span class="s2">-name` command line option has precedence over the </span><span class="si">{lower}</span><span class="s2"> name found</span>
+<span class="s2">inside the **</span><span class="si">{lower}</span><span class="s2">_name** file.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">EXISTENT_XLET_DESTINATION_MSG</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;**Destination folder exists!!!**</span>
+<span class="si">{path}</span><span class="s2"></span>
+
+<span class="s2">Choosing to proceed will completely remove the existent folder.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">XLET_DIR_IGNORED_PATTERNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;__pycache__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;__data__&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*~&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.bak&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.pyc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;z_*&quot;</span>
+<span class="p">]</span>
+
+<span class="n">XLET_EXTRA_FILES_IGNORED_PATTERNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;*.js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.xml&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.pot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;*.json&quot;</span>
+<span class="p">]</span>
+
+<span class="n">EXTRA_COMMON_FILES</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">root_folder</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;LICENSE.md&quot;</span><span class="p">,</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;python_scripts&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;helper.py&quot;</span><span class="p">,</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;assets/js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;main.js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;depends_on&quot;</span><span class="p">:</span> <span class="s2">&quot;HELP.html&quot;</span><span class="p">,</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;assets/css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bootstrap-tweaks.css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;depends_on&quot;</span><span class="p">:</span> <span class="s2">&quot;HELP.html&quot;</span><span class="p">,</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;assets/css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bootstrap.min.css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;depends_on&quot;</span><span class="p">:</span> <span class="s2">&quot;HELP.html&quot;</span><span class="p">,</span>
+<span class="p">}]</span>
+
+<span class="n">COMMON_HELP_ASSETS</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;js&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;js&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;main.js&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bootstrap-tweaks.css&quot;</span>
+<span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;source_path&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;__app__&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;html_assets&quot;</span><span class="p">,</span> <span class="s2">&quot;css&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;destination_path&quot;</span><span class="p">:</span> <span class="s2">&quot;css&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bootstrap.min.css&quot;</span>
+<span class="p">}]</span>
+
+<span class="n">README_LIST_ITEM_TEMPLATE</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;- [</span><span class="se">{{</span><span class="s1">xlet_name</span><span class="se">}}</span><span class="s1">](</span><span class="si">{</span><span class="n">URLS</span><span class="p">[</span><span class="s2">&quot;repo_docs&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">/_static/xlets_help_pages/</span><span class="se">{{</span><span class="s1">xlet_slug</span><span class="se">}}</span><span class="s1">/index.html)&#39;</span>
+
+<span class="n">THEME_BUILD_DATA</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">**Theme name:**                  </span><span class="si">{theme_name}</span><span class="s2"></span>
+<span class="s2">**Cinnamon version:**            </span><span class="si">{cinnamon_version}</span><span class="s2"></span>
+<span class="s2">**Gtk3 version:**                </span><span class="si">{gtk3_version}</span><span class="s2"></span>
+<span class="s2">**Gtk4 version:**                </span><span class="si">{gtk4_version}</span><span class="s2"></span>
+<span class="s2">**Output directory:**            </span><span class="si">{build_output}</span><span class="s2"></span>
+<span class="s2">**Ask overwrite confirmation:**  </span><span class="si">{do_not_confirm}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">XLETS_BUILD_DATA</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">**Domain name:**                 </span><span class="si">{domain_name}</span><span class="s2"></span>
+<span class="s2">**Output directory:**            </span><span class="si">{build_output}</span><span class="s2"></span>
+<span class="s2">**Install localizations:**       </span><span class="si">{install_localizations}</span><span class="s2"></span>
+<span class="s2">**Extra files from:**            </span><span class="si">{extra_files}</span><span class="s2"></span>
+<span class="s2">**Ask overwrite confirmation:**  </span><span class="si">{do_not_confirm}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">GIT_LOG_CMD_XLETS</span> <span class="o">=</span> <span class="s1">&#39;git log --grep=</span><span class="si">{xlet_slug}</span><span class="s1"> --pretty=format:&quot;</span><span class="se">\</span>
+<span class="s1">**Date:** </span><span class="si">%a</span><span class="s1">D&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Commit:** [%h](</span><span class="si">{repo_url}</span><span class="s1">/commit/%h)&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Author:** </span><span class="si">%a</span><span class="s1">N&lt;br/&gt;%n%n%b%n***%n&quot; </span><span class="se">\</span>
+<span class="s1">-- </span><span class="si">{relative_path}</span><span class="s1"> </span><span class="si">{append_or_override}</span><span class="s1"> &quot;</span><span class="si">{log_path}</span><span class="s1">&quot;&#39;</span>
+
+<span class="n">CHANGELOG_HEADER_XLETS</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;## </span><span class="si">{xlet_name}</span><span class="s2"> changelogs</span>
+
+<span class="s2">**These change logs are only valid for the version of the xlet hosted on [its original repository](</span><span class="si">{repo_url}</span><span class="s2">).**</span>
+
+<span class="s2">***</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># NOTE: Making &#39;git log&#39; ignore changes for certain paths: https://stackoverflow.com/a/21079437</span>
+<span class="n">GIT_LOG_CMD_REPO</span> <span class="o">=</span> <span class="s1">&#39;git log --no-merges --grep=&quot;</span><span class="si">{all_xlets_slugs}</span><span class="s1">&quot; --invert-grep --pretty=format:&quot;</span><span class="se">\</span>
+<span class="s1">**Date:** </span><span class="si">%a</span><span class="s1">D&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Commit:** [%h](</span><span class="si">{repo_url}</span><span class="s1">/commit/%h)&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Author:** </span><span class="si">%a</span><span class="s1">N&lt;br/&gt;%n%n### %B%n***%n&quot; </span><span class="se">\</span>
+<span class="s1">-- </span><span class="si">{relative_path}</span><span class="s1"> &quot;:(exclude)themes&quot; </span><span class="si">{append_or_override}</span><span class="s1"> &quot;</span><span class="si">{log_path}</span><span class="s1">&quot;&#39;</span>
+
+<span class="n">CHANGELOG_HEADER_REPO</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;## Repository changelog</span>
+
+<span class="s2">**The changelogs for xlets can be found inside each xlet folder and/or in their help pages. The changelog for themes can be found inside the *themes* folder.**</span>
+
+<span class="s2">***</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">GIT_LOG_CMD_THEMES</span> <span class="o">=</span> <span class="s1">&#39;git log --pretty=format:&quot;</span><span class="se">\</span>
+<span class="s1">**Date:** </span><span class="si">%a</span><span class="s1">D&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Commit:** [%h](</span><span class="si">{repo_url}</span><span class="s1">/commit/%h)&lt;br/&gt;%n</span><span class="se">\</span>
+<span class="s1">**Author:** </span><span class="si">%a</span><span class="s1">N&lt;br/&gt;%n%n%b%n***%n&quot; </span><span class="se">\</span>
+<span class="s1">-- </span><span class="si">{relative_path}</span><span class="s1"> &quot;:(exclude)themes/CHANGELOG.md&quot; </span><span class="si">{append_or_override}</span><span class="s1"> &quot;</span><span class="si">{log_path}</span><span class="s1">&quot;&#39;</span>
+
+<span class="n">CHANGELOG_HEADER_THEMES</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;## Themes changelog</span>
+
+<span class="s2">***</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="_"><a class="viewcode-back" href="../../modules/python_modules/python_modules.app_data.html#python_modules.app_data._">[docs]</a><span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">aStr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dummy function used to be able to declare calls to the gettext _() function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    aStr : str</span>
+<span class="sd">        String.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        String.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">aStr</span></div>
+
+
+<span class="n">LOCALIZED_STRINGS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;metadata-contributors&quot;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;See this xlet help file.&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;metadata-comments&quot;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Bug reports, feature requests and contributions should be done on this xlet&#39;s repository linked next.&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

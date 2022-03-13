@@ -1,67 +1,32 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Development notes &mdash; Cinnamon Tools  documentation</title>
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development notes &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Code styling/guidelines" href="04-code-styling.html" />
     <link rel="prev" title="Cinnamon tips and tricks" href="02-tips-and-tricks.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -69,32 +34,24 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01-usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#xlets-development-commandments">Xlets development <em>commandments</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#z-config-py-file-inside-xlets-directories">z_config.py file inside xlets directories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-config-yaml-file-inside-xlets-directories"><code class="docutils literal notranslate"><span class="pre">__data__/config.yaml</span></code> file inside xlets directories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#symlinks-key"><code class="docutils literal notranslate"><span class="pre">symlinks</span></code> key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#make-pot-additional-files-key"><code class="docutils literal notranslate"><span class="pre">make_pot_additional_files</span></code> key</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#extra-files-key"><code class="docutils literal notranslate"><span class="pre">extra_files</span></code> key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-modules-and-javascript-modules-keys"><code class="docutils literal notranslate"><span class="pre">python_modules</span></code> and <code class="docutils literal notranslate"><span class="pre">javascript_modules</span></code> keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-pot-additional-files-key"><code class="docutils literal notranslate"><span class="pre">make_pot_additional_files</span></code> key</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#min-cinnamon-version-override-and-max-cinnamon-version-override-keys"><code class="docutils literal notranslate"><span class="pre">min_cinnamon_version_override</span></code> and <code class="docutils literal notranslate"><span class="pre">max_cinnamon_version_override</span></code> keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-executable-key"><code class="docutils literal notranslate"><span class="pre">set_executable</span></code> key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#symlinks-key"><code class="docutils literal notranslate"><span class="pre">symlinks</span></code> key</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#z-create-localized-help-py-file-inside-xlets-directories">z_create_localized_help.py file inside xlets directories</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-create-localized-help-py-file-inside-xlets-directories"><code class="docutils literal notranslate"><span class="pre">__data__/create_localized_help.py</span></code> file inside xlets directories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#help-pages-html-assets">Help pages HTML assets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#main-class-methods-overview-more-details-in-api-documentation">Main class methods overview (more details in API documentation)</a></li>
 </ul>
@@ -116,88 +73,60 @@
 <li class="toctree-l1"><a class="reference internal" href="06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Development notes</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-            
             <a href="../_sources/includes/03-development-notes.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
-  </ul>
-
-  
-  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
-      
-        <a href="04-code-styling.html" class="btn btn-neutral float-right" title="Code styling/guidelines" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-left" title="Cinnamon tips and tricks" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-left" title="Cinnamon tips and tricks" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="04-code-styling.html" class="btn btn-neutral float-right" title="Code styling/guidelines" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="development-notes">
+             
+  <section id="development-notes">
 <h1>Development notes<a class="headerlink" href="#development-notes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="xlets-development-commandments">
+<section id="xlets-development-commandments">
 <h2>Xlets development <em>commandments</em><a class="headerlink" href="#xlets-development-commandments" title="Permalink to this headline">¶</a></h2>
 <ul>
+<li><p>Avoid at all cost to make xlets <strong>multiversion</strong>. I already went through that path. It wasn't pretty all the nonsense that I had to endure.</p></li>
+<li><p>Don't bother to implement the use of <code class="docutils literal notranslate"><span class="pre">setTimeout</span></code>, <code class="docutils literal notranslate"><span class="pre">clearTimeout</span></code>, <code class="docutils literal notranslate"><span class="pre">setInterval</span></code> and <code class="docutils literal notranslate"><span class="pre">clearInterval</span></code> to replace the use of <code class="docutils literal notranslate"><span class="pre">Mainloop.timeout_add</span></code> and <code class="docutils literal notranslate"><span class="pre">Mainloop.source_remove</span></code>. It was added around Cinnamon 4.0.x. Lets see if they get forced down CJS' throat before considering their usage.</p>
+<blockquote>
+<div><ul>
+<li><p><strong>Addendum</strong>: I implemented the <code class="docutils literal notranslate"><span class="pre">ScheduleManager</span></code> class (found in the <strong>globalUtils.js</strong> module) to take care of this with the following advantages.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>I don't need to keep track of the timeouts/intervals; it is done automatically.</p></li>
+<li><p>I don't need to clear a timeout/interval before starting another one; it is done automatically.</p></li>
+<li><p>I don't need to clear timeouts/intervals individually; I can do it in bulk with just one call.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
 <li><p>Eradicate from your thoughts the existence of Node.js. I can do infinitely more with just ten lines of Python code than with ten lines of JavaScript code that depend on 10 Node.js modules with a thousand lines of code each.</p></li>
 <li><p>If a Python module is required for xlets development, make it part of the Python application if possible. Otherwise, create a mechanism to install required modules.</p></li>
 <li><p>Try to use <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code> inside the initialization code of an xlet if possible. Take into account the following:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">_expandAppletContextMenu</span></code> and the <code class="docutils literal notranslate"><span class="pre">_bindSettings</span></code> method calls should NOT be inside <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">_expandAppletContextMenu</span></code> method calls should NOT be inside <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code>.</p></li>
 <li><p>Avoid using <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code> inside an extension code for obvious reasons.</p></li>
 <li><p>Be aware of using <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code> inside a <em>very advanced</em> xlet. For example, using <code class="docutils literal notranslate"><span class="pre">Mainloop.idle_add</span></code> to delay the initialization of the <strong>Window list applet</strong> or the <strong>System Tray applet</strong> will inevitably break these applets initialization processes.</p></li>
 </ul>
@@ -211,7 +140,7 @@
 <li><p>Applets:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Never use the <code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key in their metadata.json files. Cinnamon executes the application specified in this key without arguments, and the custom settings framework application needs arguments to be passed (the applet instance ID, its UUID, etc.).</p></li>
+<li><p>Never use the <code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key in their metadata.json files. Cinnamon executes the application specified in this key without arguments, and the custom settings framework application needs arguments to be passed (the applet instance ID, its UUID, etc.). <strong>Addendum</strong>: Ignore this. I redesigned the xlets settings framework so as to not need to be executed with arguments.</p></li>
 <li><p>Always override the applet's <strong>Configure...</strong> context menu item to force the opening of the custom settings framework application.</p></li>
 </ul>
 </div></blockquote>
@@ -227,45 +156,75 @@
 </ul>
 <div class="admonition-warning warning admonition">
 <p class="admonition-title">About Cinnamon's native settings system</p>
-<p>Up to Cinnamon 3.8.x (<abbr title="If I Recall Correctly">IIRC</abbr>), if using an external application for an xlet settings (<code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key in <strong>metadata.json</strong>) and at the same time inside the xlet folder exists the file <strong>settings-schema.json</strong>, then Cinnamon will not open the external application, it will open instead its native settings window. To overcome this, I also add a button to be displayed in the native settings system to open the <em>real</em> settings window (the one defined in <code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key). But even that will not work in certain Cinnamon versions in which buttons aren't functional. And that's why I provide the function to create a .desktop file to open the <em>real</em> settings window.</p>
+<p>Up to Cinnamon 3.8.x (<abbr title="If I Recall Correctly">IIRC</abbr>), if using an external application for an xlet settings (<code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key in <strong>metadata.json</strong>) and at the same time inside the xlet folder exists the file <strong>settings-schema.json</strong>, then Cinnamon will not open the external application, it will open instead its native settings window. To overcome this, I also add a button to be displayed in the native settings system to open the <em>real</em> settings window (the one defined in <code class="docutils literal notranslate"><span class="pre">external-configuration-app</span></code> key). But even that will not work in certain Cinnamon versions in which buttons aren't functional. And that's why I provide the function to create a .desktop file to open the <em>real</em> settings window. <strong>Addendum</strong>: Ignore this. I don't support Cinnamon versions older than 5.0.</p>
 </div>
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="z-config-py-file-inside-xlets-directories">
-<h2>z_config.py file inside xlets directories<a class="headerlink" href="#z-config-py-file-inside-xlets-directories" title="Permalink to this headline">¶</a></h2>
-<p>This file contains a single variable called <strong>settings</strong> (a dictionary). These settings are read and applied when an xlet is built.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>I was forced to implement this configuration file due to one single reason. If I manually create the symbolic links inside the xlets folders, and since I'm working directly inside a Dropbox folder, the symbolic links are constantly <em>resolving themselves</em> (a Dropbox <em>feature</em>). So I came up with the idea of creating those symbolic links when the xlets are built.</p>
-</div>
-<div class="section" id="example">
+</section>
+<section id="data-config-yaml-file-inside-xlets-directories">
+<h2><code class="docutils literal notranslate"><span class="pre">__data__/config.yaml</span></code> file inside xlets directories<a class="headerlink" href="#data-config-yaml-file-inside-xlets-directories" title="Permalink to this headline">¶</a></h2>
+<p>This file contains settings that are read and applied when an xlet is built.</p>
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;symlinks&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;3.8&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;../icons&quot;</span><span class="p">,</span> <span class="s2">&quot;icons&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;../applet.js&quot;</span><span class="p">,</span> <span class="s2">&quot;applet.js&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;../HELP.html&quot;</span><span class="p">,</span> <span class="s2">&quot;HELP.html&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;../icon.png&quot;</span><span class="p">,</span> <span class="s2">&quot;icon.png&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;../utils.js&quot;</span><span class="p">,</span> <span class="s2">&quot;utils.js&quot;</span><span class="p">)</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="s2">&quot;make_pot_additional_files&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;../../__app__/data/python_modules/xlets_settings/__init__.py&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;../../__app__/data/python_modules/xlets_settings/SettingsWidgets.py&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;../../__app__/data/python_modules/xlets_settings/TreeListWidgets.py&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;extra_files&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;__app__/data/python_modules/xlets_settings&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="s2">&quot;python_modules/xlets_settings&quot;</span>
-    <span class="p">}]</span>
-<span class="p">}</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># START config.yaml</span><span class="w"></span>
+<span class="nt">%YAML</span><span class="w"> </span><span class="m">1.1</span><span class="w"></span>
+<span class="nn">---</span><span class="w"></span>
+<span class="nt">extra_files</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">destination</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schemas/org.cinnamon.{{XLET_TYPE}}s.{{UUID}}.gschema.xml</span><span class="w"></span>
+<span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__app__/data/gschemas/debugManagerSchema.xml</span><span class="w"></span>
+<span class="nt">javascript_modules</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">appletsUtils.js</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debugManager.js</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">globalUtils.js</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notificationsUtils.js</span><span class="w"></span>
+<span class="nt">make_pot_additional_files</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../__app__/data/python_modules/xlets_settings/__init__.py</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../__app__/data/python_modules/xlets_settings/SettingsWidgets.py</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../../__app__/data/python_modules/xlets_settings/TreeListWidgets.py</span><span class="w"></span>
+<span class="nt">max_cinnamon_version_override</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w"></span>
+<span class="nt">min_cinnamon_version_override</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.8</span><span class="w"></span>
+<span class="nt">python_modules</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xlets_settings</span><span class="w"></span>
+<span class="nt">set_executable</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">file.ext</span><span class="w"></span>
+<span class="nt">symlinks</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;5.4&quot;</span><span class="p p-Indicator">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../icons</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icons</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../applet.js</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">applet.js</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../HELP.html</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HELP.html</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../icon.png</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icon.png</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../utils.js</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">utils.js</span><span class="w"></span>
+<span class="c1"># END config.yaml</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="symlinks-key">
+</section>
+<section id="extra-files-key">
+<h3><code class="docutils literal notranslate"><span class="pre">extra_files</span></code> key<a class="headerlink" href="#extra-files-key" title="Permalink to this headline">¶</a></h3>
+<p>A list of extra files/folders to copy into an xlet folder at build time. Each element on the list should be a dictionary with only two keys (<code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">destination</span></code>). The <code class="docutils literal notranslate"><span class="pre">source</span></code> should be a path relative to the repository root folder and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> should be a path relative to the xlet folder.</p>
+</section>
+<section id="python-modules-and-javascript-modules-keys">
+<h3><code class="docutils literal notranslate"><span class="pre">python_modules</span></code> and <code class="docutils literal notranslate"><span class="pre">javascript_modules</span></code> keys<a class="headerlink" href="#python-modules-and-javascript-modules-keys" title="Permalink to this headline">¶</a></h3>
+<p>These keys are lists of <em>modules</em> that are added to an xlet at building time. I used to just use the <code class="docutils literal notranslate"><span class="pre">extra_files</span></code> for this task, but I had to specify source and destination for each file/folder added, which was cumbersome. By implementing these two options I accomplished three things; easy declaration, cleaner organization of xlets files (all Python modules in one sub-folder and all JavaScript modules in another), and automatic addition of files to scan when generating xlet's POT files (so I don't have to specify them in the <code class="docutils literal notranslate"><span class="pre">make_pot_additional_files</span></code> key).</p>
+</section>
+<section id="make-pot-additional-files-key">
+<h3><code class="docutils literal notranslate"><span class="pre">make_pot_additional_files</span></code> key<a class="headerlink" href="#make-pot-additional-files-key" title="Permalink to this headline">¶</a></h3>
+<p>A list of paths to files relative to an xlet source directory. These files are scanned for translatable strings when generating an xlet translation template.</p>
+</section>
+<section id="min-cinnamon-version-override-and-max-cinnamon-version-override-keys">
+<h3><code class="docutils literal notranslate"><span class="pre">min_cinnamon_version_override</span></code> and <code class="docutils literal notranslate"><span class="pre">max_cinnamon_version_override</span></code> keys<a class="headerlink" href="#min-cinnamon-version-override-and-max-cinnamon-version-override-keys" title="Permalink to this headline">¶</a></h3>
+<p>These keys values should be a float representing the minimum/maximum Cinnamon version an xlet can be installed on. They are used to override the minimum/maximum version hardcoded in the Python application and that are used at xlet build time to generate a range of versions to be used by the <code class="docutils literal notranslate"><span class="pre">cinnamon-version</span></code> key found in an xlet metadata.json file.</p>
+</section>
+<section id="set-executable-key">
+<h3><code class="docutils literal notranslate"><span class="pre">set_executable</span></code> key<a class="headerlink" href="#set-executable-key" title="Permalink to this headline">¶</a></h3>
+<p>A list of file names relative to an xlet root folder to be set as executable at building time. I used to set as executable all files that ended with specific extensions (py, sh, etc.), but I never liked this. So, I implemented this setting.</p>
+</section>
+<section id="symlinks-key">
 <h3><code class="docutils literal notranslate"><span class="pre">symlinks</span></code> key<a class="headerlink" href="#symlinks-key" title="Permalink to this headline">¶</a></h3>
 <p>The main use of the <code class="docutils literal notranslate"><span class="pre">symlinks</span></code> key is to generate symbolic links to files in the root folder of an xlet inside a <em>version sub-folder</em> to be used by <strong>multiversion</strong> enabled xlets.</p>
 <p>This key is a dictionary of keys representing a sub-folder name inside an xlet directory. Each key contains a list of tuples representing the symbolic link target as its first index and the symbolic link name as its second index.</p>
@@ -274,22 +233,10 @@
 <p class="admonition-title">Warning</p>
 <p>It's important to make all symbolic links targets relative, not absolute.</p>
 </div>
-</div>
-<div class="section" id="make-pot-additional-files-key">
-<h3><code class="docutils literal notranslate"><span class="pre">make_pot_additional_files</span></code> key<a class="headerlink" href="#make-pot-additional-files-key" title="Permalink to this headline">¶</a></h3>
-<p>A list of paths to files relative to an xlet source directory. These files are scanned for translatable strings when generating an xlet translation template.</p>
-</div>
-<div class="section" id="extra-files-key">
-<h3><code class="docutils literal notranslate"><span class="pre">extra_files</span></code> key<a class="headerlink" href="#extra-files-key" title="Permalink to this headline">¶</a></h3>
-<p>A list of extra files/folders to copy into an xlet folder at build time. Each element on the list should be a dictionary with only two keys (<code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">destination</span></code>). The <code class="docutils literal notranslate"><span class="pre">source</span></code> should be a path relative to the repository root folder and the <code class="docutils literal notranslate"><span class="pre">destination</span></code> should be a path relative to the xlet folder.</p>
-</div>
-<div class="section" id="min-cinnamon-version-override-and-max-cinnamon-version-override-keys">
-<h3><code class="docutils literal notranslate"><span class="pre">min_cinnamon_version_override</span></code> and <code class="docutils literal notranslate"><span class="pre">max_cinnamon_version_override</span></code> keys<a class="headerlink" href="#min-cinnamon-version-override-and-max-cinnamon-version-override-keys" title="Permalink to this headline">¶</a></h3>
-<p>These keys values should be a float representing the minimum/maximum Cinnamon version an xlet can be installed on. They are used to override the minimum/maximum version hardcoded in the Python application and that are used at xlet build time to generate a range of versions to be used by the <code class="docutils literal notranslate"><span class="pre">cinnamon-version</span></code> key found in an xlet metadata.json file.</p>
-</div>
-</div>
-<div class="section" id="z-create-localized-help-py-file-inside-xlets-directories">
-<h2>z_create_localized_help.py file inside xlets directories<a class="headerlink" href="#z-create-localized-help-py-file-inside-xlets-directories" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="data-create-localized-help-py-file-inside-xlets-directories">
+<h2><code class="docutils literal notranslate"><span class="pre">__data__/create_localized_help.py</span></code> file inside xlets directories<a class="headerlink" href="#data-create-localized-help-py-file-inside-xlets-directories" title="Permalink to this headline">¶</a></h2>
 <p>This file is used to generate the <strong>HELP.html</strong> page for each xlet. The <strong>HELP.html</strong> file is an HTML document located at the root of an xlet folder.</p>
 <div class="admonition-info info admonition">
 <p class="admonition-title">Why this method of creating the <strong>HELP.html</strong> file?</p>
@@ -322,15 +269,15 @@
 </li>
 </ul>
 </div>
-<div class="section" id="help-pages-html-assets">
+<section id="help-pages-html-assets">
 <h3>Help pages HTML assets<a class="headerlink" href="#help-pages-html-assets" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://getbootstrap.com/">Bootstrap 4</a> is used as a <abbr title="Cascading Style Sheets">CSS</abbr> framework. No Bootstrap JavaScript plugins nor jQuery is used.</p></li>
-<li><p>Using my own Boostrap 4 theme built with <a class="reference external" href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Themes Generator</a> and based on <a class="reference external" href="https://bootswatch.com">Bootswatch's</a> <a class="reference external" href="https://bootswatch.com/flatly">Flatly theme</a>. Only because the colors of the default Bootstrap theme are abhorrent.</p></li>
+<li><p><a class="reference external" href="https://getbootstrap.com/">Bootstrap 5</a> is used as a <abbr title="Cascading Style Sheets">CSS</abbr> framework. No Bootstrap JavaScript plugins nor jQuery is used.</p></li>
+<li><p>Using my own Boostrap 5 theme built with <a class="reference external" href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Themes Generator</a> and based on <a class="reference external" href="https://bootswatch.com">Bootswatch's</a> <a class="reference external" href="https://bootswatch.com/flatly">Flatly theme</a>. Only because the colors of the default Bootstrap theme are abhorrent.</p></li>
 <li><p>JavaScript is only used for the page localization mechanism and a smooth scroll effect when clicking in-line links.</p></li>
 </ul>
-</div>
-<div class="section" id="main-class-methods-overview-more-details-in-api-documentation">
+</section>
+<section id="main-class-methods-overview-more-details-in-api-documentation">
 <h3>Main class methods overview (more details in API documentation)<a class="headerlink" href="#main-class-methods-overview-more-details-in-api-documentation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><strong>get_content_base:</strong> Basic information about the xlet.</p></li>
@@ -338,15 +285,15 @@
 <li><p><strong>get_css_custom:</strong> Additional <abbr title="Cascading Style Sheets">CSS</abbr> styles.</p></li>
 <li><p><strong>get_js_custom:</strong> Some custom <abbr title="JavaScript">JS</abbr> in case that the page needs it.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="opengl-shaders">
+</section>
+</section>
+<section id="opengl-shaders">
 <h2>OpenGL shaders<a class="headerlink" href="#opengl-shaders" title="Permalink to this headline">¶</a></h2>
 <p>While developing one of my xlets, I was forced to learn an entire new programming language called GLSL (OpenGL Shading Language). Which is similar to HLSL (High Level Shading Language). <strong>To be continued...</strong></p>
-</div>
-<div class="section" id="javascript-cjs-nonsense-countermeasures">
+</section>
+<section id="javascript-cjs-nonsense-countermeasures">
 <h2>JavaScript/CJS nonsense countermeasures<a class="headerlink" href="#javascript-cjs-nonsense-countermeasures" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="signals-management">
+<section id="signals-management">
 <h3>Signals management<a class="headerlink" href="#signals-management" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Always use the signal manager provided by Cinnamon (/usr/share/cinnamon/js/misc/signalManager.js) when possible.</p></li>
@@ -357,19 +304,20 @@
 <p class="admonition-title">Why?</p>
 <p>Because CJS is stupid enough to attempt to disconnect signals that do not exist anymore.</p>
 </div>
-</div>
-<div class="section" id="xlets-settings-handling-usr-share-cinnamon-js-ui-settings-js">
+</section>
+<section id="xlets-settings-handling-usr-share-cinnamon-js-ui-settings-js">
 <h3>Xlets settings handling (/usr/share/cinnamon/js/ui/settings.js)<a class="headerlink" href="#xlets-settings-handling-usr-share-cinnamon-js-ui-settings-js" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>For extensions using Cinnamon's native settings system, always use the JavaScript global module found at <code class="docutils literal notranslate"><span class="pre">__app__/data/javascript_modules/xletsSettingsUtils.js</span></code> (<code class="docutils literal notranslate"><span class="pre">CustomExtensionSettings</span></code> class). This is to be able to use the settings from any module without the need to pass the settings object or a setting value as an argument.</p></li>
+<li><p>For extensions using Cinnamon's native settings system, always use the JavaScript global module found at <code class="docutils literal notranslate"><span class="pre">__app__/data/javascript_modules/extensionsUtils.js</span></code> (<code class="docutils literal notranslate"><span class="pre">CustomExtensionSettings</span></code> class). This is to be able to use the settings from any module without the need to pass the settings object or a setting value as an argument.</p></li>
 <li><p>For applets/desklets, always instantiate Cinnamon's native settings system from inside the main xlet object (the one returned when <code class="docutils literal notranslate"><span class="pre">main()</span></code> is called). This will force to pass the xlet object or a setting value as arguments, but it is needed because for applets/desklets, an xlet instance ID needs to be used to instantiate the settings object.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="gobject-apis-nonsense-countermeasures">
+</section>
+</section>
+<section id="gobject-apis-nonsense-countermeasures">
 <h2>GObject APIs nonsense countermeasures<a class="headerlink" href="#gobject-apis-nonsense-countermeasures" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="gio">
+<section id="gio">
 <h3>Gio<a class="headerlink" href="#gio" title="Permalink to this headline">¶</a></h3>
+<p><strong>Addendum</strong>: I implemented the <code class="docutils literal notranslate"><span class="pre">launchUri</span></code> function (found in the <strong>globalUtils.js</strong> module). This function uses the <code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.AppInfo.launch_default_for_uri_async</span></code> function, automatically converts a path into an URI and, in case of error, it falls back to the <code class="docutils literal notranslate"><span class="pre">nemo-open-with</span></code> command.</p>
 <p>Abandon the use of the <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command to open URLs/URIs with the default application registered to handle them in favor of calling <code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.AppInfo.launch_default_for_uri_async</span></code>, which isn't currently available on Ubuntu 16.04 base.</p>
 <p>The goal is to eliminate the dependency on the <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command, although it being used by Cinnamon itself, it might be removed any second from it. Furthermore, <code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.AppInfo.launch_default_for_uri_async</span></code> is better equipped to handle errors.</p>
 <div class="admonition note">
@@ -379,36 +327,28 @@
 <li><p>Handle passed paths and convert them into URIs. ¬¬</p></li>
 </ul>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="04-code-styling.html" class="btn btn-neutral float-right" title="Code styling/guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-left" title="Cinnamon tips and tricks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-left" title="Cinnamon tips and tricks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="04-code-styling.html" class="btn btn-neutral float-right" title="Code styling/guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -420,10 +360,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

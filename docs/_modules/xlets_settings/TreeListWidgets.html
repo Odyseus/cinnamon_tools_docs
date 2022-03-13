@@ -1,65 +1,29 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xlets_settings.TreeListWidgets &mdash; Cinnamon Tools  documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,17 +31,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
@@ -88,70 +42,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
           <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
-        
       <li>xlets_settings.TreeListWidgets</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for xlets_settings.TreeListWidgets</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/python3</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Tree list widget.</span>
 
@@ -187,19 +104,21 @@
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">Keybinding</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">KeybindingWithOptions</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">SettingsWidget</span>
+<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">SoundFileChooser</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">SpinButton</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">Switch</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">Text</span>
 <span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">TextView</span>
-<span class="kn">from</span> <span class="nn">.SettingsWidgets</span> <span class="kn">import</span> <span class="n">_</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">BaseGrid</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">IntelligentGtkDialog</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">_</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">contrast_rgba_color</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">display_message_dialog</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">generate_options_from_paths</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">get_global</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">get_keybinding_display_name</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">get_toplevel_window</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">handle_combobox_options</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">import_export</span>
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">sort_combo_options</span>
-<span class="c1"># from SettingsWidgets import SoundFileChooser</span>
 
 <span class="n">LIST_VARIABLE_TYPE_MAP</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># appchooser</span>
@@ -223,7 +142,7 @@
     <span class="c1"># textview</span>
     <span class="s2">&quot;multistring&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="c1"># soundfilechooser</span>
-    <span class="c1"># &quot;sound&quot;: str,</span>
+    <span class="s2">&quot;sound&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="c1"># entry</span>
     <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">}</span>
@@ -239,8 +158,8 @@
     <span class="s2">&quot;keybinding&quot;</span><span class="p">:</span> <span class="n">Keybinding</span><span class="p">,</span>
     <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span> <span class="n">KeybindingWithOptions</span><span class="p">,</span>
     <span class="s2">&quot;multistring&quot;</span><span class="p">:</span> <span class="n">TextView</span><span class="p">,</span>
+    <span class="s2">&quot;sound&quot;</span><span class="p">:</span> <span class="n">SoundFileChooser</span><span class="p">,</span>
     <span class="s2">&quot;string&quot;</span><span class="p">:</span> <span class="n">Entry</span><span class="p">,</span>
-    <span class="c1"># &quot;sound&quot;: SoundFileChooser,</span>
 <span class="p">}</span>
 
 <span class="n">LIST_PROPERTIES_MAP</span> <span class="o">=</span> <span class="p">{</span>
@@ -253,6 +172,8 @@
     <span class="c1"># filechooser: If true, enable folder selection of the file chooser. If false,</span>
     <span class="c1"># enable file selection.</span>
     <span class="s2">&quot;select-dir&quot;</span><span class="p">:</span> <span class="s2">&quot;dir_select&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pattern-filters&quot;</span><span class="p">:</span> <span class="s2">&quot;pattern_filters&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mimetype-filters&quot;</span><span class="p">:</span> <span class="s2">&quot;mimetype_filters&quot;</span><span class="p">,</span>
     <span class="c1"># spinbutton: Adjustment amount.</span>
     <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;step&quot;</span><span class="p">,</span>
     <span class="c1"># spinbutton: How many digits to handle.</span>
@@ -269,6 +190,9 @@
     <span class="s2">&quot;num-bind&quot;</span><span class="p">:</span> <span class="s2">&quot;num_bind&quot;</span><span class="p">,</span>
     <span class="c1"># colorchooser: Whether to be able to specify opacity.</span>
     <span class="s2">&quot;use-alpha&quot;</span><span class="p">:</span> <span class="s2">&quot;use_alpha&quot;</span><span class="p">,</span>
+    <span class="c1"># soundfilechooser: If True, only wav and ogg sound files will be filtered in</span>
+    <span class="c1"># the file chooser dialog. If set to False, all sound files will be displayed.</span>
+    <span class="s2">&quot;event-sounds&quot;</span><span class="p">:</span> <span class="s2">&quot;event_sounds&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -289,11 +213,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="c1"># TODO: Implemente this also for &quot;normal widgets&quot;.</span>
-    <span class="k">if</span> <span class="s2">&quot;options-from-paths&quot;</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
-        <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">generate_options_from_paths</span><span class="p">(</span>
-            <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options-from-paths&quot;</span><span class="p">],</span> <span class="n">xlet_settings</span><span class="p">)</span>
-
     <span class="k">if</span> <span class="s2">&quot;options&quot;</span> <span class="ow">in</span> <span class="n">col_def</span><span class="p">:</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;valtype&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LIST_VARIABLE_TYPE_MAP</span><span class="p">[</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span>
 
@@ -302,16 +221,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">widget_type</span> <span class="o">=</span> <span class="n">ComboBox</span>
 
-        <span class="n">options_list</span> <span class="o">=</span> <span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span>
-
-        <span class="c1"># NOTE: Sort both types of options. Otherwise, items will appear in</span>
-        <span class="c1"># different order every single time the widget is re-built.</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">options_list</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">options_list</span><span class="p">,</span> <span class="n">options_list</span><span class="p">)</span>
-
-        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sort_combo_options</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="n">col_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first-option&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">handle_combobox_options</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span>
+            <span class="n">first_option</span><span class="o">=</span><span class="n">col_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first-option&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">xlet_settings</span><span class="o">=</span><span class="n">xlet_settings</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">widget_type</span> <span class="o">=</span> <span class="n">LIST_CLASS_TYPE_MAP</span><span class="p">[</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span>
 
@@ -324,15 +238,15 @@
 <span class="sd">            The list widget value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">ka</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;Initialization.</span>
 
 <span class="sd">            Parameters</span>
 <span class="sd">            ----------</span>
-<span class="sd">            **kwargs</span>
+<span class="sd">            **ka</span>
 <span class="sd">                Keyword argumets.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
-            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">ka</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">connect_widget_handlers</span><span class="p">()</span>
@@ -384,10 +298,6 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_object&quot;</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">bind_object</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
-                    <span class="c1"># NOTE: Needed for special IconChooser case.</span>
-                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;bind_content_widget_entry&quot;</span><span class="p">):</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bind_prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
@@ -421,17 +331,25 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
+<span class="sd">    apply_key : str</span>
+<span class="sd">        The preference key bound to the Apply changes button on a :any:`TreeList` widget.</span>
 <span class="sd">    bind_dir : Gio.SettingsBindFlags, None</span>
 <span class="sd">        ``Gio.SettingsBindFlags`` flags.</span>
 <span class="sd">    content_widget : Gtk.TreeView</span>
 <span class="sd">        The main widget that will be used to represent a setting value.</span>
+<span class="sd">    dialog_height : int</span>
+<span class="sd">        Height of the dialog tied to the widget.</span>
+<span class="sd">    dialog_width : int</span>
+<span class="sd">        Width of the dialog tied to the widget.</span>
+<span class="sd">    imp_exp_path_key : str</span>
+<span class="sd">        The preference key where the last selected path used on the import/export file chooser dialog.</span>
 <span class="sd">    model : Gtk.ListStore</span>
 <span class="sd">        The model used as storage by this widget.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">bind_dir</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">immutable</span><span class="o">=</span><span class="p">{},</span> <span class="n">dialog_info_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">immutable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dialog_info_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
                  <span class="n">move_buttons</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multi_select</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dialog_width</span><span class="o">=</span><span class="mi">450</span><span class="p">,</span> <span class="n">apply_and_quit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialization.</span>
 
@@ -471,18 +389,21 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_vexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog_width</span> <span class="o">=</span> <span class="n">dialog_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dialog_height</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_columns</span> <span class="o">=</span> <span class="n">columns</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="o">=</span> <span class="n">immutable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">immutable</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_immutable_options</span> <span class="o">=</span> <span class="n">immutable</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">immutable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_only_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;read-only-keys&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_info_labels</span> <span class="o">=</span> <span class="n">dialog_info_labels</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span> <span class="o">=</span> <span class="n">move_buttons</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dialog_width</span> <span class="o">=</span> <span class="n">dialog_width</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span> <span class="o">=</span> <span class="n">multi_select</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_apply_and_quit</span> <span class="o">=</span> <span class="n">apply_and_quit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_allow_edition</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span> <span class="ow">or</span> \
-            <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;allow-edition&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_immutable_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;allow-edition&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="o">=</span> <span class="kc">None</span>
@@ -490,6 +411,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="si">}</span><span class="s1">_apply&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pref_key</span><span class="si">}</span><span class="s1">_imp_exp_path&#39;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># NOTE: If an imp_exp_path_key doesn&#39;t exists for a specific instance of this widget,</span>
+        <span class="c1"># attempt to locate a global one.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="ow">and</span> <span class="s2">&quot;imp_exp_last_selected_directory&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreeView</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_grid_lines</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">TreeViewGridLines</span><span class="o">.</span><span class="n">BOTH</span><span class="p">)</span>
@@ -497,6 +431,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_select</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">SelectionMode</span><span class="o">.</span><span class="n">MULTIPLE</span><span class="p">)</span>
 
+        <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+        <span class="c1"># Use Gtk.EventControllerKey instead of key-press-event.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;key-press-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_key_press_cb</span><span class="p">)</span>
 
         <span class="n">scrollbox</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ScrolledWindow</span><span class="p">()</span>
@@ -515,9 +451,13 @@
             <span class="k">if</span> <span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip&quot;</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="p">[</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;tooltip&quot;</span><span class="p">]</span>
 
-            <span class="n">has_option_map</span> <span class="o">=</span> <span class="s2">&quot;options&quot;</span> <span class="ow">in</span> <span class="n">column_def</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span>
+            <span class="n">has_option_map</span> <span class="o">=</span> <span class="s2">&quot;options&quot;</span> <span class="ow">in</span> <span class="n">column_def</span>
+            <span class="c1"># has_option_map = &quot;options&quot; in column_def and isinstance(column_def[&quot;options&quot;], dict)</span>
             <span class="n">render_type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span> <span class="k">if</span> <span class="n">has_option_map</span> <span class="k">else</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
 
+            <span class="c1"># NOTE: About read-only-keys option in an immutable list widget.</span>
+            <span class="c1"># I&#39;m preventing the renderers of type boolean, integer and float from being &quot;in-line editable&quot;</span>
+            <span class="c1"># when the column it belongs to is set to be read only.</span>
             <span class="k">if</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;boolean&quot;</span><span class="p">:</span>
                 <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererToggle</span><span class="p">()</span>
 
@@ -536,11 +476,13 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">path</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">path</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_list_changed</span><span class="p">()</span>
 
-                <span class="n">renderer</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;toggled&quot;</span><span class="p">,</span> <span class="n">toggle_checkbox</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_only_keys</span><span class="p">:</span>
+                    <span class="n">renderer</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;toggled&quot;</span><span class="p">,</span> <span class="n">toggle_checkbox</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
                 <span class="n">prop_name</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
             <span class="k">elif</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span> <span class="ow">or</span> <span class="n">render_type</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
                 <span class="n">renderer</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererSpin</span><span class="p">()</span>
-                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;editable&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="n">renderer</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;editable&quot;</span><span class="p">,</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_only_keys</span><span class="p">)</span>
                 <span class="n">digits</span> <span class="o">=</span> <span class="mi">0</span>
 
                 <span class="n">adjustment</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Adjustment</span><span class="p">()</span>
@@ -574,14 +516,14 @@
 <span class="sd">                    data : dict</span>
 <span class="sd">                        Data holding row information.</span>
 <span class="sd">                    &quot;&quot;&quot;</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">num_parser</span> <span class="o">=</span> <span class="nb">int</span>
+
                     <span class="c1"># NOTE: Stupid internationalization!</span>
                     <span class="c1"># float(value) will fail when value is a comma-separated float. ¬¬</span>
                     <span class="c1"># int(value) will fail when value is a comma/dot separated integer. ¬¬</span>
                     <span class="c1"># It might not be needed to use replace() for integers, but it doesn&#39;t hurt</span>
                     <span class="c1"># to have it. So, leave it.</span>
-                    <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                    <span class="n">num_parser</span> <span class="o">=</span> <span class="nb">int</span>
-
                     <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;num_parser&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;float&quot;</span><span class="p">:</span>
                         <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
                         <span class="n">num_parser</span> <span class="o">=</span> <span class="nb">float</span>
@@ -634,6 +576,14 @@
                         <span class="n">fg_rgba</span> <span class="o">=</span> <span class="n">contrast_rgba_color</span><span class="p">(</span><span class="n">bg_rgba</span><span class="p">)</span>
                         <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;background-rgba&quot;</span><span class="p">,</span> <span class="n">bg_rgba</span><span class="p">)</span>
                         <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;foreground-rgba&quot;</span><span class="p">,</span> <span class="n">fg_rgba</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># NOTE: I was having &quot;residual colors&quot; set in new list items.</span>
+                        <span class="c1"># When I added a new list item with a color set and then added another</span>
+                        <span class="c1"># new item but with the color not set, the newly added item&#39;s cell would</span>
+                        <span class="c1"># have the same color than the previously added item&#39;s cell.</span>
+                        <span class="c1"># Setting the following two properties fixed that.</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;background-set&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                        <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;foreground-set&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
                 <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">set_color_func</span><span class="p">,</span> <span class="p">{</span>
                     <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span>
@@ -689,9 +639,14 @@
 <span class="sd">                        User data passed to ``Gtk.CellLayout.set_cell_data_func()``.</span>
 <span class="sd">                    &quot;&quot;&quot;</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">row_iter</span><span class="p">][</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_index&quot;</span><span class="p">]]</span>
+                    <span class="n">options_tuples</span> <span class="o">=</span> <span class="n">handle_combobox_options</span><span class="p">(</span>
+                        <span class="n">options</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;column_def&quot;</span><span class="p">][</span><span class="s2">&quot;options&quot;</span><span class="p">],</span>
+                        <span class="n">first_option</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;column_def&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first-option&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                        <span class="n">xlet_settings</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;xlet_settings&quot;</span><span class="p">]</span>
+                    <span class="p">)</span>
 
-                    <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;col_def_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">val</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">options_tuples</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;column_def&quot;</span><span class="p">][</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding-with-options&quot;</span><span class="p">:</span>
                             <span class="k">try</span><span class="p">:</span>
                                 <span class="n">kb</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;::&quot;</span><span class="p">)</span>
                             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -702,22 +657,26 @@
                             <span class="k">if</span> <span class="n">kb</span> <span class="ow">and</span> <span class="n">val</span> <span class="o">==</span> <span class="n">opt</span><span class="p">:</span>
                                 <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span>
                                     <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-                                    <span class="n">get_keybinding_display_name</span><span class="p">(</span><span class="n">kb</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;::&quot;</span> <span class="o">+</span> <span class="n">key</span>
+                                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">get_keybinding_display_name</span><span class="p">(</span><span class="n">kb</span><span class="p">)</span><span class="si">}</span><span class="s2">::</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
                                 <span class="p">)</span>
                                 <span class="k">break</span>
                             <span class="k">else</span><span class="p">:</span>
                                 <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
-                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+                                <span class="c1"># NOTE: If the options definition is a dictionary, localize the</span>
+                                <span class="c1"># display value.</span>
+                                <span class="n">loc_key</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
+                                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;column_def&quot;</span><span class="p">][</span><span class="s2">&quot;options&quot;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="n">key</span>
+                                <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">loc_key</span><span class="p">)</span>
                                 <span class="k">break</span>
                             <span class="k">else</span><span class="p">:</span>
                                 <span class="n">rend</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
                 <span class="n">column</span><span class="o">.</span><span class="n">set_cell_data_func</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="n">map_func</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;options&quot;</span><span class="p">],</span>
-                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">,</span>
-                    <span class="s2">&quot;col_def_type&quot;</span><span class="p">:</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+                    <span class="s2">&quot;column_def&quot;</span><span class="p">:</span> <span class="n">column_def</span><span class="p">,</span>
+                    <span class="s2">&quot;xlet_settings&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">,</span>
+                    <span class="s2">&quot;col_index&quot;</span><span class="p">:</span> <span class="n">i</span>
                 <span class="p">})</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;keybinding&quot;</span><span class="p">:</span>
@@ -758,7 +717,7 @@
             <span class="k">if</span> <span class="s2">&quot;align&quot;</span> <span class="ow">in</span> <span class="n">column_def</span><span class="p">:</span>
                 <span class="n">renderer</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">column_def</span><span class="p">[</span><span class="s2">&quot;align&quot;</span><span class="p">],</span> <span class="mf">0.5</span><span class="p">)</span>
 
-            <span class="n">column</span><span class="o">.</span><span class="n">set_resizable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">column</span><span class="o">.</span><span class="n">set_resizable</span><span class="p">(</span><span class="n">column_def</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;col-resize&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">append_column</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tooltips_storage</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -768,36 +727,33 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ListStore</span><span class="p">(</span><span class="o">*</span><span class="n">types</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
 
-        <span class="n">button_toolbar</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Toolbar</span><span class="p">()</span>
-        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_icon_size</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">MENU</span><span class="p">)</span>
-        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">FILL</span><span class="p">)</span>
-        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_INLINE_TOOLBAR</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">button_toolbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="n">button_holder</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolItem</span><span class="p">()</span>
-        <span class="n">button_holder</span><span class="o">.</span><span class="n">set_expand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">button_toolbar</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">button_holder</span><span class="p">)</span>
         <span class="n">buttons_box</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
         <span class="n">buttons_box</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
-        <span class="n">button_holder</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">buttons_box</span><span class="p">)</span>
+        <span class="n">buttons_box</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
+        <span class="c1"># NOTE: This is used as button position inside a Gtk.Grid and also as buttons count.</span>
         <span class="n">button_position</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;list-add-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;list-add-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Add new item&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_item</span><span class="p">)</span>
 
             <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_add_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;list-remove-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;list-remove-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Remove selected item&quot;</span><span class="p">))</span>
             <span class="c1"># NOTE: Using button-release-event to be able to catch events.</span>
             <span class="c1"># clicked event doesn&#39;t pass the event. ¬¬</span>
+            <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+            <span class="c1"># Use Gtk.GestureClick instead of button-release-event.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;button-release-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_on_remove_item_cb</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_remove_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
@@ -805,8 +761,10 @@
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_edition</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;view-list-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;view-list-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Edit selected item&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edit_item</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_edit_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -815,16 +773,20 @@
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_buttons</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;go-up-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;go-up-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Move selected item up&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_up</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_move_up_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;go-down-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;go-down-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Move selected item down&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_move_item_down</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_move_down_button</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -832,12 +794,12 @@
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_exp_path_key</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-export-symbolic&quot;</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-export-symbolic&quot;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;custom-export-data-symbolic&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;document-export-symbolic&quot;</span>
+                <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-export-symbolic&quot;</span><span class="p">)</span> <span class="k">else</span>
+                <span class="s2">&quot;xlets-settings-export-data-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Export data&quot;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_export_data</span><span class="p">)</span>
@@ -845,12 +807,12 @@
             <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_export_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="n">import_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-import-symbolic&quot;</span><span class="p">):</span>
-                <span class="n">import_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-import-symbolic&quot;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">import_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;custom-import-data-symbolic&quot;</span><span class="p">)</span>
+            <span class="n">import_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;document-import-symbolic&quot;</span>
+                <span class="k">if</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">IconTheme</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span><span class="o">.</span><span class="n">has_icon</span><span class="p">(</span><span class="s2">&quot;document-import-symbolic&quot;</span><span class="p">)</span> <span class="k">else</span>
+                <span class="s2">&quot;xlets-settings-import-data-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
 
             <span class="n">import_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Import data&quot;</span><span class="p">))</span>
             <span class="n">import_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_import_data</span><span class="p">)</span>
@@ -858,11 +820,26 @@
             <span class="n">button_position</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">:</span>
-            <span class="n">apply_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="n">apply_button</span><span class="o">.</span><span class="n">set_icon_name</span><span class="p">(</span><span class="s2">&quot;document-save-symbolic&quot;</span><span class="p">)</span>
+            <span class="n">apply_button</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new_from_icon_name</span><span class="p">(</span>
+                <span class="s2">&quot;document-save-symbolic&quot;</span><span class="p">,</span>
+                <span class="n">Gtk</span><span class="o">.</span><span class="n">IconSize</span><span class="o">.</span><span class="n">LARGE_TOOLBAR</span>
+            <span class="p">))</span>
             <span class="n">apply_button</span><span class="o">.</span><span class="n">set_tooltip_text</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Apply changes&quot;</span><span class="p">))</span>
             <span class="n">apply_button</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;clicked&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_changes</span><span class="p">)</span>
             <span class="n">buttons_box</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">apply_button</span><span class="p">,</span> <span class="n">button_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: If no buttons were added to buttons_box, destroy it.</span>
+        <span class="k">if</span> <span class="n">button_position</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">toolbar</span> <span class="o">=</span> <span class="n">BaseGrid</span><span class="p">(</span><span class="n">orientation</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Orientation</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+            <span class="n">toolbar</span><span class="o">.</span><span class="n">set_halign</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">FILL</span><span class="p">)</span>
+            <span class="n">toolbar</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+            <span class="c1"># Replace Gtk.StyleContext.add_class with Gtk.Widget.add_css_class.</span>
+            <span class="n">toolbar</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_INLINE_TOOLBAR</span><span class="p">)</span>
+            <span class="n">toolbar</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">buttons_box</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">toolbar</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">buttons_box</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">get_selection</span><span class="p">()</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;changed&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_button_sensitivity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">content_widget</span><span class="o">.</span><span class="n">set_activate_on_single_click</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -1029,7 +1006,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        widget : Gtk.ToolButton</span>
+<span class="sd">        widget : Gtk.Button</span>
 <span class="sd">            The object which received the signal.</span>
 <span class="sd">        event : Gdk.EventButton</span>
 <span class="sd">            The ``Gdk.EventButton`` which triggered this signal.</span>
@@ -1044,7 +1021,7 @@
         <span class="n">confirm_removal</span> <span class="o">=</span> <span class="n">state</span> <span class="o">!=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">ModifierType</span><span class="o">.</span><span class="n">CONTROL_MASK</span>
 
         <span class="k">if</span> <span class="n">confirm_removal</span><span class="p">:</span>
-            <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+            <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="n">get_toplevel_window</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
                                        <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
                                        <span class="n">message_type</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span>
                                        <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">YES_NO</span><span class="p">)</span>
@@ -1251,19 +1228,20 @@
 
         <span class="k">if</span> <span class="n">filepath</span><span class="p">:</span>
             <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">(</span>
-                <span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
+                <span class="n">transient_for</span><span class="o">=</span><span class="n">get_toplevel_window</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
                 <span class="n">title</span><span class="o">=</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Import data&quot;</span><span class="p">),</span>
                 <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
-                <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">use_header_bar</span><span class="o">=</span><span class="n">get_global</span><span class="p">(</span><span class="s2">&quot;USE_HEADER_BARS_ON_DIALOGS&quot;</span><span class="p">),</span>
                 <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
                          <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Overwrite&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
                          <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Append&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">YES</span><span class="p">)</span>
             <span class="p">)</span>
 
             <span class="n">dialog</span><span class="o">.</span><span class="n">set_default_response</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">)</span>
-            <span class="n">dialog</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">buttons_box</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_action_area</span><span class="p">()</span>
-            <span class="n">buttons_box</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">&quot;halign&quot;</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Align</span><span class="o">.</span><span class="n">CENTER</span><span class="p">)</span>
+            <span class="c1"># NOTE: Enforcing a minimum width to avoid the title of the dialog to ellipsize. ¬¬</span>
+            <span class="c1"># I WILL NOT build from scratch an entire titlebar just to make its title behave</span>
+            <span class="c1"># as it f*cking should!!!</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_default_size</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
             <span class="c1"># Make Cancel button the default.</span>
             <span class="c1"># https://stackoverflow.com/q/23983975</span>
@@ -1301,7 +1279,7 @@
                 <span class="n">raw_data</span> <span class="o">=</span> <span class="n">data_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">imported_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span>
+                <span class="n">imported_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MalformedJSONFile</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 
@@ -1315,7 +1293,7 @@
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">on_setting_changed</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Wrong data type found on file &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Wrong data type found on file &#39;{</span><span class="si">%s</span><span class="s2">}&#39;&quot;</span><span class="p">)</span>
 
                 <span class="n">display_message_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                        <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Error importing data&quot;</span><span class="p">),</span>
@@ -1348,10 +1326,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">,</span>
                                 <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_key</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_and_quit</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
-                    <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ApplicationWindow</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_main_app</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">)</span></div>
+        <span class="n">main_app</span> <span class="o">=</span> <span class="n">get_global</span><span class="p">(</span><span class="s2">&quot;MAIN_APP&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">main_app</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_and_quit</span> <span class="ow">and</span> <span class="n">main_app</span><span class="o">.</span><span class="n">window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="n">main_app</span><span class="o">.</span><span class="n">window</span><span class="p">,</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ApplicationWindow</span><span class="p">):</span>
+                <span class="n">main_app</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TreeList._open_add_edit_dialog"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.TreeListWidgets.html#xlets_settings.TreeListWidgets.TreeList._open_add_edit_dialog">[docs]</a>    <span class="k">def</span> <span class="nf">_open_add_edit_dialog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_row</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Open add/edit dialog.</span>
@@ -1371,13 +1351,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">title</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Edit entry&quot;</span><span class="p">)</span>
 
-        <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Dialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
-                            <span class="n">use_header_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
-                            <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
-                            <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
-                                     <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Save&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
-                            <span class="p">)</span>
+        <span class="n">dialog</span> <span class="o">=</span> <span class="n">IntelligentGtkDialog</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">transient_for</span><span class="o">=</span><span class="n">get_toplevel_window</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+            <span class="n">use_header_bar</span><span class="o">=</span><span class="n">get_global</span><span class="p">(</span><span class="s2">&quot;USE_HEADER_BARS_ON_DIALOGS&quot;</span><span class="p">),</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
+            <span class="n">buttons</span><span class="o">=</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Cancel&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">CANCEL</span><span class="p">,</span>
+                     <span class="n">_</span><span class="p">(</span><span class="s2">&quot;_Save&quot;</span><span class="p">),</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="c1"># Make OK button the default.</span>
         <span class="c1"># https://stackoverflow.com/q/23983975</span>
@@ -1385,12 +1367,15 @@
         <span class="n">ok_button</span><span class="o">.</span><span class="n">set_can_default</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">ok_button</span><span class="o">.</span><span class="n">grab_default</span><span class="p">()</span>
 
-        <span class="n">dialog</span><span class="o">.</span><span class="n">set_size_request</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dialog_width</span><span class="p">,</span> <span class="n">height</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">content_area</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">get_content_area</span><span class="p">()</span>
         <span class="n">content_area</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
         <span class="n">frame</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Frame</span><span class="p">()</span>
+        <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+        <span class="c1"># Stop using set_shadow_type and set the boolean property has-frame.</span>
         <span class="n">frame</span><span class="o">.</span><span class="n">set_shadow_type</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ShadowType</span><span class="o">.</span><span class="n">IN</span><span class="p">)</span>
+        <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+        <span class="c1"># Replace Gtk.StyleContext.add_class with Gtk.Widget.add_css_class.</span>
         <span class="n">frame</span><span class="o">.</span><span class="n">get_style_context</span><span class="p">()</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">STYLE_CLASS_VIEW</span><span class="p">)</span>
         <span class="n">content_area</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
 
@@ -1410,9 +1395,7 @@
             <span class="n">widget</span> <span class="o">=</span> <span class="n">list_edit_factory</span><span class="p">(</span><span class="n">col_def</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
             <span class="n">widget</span><span class="o">.</span><span class="n">set_border_width</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="n">widget</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-                                     <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_immutable</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;read-only-keys&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">set_sensitive</span><span class="p">(</span><span class="n">col_def</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_only_keys</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="p">(</span><span class="n">Switch</span><span class="p">,</span> <span class="n">ColorChooser</span><span class="p">)):</span>
                 <span class="n">settings_box</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;row-activated&quot;</span><span class="p">,</span> <span class="n">widget</span><span class="o">.</span><span class="n">clicked</span><span class="p">)</span>
@@ -1424,9 +1407,6 @@
             <span class="c1"># be accessed with a single click.</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">TextView</span><span class="p">):</span>
                 <span class="n">settings_box</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;row-activated&quot;</span><span class="p">,</span> <span class="n">widget</span><span class="o">.</span><span class="n">focus_the_retarded_text_view</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="p">(</span><span class="n">IconChooser</span><span class="p">,</span> <span class="n">AppChooser</span><span class="p">)):</span>
-                <span class="n">widget</span><span class="o">.</span><span class="n">set_main_app</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_main_app</span><span class="p">())</span>
 
             <span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
             <span class="n">content</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">settings_box</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -1453,6 +1433,7 @@
                 <span class="n">last_widget_pos</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="n">content_area</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
+
         <span class="n">response</span> <span class="o">=</span> <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">response</span> <span class="o">==</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">ResponseType</span><span class="o">.</span><span class="n">OK</span><span class="p">:</span>
@@ -1525,21 +1506,19 @@
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -1551,10 +1530,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });

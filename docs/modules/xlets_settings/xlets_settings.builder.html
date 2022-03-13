@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xlets_settings.builder module &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="xlets_settings.common module" href="xlets_settings.common.html" />
+    <link rel="prev" title="xlets_settings.ansi_colors module" href="xlets_settings.ansi_colors.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">xlets_settings</a> &raquo;</li>
+          <li><a href="xlets_settings.html">xlets_settings package</a> &raquo;</li>
+      <li>xlets_settings.builder module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/xlets_settings/xlets_settings.builder.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="xlets_settings.ansi_colors.html" class="btn btn-neutral float-left" title="xlets_settings.ansi_colors module" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xlets_settings.common.html" class="btn btn-neutral float-right" title="xlets_settings.common module" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-xlets_settings.builder">
+<span id="xlets-settings-builder-module"></span><h1>xlets_settings.builder module<a class="headerlink" href="#module-xlets_settings.builder" title="Permalink to this headline">¶</a></h1>
+<p>Settings page definitions builder.</p>
+<p>I created this module for several reasons.</p>
+<ul class="simple">
+<li><p>I fed up of creating the definitions in their &quot;raw&quot; form using Python dictionaries.</p></li>
+<li><p>Autocompletions. When creating definitions in their &quot;raw&quot; form, I was constantly searching the source code for the correct property names. By using the Python classes in this module I have at my finger tips the autocompletions of their properties/arguments.</p></li>
+<li><p>Documentation. It's easier to create and maintain the documentation of a Python module than creating/maintaining a ResTructuredText file &quot;by hand&quot;.</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.ASTERISK_END">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">ASTERISK_END</span></span><a class="headerlink" href="#xlets_settings.builder.ASTERISK_END" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call attention with an asterix placed at the end of a frase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.ASTERISK_START">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">ASTERISK_START</span></span><a class="headerlink" href="#xlets_settings.builder.ASTERISK_START" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call attention with an asterix placed at the start of a frase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.CINN_RESTART">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">CINN_RESTART</span></span><a class="headerlink" href="#xlets_settings.builder.CINN_RESTART" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label to inform that Cinnamon needs to be restarted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.CINN_RESTART_MIGHT">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">CINN_RESTART_MIGHT</span></span><a class="headerlink" href="#xlets_settings.builder.CINN_RESTART_MIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label to inform that Cinnamon might need to be restarted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.CIRCLE">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">CIRCLE</span></span><a class="headerlink" href="#xlets_settings.builder.CIRCLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Character used as list definition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.LOGGING_LEVEL_TOOLTIP">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">LOGGING_LEVEL_TOOLTIP</span></span><a class="headerlink" href="#xlets_settings.builder.LOGGING_LEVEL_TOOLTIP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tooltip for the logging level chooser combobox.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.NOTES">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">NOTES</span></span><a class="headerlink" href="#xlets_settings.builder.NOTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">Using</span> <span class="pre">typing</span> <span class="pre">for</span> <span class="pre">the</span> <span class="pre">first</span> <span class="pre">time</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">used</span> <span class="pre">to</span> <span class="pre">it</span> <span class="pre">and</span> <span class="pre">to</span> <span class="pre">see</span> <span class="pre">how</span> <span class="pre">it</span> <span class="pre">affects</span> <span class="pre">documentation</span> <span class="pre">generation.</span> <span class="pre">Holding</span> <span class="pre">off</span> <span class="pre">wide</span> <span class="pre">spread</span> <span class="pre">utilization</span> <span class="pre">because</span> <span class="pre">the</span> <span class="pre">AutoDocstring</span> <span class="pre">plugin</span> <span class="pre">that</span> <span class="pre">I</span> <span class="pre">use</span> <span class="pre">doesn't</span> <span class="pre">extract</span> <span class="pre">&quot;annotated</span> <span class="pre">attributes&quot;.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">Importing</span> <span class="pre">``annotations``</span> <span class="pre">from</span> <span class="pre">``__future__``</span> <span class="pre">allows</span> <span class="pre">me</span> <span class="pre">to</span> <span class="pre">directly</span> <span class="pre">use</span> <span class="pre">``tuple[int,</span> <span class="pre">int]``</span> <span class="pre">instead</span> <span class="pre">of</span> <span class="pre">being</span> <span class="pre">forced</span> <span class="pre">to</span> <span class="pre">import</span> <span class="pre">``Tuple``</span> <span class="pre">from</span> <span class="pre">``typing``</span> <span class="pre">and</span> <span class="pre">use</span> <span class="pre">``Tuple[int,</span> <span class="pre">int]``,</span> <span class="pre">which</span> <span class="pre">is</span> <span class="pre">deprecated.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">-</span> <span class="pre">Using</span> <span class="pre">the</span> <span class="pre">:py:`dataclasses`</span> <span class="pre">module</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">cleaner</span> <span class="pre">classes</span> <span class="pre">and</span> <span class="pre">to</span> <span class="pre">minimize</span> <span class="pre">redundant</span> <span class="pre">docstrings.</span></span></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.Widget">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">Widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_key:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widget_kwargs:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema:</span> <span class="pre">typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Widget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Widget definition.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.Widget.widget_type2">
+<span class="sig-name descname"><span class="pre">widget_type2</span></span><a class="headerlink" href="#xlets_settings.builder.Widget.widget_type2" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="xlets_settings.builder.Widget.widget_type">
+<span class="sig-name descname"><span class="pre">widget_type</span></span><a class="headerlink" href="#xlets_settings.builder.Widget.widget_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.Label">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">Label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_kwargs:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widget_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_key:</span> <span class="pre">typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Label definition.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.ButtonsGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">ButtonsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_kwargs:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widget_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'buttonsgroup'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_key:</span> <span class="pre">typing.Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#ButtonsGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.ButtonsGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Button group definition.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.Section">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">Section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes:</span> <span class="pre">list</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dependency:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widgets:</span> <span class="pre">list[Widget]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Section definition.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.Section.add_buttons_group">
+<span class="sig-name descname"><span class="pre">add_buttons_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Section.add_buttons_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Section.add_buttons_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add buttons group to section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) -- Widget keyword arguments.</p></li>
+<li><p><strong>compatible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- The boolean result of an expresion to decide if a widget/page/section should be created.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.Section.add_label">
+<span class="sig-name descname"><span class="pre">add_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Section.add_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Section.add_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add label to section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) -- Widget keyword arguments.</p></li>
+<li><p><strong>compatible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- The boolean result of an expresion to decide if a widget/page/section should be created.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.Section.add_widget">
+<span class="sig-name descname"><span class="pre">add_widget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widget_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#xlets_settings.builder.Widget" title="xlets_settings.builder.Widget"><span class="pre">Widget</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pref_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">widget_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Section.add_widget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Section.add_widget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add widget to section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>widget_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="#xlets_settings.builder.Widget" title="xlets_settings.builder.Widget"><em>Widget</em></a><em>]</em>) -- Widget type.</p></li>
+<li><p><strong>pref_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) -- Preference key.</p></li>
+<li><p><strong>widget_kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) -- Widget keyword arguments.</p></li>
+<li><p><strong>compatible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- The boolean result of an expresion to decide if a widget/page/section should be created.</p></li>
+<li><p><strong>schema</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) -- A gsettings schema.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.Page">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">Page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections:</span> <span class="pre">list[Section]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Page definition.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.Page.add_section">
+<span class="sig-name descname"><span class="pre">add_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section"><span class="pre">Section</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section"><span class="pre">Section</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#Page.add_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.Page.add_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add section to page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section"><em>Section</em></a><em>]</em>) -- Section title.</p></li>
+<li><p><strong>**kwargs</strong> -- Section keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Section definition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section">Section</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="xlets_settings.builder.WindowDefinition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">WindowDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pages:</span> <span class="pre">list[Page]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#WindowDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.WindowDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Window definition.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.WindowDefinition.add_page">
+<span class="sig-name descname"><span class="pre">add_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#xlets_settings.builder.Page" title="xlets_settings.builder.Page"><span class="pre">Page</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compatible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#xlets_settings.builder.Page" title="xlets_settings.builder.Page"><span class="pre">Page</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#WindowDefinition.add_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.WindowDefinition.add_page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add page definition to window definition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference internal" href="#xlets_settings.builder.Page" title="xlets_settings.builder.Page"><em>Page</em></a><em>]</em>) -- A title for the page that will be displayed in the sidebar.</p></li>
+<li><p><strong>compatible</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- The boolean result of an expresion to decide if a widget/page/section should be created.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Page definition.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.builder.Page" title="xlets_settings.builder.Page">Page</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="xlets_settings.builder.WindowDefinition.should_create_page_switcher">
+<span class="sig-name descname"><span class="pre">should_create_page_switcher</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#WindowDefinition.should_create_page_switcher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.WindowDefinition.should_create_page_switcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should the page switcher be created?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the sidebar should be created.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="xlets_settings.builder.get_debugging_section">
+<span class="sig-prename descclassname"><span class="pre">xlets_settings.builder.</span></span><span class="sig-name descname"><span class="pre">get_debugging_section</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlet_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlet_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section"><span class="pre">xlets_settings.builder.Section</span></a></span></span><a class="reference internal" href="../../_modules/xlets_settings/builder.html#get_debugging_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xlets_settings.builder.get_debugging_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get debugging section.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xlet_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Xlet type.</p></li>
+<li><p><strong>xlet_uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Xlet UUID.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The debugging section.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#xlets_settings.builder.Section" title="xlets_settings.builder.Section">Section</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="xlets_settings.ansi_colors.html" class="btn btn-neutral float-left" title="xlets_settings.ansi_colors module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xlets_settings.common.html" class="btn btn-neutral float-right" title="xlets_settings.common module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -7,7 +7,11 @@ Requirements
     :context: note
     :title: Xlets/Themes building requirements
 
-    No mayor requirements are needed to build xlets/themes other than Python 3.5+.
+    No mayor requirements are needed to build xlets/themes other than Python 3.7+. End users can simply perform the following steps:
+
+    1. Download the source code from Cinnamon Tools' repository or from any of its mirrors and unpack it.
+    2. Open a terminal from inside the extracted source code and run the command ``./app.py menu``.
+    3. The CLI menu is completely interactive, just follow instructions.
 
 .. contextual-admonition::
     :context: warning
@@ -26,8 +30,8 @@ Requirements
     :context: warning
     :title: Documentation building requirements
 
-    - **Python 3.5+**
-    - **sphinx>=1.8.1**: ``sudo pip3 install sphinx`` or install from your distribution repositories.
+    - **Python 3.7+**
+    - **sphinx>=1.8.1**: Install from your distribution repositories.
 
     .. note::
 
@@ -39,16 +43,29 @@ Requirements
 
 .. contextual-admonition::
     :context: warning
-    :title: Cinnamon theme building from Sass sources
+    :title: Gtk 3 and Cinnamon themes building from |Sass| sources
 
-    - **Python 3.5+**
-    - **sass**: Either of the following implementations can be used to parse |Sass| files.
+    - **Python 3.7+**
+    - **Dart Sass**: `Download the appropiate release <https://github.com/sass/dart-sass/releases>`__ and `see installation instructions <https://github.com/sass/dart-sass#standalone>`__.
 
-        + Dart Sass: `See installation instructions <https://github.com/sass/dart-sass/releases>`__.
-        + SassC: Install from your distribution repositories.
+.. only:: html
+
+    .. _thumbnails-generation-requirement-reference:
+
+.. contextual-admonition::
+    :context: warning
+    :title: Gtk and Cinnamon themes thumbnails generation
+
+    - **ImageMagic**: Install from your distribution repositories.
 
 .. contextual-admonition::
     :context: info
     :title: Xlets help pages building optional requirement
 
-    - **pyuca**: ``sudo pip3 install pyuca``
+    - **pyuca**: Install from your distribution repositories.
+
+.. contextual-admonition::
+    :context: info
+    :title: Python virtual environment
+
+    A Python virtual environment can be created inside the **.venv** folder at the root of the repository. The **.venv** folder is already ignored in the repository's **.gitignore** file. The virtual environment is recommended, but not required since I designed the main Python application **to work with all Python 3 versions in existence** (or NONE AT ALL).

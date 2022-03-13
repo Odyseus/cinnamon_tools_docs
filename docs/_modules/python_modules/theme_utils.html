@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python_modules.theme_utils &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>python_modules.theme_utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for python_modules.theme_utils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Module with utility functions and classes.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">root_folder : str</span>
+<span class="sd">    The main folder containing the application. All commands must be executed from this location</span>
+<span class="sd">    without exceptions.</span>
+<span class="sd">validate_options_1 : method</span>
+<span class="sd">    Function to validate numeric input.</span>
+<span class="sd">validate_options_1_2 : method</span>
+<span class="sd">    Function to validate numeric input.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">rmtree</span>
+
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">cmd_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">file_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">misc_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">prompts</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">string_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils</span> <span class="kn">import</span> <span class="n">yaml_utils</span>
+<span class="kn">from</span> <span class="nn">.python_utils.simple_validators</span> <span class="kn">import</span> <span class="n">generate_numeral_options_validator</span>
+<span class="kn">from</span> <span class="nn">.python_utils.simple_validators</span> <span class="kn">import</span> <span class="n">validate_output_path</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">app_data</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">app_utils</span>
+
+<span class="n">root_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="o">*</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">pardir</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))))))</span>
+<span class="n">validate_options_1</span> <span class="o">=</span> <span class="n">generate_numeral_options_validator</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">validate_options_1_2</span> <span class="o">=</span> <span class="n">generate_numeral_options_validator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">strings_subst_extensions</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;.css&quot;</span><span class="p">,</span> <span class="s2">&quot;.svg&quot;</span><span class="p">,</span> <span class="s2">&quot;.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;.json&quot;</span><span class="p">,</span> <span class="s2">&quot;.rc&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;gtkrc&quot;</span><span class="p">,</span> <span class="s2">&quot;.theme&quot;</span><span class="p">,</span> <span class="s2">&quot;.ini&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ThemeHelperCore"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.ThemeHelperCore">[docs]</a><span class="k">class</span> <span class="nc">ThemeHelperCore</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    logger : LogSystem</span>
+<span class="sd">        The logger.</span>
+<span class="sd">    sass_parser : str</span>
+<span class="sd">        Path or name of the Dart Sass executable.</span>
+<span class="sd">    theme_variants : list</span>
+<span class="sd">        The theme variant names to work with.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theme_variants</span><span class="o">=</span><span class="p">[],</span> <span class="n">sass_parser</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        theme_variants : list, optional</span>
+<span class="sd">            The theme variant names to work with.</span>
+<span class="sd">        sass_parser : None, optional</span>
+<span class="sd">            Path or name of the Dart Sass executable.</span>
+<span class="sd">        logger : LogSystem</span>
+<span class="sd">            The logger.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theme_variants</span> <span class="o">=</span> <span class="n">theme_variants</span> <span class="k">if</span> <span class="n">theme_variants</span> <span class="k">else</span> <span class="n">get_theme_variant_names</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sass_parser</span> <span class="o">=</span> <span class="n">sass_parser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+
+<div class="viewcode-block" id="ThemeHelperCore.parse_sass"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.ThemeHelperCore.parse_sass">[docs]</a>    <span class="k">def</span> <span class="nf">parse_sass</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Parse |Sass|.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SystemExit</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Parsing Sass files.**&quot;</span><span class="p">)</span>
+
+        <span class="n">cmd_str</span> <span class="o">=</span> <span class="n">cmd_utils</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sass_parser</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sass_parser</span> <span class="k">else</span> <span class="n">cmd_utils</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;sass&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cmd_str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid or not found Sass parser.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sass_parser</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser passed: </span><span class="si">{</span><span class="n">cmd_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parser detected: </span><span class="si">{</span><span class="n">cmd_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Read documentation for requirements.&quot;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Parser used: </span><span class="si">{</span><span class="n">cmd_str</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">cmd_str</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;--no-source-map&quot;</span><span class="p">,</span> <span class="s2">&quot;--style&quot;</span><span class="p">,</span> <span class="s2">&quot;expanded&quot;</span><span class="p">]</span>
+
+        <span class="n">files_to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sass_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_folder&quot;</span><span class="p">],</span> <span class="s2">&quot;_sass&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">variant_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_variants</span><span class="p">:</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Attempting to parse Sass files for variant: </span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+            <span class="n">variant_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span> <span class="n">variant_name</span><span class="p">,</span> <span class="s2">&quot;config.yaml&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2"> is not a valid folder for a theme variant.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">variant_config_file</span><span class="p">:</span>
+                    <span class="n">variant_config</span> <span class="o">=</span> <span class="n">yaml_utils</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">variant_config_file</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Error reading variant config file. Read documentation for usage.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">theme_data</span> <span class="ow">in</span> <span class="n">app_data</span><span class="o">.</span><span class="n">THEME_SASS_PARSING_DATA</span><span class="p">:</span>
+                <span class="n">template_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">sass_path</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;sass_folder&quot;</span><span class="p">],</span> <span class="s2">&quot;template.scss&quot;</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">template_file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">template_file</span><span class="p">:</span>
+                    <span class="n">template_data</span> <span class="o">=</span> <span class="n">template_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+                <span class="k">for</span> <span class="n">theme_version</span> <span class="ow">in</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Parsing files for </span><span class="si">%s</span><span class="s2"> version: </span><span class="si">%s</span><span class="s2">**&quot;</span> <span class="o">%</span>
+                                     <span class="p">(</span><span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">theme_version</span><span class="p">))</span>
+                    <span class="n">sass_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">sass_path</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;sass_folder&quot;</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">theme_version</span><span class="si">}</span><span class="s2">.scss&quot;</span>
+                    <span class="p">)</span>
+                    <span class="n">sass_file_data</span> <span class="o">=</span> <span class="n">string_utils</span><span class="o">.</span><span class="n">do_replacements</span><span class="p">(</span><span class="n">template_data</span><span class="p">,</span> <span class="p">[</span>
+                        <span class="c1"># NOTE: This sets the variables $gtk_version and $cinnamon_version in the Sass sources.</span>
+                        <span class="c1"># Replace the dot to be able to store an integer since I don&#39;t trust Sass comparisons.</span>
+                        <span class="c1"># In fact, I don&#39;t trust floats in any programming language in existence.</span>
+                        <span class="p">(</span><span class="s2">&quot;@version@&quot;</span><span class="p">,</span> <span class="n">theme_version</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)),</span>
+                        <span class="c1"># NOTE: This is not implemented yet...and might never be. LOL</span>
+                        <span class="p">(</span><span class="s2">&quot;@variant@&quot;</span><span class="p">,</span> <span class="n">variant_name</span><span class="p">),</span>
+                    <span class="p">]</span> <span class="o">+</span> <span class="n">tokenize_variant_config</span><span class="p">(</span><span class="n">variant_config</span><span class="p">))</span>
+
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sass_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sass_file</span><span class="p">:</span>
+                        <span class="n">sass_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sass_file_data</span><span class="p">)</span>
+
+                    <span class="n">css_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span>
+                        <span class="n">variant_name</span><span class="p">,</span>
+                        <span class="s2">&quot;_version_sensitive&quot;</span> <span class="k">if</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;version_sensitive&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;_version_insensitive&quot;</span><span class="p">,</span>
+                        <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;destination_folder&quot;</span><span class="p">],</span>
+                        <span class="n">theme_version</span> <span class="k">if</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;version_sensitive&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;cssfile&quot;</span><span class="p">]</span>
+                    <span class="p">))</span>
+
+                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">css_file_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                    <span class="n">final_cmd</span> <span class="o">=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="p">[</span>
+                        <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">sass_file_path</span><span class="si">}</span><span class="s2">&#39;:&#39;</span><span class="si">{</span><span class="n">css_file_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                    <span class="p">]</span>
+
+                    <span class="n">cmd_utils</span><span class="o">.</span><span class="n">run_cmd</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">final_cmd</span><span class="p">),</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                      <span class="n">cwd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sass_file_path</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                    <span class="n">files_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sass_file_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Cleaning temporary files...**&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">files_to_remove</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span></div>
+
+<div class="viewcode-block" id="ThemeHelperCore.generate_gtk_sass_includes_index"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.ThemeHelperCore.generate_gtk_sass_includes_index">[docs]</a>    <span class="k">def</span> <span class="nf">generate_gtk_sass_includes_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate Gtk includes index.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Generating Sass includes files.**&quot;</span><span class="p">)</span>
+
+        <span class="n">sass_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_folder&quot;</span><span class="p">],</span> <span class="s2">&quot;_sass&quot;</span><span class="p">,</span> <span class="s2">&quot;gtk&quot;</span><span class="p">)</span>
+        <span class="n">includes_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sass_folder</span><span class="p">,</span> <span class="s2">&quot;includes&quot;</span><span class="p">)</span>
+        <span class="n">apps_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">includes_folder</span><span class="p">,</span> <span class="s2">&quot;apps&quot;</span><span class="p">)</span>
+        <span class="n">includes_index_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">includes_folder</span><span class="p">,</span> <span class="s2">&quot;__index__.scss&quot;</span><span class="p">)</span>
+
+        <span class="n">apps_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;apps/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">apps_folder</span><span class="p">)</span>
+                             <span class="k">if</span> <span class="nb">all</span><span class="p">((</span><span class="n">entry</span><span class="o">.</span><span class="n">is_file</span><span class="p">(</span><span class="n">follow_symlinks</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                                     <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span>
+                                     <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.scss&quot;</span><span class="p">))</span>
+                                    <span class="p">)])</span>
+        <span class="n">root_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">includes_folder</span><span class="p">)</span>
+                      <span class="k">if</span> <span class="nb">all</span><span class="p">((</span><span class="n">entry</span><span class="o">.</span><span class="n">is_file</span><span class="p">(</span><span class="n">follow_symlinks</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                              <span class="n">entry</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;__index__.scss&quot;</span><span class="p">,</span>
+                              <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">),</span>
+                              <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.scss&quot;</span><span class="p">))</span>
+                             <span class="p">)]</span>
+
+        <span class="n">root_files_to_modify</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">root_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;-gtk4&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">root_files_to_modify</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">root_files_to_modify</span><span class="p">:</span>
+            <span class="n">root_files</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">root_files</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-gtk4&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="n">root_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-gtk4&quot;</span><span class="p">,</span> <span class="s2">&quot;#{$includes_suffix}&quot;</span><span class="p">))</span>
+
+        <span class="n">includes</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">files_list</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">root_files</span><span class="p">),</span> <span class="n">apps_files</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">include</span> <span class="ow">in</span> <span class="n">files_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">include</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+                    <span class="n">includes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;@import &quot;</span><span class="si">{</span><span class="n">include</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot;;&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">includes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;@import &quot;</span><span class="si">{</span><span class="n">include</span><span class="p">[:</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot;;&#39;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">includes_index_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;// NOTE: File auto-generated. Do not edit.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">includes</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ThemeHelperCore.generate_thumbnails"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.ThemeHelperCore.generate_thumbnails">[docs]</a>    <span class="k">def</span> <span class="nf">generate_thumbnails</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate themes thumbnails.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        SystemExit</span>
+<span class="sd">            Halt execution if the required command isn&#39;t available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Generating themes thumbnails.**&quot;</span><span class="p">)</span>
+
+        <span class="n">cmd_str</span> <span class="o">=</span> <span class="n">cmd_utils</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;magick&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">cmd_utils</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">&quot;convert&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cmd_str</span><span class="p">:</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">cmd_str</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Missing ImageMagick command. Read documentation for requirements.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">variant_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_variants</span><span class="p">:</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Attempting to generate thumbnails for variant: </span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2">**&quot;</span><span class="p">)</span>
+            <span class="n">variant_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span> <span class="n">variant_name</span><span class="p">,</span> <span class="s2">&quot;config.yaml&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2"> is not a valid folder for a theme variant.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">variant_config_file</span><span class="p">:</span>
+                    <span class="n">variant_config</span> <span class="o">=</span> <span class="n">yaml_utils</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">variant_config_file</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s2">&quot;Error reading variant config file. Read documentation for usage.&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="n">variant_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_folder&quot;</span><span class="p">],</span> <span class="s2">&quot;_variants&quot;</span><span class="p">,</span> <span class="n">variant_name</span><span class="p">,</span> <span class="s2">&quot;_version_insensitive&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">theme_data</span> <span class="ow">in</span> <span class="n">app_data</span><span class="o">.</span><span class="n">THEME_SASS_PARSING_DATA</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**Generating thumbnail for </span><span class="si">{</span><span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> theme...**&#39;</span><span class="p">)</span>
+
+                <span class="n">thumb_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">variant_path</span><span class="p">,</span>
+                    <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;destination_folder&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;thumbnail.png&quot;</span><span class="p">)</span>
+
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">thumb_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+                <span class="n">final_cmd</span> <span class="o">=</span> <span class="n">cmd</span> <span class="o">+</span> <span class="p">[</span>
+                    <span class="s2">&quot;-size&quot;</span><span class="p">,</span>
+                    <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;thumb_size&quot;</span><span class="p">],</span>
+                    <span class="sa">f</span><span class="s1">&#39;canvas:&quot;</span><span class="si">{</span><span class="n">variant_config</span><span class="p">[</span><span class="s2">&quot;selected_bg_color&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;PNG32:&quot;</span><span class="si">{</span><span class="n">thumb_path</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+                <span class="p">]</span>
+
+                <span class="n">cmd_utils</span><span class="o">.</span><span class="n">run_cmd</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">final_cmd</span><span class="p">),</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                  <span class="n">cwd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">thumb_path</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="tokenize_variant_config"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.tokenize_variant_config">[docs]</a><span class="k">def</span> <span class="nf">tokenize_variant_config</span><span class="p">(</span><span class="n">variant_config</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tokenize variant config.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    variant_config : dict</span>
+<span class="sd">        The variant config to tokenize.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        The tokenized variant config.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">variant_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">variant_config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">variant_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="sa">f</span><span class="s1">&#39;@</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">@&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">variant_tokens</span></div>
+
+
+<div class="viewcode-block" id="get_gradient_dark_stop_color"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.get_gradient_dark_stop_color">[docs]</a><span class="k">def</span> <span class="nf">get_gradient_dark_stop_color</span><span class="p">(</span><span class="nb">hex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gradient stop color.</span>
+
+<span class="sd">    Very cheap and lazy way of generating the second stop color from a base color for a gradient</span>
+<span class="sd">    used in images from the Gtk 2 theme.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hex : str</span>
+<span class="sd">        A color in hexadecimal notation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A color in hexadecimal notation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.python_utils.colour</span> <span class="kn">import</span> <span class="n">Color</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="nb">hex</span><span class="p">)</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">set_luminance</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">get_luminance</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1.36</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">color</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_gradient_border_color"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.get_gradient_border_color">[docs]</a><span class="k">def</span> <span class="nf">get_gradient_border_color</span><span class="p">(</span><span class="nb">hex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get gadient border color.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hex : str</span>
+<span class="sd">        A color in hexadecimal notation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A color in hexadecimal notation with 30% less saturation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.python_utils.colour</span> <span class="kn">import</span> <span class="n">Color</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="nb">hex</span><span class="p">)</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">set_saturation</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">get_saturation</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1.3</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">color</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hex_to_rgba"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.hex_to_rgba">[docs]</a><span class="k">def</span> <span class="nf">hex_to_rgba</span><span class="p">(</span><span class="nb">hex</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Hex to RGBA color convertion.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hex : str</span>
+<span class="sd">        A color in hexadecimal notation.</span>
+<span class="sd">    alpha : None, optional</span>
+<span class="sd">        Color opacity.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A color in RGBA notation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hex_str</span> <span class="o">=</span> <span class="nb">hex</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_str</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_str</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">alpha</span> <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">alpha</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;rgba(</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">)&#39;</span></div>
+
+
+<div class="viewcode-block" id="get_theme_variant_names"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.get_theme_variant_names">[docs]</a><span class="k">def</span> <span class="nf">get_theme_variant_names</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get xlets dirs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        The list of xlets directory names prefixed with their &quot;types&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">scandir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;themes&quot;</span><span class="p">,</span> <span class="s2">&quot;_variants&quot;</span><span class="p">))</span>
+                   <span class="k">if</span> <span class="nb">all</span><span class="p">((</span><span class="n">entry</span><span class="o">.</span><span class="n">is_dir</span><span class="p">(</span><span class="n">follow_symlinks</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+                           <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                               <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;config.yaml&quot;</span>
+                           <span class="p">)),</span>
+                           <span class="ow">not</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;z_&quot;</span><span class="p">),</span>
+                           <span class="ow">not</span> <span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">))</span>
+                          <span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="build_themes"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.build_themes">[docs]</a><span class="k">def</span> <span class="nf">build_themes</span><span class="p">(</span><span class="n">theme_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">theme_variants</span><span class="o">=</span><span class="p">[],</span> <span class="n">build_output</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">do_not_confirm</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">from_menu</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Build themes.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    theme_name : str, optional</span>
+<span class="sd">        The given name of the theme.</span>
+<span class="sd">    theme_variants : list, optional</span>
+<span class="sd">        The theme variant names to work with.</span>
+<span class="sd">    build_output : str, optional</span>
+<span class="sd">        Path to the destination folder were the built themes will be saved.</span>
+<span class="sd">    do_not_confirm : bool, optional</span>
+<span class="sd">        Whether to ask for overwrite confirmation when a theme destination exists or not.</span>
+<span class="sd">    logger : LogSystem</span>
+<span class="sd">        The logger.</span>
+<span class="sd">    from_menu : bool, optional</span>
+<span class="sd">        Whether this function was called from the CLI menu or not.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    SystemExit</span>
+<span class="sd">        Halt execution if the theme name cannot be obtained.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># NOTE: o_m_l_v a.k.a. options_map_latest_used_values</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;theme_latest_build_data_file&quot;</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">o_m_l_v</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">o_m_l_v</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">theme_name</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;theme_name_storage_file&quot;</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">theme_file</span><span class="p">:</span>
+                <span class="n">theme_name</span> <span class="o">=</span> <span class="n">theme_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">theme_name</span> <span class="o">=</span> <span class="s2">&quot;MyThemeName&quot;</span>
+
+    <span class="n">opt_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;cinnamon_version&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;5.0&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;gtk3_version&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;3.24&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;gtk4_version&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;4.0&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;do_not_confirm&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">opt_map_def</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;theme_name&quot;</span><span class="p">:</span> <span class="n">theme_name</span><span class="p">,</span>
+        <span class="c1"># Note: Check needed to avoid storing None.</span>
+        <span class="s2">&quot;build_output&quot;</span><span class="p">:</span> <span class="n">build_output</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;do_not_confirm&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span> <span class="k">if</span> <span class="n">do_not_confirm</span> <span class="k">else</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cinnamon_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gtk3_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gtk4_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">interactive</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">o_m_l_v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">opt_map_def</span> <span class="o">!=</span> <span class="n">o_m_l_v</span><span class="p">:</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">(</span><span class="s2">&quot;Build data from a previous theme build found at:&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**</span><span class="si">{</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;theme_latest_build_data_file&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">**&#39;</span><span class="p">,</span>
+                    <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">(</span><span class="s2">&quot;Details:&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">THEME_BUILD_DATA</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">cinnamon_version</span><span class="o">=</span><span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">][</span>
+                    <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">])</span>
+                <span class="p">],</span>
+                <span class="n">gtk3_version</span><span class="o">=</span><span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">][</span>
+                    <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">])</span>
+                <span class="p">],</span>
+                <span class="n">gtk4_version</span><span class="o">=</span><span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">][</span>
+                    <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">])</span>
+                <span class="p">],</span>
+                <span class="n">theme_name</span><span class="o">=</span><span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;theme_name&quot;</span><span class="p">,</span>
+                                       <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;theme_name&quot;</span><span class="p">]),</span>
+                <span class="n">build_output</span><span class="o">=</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span> <span class="k">else</span>
+                <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;build_output&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]),</span>
+                <span class="n">do_not_confirm</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="ow">not</span> <span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">][</span>
+                    <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">])</span>
+                <span class="p">])</span>
+            <span class="p">),</span> <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">(</span><span class="s2">&quot;Choose an option:&quot;</span><span class="p">)</span>
+            <span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;**1.** Use data interactively.&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;**2.** Use data and directly build themes.&quot;</span><span class="p">,</span>
+                                       <span class="s2">&quot;**Press any other key to not use stored data.**&quot;</span><span class="p">)</span>
+
+            <span class="n">answer</span> <span class="o">=</span> <span class="n">prompts</span><span class="o">.</span><span class="n">read_char</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Do not change defaults if one chooses not to use stored build data.</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span> <span class="ow">or</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+            <span class="c1"># Check that the stored options contain all options needed for the building process.</span>
+            <span class="c1"># If not, add them.</span>
+            <span class="k">for</span> <span class="n">opt</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">opt_map_def</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">opt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">o_m_l_v</span><span class="p">:</span>
+                    <span class="n">o_m_l_v</span><span class="p">[</span><span class="n">opt</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+            <span class="c1"># Check that the stored options doesn&#39;t contain options that aren&#39;t used anymore.</span>
+            <span class="c1"># If they do, remove them.</span>
+            <span class="n">new_o_m_l_v</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">opt</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">o_m_l_v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">opt_map_def</span><span class="p">:</span>
+                    <span class="n">new_o_m_l_v</span><span class="p">[</span><span class="n">opt</span><span class="p">]</span> <span class="o">=</span> <span class="n">o_m_l_v</span><span class="p">[</span><span class="n">opt</span><span class="p">]</span>
+
+            <span class="n">opt_map_def</span> <span class="o">=</span> <span class="n">new_o_m_l_v</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">interactive</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;2&quot;</span>
+
+    <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+        <span class="c1"># Ask for Cinnamon theme version.</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">([</span><span class="s2">&quot;Choose in which Cinnamon version the theme will be used.&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;1. 5.0.x plus&quot;</span><span class="p">])</span>
+
+        <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                          <span class="s2">&quot;cinnamon_version&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;Enter an option&quot;</span><span class="p">,</span>
+                          <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">],</span>
+                          <span class="n">validator</span><span class="o">=</span><span class="n">validate_options_1</span><span class="p">)</span>
+
+        <span class="c1"># Ask for Gtk3 theme version.</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">([</span><span class="s2">&quot;Choose in which Gtk3 version the theme will be used.&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;1. 3.24.x and above&quot;</span><span class="p">])</span>
+
+        <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                          <span class="s2">&quot;gtk3_version&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;Enter an option&quot;</span><span class="p">,</span>
+                          <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">],</span>
+                          <span class="n">validator</span><span class="o">=</span><span class="n">validate_options_1</span><span class="p">)</span>
+
+        <span class="c1"># Ask for Gtk4 theme version.</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">([</span><span class="s2">&quot;Choose in which Gtk4 version the theme will be used.&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;1. 4.0.x and above&quot;</span><span class="p">])</span>
+
+        <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                          <span class="s2">&quot;gtk4_version&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;Enter an option&quot;</span><span class="p">,</span>
+                          <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">],</span>
+                          <span class="n">validator</span><span class="o">=</span><span class="n">validate_options_1</span><span class="p">)</span>
+
+        <span class="c1"># Ask for build output.</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">([</span><span class="s2">&quot;Where to store built themes?&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;Choose an option:&quot;</span><span class="p">])</span>
+        <span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;**1.** Temporary location.&quot;</span><span class="p">,</span>
+                                   <span class="s2">&quot;**2.** Install into user home.&quot;</span><span class="p">,</span>
+                                   <span class="s2">&quot;**Press any other key to specify a location.**&quot;</span><span class="p">)</span>
+
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">prompts</span><span class="o">.</span><span class="n">read_char</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+        <span class="n">ask_for_confirmation_options</span> <span class="o">=</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s2">&quot;1&quot;</span>
+
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+            <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">app_utils</span><span class="o">.</span><span class="n">get_base_temp_folder</span><span class="p">(),</span>
+                <span class="n">misc_utils</span><span class="o">.</span><span class="n">micro_to_milli</span><span class="p">(</span><span class="n">misc_utils</span><span class="o">.</span><span class="n">get_date_time</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">answer</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+            <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;~&quot;</span><span class="p">,</span> <span class="s2">&quot;.themes&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Ask for output directory.</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">(</span><span class="s2">&quot;Choose a storage location:&quot;</span><span class="p">)</span>
+            <span class="c1"># NOTE: Yes, if the previous build_output was the temporary location,</span>
+            <span class="c1"># inform that it will be overwritten with a new temporary location.</span>
+            <span class="c1"># This is to avoid dealing with existing xlets built into /tmp.</span>
+            <span class="k">if</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">app_utils</span><span class="o">.</span><span class="n">get_base_temp_folder</span><span class="p">()):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">&quot;The following default value, if chosen, it will be re-generated and overwritten.&quot;</span><span class="p">,</span>
+                    <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                              <span class="s2">&quot;build_output&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;Enter a path&quot;</span><span class="p">,</span>
+                              <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">],</span>
+                              <span class="n">validator</span><span class="o">=</span><span class="n">validate_output_path</span><span class="p">)</span>
+
+        <span class="c1"># NOTE: Yes, check again (just in case) if build_output is inside /tmp.</span>
+        <span class="c1"># So I can cancel asking for confirmation options since there is no</span>
+        <span class="c1"># need to ask for confirmation options when the possibility of</span>
+        <span class="c1"># overwriting an existing xlet is null.</span>
+        <span class="k">if</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">app_utils</span><span class="o">.</span><span class="n">get_base_temp_folder</span><span class="p">()):</span>
+            <span class="n">ask_for_confirmation_options</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+
+        <span class="k">if</span> <span class="n">ask_for_confirmation_options</span><span class="p">:</span>
+            <span class="c1"># Ask for overwrite confirmation.</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">([</span><span class="s2">&quot;Choose what to do when a built theme already exists at the destination.&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;1. Confirm each overwrite operation&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;2. Directly overwrite existent themes&quot;</span><span class="p">])</span>
+            <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                              <span class="s2">&quot;do_not_confirm&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;Enter option&quot;</span><span class="p">,</span>
+                              <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">],</span>
+                              <span class="n">validator</span><span class="o">=</span><span class="n">validate_options_1_2</span><span class="p">)</span>
+
+    <span class="n">theme_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;cinnamon_version&quot;</span><span class="p">:</span> <span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">][</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">]],</span>
+        <span class="s2">&quot;gtk3_version&quot;</span><span class="p">:</span> <span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">][</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">]],</span>
+        <span class="s2">&quot;gtk4_version&quot;</span><span class="p">:</span> <span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">][</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">]]</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">interactive</span><span class="p">:</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">inform</span><span class="p">(</span><span class="s2">&quot;Enter a name for the theme:&quot;</span><span class="p">)</span>
+        <span class="n">prompts</span><span class="o">.</span><span class="n">do_prompt</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span>
+                          <span class="s2">&quot;theme_name&quot;</span><span class="p">,</span>
+                          <span class="s2">&quot;Enter name&quot;</span><span class="p">,</span>
+                          <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;theme_name&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;theme_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">MISSING_THEME_OR_DOMAIN_NAME_MSG</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">capital</span><span class="o">=</span><span class="s2">&quot;Theme&quot;</span><span class="p">,</span>
+            <span class="n">lower</span><span class="o">=</span><span class="s2">&quot;theme&quot;</span><span class="p">,</span>
+            <span class="n">types</span><span class="o">=</span><span class="s2">&quot;themes&quot;</span>
+        <span class="p">),</span> <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">to_file</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">app_utils</span><span class="o">.</span><span class="n">get_base_temp_folder</span><span class="p">())</span> <span class="ow">or</span> \
+            <span class="ow">not</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]:</span>
+        <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">app_utils</span><span class="o">.</span><span class="n">get_base_temp_folder</span><span class="p">(),</span>
+            <span class="n">misc_utils</span><span class="o">.</span><span class="n">micro_to_milli</span><span class="p">(</span><span class="n">misc_utils</span><span class="o">.</span><span class="n">get_date_time</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">))</span>
+        <span class="p">)</span>
+
+    <span class="n">themes_sources</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;themes&quot;</span><span class="p">)</span>
+    <span class="n">common_version_insensitive_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">themes_sources</span><span class="p">,</span> <span class="s2">&quot;_common&quot;</span><span class="p">,</span> <span class="s2">&quot;_version_insensitive&quot;</span><span class="p">)</span>
+    <span class="n">common_version_sensitive</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">themes_sources</span><span class="p">,</span> <span class="s2">&quot;_common&quot;</span><span class="p">,</span> <span class="s2">&quot;_version_sensitive&quot;</span><span class="p">)</span>
+    <span class="n">common_version_sensitive_cinnamon_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">common_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">])</span>
+    <span class="n">common_version_sensitive_gtk3_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">common_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;gtk-3.0&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">])</span>
+    <span class="n">common_version_sensitive_gtk4_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">common_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;gtk-4.0&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">])</span>
+    <span class="n">theme_variants</span> <span class="o">=</span> <span class="n">theme_variants</span> <span class="k">if</span> <span class="n">theme_variants</span> <span class="k">else</span> <span class="n">get_theme_variant_names</span><span class="p">()</span>
+
+    <span class="n">do_not_confirm</span> <span class="o">=</span> <span class="n">opt_map</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">][</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;do_not_confirm&quot;</span><span class="p">]]</span>
+    <span class="n">built_theme_variants</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">variant_name</span> <span class="ow">in</span> <span class="n">theme_variants</span><span class="p">:</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**Generating variant:** </span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">variant_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span> <span class="n">variant_name</span><span class="p">,</span> <span class="s2">&quot;config.yaml&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2"> is not a valid folder for a theme variant.&quot;</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">variant_config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">variant_config_file</span><span class="p">:</span>
+                <span class="n">variant_config</span> <span class="o">=</span> <span class="n">yaml_utils</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">variant_config_file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error reading variant config file. Read documentation for usage.&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">theme_config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_folder&quot;</span><span class="p">],</span> <span class="s2">&quot;theme_config.yaml&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">theme_config_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">themes_global_config_file</span><span class="p">:</span>
+                <span class="n">theme_config</span> <span class="o">=</span> <span class="n">yaml_utils</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">themes_global_config_file</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Error reading global theme config file. Read documentation for usage.&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">theme_config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;theme_config.yaml&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">theme_config_file</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">theme_config_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">themes_user_config_file</span><span class="p">:</span>
+                    <span class="n">theme_config</span> <span class="o">=</span> <span class="n">misc_utils</span><span class="o">.</span><span class="n">merge_dict</span><span class="p">(</span>
+                        <span class="n">theme_config</span><span class="p">,</span>
+                        <span class="n">yaml_utils</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">themes_user_config_file</span><span class="p">),</span>
+                        <span class="n">logger</span><span class="o">=</span><span class="n">logger</span>
+                    <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">full_theme_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;theme_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="n">destination_folder</span> <span class="o">=</span> <span class="n">file_utils</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">],</span> <span class="n">full_theme_name</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">file_utils</span><span class="o">.</span><span class="n">is_real_file</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;**InvalidDestination:** Destination exists and is a file!!! Aborted!!!&quot;</span><span class="p">,</span>
+                           <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">file_utils</span><span class="o">.</span><span class="n">is_real_dir</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">do_not_confirm</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">EXISTENT_XLET_DESTINATION_MSG</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">destination_folder</span><span class="p">),</span>
+                               <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">do_not_confirm</span> <span class="ow">or</span> <span class="n">prompts</span><span class="o">.</span><span class="n">confirm</span><span class="p">(</span><span class="n">prompt</span><span class="o">=</span><span class="s2">&quot;Proceed?&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                <span class="n">rmtree</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;**OperationAborted:** The theme building process was canceled.&quot;</span><span class="p">,</span>
+                               <span class="n">date</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+        <span class="c1"># WARNING: Keep THEME_CSS_DEFINITIONS always first. It contains replacement data in itself.</span>
+        <span class="c1"># And always make a copy of it.</span>
+        <span class="n">replacement_data</span> <span class="o">=</span> <span class="n">app_data</span><span class="o">.</span><span class="n">THEME_CSS_DEFINITIONS</span><span class="p">[:]</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tokenize_variant_config</span><span class="p">(</span><span class="n">variant_config</span><span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tokenize_variant_config</span><span class="p">(</span><span class="n">theme_config</span><span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;@repo_url@&quot;</span><span class="p">,</span> <span class="n">app_data</span><span class="o">.</span><span class="n">URLS</span><span class="p">[</span><span class="s2">&quot;repo&quot;</span><span class="p">]))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;@theme_name@&quot;</span><span class="p">,</span> <span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;theme_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;@theme_variant@&quot;</span><span class="p">,</span> <span class="n">variant_name</span><span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="c1"># NOTE: No, this doesn&#39;t need &quot;quoted quotes&quot; because it&#39;s defined inside a call</span>
+            <span class="c1"># to Sass&#39; unquote() function.</span>
+            <span class="s2">&quot;@colorswatch_outline_opacity@&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;outline_opacity&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="p">))</span>
+        <span class="c1"># WARNING: Yes, the quotes in the following tokens are intentional. DO NOT REMOVE!!!</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="s1">&#39;&quot;@display_gtk_2_scrollbar_arrows@&quot;&#39;</span><span class="p">,</span>
+            <span class="n">app_data</span><span class="o">.</span><span class="n">THEME_BOOLEAN_DEFINITIONS</span><span class="p">[</span><span class="s2">&quot;display_gtk_2_scrollbar_arrows&quot;</span><span class="p">][</span>
+                <span class="nb">bool</span><span class="p">(</span><span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_scrollbar_arrows&quot;</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="s1">&#39;&quot;@display_gtk_3_scrollbar_arrows@&quot;&#39;</span><span class="p">,</span>
+            <span class="n">app_data</span><span class="o">.</span><span class="n">THEME_BOOLEAN_DEFINITIONS</span><span class="p">[</span><span class="s2">&quot;display_gtk_3_scrollbar_arrows&quot;</span><span class="p">][</span>
+                <span class="nb">bool</span><span class="p">(</span><span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_scrollbar_arrows&quot;</span><span class="p">))</span>
+            <span class="p">]</span>
+        <span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="s1">&#39;&quot;@tooltip_border_rgba_color@&quot;&#39;</span><span class="p">,</span>
+            <span class="n">hex_to_rgba</span><span class="p">(</span>
+                <span class="n">variant_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip_fg_color&quot;</span><span class="p">),</span>
+                <span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip_border_opacity&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="s1">&#39;&quot;@tooltip_background_rgba_color@&quot;&#39;</span><span class="p">,</span>
+            <span class="n">hex_to_rgba</span><span class="p">(</span>
+                <span class="n">variant_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip_bg_color&quot;</span><span class="p">),</span>
+                <span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip_background_opacity&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+            <span class="s1">&#39;&quot;@tooltip_background_gtk2_opacity@&quot;&#39;</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">theme_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tooltip_background_opacity&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="p">))</span>
+        <span class="c1"># Gradient colors for the images at:</span>
+        <span class="c1"># - gtk-2.0/images/treeview/iconview-selected.svg</span>
+        <span class="c1"># - gtk-2.0/images/treeview/progress-bar.svg</span>
+        <span class="c1"># - gtk-2.0/images/treeview/row-selected.svg</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;@gradient_dark_stop_color@&quot;</span><span class="p">,</span>
+                                 <span class="n">get_gradient_dark_stop_color</span><span class="p">(</span><span class="n">variant_config</span><span class="p">[</span><span class="s2">&quot;selected_bg_color&quot;</span><span class="p">])))</span>
+        <span class="n">replacement_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;@gradient_border_color@&quot;</span><span class="p">,</span>
+                                 <span class="n">get_gradient_border_color</span><span class="p">(</span><span class="n">variant_config</span><span class="p">[</span><span class="s2">&quot;selected_bg_color&quot;</span><span class="p">])))</span>
+
+        <span class="c1"># NOTE: Store the replacement data for debugging purposes.</span>
+        <span class="c1"># I store it as YAML so it is easier to compare.</span>
+        <span class="n">replacement_data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;tmp&quot;</span><span class="p">,</span> <span class="s2">&quot;replacement_data&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s2">.yaml&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">replacement_data_file</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">replacement_data_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">yaml_utils</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">replacement_data</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+
+        <span class="n">variant_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;themes_variants_folder&quot;</span><span class="p">],</span> <span class="n">variant_name</span><span class="p">)</span>
+        <span class="n">variant_version_insensitive_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variant_folder</span><span class="p">,</span> <span class="s2">&quot;_version_insensitive&quot;</span><span class="p">)</span>
+        <span class="n">variant_version_sensitive</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">variant_folder</span><span class="p">,</span> <span class="s2">&quot;_version_sensitive&quot;</span><span class="p">)</span>
+        <span class="n">variant_version_sensitive_cinnamon_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">variant_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;cinnamon_version&quot;</span><span class="p">])</span>
+        <span class="n">variant_version_sensitive_gtk3_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">variant_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;gtk-3.0&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;gtk3_version&quot;</span><span class="p">])</span>
+        <span class="n">variant_version_sensitive_gtk4_files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">variant_version_sensitive</span><span class="p">,</span> <span class="s2">&quot;gtk-4.0&quot;</span><span class="p">,</span> <span class="n">theme_data</span><span class="p">[</span><span class="s2">&quot;gtk4_version&quot;</span><span class="p">])</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Copying files...**&quot;</span><span class="p">)</span>
+
+        <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">common_version_insensitive_files</span><span class="p">,</span> <span class="n">destination_folder</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">common_version_sensitive_cinnamon_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">common_version_sensitive_cinnamon_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">common_version_sensitive_gtk3_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">common_version_sensitive_gtk3_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;gtk-3.0&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">common_version_sensitive_gtk4_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">common_version_sensitive_gtk4_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;gtk-4.0&quot;</span><span class="p">))</span>
+
+        <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">variant_version_insensitive_files</span><span class="p">,</span> <span class="n">destination_folder</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_version_sensitive_gtk3_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">variant_version_sensitive_gtk3_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;gtk-3.0&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_version_sensitive_gtk4_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">variant_version_sensitive_gtk4_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;gtk-4.0&quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">variant_version_sensitive_cinnamon_files</span><span class="p">):</span>
+            <span class="n">file_utils</span><span class="o">.</span><span class="n">custom_copytree2</span><span class="p">(</span><span class="n">variant_version_sensitive_cinnamon_files</span><span class="p">,</span>
+                                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="s2">&quot;cinnamon&quot;</span><span class="p">))</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;**Performing string substitutions...**&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">destination_folder</span><span class="p">,</span> <span class="n">topdown</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="c1"># Only deal with a limited set of file extensions.</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">fname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">strings_subst_extensions</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                    <span class="n">file_data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">file_data_modified</span> <span class="o">=</span> <span class="n">string_utils</span><span class="o">.</span><span class="n">do_replacements</span><span class="p">(</span>
+                        <span class="n">file_data</span><span class="p">,</span> <span class="n">replacement_data</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">file_data_modified</span> <span class="o">!=</span> <span class="n">file_data</span><span class="p">:</span>
+                        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_data_modified</span><span class="p">)</span>
+                        <span class="n">file</span><span class="o">.</span><span class="n">truncate</span><span class="p">()</span>
+
+        <span class="n">built_theme_variants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">variant_name</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**Theme variant </span><span class="si">{</span><span class="n">variant_name</span><span class="si">}</span><span class="s1"> successfully built.**&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">theme_variants</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">built_theme_variants</span><span class="p">):</span>
+        <span class="n">app_utils</span><span class="o">.</span><span class="n">print_separator</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="s2">&quot;The build process of some themes was canceled or there was an error while building them.&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Check the logs for more details.&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;**Built themes saved at </span><span class="si">{</span><span class="n">opt_map_def</span><span class="p">[</span><span class="s2">&quot;build_output&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">**&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">PATHS</span><span class="p">[</span><span class="s2">&quot;theme_latest_build_data_file&quot;</span><span class="p">],</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;UTF-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">opt_map_def</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="print_theme_variants"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.print_theme_variants">[docs]</a><span class="k">def</span> <span class="nf">print_theme_variants</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Print theme variants.</span>
+
+<span class="sd">    This method is called by the Bash completions script to auto-complete</span>
+<span class="sd">    theme variant names for the ``--variant-name=`` and ``-v`` CLI options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">variant_dir_name</span> <span class="ow">in</span> <span class="n">get_theme_variant_names</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">variant_dir_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="generate_themes_changelog"><a class="viewcode-back" href="../../modules/python_modules/python_modules.theme_utils.html#python_modules.theme_utils.generate_themes_changelog">[docs]</a><span class="k">def</span> <span class="nf">generate_themes_changelog</span><span class="p">(</span><span class="n">logger</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate themes changelog.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    logger : LogSystem</span>
+<span class="sd">        The logger.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">log_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_folder</span><span class="p">,</span> <span class="s2">&quot;themes&quot;</span><span class="p">,</span> <span class="s2">&quot;CHANGELOG.md&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">app_data</span><span class="o">.</span><span class="n">CHANGELOG_HEADER_THEMES</span><span class="p">)</span>
+
+        <span class="n">cmd</span> <span class="o">=</span> <span class="n">app_data</span><span class="o">.</span><span class="n">GIT_LOG_CMD_THEMES</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">relative_path</span><span class="o">=</span><span class="s2">&quot;./themes&quot;</span><span class="p">,</span>
+            <span class="n">append_or_override</span><span class="o">=</span><span class="s2">&quot;&gt;&gt;&quot;</span><span class="p">,</span>
+            <span class="n">log_path</span><span class="o">=</span><span class="n">log_path</span><span class="p">,</span>
+            <span class="n">repo_url</span><span class="o">=</span><span class="n">app_data</span><span class="o">.</span><span class="n">URLS</span><span class="p">[</span><span class="s2">&quot;repo&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">cmd_utils</span><span class="o">.</span><span class="n">run_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="n">root_folder</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Changelog generated at:**</span><span class="se">\n</span><span class="si">{</span><span class="n">log_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>xlets_settings.builder &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
+      <li>xlets_settings.builder</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for xlets_settings.builder</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Settings page definitions builder.</span>
+
+<span class="sd">I created this module for several reasons.</span>
+
+<span class="sd">- I fed up of creating the definitions in their &quot;raw&quot; form using Python dictionaries.</span>
+<span class="sd">- Autocompletions. When creating definitions in their &quot;raw&quot; form, I was constantly searching the \</span>
+<span class="sd">source code for the correct property names. By using the Python classes in this module I have at \</span>
+<span class="sd">my finger tips the autocompletions of their properties/arguments.</span>
+<span class="sd">- Documentation. It&#39;s easier to create and maintain the documentation of a Python module than \</span>
+<span class="sd">creating/maintaining a ResTructuredText file &quot;by hand&quot;.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">ASTERISK_END : str</span>
+<span class="sd">    Call attention with an asterix placed at the end of a frase.</span>
+<span class="sd">ASTERISK_START : str</span>
+<span class="sd">    Call attention with an asterix placed at the start of a frase.</span>
+<span class="sd">CINN_RESTART : str</span>
+<span class="sd">    Label to inform that Cinnamon needs to be restarted.</span>
+<span class="sd">CINN_RESTART_MIGHT : str</span>
+<span class="sd">    Label to inform that Cinnamon might need to be restarted.</span>
+<span class="sd">CIRCLE : str</span>
+<span class="sd">    Character used as list definition.</span>
+<span class="sd">LOGGING_LEVEL_TOOLTIP : str</span>
+<span class="sd">    Tooltip for the logging level chooser combobox.</span>
+
+<span class="sd">NOTES</span>
+<span class="sd">- Using typing for the first time to get used to it and to see how it affects documentation \</span>
+<span class="sd">generation. Holding off wide spread utilization because the AutoDocstring plugin that I use \</span>
+<span class="sd">doesn&#39;t extract &quot;annotated attributes&quot;.</span>
+<span class="sd">- Importing ``annotations`` from ``__future__`` allows me to directly use ``tuple[int, int]`` instead \</span>
+<span class="sd">of being forced to import ``Tuple`` from ``typing`` and use ``Tuple[int, int]``, which is deprecated.</span>
+<span class="sd">- Using the :py:`dataclasses` module to create cleaner classes and to minimize redundant docstrings.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">html</span> <span class="kn">import</span> <span class="n">escape</span>
+
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">_</span>
+
+<span class="n">CINN_RESTART</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;(*) &lt;i&gt;</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Cinnamon needs to be restarted&quot;</span><span class="p">))</span><span class="si">}</span><span class="s1">&lt;/i&gt;&#39;</span>
+<span class="n">CINN_RESTART_MIGHT</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;(*) &lt;i&gt;</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Cinnamon might need to be restarted&quot;</span><span class="p">))</span><span class="si">}</span><span class="s1">&lt;/i&gt;&#39;</span>
+<span class="n">CIRCLE</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;⚫&lt;/b&gt;&quot;</span>
+<span class="n">ASTERISK_END</span> <span class="o">=</span> <span class="s2">&quot; (*)&quot;</span>
+<span class="n">ASTERISK_START</span> <span class="o">=</span> <span class="s2">&quot;(*) &quot;</span>
+<span class="n">LOGGING_LEVEL_TOOLTIP</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+    <span class="n">_</span><span class="p">(</span><span class="s2">&quot;It enables the ability to log the output of several functions used by the extension.&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Normal&quot;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Only log messages caused by non critical errors.&quot;</span><span class="p">)),</span>
+    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Verbose&quot;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Additionally log extra output messages and all HTTP responses.&quot;</span><span class="p">)),</span>
+    <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Very verbose&quot;</span><span class="p">),</span> <span class="n">_</span><span class="p">(</span>
+        <span class="s2">&quot;Additionally log all method calls from all JavaScript classes/prototypes along with their execution time.&quot;</span><span class="p">))</span>
+<span class="p">])</span>
+
+
+<div class="viewcode-block" id="Widget"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Widget">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Widget</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Widget definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">widget_type</span> <span class="o">=</span> <span class="nb">str</span>
+    <span class="n">widget_type2</span> <span class="o">=</span> <span class="nb">str</span>
+    <span class="n">widget_type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">pref_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Label"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Label">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Label</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Label definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">widget_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;label&quot;</span>
+    <span class="n">pref_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="ButtonsGroup"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.ButtonsGroup">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ButtonsGroup</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Button group definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">widget_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;buttonsgroup&quot;</span>
+    <span class="n">pref_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Section"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Section">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Section</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Section definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">subtitle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">dependency</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">widgets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Widget</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Section.add_buttons_group"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Section.add_buttons_group">[docs]</a>    <span class="k">def</span> <span class="nf">add_buttons_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add buttons group to section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget_kwargs : dict, optional</span>
+<span class="sd">            Widget keyword arguments.</span>
+<span class="sd">        compatible : bool, optional</span>
+<span class="sd">            The boolean result of an expresion to decide if a widget/page/section should be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">widget_kwargs</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget_kwargs</span><span class="p">,</span> <span class="n">ButtonsGroup</span><span class="p">)</span> <span class="k">else</span> <span class="n">ButtonsGroup</span><span class="p">(</span><span class="n">widget_kwargs</span><span class="o">=</span><span class="n">widget_kwargs</span><span class="p">,</span>
+                                                                                            <span class="n">compatible</span><span class="o">=</span><span class="n">compatible</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Section.add_label"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Section.add_label">[docs]</a>    <span class="k">def</span> <span class="nf">add_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add label to section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget_kwargs : dict, optional</span>
+<span class="sd">            Widget keyword arguments.</span>
+<span class="sd">        compatible : bool, optional</span>
+<span class="sd">            The boolean result of an expresion to decide if a widget/page/section should be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">widget_kwargs</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget_kwargs</span><span class="p">,</span> <span class="n">Label</span><span class="p">)</span> <span class="k">else</span> <span class="n">Label</span><span class="p">(</span><span class="n">widget_kwargs</span><span class="o">=</span><span class="n">widget_kwargs</span><span class="p">,</span>
+                                                                              <span class="n">compatible</span><span class="o">=</span><span class="n">compatible</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Section.add_widget"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Section.add_widget">[docs]</a>    <span class="k">def</span> <span class="nf">add_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget_type</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Widget</span><span class="p">],</span> <span class="n">pref_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                   <span class="n">widget_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add widget to section.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        widget_type : tuple[str, Widget]</span>
+<span class="sd">            Widget type.</span>
+<span class="sd">        pref_key : str, optional</span>
+<span class="sd">            Preference key.</span>
+<span class="sd">        widget_kwargs : dict, optional</span>
+<span class="sd">            Widget keyword arguments.</span>
+<span class="sd">        compatible : bool, optional</span>
+<span class="sd">            The boolean result of an expresion to decide if a widget/page/section should be created.</span>
+<span class="sd">        schema : str, optional</span>
+<span class="sd">            A gsettings schema.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">widget_type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">widget_type</span><span class="p">,</span> <span class="n">Widget</span><span class="p">)</span> <span class="k">else</span> <span class="n">Widget</span><span class="p">(</span><span class="n">widget_type</span><span class="p">,</span>
+                                                                            <span class="n">pref_key</span><span class="o">=</span><span class="n">pref_key</span><span class="p">,</span>
+                                                                            <span class="n">widget_kwargs</span><span class="o">=</span><span class="n">widget_kwargs</span><span class="p">,</span>
+                                                                            <span class="n">compatible</span><span class="o">=</span><span class="n">compatible</span><span class="p">,</span>
+                                                                            <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Page"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Page">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Page</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Page definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">sections</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Section</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Page.add_section"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.Page.add_section">[docs]</a>    <span class="k">def</span> <span class="nf">add_section</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Section</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Section</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add section to page.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : tuple[str, Section]</span>
+<span class="sd">            Section title.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Section keyword arguments.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Section</span>
+<span class="sd">            Section definition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">title</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">Section</span><span class="p">)</span> <span class="k">else</span> <span class="n">Section</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">section</span></div></div>
+
+
+<div class="viewcode-block" id="WindowDefinition"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.WindowDefinition">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">WindowDefinition</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Window definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Page</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WindowDefinition.add_page"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.WindowDefinition.add_page">[docs]</a>    <span class="k">def</span> <span class="nf">add_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Page</span><span class="p">],</span> <span class="n">compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add page definition to window definition.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : tuple[str, Page]</span>
+<span class="sd">            A title for the page that will be displayed in the sidebar.</span>
+<span class="sd">        compatible : bool, optional</span>
+<span class="sd">            The boolean result of an expresion to decide if a widget/page/section should be created.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Page</span>
+<span class="sd">            Page definition.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">title</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">Page</span><span class="p">)</span> <span class="k">else</span> <span class="n">Page</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">compatible</span><span class="o">=</span><span class="n">compatible</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">page</span></div>
+
+<div class="viewcode-block" id="WindowDefinition.should_create_page_switcher"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.WindowDefinition.should_create_page_switcher">[docs]</a>    <span class="k">def</span> <span class="nf">should_create_page_switcher</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Should the page switcher be created?</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            If the sidebar should be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="get_debugging_section"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.builder.html#xlets_settings.builder.get_debugging_section">[docs]</a><span class="k">def</span> <span class="nf">get_debugging_section</span><span class="p">(</span><span class="n">xlet_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">xlet_uuid</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Section</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Get debugging section.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xlet_type : str</span>
+<span class="sd">        Xlet type.</span>
+<span class="sd">    xlet_uuid : str</span>
+<span class="sd">        Xlet UUID.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Section</span>
+<span class="sd">        The debugging section.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">section</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s2">&quot;Debugging&quot;</span><span class="p">),</span> <span class="n">notes</span><span class="o">=</span><span class="p">[</span><span class="n">CINN_RESTART</span><span class="p">])</span>
+    <span class="n">section</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="s2">&quot;gcombobox&quot;</span><span class="p">,</span> <span class="s2">&quot;logging-level&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (*)&quot;</span> <span class="o">%</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Logging level&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;tooltip&quot;</span><span class="p">:</span> <span class="n">LOGGING_LEVEL_TOOLTIP</span><span class="p">,</span>
+        <span class="s2">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="mi">0</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Normal&quot;</span><span class="p">),</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Verbose&quot;</span><span class="p">),</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Very verbose&quot;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="n">schema</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;org.cinnamon.</span><span class="si">{</span><span class="n">xlet_type</span><span class="si">}</span><span class="s2">s.</span><span class="si">{</span><span class="n">xlet_uuid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">section</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="s2">&quot;gswitch&quot;</span><span class="p">,</span> <span class="s2">&quot;debugger-enabled&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> (*)&quot;</span> <span class="o">%</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Enable debugger&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;tooltip&quot;</span><span class="p">:</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;It enables the ability to catch all exceptions that under normal use would not be caught.&quot;</span><span class="p">)</span>
+    <span class="p">},</span> <span class="n">schema</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;org.cinnamon.</span><span class="si">{</span><span class="n">xlet_type</span><span class="si">}</span><span class="s2">s.</span><span class="si">{</span><span class="n">xlet_uuid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">section</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

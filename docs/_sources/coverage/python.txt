@@ -1,5 +1,51 @@
 Undocumented Python objects
 ===========================
+python_modules.python_utils.cmd_utils
+-------------------------------------
+Functions:
+ * get_startup_info
+
+python_modules.python_utils.sublime_text_utils.events
+-----------------------------------------------------
+Functions:
+ * broadcast
+ * off
+ * on
+ * subscribe
+ * unsubscribe
+
+python_modules.python_utils.sublime_text_utils.logger
+-----------------------------------------------------
+Classes:
+ * SublimeLogger -- missing methods:
+
+   - debug
+   - error
+   - exception
+   - info
+   - warning
+
+python_modules.python_utils.sublime_text_utils.queue
+----------------------------------------------------
+Functions:
+ * cleanup
+ * debounce
+ * unload
+
+python_modules.python_utils.sublime_text_utils.utils
+----------------------------------------------------
+Functions:
+ * distinct_until_buffer_changed
+
+Classes:
+ * CompletionsSuperClass
+
+python_modules.python_utils.yaml_utils
+--------------------------------------
+Functions:
+ * ordered_dump
+ * ordered_load
+
 xlets_settings.JsonSettingsWidgets
 ----------------------------------
 Functions:

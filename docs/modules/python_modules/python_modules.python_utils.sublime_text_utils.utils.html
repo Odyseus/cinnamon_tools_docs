@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python_modules.python_utils.sublime_text_utils.utils module &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="python_modules.python_utils.ansi_colors module" href="python_modules.python_utils.ansi_colors.html" />
+    <link rel="prev" title="python_modules.python_utils.sublime_text_utils.settings module" href="python_modules.python_utils.sublime_text_utils.settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">python_modules</a> &raquo;</li>
+          <li><a href="python_modules.html">python_modules package</a> &raquo;</li>
+          <li><a href="python_modules.python_utils.html">python_modules.python_utils package</a> &raquo;</li>
+          <li><a href="python_modules.python_utils.sublime_text_utils.html">python_modules.python_utils.sublime_text_utils package</a> &raquo;</li>
+      <li>python_modules.python_utils.sublime_text_utils.utils module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="python_modules.python_utils.sublime_text_utils.settings.html" class="btn btn-neutral float-left" title="python_modules.python_utils.sublime_text_utils.settings module" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="python_modules.python_utils.ansi_colors.html" class="btn btn-neutral float-right" title="python_modules.python_utils.ansi_colors module" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-python_modules.python_utils.sublime_text_utils.utils">
+<span id="python-modules-python-utils-sublime-text-utils-utils-module"></span><h1>python_modules.python_utils.sublime_text_utils.utils module<a class="headerlink" href="#module-python_modules.python_utils.sublime_text_utils.utils" title="Permalink to this headline">¶</a></h1>
+<p>Various utilities.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.has_right_syntax">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">has_right_syntax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">view_syntaxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#has_right_syntax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.has_right_syntax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has right syntax.</p>
+<p>Check if the view is of the desired syntax listed in <code class="docutils literal notranslate"><span class="pre">view_syntaxes</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
+<li><p><strong>view_syntaxes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>string</em><em>, </em><em>optional</em>) -- List of syntaxes to check against.</p></li>
+<li><p><strong>strict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- Perform equality checks instead of membership checks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If the view has the right syntax.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.has_right_extension">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">has_right_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extensions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#has_right_extension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.has_right_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has the right file extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
+<li><p><strong>file_extensions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) -- The list of file extensions to check against.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whether if file is of the right syntax.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Borrowed from JSFormat.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.remove_bad_chars">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">remove_bad_chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#remove_bad_chars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.remove_bad_chars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove bad characters from selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- The string to clean.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String with bad characters removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.get_selections">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_selections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extract_words</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#get_selections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.get_selections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all selections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
+<li><p><strong>extract_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- If no selection is found at region's coordinates, extract words from regions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of strings.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.get_executable_from_settings">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_executable_from_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#get_executable_from_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.get_executable_from_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get executable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
+<li><p><strong>settings</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) -- The list of executable names and/or paths to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>str</em> -- The path or name to an existent program.</p></li>
+<li><p><em>None</em> -- No program found.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.substitute_variables">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">substitute_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#substitute_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.substitute_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitute variables.</p>
+<p>Utilizes Sublime Text's <cite>expand_variables</cite> API, which uses the <cite>${varname}</cite> syntax and
+supports placeholders (<cite>${varname:placeholder}</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variables</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) -- A dictionary containing variables as keys mapped to values to replace those variables.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) -- The str/list/dict containing the data where to perform substitutions.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>list</em></p></li>
+<li><p><em>dict</em></p></li>
+<li><p><em>str</em> -- The modified data.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Borrowed from SublimeLinter.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.guess_project_root_of_view">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">guess_project_root_of_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#guess_project_root_of_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.guess_project_root_of_view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Guess project root folder from view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None</em> -- No project root folder could be ascertained.</p></li>
+<li><p><em>str</em> -- The project root folder.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Borrowed from SublimeLinter. I &lt;3 these guys!</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.get_file_path">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_file_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#get_file_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.get_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get file from view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The view's file path.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.get_filename">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#get_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.get_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get view's file name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>File name.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Borrowed from SublimeLinter.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils._extract_window_variables">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">_extract_window_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#_extract_window_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils._extract_window_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract window variables.</p>
+<p>We explicitly want to compute all variables around the current file on our own.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A sublime.Window object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Window variables.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.get_view_context">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">get_view_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">view</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#get_view_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.get_view_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get view context.</p>
+<p>Note that we ship a enhanced version for <code class="docutils literal notranslate"><span class="pre">folder</span></code> if you have multiple
+folders open in a window. See <code class="docutils literal notranslate"><span class="pre">guess_project_root_of_view</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
+<li><p><strong>additional_context</strong> (<em>None</em><em>, </em><em>optional</em>) -- Additional context.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Extended window variables with environment variables and more &quot;persistent&quot;
+files/folders names/paths.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.ChainMap" title="(in Python v3.10)">collections.ChainMap</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.reload_plugins">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">reload_plugins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#reload_plugins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.reload_plugins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reload Sublime 'plugins' using official API.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="python_modules.python_utils.sublime_text_utils.settings.html" class="btn btn-neutral float-left" title="python_modules.python_utils.sublime_text_utils.settings module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="python_modules.python_utils.ansi_colors.html" class="btn btn-neutral float-right" title="python_modules.python_utils.ansi_colors module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <title>Help for Desktop Effects Applier</title>
+        <link rel="shortcut icon" type="image/x-icon" href="./icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="../../css/bootstrap-tweaks.css">
+        <style type="text/css">
+
+        </style>
+    </head>
+
+    <body>
+        <div id="mainarea">
+            <nav id="main-navbar"
+                 class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top py-0"
+                 role="navigation">
+                <div class="container-fluid">
+                    <div class="nav navbar-nav mr-auto">
+                        <a id="nav-xlet-help"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-help">Help</a>
+                        <a id="nav-xlet-contributors"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-contributors">Contributors</a>
+                        <a id="nav-xlet-changelogs"
+                           class="nav-link"
+                           onclick="event.preventDefault();"
+                           href="#xlet-changelogs">Changelogs</a>
+                    </div>
+                    <form>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"
+                                  id="localization-switch-image">🌐</span>
+                            <select class="form-select form-select-sm"
+                                    id="localization-switch"
+                                    aria-describedby="localization-switch-image">
+<!-- English --><option selected data-title="Help for Desktop Effects Applier" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelogs" value="en">English (English)</option>
+<!-- Español --><option data-title="Ayuda para Aplicador de Efectos de Escritorio" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Changelogs" value="es">Español (Spanish)</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <div id="no-js-main"
+                 class="alert alert-warning mx-5"
+                 role="alert">
+                <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
+                <p><strong>This page uses JavaScript only to switch between the available languages, smooth scrolling, etc.</strong></p>
+                <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
+            </div>
+            <span id="xlet-help"></span>
+            <div class="container boxed my-3 py-3">
+
+<div id="es" class="localization-content" hidden="true">
+<h1>Ayuda para Aplicador de Efectos de Escritorio</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Advertencia</div>
+    <div class="card-body text-warning text-font-size-large"><p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<p>Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Compatibilidad con Cinnamon</div>
+    <div class="card-body text-success text-font-size-large">Este xlet es compatible con Cinnamon 5.0 hasta la última versión de Cinnamon.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Localización de xlets</div>
+    <div class="card-body text-info text-font-size-large"><p>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</p>
+
+<p>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado helper.py desde una terminal abierta dentro de la carpeta del xlet.</p>
+</div>
+</div>
+
+<h2>Características</h2>
+<ul>
+<li>Todos los efectos se aplican mediante atajos de teclado.</li>
+<li>Todos los efectos aplicados a las ventanas son heredados por sus <em>clones</em>. Es decir, las miniaturas de las ventanas que se muestran en los conmutadores de ventana <kbd>Alt</kbd> + <kbd>Tab</kbd>, Expo, etc. Ver <strong>Problemas conocidos y limitaciones</strong>.</li>
+</ul>
+<h2>Problemas conocidos y limitaciones</h2>
+<ul>
+<li>Todos los efectos aplicados por esta extensión son transitorios. Lo que significa que, siempre que se cierre una ventana, se reinicie Cinnamon o se reinicie el sistema, todos los efectos se eliminarán/destruirán.</li>
+<li>Las miniaturas de ventanas en el conmutador de aplicaciones clásico no heredarán el efecto de las ventanas reales. Esta es una limitación mía; Simplemente no pude encontrar la manera de hacerlo.</li>
+</ul>
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+Las siguientes secciones están disponibles sólo en Inglés.
+</div>
+
+</div> <!-- .localization-content -->
+
+
+<div id="en" class="localization-content" >
+<h1>Help for Desktop Effects Applier</h1>
+
+<div class="card fw-bold my-3 border-warning shadow-sm">
+    <div class="card-header bg-warning text-white">Warning</div>
+    <div class="card-body text-warning text-font-size-large"><p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
+<p>Bug reports, feature requests and contributions should be done on this xlet's repository linked next. <a href="https://gitlab.com/Odyseus/CinnamonTools">GitLab</a></p></div>
+</div>
+<div class="card fw-bold my-3 border-success shadow-sm">
+    <div class="card-header bg-success text-white">Cinnamon compatibility</div>
+    <div class="card-body text-success text-font-size-large">This xlet is compatible with Cinnamon 5.0 up to latest Cinnamon version.</div>
+</div>
+<div class="card fw-bold my-3 border-info shadow-sm">
+    <div class="card-header bg-info text-white">Xlets localization</div>
+    <div class="card-body text-info text-font-size-large"><p>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</p>
+
+<p>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called helper.py from a terminal opened inside the xlet's folder.</p>
+</div>
+</div>
+
+<h2>Features</h2>
+<ul>
+<li>All effects are applied through keyboard shortcuts.</li>
+<li>All effects applied to windows are inherited by their <em>clones</em>. That is, the thumbnails of the windows displayed in <kbd>Alt</kbd> + <kbd>Tab</kbd> window switchers, Expo, etc. See <strong>Known issues and limitations</strong>.</li>
+</ul>
+<h2>Known issues and limitations</h2>
+<ul>
+<li>All effects applied by this extension are transient. Which means that, whenever a window is closed, Cinnamon is restarted or the system is restarted, all effects will be removed/destroyed.</li>
+<li>Thumbnails of windows in the classic application switcher will not inherit the effect of the real windows. This is a limitation of my own; I simply couldn't find the way of doing it.</li>
+</ul>
+
+</br>
+
+<div class="alert alert-info fw-bold shadow-sm" role="alert">
+
+The following sections are available only in English.
+</div>
+
+</div> <!-- .localization-content -->
+
+            </div>
+            <span id="xlet-contributors"></span>
+<div class="container boxed my-3 py-3">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/maiself">Mai Lavelle</a>:</strong> Author of the Gnome Shell extension called <a href="https://github.com/maiself/gnome-shell-extension-invert-color">Invert Window Color</a>.</li>
+<li><strong><a href="https://github.com/rnbdsh">Marcus Vogel</a>:</strong> Author of the Cinnamon extension called <a href="https://cinnamon-spices.linuxmint.com/extensions/view/45">Negate Window</a>.</li>
+<li><strong><a href="https://github.com/laerne">laerne</a>:</strong> Author of the Gnome Shell extension called <a href="https://github.com/laerne/desaturate_all">Desaturate All</a>.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+            <span id="xlet-changelogs"></span>
+<div class="container boxed my-3 py-3">
+<h2>Desktop Effects Applier changelogs</h2>
+<p><strong>These change logs are only valid for the version of the xlet hosted on <a href="https://gitlab.com/Odyseus/CinnamonTools">its original repository</a>.</strong></p>
+<hr>
+
+</div> <!-- .container.boxed -->
+<div class="container boxed my-3 py-3">
+
+<button type="button" class="btn btn-primary collapsible">Display more history</button>
+<div class="collapsible-content">
+<p><br/>
+<br/></p>
+<hr>
+<p><strong>Date:</strong> Sun, 5 Apr 2020 16:14:01 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/02e2827">02e2827</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<p>WARNING: Undo/Ignore the warning in previous commit (73b77bc).</p>
+<ul>
+<li>Reverted previous changes to shader files.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 4 Apr 2020 18:19:02 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/73b77bc">73b77bc</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<p>WARNING: This update requires that all shader files in use that aren't shipped with the extension to be renamed from <code>.frag.glsl</code> to <code>.shader.glsl</code>. It's also required that all shader effects in this extension settings window to be edited so they use the renamed shaders. If there are too many effects listed to be edited from the GUI, just do a mass string substitution on the settings file (<strong>~/.cinnamon/configs/0DesktopEffectsApplierExtension@domain.com/0DesktopEffectsApplierExtension@domain.com.json</strong>).</p>
+<ul>
+<li>Renamed all shader files from <code>.frag.glsl</code> to <code>.shader.glsl</code>. The reason for this is that the only GLSL validator that seems to exist (<a href="https://github.com/KhronosGroup/glslang">glslangValidator</a>) will report errors (false positives) on all shader files when they are named <code>.frag.glsl</code>.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Wed, 12 Feb 2020 22:46:36 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/49dc7f5">49dc7f5</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Adaptations due to changes to the custom settings framework.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Mon, 10 Feb 2020 23:01:49 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/c3e81ea">c3e81ea</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Adaptations due to changes to the custom settings framework.</li>
+<li>Adaptations due to changes to the <code>debugManager.js</code> JavaScript module.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 28 Jan 2020 01:24:52 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/89b9ed3">89b9ed3</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<p>Brought up to date with the rest of xlets.</p>
+<ul>
+<li>Implementation of JavaScript global modules.</li>
+<li>Removed unused icons.</li>
+<li>Updated metadata.json files due to changes to their handling.</li>
+<li>Replaced the use of the cgi.escape method (due to its deprecation) in the settings application for the html.escape method.</li>
+<li>Fixed non functional keybinding effects when there are more than one of the same type defined. This lead to having effects with the same internal IDs.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Sat, 27 Apr 2019 15:03:02 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/93e2b71">93e2b71</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Some grammar corrections.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Thu, 25 Apr 2019 02:04:13 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/a60ae21">a60ae21</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<ul>
+<li>Corrected all the shader files. It seems that the shader language is susceptible to certain combination of software versions and/or hardware.</li>
+<li>Removed the redundant declaration of the XletMeta variable in extension.js.</li>
+<li>Moved the addition of the Help button for the desktop notification when the notification is created, not updated.</li>
+</ul>
+<hr>
+<p><strong>Date:</strong> Tue, 16 Apr 2019 14:12:23 -0300<br/>
+<strong>Commit:</strong> <a href="https://gitlab.com/Odyseus/CinnamonTools/commit/fac2ce7">fac2ce7</a><br/>
+<strong>Author:</strong> Odyseus<br/></p>
+<p>Initial commit. An extension that allows to apply effects to windows or the screen. It has the ability to apply effects as simple as brightness, desaturation, contrast and colors and as complex as OpenGL shaders.</p>
+<p>TODO:</p>
+<ul>
+<li>Complete Spanish localization.</li>
+<li>Complete help page.</li>
+<li>Complete contributors section.</li>
+<li>Implement a wizard-like mechanism to apply effects. This extension works exclusively with keyboard shortcuts and can be configured with hundreds of effects. No one (including me) will ever bother to configure and remember hundreds of keyboard shortcuts!</li>
+</ul>
+<hr>
+
+</div>
+
+</div> <!-- .container.boxed -->
+
+        </div>
+        <footer class="fw-bold text-white navbar-dark bg-primary px-3 pt-4 mt-4">
+            <div class="container-fluid text-left">
+                <ul class="list-unstyled">
+                    <li>
+                        <p>Page created with <a href="https://getbootstrap.com">Bootstrap</a>.</p>
+                    </li>
+                    <li>
+                        <p>Boostrap theme created with <a href="https://gitlab.com/PythonCLIApplications/BootstrapThemesGenerator">Bootstrap Theme Generator</a> and based on <a href="https://bootswatch.com">Bootswatch</a>'s <a href="https://bootswatch.com/flatly">Flatly theme</a>.</p>
+                    </li>
+                    <li>
+                        <p><a href="https://github.com/julienetie/smooth-scroll">Smooth Scroll plugin</a> provided by <a href="https://github.com/julienetie">Julien Etienne</a>.</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center py-3">
+                <div class="container-fluid">
+                    © 2016-2022 <a href="https://gitlab.com/Odyseus/CinnamonTools">Odyseus</a>
+                </div>
+            </div>
+        </footer>
+        <script type="text/javascript" defer src="../../js/main.js"></script>
+        <script type="text/javascript">
+
+        </script>
+    </body>
+
+</html>

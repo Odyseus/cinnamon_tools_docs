@@ -53,17 +53,17 @@ This command starts a |CLI| menu from which xlets and themes can be built intera
 
     .. _how-to-build-xlets-reference:
 
-app.py build
-------------
+app.py build_xlets
+------------------
 
 This command is used to build all or specific xlets. All xlets found in Cinnamon Tools' repository aren't directly usable, they need to be *built*. *Building* an xlet just means that the *raw xlet* (as found in the repository) will be copied into another location (chosen when performing the building) and a string substitution will be done that will apply a generated UUID (``xlet_name@custom_domain_name``) to all files (files content and file names). It will also compile the ``gsettings`` files (if an xlet contains such files) and copy files common to all xlets (LICENSE.md, localizations installer script, global modules, etc.).
 
 Options
 ^^^^^^^
 
-- ``-x <name>`` or ``--xlet=<name>``: Specify one or more xlets to build.
+- ``-x <name>`` or ``--xlet-name=<name>``: Specify one or more xlets to build.
 
-    + Example usage: ``app.py build -x 0ArgosForCinnamon -x 0CinnamonTweaks``
+    + Example usage: ``app.py build_xlets -x 0ArgosForCinnamon -x 0CinnamonTweaks``
     + This command will build the Argos for Cinnamon applet and the Cinnamon Tweaks extension into the default output directory.
 
 
@@ -73,7 +73,7 @@ Options
 
 - ``-d <domain>`` or ``--domain=<domain>``: To be able to build any xlet, it is necessary to specify a domain name. This domain name is then used to generate an xlet UUID (and other data). To avoid passing this command line option every time one builds xlets, a file named **domain_name** can be created inside a folder named **tmp** at the root of the repository whose only content should be the desired domain name. This command line option has precedence over the **domain_name** file. Which means that if this option is used, the domain name found in an existent **domain_name** file will be ignored.
 
-    + Example usage: ``app.py build -x 0ArgosForCinnamon -d example.com``
+    + Example usage: ``app.py build_xlets -x 0ArgosForCinnamon -d example.com``
 
 
     .. only:: html
@@ -99,7 +99,7 @@ Options
 
 - ``-o <dir>`` or ``--output=<dir>``: The output directory that will be used to save the built xlets. If not specified, the default storage location will be used.
 
-    + Example usage: ``app.py build -x 0ArgosForCinnamon -o /home/user_name/.local/share/cinnamon``
+    + Example usage: ``app.py build_xlets -x 0ArgosForCinnamon -o /home/user_name/.local/share/cinnamon``
     + This command will build the Argos for Cinnamon applet directly into Cinnamon's install location for xlets.
 
     .. only:: html
@@ -116,10 +116,10 @@ Options
 
 - ``-e <dir>`` or ``--extra-files=<dir>``: Path to a folder containing files that will be copied into an xlet folder at build time.
 
-    + Example usage: ``app.py build -x 0ArgosForCinnamon --extra-files=~/MyCinnamonToolsExtraFiles``
+    + Example usage: ``app.py build_xlets -x 0ArgosForCinnamon --extra-files=~/MyCinnamonToolsExtraFiles``
     + The folder passed to this option should have the same folder structure as the Cinnamon Tools repository.
     + Only two folders should exist inside this folder; one called **applets** and/or another called **extensions**. Any other content will be ignored.
-    + Using the example at the beginning of this list, to add extra files to the built **0ArgosForCinnamon** xlet, those extra files should reside at ``~/MyCinnamonToolsExtraFiles/applets/0ArgosForCinnamon``.
+    + Using the example at the beginning of this list, to add extra files to the built **ArgosForCinnamon** xlet, those extra files should reside at ``~/MyCinnamonToolsExtraFiles/applets/ArgosForCinnamon``.
     + Copied files that exist at the destination will be overwritten without confirmation.
     + Core xlet files cannot be copied/overwritten. More precisely, files ending with the following file extensions will be ignored: ``.js``, ``.py``, ``.xml``, ``.pot``, and ``.json``.
 
@@ -130,7 +130,7 @@ Options
             :title: Why I added this option?
 
             I created this option for one simple reason. So users can create and use their own localizations for the xlets that they install without the need to modify the files inside the repository nor to learn advanced use of ``git``.
-            Users that want to perform more in depth changes to the xlets or even create their own xlets using the Cinnamon Tools repository as a *framework* should take full advantage of ``git``. It is *as simple* as creating their own fork of the repository, making any kind of changes in a separated branch, rebasing from the upstream repository's master branch when needed/wanted.
+            Users that want to perform more in depth changes to the xlets or even create their own xlets using the Cinnamon Tools repository as a *framework* should take full advantage of ``git``. It is *as simple* as creating their own fork of the repository, making any kind of changes in a separated branch, re-basing from the upstream repository's master branch when needed/wanted.
 
 - ``-i`` or ``--install-localizations``: Install xlets localizations after building xlets.
 
@@ -148,102 +148,117 @@ Options
 
 .. only:: html
 
-    .. _build-command-option-dry-run-reference:
-
-- ``-y`` or ``--dry-run``: Do not perform file system changes. Only display messages informing of the actions that will be performed or commands that will be executed.
-
-    .. only:: html
-
-        .. warning::
-
-            Some file system changes will be performed (e.g. temporary files creation).
-
-.. only:: html
-
     .. _how-to-build-themes-reference:
 
 app.py build_themes
 -------------------
 
-This command is used to build all the themes. Just like xlets, the themes found in Cinnamon Tools' repository aren't directly usable, they need to be *built*. The themes building process is interactive. The build process will ask for Cinnamon version, Cinnamon's theme default font size/family, GTK+ 3 version, shadows of windows with |CSD| , etc.
+This command is used to build all the themes. Just like xlets, the themes found in Cinnamon Tools' repository aren't directly usable, they need to be *built*. The themes building process is interactive. The build process will ask for Cinnamon version, GTK+ 3/4 versions, shadows of windows with |CSD| , etc.
 
-There is actually one theme in this repository, but infinite variants (color accents) can be created. The existent variant is called **GreybirdBlue** because it's the same blue used by the `Greybird <https://github.com/shimmerproject/Greybird>`__ theme.
+There is actually one theme in this repository, but 10 variants (color accents) available. The existent variant is called **GreybirdBlue** because it's the same blue used by the `Greybird <https://github.com/shimmerproject/Greybird>`__ theme.
 
 Options
 ^^^^^^^
 
 - ``-t <name>`` or ``--theme-name=<name>``: To be able to build the themes, it is necessary to specify a theme name. This theme name is then used to generate the full theme name (theme_name-theme_variant). To avoid passing this command line option every time one builds themes, a file named **theme_name** can be created at the root of the repository whose only content should be the desired theme name. This command line option has precedence over the **theme_name** file. Which means that if this option is used, the theme name found in an existent **theme_name** file will be ignored.
+- ``-v <name>`` or ``--variant-name=<name>``: Specify a theme variant name (the name of its folder). If not specified, all theme variants will be built.
 - ``-o <dir>`` or ``--output=<dir>``: The output directory that will be used to save the built themes. If not specified, the default storage location will be used. See :ref:`build command --output <build-command-option-output-reference>` option notes for more details.
 - ``-n`` or ``--no-confirmation``: Do not confirm the deletion of an already built theme when the ``--output`` option is used. See :ref:`build command --output <build-command-option-output-reference>` option notes for more details.
 - ``-r`` or ``--restart-cinnamon``: Restart Cinnamon's shell after finishing the themes building process.
-- ``-y`` or ``--dry-run``: See :ref:`build command --dry-run <build-command-option-dry-run-reference>`.
+
+.. only:: html
+
+    .. _dev-themes-command-reference:
+
+app.py dev_themes
+-----------------
+
+Options
+^^^^^^^
+
+- ``-v <name>`` or ``--variant-name=<name>``: Specify a theme variant name (the name of its folder). If not specified, all theme variants will be worked on.
+
+Sub-commands
+^^^^^^^^^^^^
+
+- ``generate_thumbnails``: This command generates the thumbnails for the Gtk and Cinnamon themes (the ones seen in Cinnamon' theme selector window). The generated thumbnail is just an image with the variant accent color as its background. See :ref:`requirements <thumbnails-generation-requirement-reference>`.
+- ``parse_sass``: This command parses the |Sass| files needed to create the themes found in this repository. It's only useful for people that wants to create their own themes variants. See :ref:`requirements <parse-sass-requirement-reference>`.
+
+Detailed differences with the Mint-X theme family
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The theme is basically the **Mint-X** theme with some graphics from the **Mint-Y** theme. But with added features that were removed from the previously mentioned default themes.
+
+**GTK2/GTK3 themes**
+
+- Restored all removed scroll bars arrows. This is configurable. Scrollbar arrows can be hidden/shown.
+- Restored all removed outlines from focused elements.
+- Dashed lines feedback (undershoot) from scrolled views (affects GTK3 applications only) are configurable and can be hidden/shown.
+
+**Cinnamon theme**
+
+- Removed center alignment from tooltips.
+- Changed the switches appearance to look like the GTK3 switches.
+- Removed fixed sizes for entries inside menus.
+- Removed all images that were used to create elements with gradients in favor of using CSS rules.
+
+**All themes**
+
+- I added accent color highlights to focused entries. I consider this a usability feature. The entries of the original Mint-X themes have almost no differences and their state is almost imperceptible from one another. Having a focused entry highlighted with the accent color makes it noticeable at first sight when there are more than one entry on screen.
+- Tooltips homogenization and configuration. The background and foreground colors of the tooltips as well as their background and border opacity can be configured. By default all variants have tooltips with almost black background and almost white foreground colors.
 
 .. only:: html
 
     .. _how-to-create-custom-variant-reference:
 
-    .. contextual-admonition::
-        :title: How to create a custom theme variant?
+How to create a custom theme variant?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        1. Duplicate the folder called **GreybirdBlue** inside **themes/_variants**. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.
-        2. Delete the folder called **_version_sensitive**. This folder will be recreated when parsing the |Sass| files.
-        3. Edit the file called **config.py** with the desired colors. This file is commented to facilitate its edition.
-        4. Parse the |Sass| files using the Cinnamon Tools command line application. See :ref:`app.py parse_sass <parse-sass-command-reference>`.
-        5. Build the themes using the Cinnamon Tools command line application. See :ref:`app.py build_themes <how-to-build-themes-reference>`.
-        6. Optionally generate the theme thumbnails. As of now, the folder **VariantName/_version_insensitive** only contains thumbnails for the Cinnamon and Gtk2/Gtk3 themes. These thumbnails are used by Cinnamon's theme selectors as themes previews. The folder **VariantName/_version_insensitive** could be ignored/removed, in which case the Cinnamon's theme selectors will use blank/generic images.
+1. Duplicate any of the variant folders found inside **themes/_variants**. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.
+2. Delete the content of the folder except for the file called **config.yaml**.
+3. Edit the **config.yaml** file with the desired colors. This file is commented to facilitate its edition.
+4. Parse the |Sass| files using the Cinnamon Tools command line application. See :ref:`app.py dev_themes parse_sass <dev-themes-command-reference>`.
+5. Generate the variant theme thumbnails using the Cinnamon Tools command line application. See :ref:`app.py dev_themes generate_thumbnails <dev-themes-command-reference>`. These thumbnails are used by Cinnamon's theme selectors as themes previews. This step could be ignored, in which case the thumbnails in the theme selectors will be blank.
+6. Build the themes using the Cinnamon Tools command line application. See :ref:`app.py build_themes <how-to-build-themes-reference>`.
 
-             a) The thumbnail for the Gtk2/Gtk3 theme can be created with the command ``cinnamon-preview-gtk-theme ThemeName``. The theme needs to be built and installed for the previous command to display a window using the desired theme. What remains now is to take a screenshot of the displayed window and crop it to 120x35 pixels and then copy the image to **VariantName/_version_insensitive/gtk-3.0** folder.
-             b) The thumbnail for the Cinnamon theme can be any image of any size that displays the look of the Cinnamon theme in use.
+.. note::
 
-            .. contextual-admonition::
-                :context: warning
-                :title: Note
+    - When creating a custom theme variant, always use ``--variant-name=<name>`` CLI option to avoid unnecessary modifications to the default theme variants.
+    - **All newly added** files/folders inside the **themes/_variants** folder **will not be tracked by git**.
 
-                Needless to say, the themes need to be rebuilt after creating and placing the thumbnails into their respective places.
 
-    .. contextual-admonition::
-        :title: Detailed differences with the Mint-X theme family
+Customization options
+^^^^^^^^^^^^^^^^^^^^^
 
-        The theme is basically the **Mint-X** theme with some graphics from the **Mint-Y** theme. But with added features that were removed from the previously mentioned default themes.
+Creating a custom variant of the theme has the advantage of having at ones finger tips the possibility to change certain core aspects of the theme that may otherwise be to complicated (or impossible) to change in a finished theme.
 
-        **GTK2/GTK3 themes**
+Variant configuration file example
+""""""""""""""""""""""""""""""""""
 
-        - Restored all removed scroll bars arrows.
-        - Restored all removed outlines from focused elements.
-        - Removed dashed lines feedback from scrolled views (affects GTK3 applications only).
-        - Changed the tooltips appearance of the GTK2 theme to look like the GTK3 tooltips.
+.. literalinclude:: ../../../themes/_variants/GreybirdBlue/config.yaml
+    :language: python
+    :prepend: # START GreybirdBlue/config.yaml
+    :append: # END GreybirdBlue/config.yaml
 
-        **Cinnamon theme**
+Global themes configuration file example
+""""""""""""""""""""""""""""""""""""""""
 
-        - Changed the tooltips appearance to look like the GTK3 tooltips.
-        - Removed center alignment from tooltips.
-        - Changed the switches appearance to look like the GTK3 switches.
-        - Removed fixed sizes for entries inside menus.
-        - Removed all images that were used to create elements with gradients in favor of using CSS rules.
+The options in this file can be overwritten by simply making a copy of this file inside the **cinnamon_tools_repository/tmp** folder and editing its content.
 
-.. only:: html
+.. literalinclude:: ../../../themes/theme_config.yaml
+    :language: python
+    :prepend: # START theme_config.yaml
+    :append: # END theme_config.yaml
 
-    .. _parse-sass-command-reference:
-
-app.py parse_sass
------------------
-
-This command parses the |Sass| files needed to create the themes found in this repository. It's only usefull for people that wants to create their own themes variants. See :ref:`requirements <parse-sass-requirement-reference>`.
-
-Options
-^^^^^^^
-
-- ``-y`` or ``--dry-run``: See :ref:`build command --dry-run <build-command-option-dry-run-reference>`.
-
-app.py dev
-----------
+app.py dev_xlets
+----------------
 
 This command is used to perform development tasks.
 
 Options
 ^^^^^^^
 
-- ``-x <name>`` or ``--xlet=<name>``: Specify one or more xlets to perform development tasks on. Without specifying any xlet, all xlets will be handled.
+- ``-x <name>`` or ``--xlet-name=<name>``: Specify one or more xlets to perform development tasks on. Without specifying any xlet, all xlets will be handled.
 
 Sub-commands
 ^^^^^^^^^^^^
@@ -273,7 +288,6 @@ Sub-commands
 - ``docs``: Generate this documentation page.
 - ``docs_no_api``: Generate this documentation page without extracting Python modules docstrings.
 - ``base_xlet``: Interactively generate a *skeleton* xlet.
-
 
 Options for ``docs`` and ``docs_no_api`` sub-commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

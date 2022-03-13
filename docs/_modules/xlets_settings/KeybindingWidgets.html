@@ -1,65 +1,29 @@
-
-
 <!DOCTYPE html>
-<html class="no-js" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xlets_settings.KeybindingWidgets &mdash; Cinnamon Tools  documentation</title>
-  
-
-  
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="shortcut icon" href="../../_static/cinnamon-logo.svg"/>
   
-  
-  
-
-  
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.min.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search"  style="background: False" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> Cinnamon Tools
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -67,17 +31,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
@@ -88,70 +42,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
-            
-          
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Cinnamon Tools</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content style-external-links">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
-        
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Module code</a> &raquo;</li>
-        
           <li><a href="../xlets_settings.html">xlets_settings</a> &raquo;</li>
-        
       <li>xlets_settings.KeybindingWidgets</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <h1>Source code for xlets_settings.KeybindingWidgets</h1><div class="highlight"><pre>
-<span></span><span class="ch">#!/usr/bin/python3</span>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Keybinding widgets.</span>
 
@@ -170,6 +87,7 @@
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gdk</span>
 <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span>
 
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">display_message_dialog</span>
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">get_keybinding_display_name</span>
 
 <span class="c1"># NOTE: All translatable strings used in this module are available in Cinnamon.</span>
@@ -259,12 +177,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">entry_store</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span> <span class="o">=</span> <span class="n">CellRendererKeybinding</span><span class="p">(</span><span class="n">a_widget</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;accel-edited&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_cell_edited</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;accel-cleared&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_cell_cleared</span><span class="p">)</span>
 
         <span class="n">col</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">TreeViewColumn</span><span class="p">(</span><span class="s2">&quot;binding&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="p">,</span> <span class="n">accel_string</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">col</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">col</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">append_column</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 
@@ -350,7 +268,7 @@
         <span class="k">if</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;accel-string&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;unknown property </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown property </span><span class="si">{</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ButtonKeybinding.do_set_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.KeybindingWidgets.html#xlets_settings.KeybindingWidgets.ButtonKeybinding.do_set_property">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set property override.</span>
@@ -372,7 +290,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span> <span class="o">=</span> <span class="n">value</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">keybinding_cell</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;unknown property </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown property </span><span class="si">{</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ButtonKeybinding.get_accel_string"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.KeybindingWidgets.html#xlets_settings.KeybindingWidgets.ButtonKeybinding.get_accel_string">[docs]</a>    <span class="k">def</span> <span class="nf">get_accel_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get accel. string.</span>
@@ -394,6 +312,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span> <span class="o">=</span> <span class="n">accel_string</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span></div></div>
+
+
+<span class="n">GObject</span><span class="o">.</span><span class="n">type_register</span><span class="p">(</span><span class="n">ButtonKeybinding</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CellRendererKeybinding"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.KeybindingWidgets.html#xlets_settings.KeybindingWidgets.CellRendererKeybinding">[docs]</a><span class="k">class</span> <span class="nc">CellRendererKeybinding</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">CellRendererText</span><span class="p">):</span>
@@ -487,7 +408,7 @@
         <span class="k">if</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;accel-string&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;unknown property </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown property </span><span class="si">{</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CellRendererKeybinding.do_set_property"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.KeybindingWidgets.html#xlets_settings.KeybindingWidgets.CellRendererKeybinding.do_set_property">[docs]</a>    <span class="k">def</span> <span class="nf">do_set_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set property override.</span>
@@ -509,7 +430,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">accel_string</span> <span class="o">=</span> <span class="n">value</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">update_label</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;unknown property </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown property </span><span class="si">{</span><span class="n">prop</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CellRendererKeybinding.update_label"><a class="viewcode-back" href="../../modules/xlets_settings/xlets_settings.KeybindingWidgets.html#xlets_settings.KeybindingWidgets.CellRendererKeybinding.update_label">[docs]</a>    <span class="k">def</span> <span class="nf">update_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Update widget label.</span>
@@ -563,9 +484,13 @@
             <span class="n">editable</span><span class="o">.</span><span class="n">set_hexpand</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">accel_editable</span> <span class="o">=</span> <span class="n">editable</span>
 
+            <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+            <span class="c1"># Use Gtk.EventControllerKey instead of key-press-event and key-release-event.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">release_event_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_editable</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
                 <span class="s2">&quot;key-release-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_key_release</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">press_event_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_editable</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;key-press-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_key_press</span><span class="p">)</span>
+            <span class="c1"># Mark for deletion on EOL. Gtk4</span>
+            <span class="c1"># Use Gtk.EventControllerFocus instead of focus-out-event.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">focus_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accel_editable</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;focus-out-event&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_focus_out</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">teaching</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
@@ -671,7 +596,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;accel-cleared&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">return</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EVENT_STOP</span>
-            <span class="k">elif</span> <span class="n">accel_key</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Return</span> <span class="ow">or</span> <span class="n">accel_key</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_space</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">accel_key</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Return</span> <span class="ow">or</span> <span class="n">accel_key</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_KP_Enter</span> <span class="ow">or</span> <span class="n">accel_key</span> <span class="o">==</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_space</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EVENT_STOP</span>
 
         <span class="n">accel_string</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">accelerator_name_with_keycode</span><span class="p">(</span>
@@ -694,19 +619,11 @@
                 <span class="p">(</span><span class="n">keyval</span> <span class="o">&gt;=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Hangul</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">&lt;=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Hangul_Special</span><span class="p">)</span> <span class="ow">or</span>
                 <span class="p">(</span><span class="n">keyval</span> <span class="o">&gt;=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Hangul_Kiyeog</span> <span class="ow">and</span> <span class="n">keyval</span> <span class="o">&lt;=</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">KEY_Hangul_J_YeorinHieuh</span><span class="p">)</span> <span class="ow">or</span>
                     <span class="n">keyval</span> <span class="ow">in</span> <span class="n">FORBIDDEN_KEYVALS</span><span class="p">):</span>
-                <span class="n">dialog</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">MessageDialog</span><span class="p">(</span><span class="n">transient_for</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a_widget</span><span class="o">.</span><span class="n">get_toplevel</span><span class="p">(),</span>
-                                           <span class="n">flags</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">MODAL</span> <span class="o">|</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">DialogFlags</span><span class="o">.</span><span class="n">DESTROY_WITH_PARENT</span><span class="p">,</span>
-                                           <span class="n">message_type</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">MessageType</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
-                                           <span class="n">buttons</span><span class="o">=</span><span class="n">Gtk</span><span class="o">.</span><span class="n">ButtonsType</span><span class="o">.</span><span class="n">OK</span><span class="p">)</span>
-
-                <span class="n">dialog</span><span class="o">.</span><span class="n">set_default_size</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span>
                     <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This key combination, </span><span class="se">\&#39;</span><span class="s2">&lt;b&gt;</span><span class="si">%s</span><span class="s2">&lt;/b&gt;</span><span class="se">\&#39;</span><span class="s2"> cannot be used because it would become impossible to type using this key.</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="n">msg</span> <span class="o">+=</span> <span class="n">_</span><span class="p">(</span><span class="s2">&quot;Please try again with a modifier key such as Control, Alt or Super (Windows key) at the same time.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">dialog</span><span class="o">.</span><span class="n">set_markup</span><span class="p">(</span><span class="n">msg</span> <span class="o">%</span> <span class="p">(</span><span class="n">accel_label</span><span class="p">))</span>
-                <span class="n">dialog</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span>
-                <span class="n">dialog</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-                <span class="n">dialog</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+                <span class="n">display_message_dialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a_widget</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span>
+
                 <span class="k">return</span> <span class="n">Gdk</span><span class="o">.</span><span class="n">EVENT_STOP</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">press_event</span> <span class="o">=</span> <span class="kc">None</span>
@@ -736,26 +653,27 @@
             <span class="k">pass</span></div></div>
 
 
+<span class="n">GObject</span><span class="o">.</span><span class="n">type_register</span><span class="p">(</span><span class="n">CellRendererKeybinding</span><span class="p">)</span>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="k">pass</span>
 </pre></div>
 
            </div>
-           
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2016-2020, Odyseus.
-
-    </p>
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
   </div>
-    
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a modified version of <a href="https://github.com/rtfd/sphinx_rtd_theme">sphinx-rtd-theme</a>. 
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
 
@@ -767,10 +685,9 @@
       </a>
 
     </section>
-
   </div>
 
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
