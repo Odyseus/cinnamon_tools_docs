@@ -1,6 +1,11 @@
 
+.. |a.k.a.| replace:: :abbr:`a.k.a. (Also Known As)`
 .. |AES| replace:: :abbr:`AES (Advanced Encryption System)`
 .. |AFAIK| replace:: :abbr:`AFAIK (As Far As I Know)`
+.. |AIO| replace:: :abbr:`AIO (All In One)`
+.. |AI| replace:: :abbr:`AI (Artificial Intelligence)`
+.. |Ajax| replace:: :abbr:`Ajax (Asynchronous JavaScript and XML)`
+.. |ALSA| replace:: :abbr:`ALSA (Advanced Linux Sound Architecture)`
 .. |API| replace:: :abbr:`API (Application Programming Interface)`
 .. |AP| replace:: :abbr:`AP (Access Point)`
 .. |ASAP| replace:: :abbr:`ASAP (As Soon As Possible)`
@@ -10,53 +15,86 @@
 .. |CNAME| replace:: :abbr:`CNAME (Canonical Name)`
 .. |CSD| replace:: :abbr:`CSD (Client Side Decorations)`
 .. |CSS| replace:: :abbr:`CSS (Cascading Style Sheets)`
+.. |DB| replace:: :abbr:`DB (Database)`
 .. |DDoS| replace:: :abbr:`DDoS (Distributed Denial Of Services)`
 .. |DHCP| replace:: :abbr:`DHCP (Dynamic Host Configuration Protocol)`
 .. |DIY| replace:: :abbr:`DIY (Do It Yourself)`
 .. |DNS| replace:: :abbr:`DNS (Domain Name System)`
 .. |DOM| replace:: :abbr:`DOM (Document Object Model)`
 .. |DOS| replace:: :abbr:`DOS (Denial of Services)`
+.. |DRM| replace:: :abbr:`DRM (Digital Rights Management)`
 .. |DVD| replace:: :abbr:`DVD (Digital Versatile Disc)`
+.. |e.g.| replace:: :abbr:`e.g. (Exempli Gratia \(for example\))`
 .. |EOF| replace:: :abbr:`EOF (End Of File)`
 .. |EOL| replace:: :abbr:`EOL (end-of-life)`
 .. |ETA| replace:: :abbr:`ETA (Estimated Time of Arrival)`
+.. |FAQ| replace:: :abbr:`FAQ (Frequently Asked Questions)`
 .. |FFS| replace:: :abbr:`FFS (For F***s Sake)`
-.. |FOSS| replace:: :abbr:`FOSS (Free and open-source software)`
+.. |FOSS| replace:: :abbr:`FOSS (Free and Open Source Software)`
+.. |FPS| replace:: :abbr:`FPS (Frames Per Second)`
 .. |FTP| replace:: :abbr:`FTP (File Transfer Protocol)`
+.. |GB| replace:: :abbr:`GB (Gigabyte)`
+.. |GCC| replace:: :abbr:`GCC (GNU Compiler Collection)`
+.. |GPS| replace:: :abbr:`GPS (Global Positioning System)`
+.. |GPU| replace:: :abbr:`GPU (Graphics Processing Unit)`
+.. |GUID| replace:: :abbr:`GUID (Globally Unique Identifier)`
 .. |GUI| replace:: :abbr:`GUI (Graphical User Interface)`
 .. |HTML| replace:: :abbr:`HTML (Hypertext Markup Language)`
-.. |HTTPS| replace:: :abbr:`HTTPS (HyperText Transport Protocol Secure)`
+.. |HTTPS| replace:: :abbr:`HTTPS (HTTP over SSL)`
 .. |HTTP| replace:: :abbr:`HTTP (HyperText Transport Protocol)`
+.. |Hz| replace:: :abbr:`Hz (Hertz)`
+.. |i.e.| replace:: :abbr:`i.e. (Id Est \(that is\))`
 .. |I/O| replace:: :abbr:`I/O (Input & Output)`
+.. |i18n| replace:: :abbr:`i18n (Internationalization)`
+.. |IC| replace:: :abbr:`IC (Integrated Circuit)`
 .. |IDE| replace:: :abbr:`IDE (Integrated Development Environment)`
+.. |ID| replace:: :abbr:`ID (Identifier)`
 .. |IFTTT| replace:: :abbr:`IFTTT (If This Then That)`
 .. |IIRC| replace:: :abbr:`IIRC (If I Recall Correctly)`
 .. |IMAP| replace:: :abbr:`IMAP (Internet Message Access Protocol)`
 .. |IoT| replace:: :abbr:`IoT (Internet Of Things)`
+.. |IPv4| replace:: :abbr:`IPv4 (Internet Protocol version 4)`
+.. |IPv6| replace:: :abbr:`IPv6 (Internet Protocal version 6)`
 .. |IP| replace:: :abbr:`IP (Internet Protocol)`
 .. |ISP| replace:: :abbr:`ISP (Internet Service Provider)`
 .. |IT| replace:: :abbr:`IT (Information Technology)`
 .. |JSON| replace:: :abbr:`JSON (JavaScript Object Notation)`
 .. |JS| replace:: :abbr:`JS (JavaScript)`
+.. |kB| replace:: :abbr:`kB (Kilobyte)`
+.. |KDE| replace:: :abbr:`KDE (K Desktop Environment)`
+.. |KISS| replace:: :abbr:`KISS (Keep It Simple, Stupid)`
 .. |KVM| replace:: :abbr:`KVM (Kernel-based Virtual Machine)`
+.. |l10n| replace:: :abbr:`l10n (Localization)`
+.. |LAMP| replace:: :abbr:`LAMP (Linux, Apache, MySQL and PHP)`
 .. |LAN| replace:: :abbr:`LAN (Local Area Network)`
+.. |LCD| replace:: :abbr:`LCD (Liquid Crystal Display)`
 .. |LLT| replace:: :abbr:`LLT (Low Latency Transport)`
+.. |LOL| replace:: :abbr:`LOL (Laugh\(ing\) Out Loud)`
 .. |MAC| replace:: :abbr:`MAC (Media Access Control)`
+.. |Mb| replace:: :abbr:`Mb (Megabyte)`
 .. |MIME| replace:: :abbr:`MIME (Multipurpose Internet Mail Extensions)`
 .. |MX| replace:: :abbr:`MX (Mail Exchange)`
 .. |NIC| replace:: :abbr:`NIC (Network Interface Card)`
+.. |OOP| replace:: :abbr:`OOP (Object Oriented Programming)`
 .. |OSS| replace:: :abbr:`OSS (Open Source Software)`
 .. |OS| replace:: :abbr:`OS (Operating System)`
 .. |PDF| replace:: :abbr:`PDF (Portable Document Format)`
 .. |PEBCAK| replace:: :abbr:`PEBCAK (Problem Exists Between Chair And Keyboard)`
+.. |POP3| replace:: :abbr:`POP3 (Post Office Protocol v3)`
 .. |POP| replace:: :abbr:`POP (Post Office Protocol)`
 .. |PPTP| replace:: :abbr:`PPTP (Point-to-Point Tunneling Protocol)`
 .. |PSU| replace:: :abbr:`PSU (Power Supply Unit)`
 .. |QEMU| replace:: :abbr:`QEMU (Quick Emulator)`
 .. |QoS| replace:: :abbr:`QoS (Quality of Service)`
+.. |RAID| replace:: :abbr:`RAID (Redundant Array of Independent Disks)`
+.. |RAM| replace:: :abbr:`RAM (Random Access Memory)`
 .. |RDP| replace:: :abbr:`RDP (Remote Desktop Protocol)`
+.. |ROFL| replace:: :abbr:`ROFL (Rolling On the Floor Laughing)`
 .. |ROM| replace:: :abbr:`ROM (Read Only Memory)`
 .. |RSS| replace:: :abbr:`RSS (Really Simple Syndication)`
+.. |RTF| replace:: :abbr:`RTF (Rich Text Format)`
+.. |RTFM| replace:: :abbr:`RTFM (Read The F*cking Manual)`
+.. |SASL| replace:: :abbr:`SASL (Simple Authentication and Security Layer)`
 .. |Sass| replace:: :abbr:`Sass (Syntactically Awesome Style Sheets)`
 .. |SDK| replace:: :abbr:`SDK (Software Development Kit)`
 .. |SKid| replace:: :abbr:`SKid (Script Kiddie)`
@@ -66,6 +104,7 @@
 .. |SSL| replace:: :abbr:`SSL (Secure Socket Layer)`
 .. |STFU| replace:: :abbr:`STFU (Shut The F*** Up)`
 .. |SVG| replace:: :abbr:`SVG (Scalable Vector Graphics)`
+.. |TB| replace:: :abbr:`TB (TeraByte)`
 .. |TCP| replace:: :abbr:`TCP (Transmission Control Protocol)`
 .. |TLD| replace:: :abbr:`TLD (Top-level domain)`
 .. |TLS| replace:: :abbr:`TLS (Transport Layer Security)`
@@ -74,9 +113,14 @@
 .. |UPS| replace:: :abbr:`UPS (Uninterruptible Power Supply)`
 .. |URI| replace:: :abbr:`URI (Uniform Resource Identifier)`
 .. |URL| replace:: :abbr:`URL (Uniform Resource Locator)`
+.. |USB| replace:: :abbr:`USB (Universal Serial Bus)`
+.. |UTF-8| replace:: :abbr:`UTF-8 (Unicode Transformation Format 8)`
 .. |VLAN| replace:: :abbr:`VLAN (Virtual Local Area Network)`
 .. |VM| replace:: :abbr:`VM (Virtual Machine)`
 .. |VPN| replace:: :abbr:`VPN (Virtual Private Network)`
+.. |W3C| replace:: :abbr:`W3C (World Wide Web Consortium)`
 .. |WAN| replace:: :abbr:`WAN (Wide Area Network)`
 .. |WLAN| replace:: :abbr:`WLAN (Wireless Local Area Network)`
 .. |WWW| replace:: :abbr:`WWW (World Wide Web)`
+.. |XML| replace:: :abbr:`XML (Extensible Markup Language)`
+.. |YAML| replace:: :abbr:`YAML (YAML Ain’t Markup Language)`
