@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>python_modules.python_utils.sublime_text_utils.events &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../../../../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/01-usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      <li>python_modules.python_utils.sublime_text_utils.events</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for python_modules.python_utils.sublime_text_utils.events</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Events.</span>
+
+<span class="sd">Attributes</span>
+<span class="sd">----------</span>
+<span class="sd">listeners : collections.defaultdict</span>
+<span class="sd">    Registered listeners storage.</span>
+<span class="sd">map_fn_to_topic : dict</span>
+<span class="sd">    Registered functions storage.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="n">listeners</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="subscribe"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.events.html#python_modules.python_utils.sublime_text_utils.events.subscribe">[docs]</a><span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Register event.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topic : str</span>
+<span class="sd">        Event name.</span>
+<span class="sd">    fn : method</span>
+<span class="sd">        Method to register.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">listeners</span><span class="p">[</span><span class="n">topic</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="unsubscribe"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.events.html#python_modules.python_utils.sublime_text_utils.events.unsubscribe">[docs]</a><span class="k">def</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Unregister event.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topic : str</span>
+<span class="sd">        Event name.</span>
+<span class="sd">    fn : method</span>
+<span class="sd">        Method to unregister.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">listeners</span><span class="p">[</span><span class="n">topic</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="broadcast"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.events.html#python_modules.python_utils.sublime_text_utils.events.broadcast">[docs]</a><span class="k">def</span> <span class="nf">broadcast</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;Emit event.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topic : srt</span>
+<span class="sd">        Event name.</span>
+<span class="sd">    payload : dict, optional</span>
+<span class="sd">        Parameters passed to executed method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">listeners</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fn</span><span class="p">(</span><span class="o">**</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span></div>
+
+
+<span class="n">map_fn_to_topic</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="on"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.events.html#python_modules.python_utils.sublime_text_utils.events.on">[docs]</a><span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="n">topic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Event registration decorator.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    topic : str</span>
+<span class="sd">        Event name.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    method</span>
+<span class="sd">        Decorator function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Decorator.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fn : method</span>
+<span class="sd">            Method to execute.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        method</span>
+<span class="sd">            Method to execute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">subscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+        <span class="n">map_fn_to_topic</span><span class="p">[</span><span class="n">fn</span><span class="p">]</span> <span class="o">=</span> <span class="n">topic</span>
+        <span class="k">return</span> <span class="n">fn</span>
+
+    <span class="k">return</span> <span class="n">inner</span></div>
+
+
+<div class="viewcode-block" id="off"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.events.html#python_modules.python_utils.sublime_text_utils.events.off">[docs]</a><span class="k">def</span> <span class="nf">off</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove event.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fn : method</span>
+<span class="sd">        Method to unregister.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">topic</span> <span class="o">=</span> <span class="n">map_fn_to_topic</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">topic</span><span class="p">:</span>
+        <span class="n">unsubscribe</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

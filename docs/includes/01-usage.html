@@ -16,7 +16,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Cinnamon tips and tricks" href="02-tips-and-tricks.html" />
+    <link rel="next" title="Themes development/building" href="02-theme.html" />
     <link rel="prev" title="Requirements" href="00-requirements.html" /> 
 </head>
 
@@ -52,11 +52,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -79,7 +80,7 @@
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="00-requirements.html" class="btn btn-neutral float-left" title="Requirements" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-right" title="Cinnamon tips and tricks" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="02-theme.html" class="btn btn-neutral float-right" title="Themes development/building" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -95,11 +96,11 @@
 <section id="synopsis">
 <h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight">
-<pre><span class="text-bold">Cinnamon Tools Ω</span>
+<pre><strong>Cinnamon Tools Ω</strong>
 
-<span class="text-bold">CLI utility to build xlets/themes and to perform development tasks on Cinnamon Tools&#x27; repository.</span>
+<strong>CLI utility to build xlets/themes and to perform development tasks on Cinnamon Tools&#x27; repository.</strong>
 
-<span class="text-bold">Usage:</span>
+<strong>Usage:</strong>
     app.py (-h | --help | --version | --manual | -r | --restart-cinnamon)
     app.py menu
     app.py build_xlets [-x &lt;name&gt;... | --xlet-name=&lt;name&gt;...]
@@ -127,110 +128,110 @@
     app.py print_theme_variants
     app.py repo (submodules | subtrees) (init | update)
 
-<span class="text-bold">Options:</span>
+<strong>Options:</strong>
 
-<span class="text-bold">-h, --help</span>
+<strong>-h, --help</strong>
     Show this application basic help.
 
-<span class="text-bold">--manual</span>
+<strong>--manual</strong>
     Show this application manual page.
 
-<span class="text-bold">--version</span>
+<strong>--version</strong>
     Show application version.
 
-<span class="text-bold">-d &lt;domain&gt;, --domain=&lt;domain&gt;</span>
+<strong>-d &lt;domain&gt;, --domain=&lt;domain&gt;</strong>
     This option should be used to define a domain name for use when
     building xlets.
-    A file named <span class="text-bold">domain_name</span> can also be created inside a folder named
-    <span class="text-bold">tmp</span> at the root of the repository whose only content should be the
+    A file named <strong>domain_name</strong> can also be created inside a folder named
+    <strong>tmp</strong> at the root of the repository whose only content should be the
     desired domain name.
     This option has precedence over the domain name found inside
-    the <span class="text-bold">domain_name</span> file.
+    the <strong>domain_name</strong> file.
 
-<span class="text-bold">-e &lt;dir&gt;, --extra-files=&lt;dir&gt;</span>
+<strong>-e &lt;dir&gt;, --extra-files=&lt;dir&gt;</strong>
     Path to a folder containing files that will be copied into an xlet folder
     at build time. Read the documentation to learn how this option works.
 
-<span class="text-bold">-f, --force-clean-build</span>
+<strong>-f, --force-clean-build</strong>
     Clear doctree cache and destination folder when building the documentation.
 
-<span class="text-bold">-i, --install-localizations</span>
+<strong>-i, --install-localizations</strong>
     Install xlets localizations after building xlets.
 
-<span class="text-bold">-n, --no-confirmation</span>
+<strong>-n, --no-confirmation</strong>
     Do not ask confirmation when building an xlet and the destination already
     exists. Specifying this option means that an existent destination will be
     completely removed, no questions asked.
 
-<span class="text-bold">-o &lt;dir&gt;, --output=&lt;dir&gt;</span>
+<strong>-o &lt;dir&gt;, --output=&lt;dir&gt;</strong>
     The output directory that will be used to save the built xlets.
-    <span class="text-bold">WARNING!!!</span> If the destination folder is inside a Dropbox folder, all
+    <strong>WARNING!!!</strong> If the destination folder is inside a Dropbox folder, all
     symbolic links will be resolved.
 
-<span class="text-bold">-r, --restart-cinnamon</span>
+<strong>-r, --restart-cinnamon</strong>
     Restart Cinnamon.
 
-<span class="text-bold">-s &lt;exec&gt;, --sass-parser=&lt;exec&gt;</span>
+<strong>-s &lt;exec&gt;, --sass-parser=&lt;exec&gt;</strong>
     Name or absolute path to Dart Sass executable. This may be needed only if
     Dart Sass isn&#x27;t available in a system&#x27;s PATH.
 
-<span class="text-bold">-t &lt;name&gt;, --theme-name=&lt;name&gt;</span>
+<strong>-t &lt;name&gt;, --theme-name=&lt;name&gt;</strong>
     A string used to give a name to the themes. The final theme names will look
-    like this: <span class="text-bold">&lt;theme_name&gt;-&lt;theme_variant&gt;</span>.
-    A file named <span class="text-bold">theme_name</span> can also be created inside a folder named
-    <span class="text-bold">tmp</span> at the root of the repository whose only content should be the
+    like this: <strong>&lt;theme_name&gt;-&lt;theme_variant&gt;</strong>.
+    A file named <strong>theme_name</strong> can also be created inside a folder named
+    <strong>tmp</strong> at the root of the repository whose only content should be the
     desired theme name.
     This option has precedence over the theme name found inside
-    the <span class="text-bold">theme_name</span> file.
+    the <strong>theme_name</strong> file.
 
-<span class="text-bold">-u, --update-inventories</span>
+<strong>-u, --update-inventories</strong>
     Update inventory files from their on-line resources when building the
     documentation. Inventory files will be updated automatically if they don&#x27;t
     already exist.
 
-<span class="text-bold">-v &lt;name&gt;, --variant-name=&lt;name&gt;</span>
+<strong>-v &lt;name&gt;, --variant-name=&lt;name&gt;</strong>
     Theme variant name (the name of its folder). If not specified, all theme
     variants will be worked on.
 
-<span class="text-bold">-x &lt;name&gt;, --xlet-name=&lt;name&gt;</span>
+<strong>-x &lt;name&gt;, --xlet-name=&lt;name&gt;</strong>
     Specify one or more applets/extensions to build. If none are specified,
     all xlets will be built.
 
-<span class="text-bold">dev_xlets &lt;sub_commands&gt;:</span>
+<strong>dev_xlets &lt;sub_commands&gt;:</strong>
 
-    <span class="text-bold">generate_meta_file</span>
+    <strong>generate_meta_file</strong>
         Generate the file containing all the metadata of all xlets on this
         repository.
 
-    <span class="text-bold">update_pot_files</span>
+    <strong>update_pot_files</strong>
         Update all .pot files from all xlets.
 
-    <span class="text-bold">update_spanish_localizations</span>
+    <strong>update_spanish_localizations</strong>
         Update all Spanish localizations from all xlets.
 
-    <span class="text-bold">create_xlets_changelogs</span>
+    <strong>create_xlets_changelogs</strong>
         Generate the CHANGELOG.md files for all xlets.
 
-    <span class="text-bold">create_localized_help</span>
+    <strong>create_localized_help</strong>
         Execute the create_localized_help.py script for each xlet to generate
         their HELP.html files.
 
-    <span class="text-bold">generate_trans_stats</span>
+    <strong>generate_trans_stats</strong>
         Generate translations statistics.
 
-    <span class="text-bold">check_js_modules</span>
+    <strong>check_js_modules</strong>
         Check if a JS module defined in an xlet configuration file is actually
         used/imported by an xlet and vice versa.
 
-<span class="text-bold">dev_themes &lt;sub_commands&gt;:</span>
+<strong>dev_themes &lt;sub_commands&gt;:</strong>
 
-    <span class="text-bold">generate_gtk_sass_includes_index</span>
+    <strong>generate_gtk_sass_includes_index</strong>
         Generate Gtk includes index file.
 
-    <span class="text-bold">parse_sass</span>
+    <strong>parse_sass</strong>
         Parse Sass files.
 
-    <span class="text-bold">generate_thumbnails</span>
+    <strong>generate_thumbnails</strong>
         Generate themes thumbnails.</pre>
 </div></div>
 </section>
@@ -264,7 +265,7 @@
 </li>
 </ul>
 <ul id="build-command-option-domain-reference">
-<li><p><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&lt;domain&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--domain=&lt;domain&gt;</span></code>: To be able to build any xlet, it is necessary to specify a domain name. This domain name is then used to generate an xlet UUID (and other data). To avoid passing this command line option every time one builds xlets, a file named <strong>domain_name</strong> can be created inside a folder named <strong>tmp</strong> at the root of the repository whose only content should be the desired domain name. This command line option has precedence over the <strong>domain_name</strong> file. Which means that if this option is used, the domain name found in an existent <strong>domain_name</strong> file will be ignored.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&lt;domain&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--domain=&lt;domain&gt;</span></code>: To be able to build any xlet, it is necessary to specify a domain name. This domain name is then used to generate an xlet UUID (and other data). To avoid passing this command line option every time one builds xlets, a file named <strong>domain_name</strong> can be created inside a folder named <strong>tmp</strong> at the root of the repository whose only content should be the desired domain name. This command line option has precedence over the <strong>domain_name</strong> file.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Example usage: <code class="docutils literal notranslate"><span class="pre">app.py</span> <span class="pre">build_xlets</span> <span class="pre">-x</span> <span class="pre">0ArgosForCinnamon</span> <span class="pre">-d</span> <span class="pre">example.com</span></code></p></li>
@@ -340,12 +341,11 @@ Users that want to perform more in depth changes to the xlets or even create the
 </section>
 <section id="app-py-build-themes">
 <span id="how-to-build-themes-reference"></span><h3>app.py build_themes<a class="headerlink" href="#app-py-build-themes" title="Permalink to this headline">¶</a></h3>
-<p>This command is used to build all the themes. Just like xlets, the themes found in Cinnamon Tools' repository aren't directly usable, they need to be <em>built</em>. The themes building process is interactive. The build process will ask for Cinnamon version, GTK+ 3/4 versions, shadows of windows with <abbr title="Client Side Decorations">CSD</abbr> , etc.</p>
-<p>There is actually one theme in this repository, but 10 variants (color accents) available. The existent variant is called <strong>GreybirdBlue</strong> because it's the same blue used by the <a class="reference external" href="https://github.com/shimmerproject/Greybird">Greybird</a> theme.</p>
+<p>This command is used to build all the themes. Just like xlets, the themes found in Cinnamon Tools' repository aren't directly usable, they need to be <em>built</em>. The themes building process is interactive. The build process will ask for Cinnamon version, GTK+ 3/4 versions, theme name, etc.</p>
 <section id="id1">
 <h4>Options<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">&lt;name&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--theme-name=&lt;name&gt;</span></code>: To be able to build the themes, it is necessary to specify a theme name. This theme name is then used to generate the full theme name (theme_name-theme_variant). To avoid passing this command line option every time one builds themes, a file named <strong>theme_name</strong> can be created at the root of the repository whose only content should be the desired theme name. This command line option has precedence over the <strong>theme_name</strong> file. Which means that if this option is used, the theme name found in an existent <strong>theme_name</strong> file will be ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">&lt;name&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--theme-name=&lt;name&gt;</span></code>: To be able to build the themes, it is necessary to specify a theme name. This theme name is then used to generate the full theme name (theme_name-theme_variant). To avoid passing this command line option every time one builds themes, a file named <strong>theme_name</strong> can be created inside a folder named <strong>tmp</strong> at the root of the repository whose only content should be the desired theme name. This command line option has precedence over the <strong>theme_name</strong> file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">&lt;name&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--variant-name=&lt;name&gt;</span></code>: Specify a theme variant name (the name of its folder). If not specified, all theme variants will be built.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;dir&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--output=&lt;dir&gt;</span></code>: The output directory that will be used to save the built themes. If not specified, the default storage location will be used. See <a class="reference internal" href="#build-command-option-output-reference"><span class="std std-ref">build command --output</span></a> option notes for more details.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-confirmation</span></code>: Do not confirm the deletion of an already built theme when the <code class="docutils literal notranslate"><span class="pre">--output</span></code> option is used. See <a class="reference internal" href="#build-command-option-output-reference"><span class="std std-ref">build command --output</span></a> option notes for more details.</p></li>
@@ -364,130 +364,10 @@ Users that want to perform more in depth changes to the xlets or even create the
 <section id="sub-commands">
 <h4>Sub-commands<a class="headerlink" href="#sub-commands" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">generate_gtk_sass_includes_index</span></code>: The <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> source for the Gtk 3/4 themes is organized by several <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files. Instead of dealing with dozens of import <code class="docutils literal notranslate"><span class="pre">&#64;import</span></code> statements every time that I add or remove a file, I only import one index file (<strong>themes/_sass/gtk/includes/__index__.scss</strong>) that is automatically generated by this command.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">generate_thumbnails</span></code>: This command generates the thumbnails for the Gtk and Cinnamon themes (the ones seen in Cinnamon' theme selector window). The generated thumbnail is just an image with the variant accent color as its background. See <a class="reference internal" href="00-requirements.html#thumbnails-generation-requirement-reference"><span class="std std-ref">requirements</span></a>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">parse_sass</span></code>: This command parses the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files needed to create the themes found in this repository. It's only useful for people that wants to create their own themes variants. See <a class="reference internal" href="00-requirements.html#parse-sass-requirement-reference"><span class="std std-ref">requirements</span></a>.</p></li>
 </ul>
-</section>
-<section id="detailed-differences-with-the-mint-x-theme-family">
-<h4>Detailed differences with the Mint-X theme family<a class="headerlink" href="#detailed-differences-with-the-mint-x-theme-family" title="Permalink to this headline">¶</a></h4>
-<p>The theme is basically the <strong>Mint-X</strong> theme with some graphics from the <strong>Mint-Y</strong> theme. But with added features that were removed from the previously mentioned default themes.</p>
-<p><strong>GTK2/GTK3 themes</strong></p>
-<ul class="simple">
-<li><p>Restored all removed scroll bars arrows. This is configurable. Scrollbar arrows can be hidden/shown.</p></li>
-<li><p>Restored all removed outlines from focused elements.</p></li>
-<li><p>Dashed lines feedback (undershoot) from scrolled views (affects GTK3 applications only) are configurable and can be hidden/shown.</p></li>
-</ul>
-<p><strong>Cinnamon theme</strong></p>
-<ul class="simple">
-<li><p>Removed center alignment from tooltips.</p></li>
-<li><p>Changed the switches appearance to look like the GTK3 switches.</p></li>
-<li><p>Removed fixed sizes for entries inside menus.</p></li>
-<li><p>Removed all images that were used to create elements with gradients in favor of using CSS rules.</p></li>
-</ul>
-<p><strong>All themes</strong></p>
-<ul class="simple">
-<li><p>I added accent color highlights to focused entries. I consider this a usability feature. The entries of the original Mint-X themes have almost no differences and their state is almost imperceptible from one another. Having a focused entry highlighted with the accent color makes it noticeable at first sight when there are more than one entry on screen.</p></li>
-<li><p>Tooltips homogenization and configuration. The background and foreground colors of the tooltips as well as their background and border opacity can be configured. By default all variants have tooltips with almost black background and almost white foreground colors.</p></li>
-</ul>
-</section>
-<section id="how-to-create-a-custom-theme-variant">
-<span id="how-to-create-custom-variant-reference"></span><h4>How to create a custom theme variant?<a class="headerlink" href="#how-to-create-a-custom-theme-variant" title="Permalink to this headline">¶</a></h4>
-<ol class="arabic simple">
-<li><p>Duplicate any of the variant folders found inside <strong>themes/_variants</strong>. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.</p></li>
-<li><p>Delete the content of the folder except for the file called <strong>config.yaml</strong>.</p></li>
-<li><p>Edit the <strong>config.yaml</strong> file with the desired colors. This file is commented to facilitate its edition.</p></li>
-<li><p>Parse the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files using the Cinnamon Tools command line application. See <a class="reference internal" href="#dev-themes-command-reference"><span class="std std-ref">app.py dev_themes parse_sass</span></a>.</p></li>
-<li><p>Generate the variant theme thumbnails using the Cinnamon Tools command line application. See <a class="reference internal" href="#dev-themes-command-reference"><span class="std std-ref">app.py dev_themes generate_thumbnails</span></a>. These thumbnails are used by Cinnamon's theme selectors as themes previews. This step could be ignored, in which case the thumbnails in the theme selectors will be blank.</p></li>
-<li><p>Build the themes using the Cinnamon Tools command line application. See <a class="reference internal" href="#how-to-build-themes-reference"><span class="std std-ref">app.py build_themes</span></a>.</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>When creating a custom theme variant, always use <code class="docutils literal notranslate"><span class="pre">--variant-name=&lt;name&gt;</span></code> CLI option to avoid unnecessary modifications to the default theme variants.</p></li>
-<li><p><strong>All newly added</strong> files/folders inside the <strong>themes/_variants</strong> folder <strong>will not be tracked by git</strong>.</p></li>
-</ul>
-</div>
-</section>
-<section id="customization-options">
-<h4>Customization options<a class="headerlink" href="#customization-options" title="Permalink to this headline">¶</a></h4>
-<p>Creating a custom variant of the theme has the advantage of having at ones finger tips the possibility to change certain core aspects of the theme that may otherwise be to complicated (or impossible) to change in a finished theme.</p>
-<section id="variant-configuration-file-example">
-<h5>Variant configuration file example<a class="headerlink" href="#variant-configuration-file-example" title="Permalink to this headline">¶</a></h5>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># START GreybirdBlue/config.yaml</span>
-<span class="o">%</span><span class="n">YAML</span> <span class="mf">1.1</span>
-<span class="o">---</span>
-<span class="c1"># All colors can only be a color in hexadecimal notation.</span>
-<span class="c1"># Shorthands (e.g. #fff) and alpha values (e.g. #000000ff) are not allowed.</span>
-<span class="c1"># All colors MUST be defined; no exceptions.</span>
-<span class="n">selected_bg_color</span><span class="p">:</span> <span class="s2">&quot;#398ee7&quot;</span> <span class="c1"># Bright blue</span>
-<span class="n">selected_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
-<span class="n">tooltip_bg_color</span><span class="p">:</span> <span class="s2">&quot;#212121&quot;</span> <span class="c1"># Black</span>
-<span class="n">tooltip_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
-<span class="n">link_color</span><span class="p">:</span> <span class="s2">&quot;#0000ee&quot;</span> <span class="c1"># Blue</span>
-<span class="n">info_color</span><span class="p">:</span> <span class="s2">&quot;#398ee7&quot;</span> <span class="c1"># Bright blue</span>
-<span class="n">info_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
-<span class="n">question_color</span><span class="p">:</span> <span class="s2">&quot;#55c1ec&quot;</span> <span class="c1"># Light blue</span>
-<span class="n">question_fg_color</span><span class="p">:</span> <span class="s2">&quot;#004166&quot;</span> <span class="c1"># Dark blue</span>
-<span class="n">warning_color</span><span class="p">:</span> <span class="s2">&quot;#fdde76&quot;</span> <span class="c1"># Yellow</span>
-<span class="n">warning_fg_color</span><span class="p">:</span> <span class="s2">&quot;#212121&quot;</span> <span class="c1"># Black</span>
-<span class="n">error_color</span><span class="p">:</span> <span class="s2">&quot;#cc0000&quot;</span> <span class="c1"># Red</span>
-<span class="n">error_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
-<span class="n">success_color</span><span class="p">:</span> <span class="s2">&quot;#4e9a06&quot;</span> <span class="c1"># Green</span>
-<span class="n">success_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># Green</span>
-<span class="c1"># END GreybirdBlue/config.yaml</span>
-</pre></div>
-</div>
-</section>
-<section id="global-themes-configuration-file-example">
-<h5>Global themes configuration file example<a class="headerlink" href="#global-themes-configuration-file-example" title="Permalink to this headline">¶</a></h5>
-<p>The options in this file can be overwritten by simply making a copy of this file inside the <strong>cinnamon_tools_repository/tmp</strong> folder and editing its content.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># START theme_config.yaml</span>
-<span class="o">%</span><span class="n">YAML</span> <span class="mf">1.1</span>
-<span class="o">---</span>
-<span class="c1"># To override these defaults, make a copy of this file into REPOSITORY_FOLDER/tmp and</span>
-<span class="c1"># modify the values on the copied file.</span>
-
-<span class="c1"># Opacity values range: 0 (fully transparent) to 1 (fully opaque).</span>
-<span class="c1"># Spread/Distance values range in pixels: Any positive integer.</span>
-
-<span class="c1"># CSD (Client Side Decorations) shadows.</span>
-<span class="c1"># Affects Gtk3+ themes only.</span>
-<span class="n">csd_shadow_spread</span><span class="p">:</span> <span class="mi">0</span>
-<span class="n">csd_shadow_opacity</span><span class="p">:</span> <span class="mf">0.4</span>
-<span class="n">csd_backdrop_shadow_spread</span><span class="p">:</span> <span class="mi">0</span>
-<span class="n">csd_backdrop_shadow_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
-
-<span class="c1"># Popovers shadows.</span>
-<span class="c1"># Affects Gtk3+ themes only.</span>
-<span class="n">popover_shadow_spread</span><span class="p">:</span> <span class="mi">1</span>
-<span class="n">popover_shadow_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
-
-<span class="c1"># Visual hints that happen where content is &quot;scrolled off&quot; and can be made visible by scrolling.</span>
-<span class="c1"># Affects Gtk3+ themes only.</span>
-<span class="c1"># Set to zero to get rid of it.</span>
-<span class="n">undershoots_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
-<span class="c1"># Distance in pixels from a scrolled view border.</span>
-<span class="n">undershoots_distance</span><span class="p">:</span> <span class="mi">0</span>
-
-<span class="c1"># Tooltips opacity.</span>
-<span class="c1"># Affects all themes.</span>
-<span class="n">tooltip_background_opacity</span><span class="p">:</span> <span class="mi">1</span>
-<span class="c1"># Affects Cinnamon and Gtk3+ themes only.</span>
-<span class="n">tooltip_border_opacity</span><span class="p">:</span> <span class="mf">0.3</span>
-
-<span class="c1"># Focus outline.</span>
-<span class="c1"># Affects all Gtk themes.</span>
-<span class="n">outline_opacity</span><span class="p">:</span> <span class="mf">0.3</span>
-
-<span class="c1"># Display scrollbar arrows.</span>
-<span class="c1"># true or 1 to display arrows.</span>
-<span class="c1"># false or 0 to hide them.</span>
-<span class="c1"># Affects all Gtk themes.</span>
-<span class="n">display_scrollbar_arrows</span><span class="p">:</span> <span class="n">true</span>
-<span class="c1"># END theme_config.yaml</span>
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 <section id="app-py-dev-xlets">
@@ -570,7 +450,7 @@ Users that want to perform more in depth changes to the xlets or even create the
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="00-requirements.html" class="btn btn-neutral float-left" title="Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="02-tips-and-tricks.html" class="btn btn-neutral float-right" title="Cinnamon tips and tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="02-theme.html" class="btn btn-neutral float-right" title="Themes development/building" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
@@ -580,7 +460,7 @@ Users that want to perform more in depth changes to the xlets or even create the
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

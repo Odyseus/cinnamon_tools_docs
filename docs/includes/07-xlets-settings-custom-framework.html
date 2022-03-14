@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="file_chooser_dialog" href="../modules/file_chooser_dialog/modules.html" />
-    <link rel="prev" title="EOL ideas/plans" href="05-EOL.html" /> 
+    <link rel="prev" title="EOL ideas/plans" href="06-EOL.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,10 +38,11 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Xlets settings custom framework</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#general-changes">General changes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#widget-changes">Widget changes</a></li>
@@ -74,10 +75,10 @@
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
       <li>Xlets settings custom framework</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/includes/06-xlets-settings-custom-framework.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/includes/07-xlets-settings-custom-framework.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="05-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="06-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../modules/file_chooser_dialog/modules.html" class="btn btn-neutral float-right" title="file_chooser_dialog" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -115,7 +116,7 @@
 <h2>Widget changes<a class="headerlink" href="#widget-changes" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><strong>button</strong>: This widget doesn't use the <em>proxy</em> that the Cinnamon implementation uses. Instead, it just toggles a boolean setting that can be bound to any action on the xlet side. Added <code class="docutils literal notranslate"><span class="pre">image</span></code> parameter to display an icon on the button. The button can have an icon, a label or both.</p></li>
-<li><p><strong>buttonsgroup</strong>: A new widget whose sole purpose is to contain <strong>button</strong> widgets.</p></li>
+<li><p><strong>buttonsgroup</strong>: A new widget whose sole purpose is to contain <strong>button</strong> widgets. It is used only for UI layout and it isn't bound to any setting.</p></li>
 <li><p><strong>stringslist</strong>: A new widget that allows to store a list of strings. It is rendered in the main window as a simple button that when clicked a dialog will appear with the list of strings represented inside a <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-3.0/classes/TreeView.html#Gtk.TreeView" title="(in Gtk 3.0 v3.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.TreeView</span></code></a>.</p></li>
 <li><p><strong>entry</strong>: This widget has the <code class="docutils literal notranslate"><span class="pre">expand-width</span></code> option set to <strong>true</strong> by default.</p></li>
 <li><p><strong>list</strong>: This widget has several bug fixes (<strong>FIXME</strong>: remember to properly report them if and when I can reproduce them) and several improvements.</p>
@@ -205,7 +206,7 @@
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>See <a class="reference internal" href="03-development-notes.html#custom-settings-framework-countermeasures-reference"><span class="std std-ref">Countermeasures for xlets that make use of the custom settings framework</span></a>.</p></li>
+<li><p>See <a class="reference internal" href="04-development-notes.html#custom-settings-framework-countermeasures-reference"><span class="std std-ref">Countermeasures for xlets that make use of the custom settings framework</span></a>.</p></li>
 </ul>
 </section>
 <section id="todo">
@@ -373,7 +374,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="05-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="06-EOL.html" class="btn btn-neutral float-left" title="EOL ideas/plans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../modules/file_chooser_dialog/modules.html" class="btn btn-neutral float-right" title="file_chooser_dialog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -384,7 +385,7 @@
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

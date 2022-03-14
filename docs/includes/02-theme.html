@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Themes development/building &mdash; Cinnamon Tools  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/cinnamon-logo.svg"/>
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cinnamon tips and tricks" href="03-tips-and-tricks.html" />
+    <link rel="prev" title="Usage" href="01-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: False" >
+            <a href="../index.html" class="icon icon-home"> Cinnamon Tools
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00-requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01-usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Themes development/building</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-differences-with-the-mint-x-theme-family">Detailed differences with the Mint-X theme family</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-create-a-custom-theme-variant">How to create a custom theme variant?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customization-options">Customization options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variant-configuration-file-example">Variant configuration file example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-themes-configuration-file-example">Global themes configuration file example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: False" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cinnamon Tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Themes development/building</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/includes/02-theme.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="01-usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03-tips-and-tricks.html" class="btn btn-neutral float-right" title="Cinnamon tips and tricks" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="themes-development-building">
+<h1>Themes development/building<a class="headerlink" href="#themes-development-building" title="Permalink to this headline">¶</a></h1>
+<p>There is actually one theme in this repository, but 10 variants (accent colors) available. It is basically the <strong>Mint-X</strong> theme with some graphics from the <strong>Mint-Y</strong> theme. But with added features that were removed from the previously mentioned default themes.</p>
+<section id="detailed-differences-with-the-mint-x-theme-family">
+<h2>Detailed differences with the Mint-X theme family<a class="headerlink" href="#detailed-differences-with-the-mint-x-theme-family" title="Permalink to this headline">¶</a></h2>
+<p><strong>GTK2/GTK3 themes</strong></p>
+<ul class="simple">
+<li><p>Restored all removed scroll bars arrows. This is configurable. Scrollbar arrows can be hidden/shown.</p></li>
+<li><p>Restored all removed outlines from focused elements.</p></li>
+<li><p>Dashed lines feedback (undershoot) from scrolled views (affects GTK3/4 applications only) are configurable and can be hidden/shown.</p></li>
+</ul>
+<p><strong>Cinnamon theme</strong></p>
+<ul class="simple">
+<li><p>Removed center alignment from tooltips.</p></li>
+<li><p>Changed the switches appearance to look like the GTK3 switches.</p></li>
+<li><p>Removed fixed sizes for entries inside menus.</p></li>
+<li><p>Removed all images that were used to create elements with gradients in favor of using CSS rules.</p></li>
+</ul>
+<p><strong>All themes</strong></p>
+<ul class="simple">
+<li><p>I added accent color highlights to focused entries. I consider this a usability feature. The entries of the original Mint-X themes have almost no differences and their state is almost imperceptible from one another. Having a focused entry highlighted with the accent color makes it noticeable at first sight when there are more than one entry on screen.</p></li>
+<li><p>Tooltips homogenization and configuration. The background and foreground colors of the tooltips as well as their background and border opacity can be configured. By default all variants have tooltips with almost black background and almost white foreground colors.</p></li>
+</ul>
+</section>
+<section id="how-to-create-a-custom-theme-variant">
+<span id="how-to-create-custom-variant-reference"></span><h2>How to create a custom theme variant?<a class="headerlink" href="#how-to-create-a-custom-theme-variant" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Duplicate any of the variant folders found inside <strong>themes/_variants</strong>. Name the duplicated folder to whatever name one wants the variant theme to have. All changes described in the following steps should be made inside the newly created folder and nowhere else.</p></li>
+<li><p>Delete the content of the folder except for the file called <strong>config.yaml</strong>.</p></li>
+<li><p>Edit the <strong>config.yaml</strong> file with the desired colors. This file is commented to facilitate its edition.</p></li>
+<li><p>Parse the <abbr title="Syntactically Awesome Style Sheets">Sass</abbr> files using the Cinnamon Tools command line application. See <a class="reference internal" href="01-usage.html#dev-themes-command-reference"><span class="std std-ref">app.py dev_themes parse_sass</span></a>.</p></li>
+<li><p>Generate the variant theme thumbnails using the Cinnamon Tools command line application. See <a class="reference internal" href="01-usage.html#dev-themes-command-reference"><span class="std std-ref">app.py dev_themes generate_thumbnails</span></a>. These thumbnails are used by Cinnamon's theme selectors as themes previews. This step could be ignored, in which case the thumbnails in the theme selectors will be blank.</p></li>
+<li><p>Build the themes using the Cinnamon Tools command line application. See <a class="reference internal" href="01-usage.html#how-to-build-themes-reference"><span class="std std-ref">app.py build_themes</span></a>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>When creating a custom theme variant, always use <code class="docutils literal notranslate"><span class="pre">--variant-name=&lt;name&gt;</span></code> CLI option to avoid unnecessary modifications to the default theme variants.</p></li>
+<li><p><strong>All newly added</strong> files/folders inside the <strong>themes/_variants</strong> folder <strong>will not be tracked by git</strong>.</p></li>
+</ul>
+</div>
+</section>
+<section id="customization-options">
+<h2>Customization options<a class="headerlink" href="#customization-options" title="Permalink to this headline">¶</a></h2>
+<p>Creating a custom variant of the theme has the advantage of having at ones finger tips the possibility to change certain core aspects of the theme that may otherwise be to complicated (or impossible) to change in a finished theme.</p>
+<section id="variant-configuration-file-example">
+<h3>Variant configuration file example<a class="headerlink" href="#variant-configuration-file-example" title="Permalink to this headline">¶</a></h3>
+<p>The color named <code class="docutils literal notranslate"><span class="pre">selected_bg_color</span></code> is the one that defines what one might refer to as the accent color of the theme. The theme variant should be named (the folder name) as a description of the color defined in <code class="docutils literal notranslate"><span class="pre">selected_bg_color</span></code>.</p>
+<p>In the following example, the variant is called <strong>GreybirdBlue</strong> because it's the same blue used by the <a class="reference external" href="https://github.com/shimmerproject/Greybird">Greybird theme</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># START GreybirdBlue/config.yaml</span>
+<span class="o">%</span><span class="n">YAML</span> <span class="mf">1.1</span>
+<span class="o">---</span>
+<span class="c1"># All colors can only be a color in hexadecimal notation.</span>
+<span class="c1"># Shorthands (e.g. #fff) and alpha values (e.g. #000000ff) are not allowed.</span>
+<span class="c1"># All colors MUST be defined; no exceptions.</span>
+<span class="n">selected_bg_color</span><span class="p">:</span> <span class="s2">&quot;#398ee7&quot;</span> <span class="c1"># Bright blue</span>
+<span class="n">selected_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
+<span class="n">tooltip_bg_color</span><span class="p">:</span> <span class="s2">&quot;#212121&quot;</span> <span class="c1"># Black</span>
+<span class="n">tooltip_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
+<span class="n">link_color</span><span class="p">:</span> <span class="s2">&quot;#0000ee&quot;</span> <span class="c1"># Blue</span>
+<span class="n">info_color</span><span class="p">:</span> <span class="s2">&quot;#398ee7&quot;</span> <span class="c1"># Bright blue</span>
+<span class="n">info_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
+<span class="n">question_color</span><span class="p">:</span> <span class="s2">&quot;#55c1ec&quot;</span> <span class="c1"># Light blue</span>
+<span class="n">question_fg_color</span><span class="p">:</span> <span class="s2">&quot;#004166&quot;</span> <span class="c1"># Dark blue</span>
+<span class="n">warning_color</span><span class="p">:</span> <span class="s2">&quot;#fdde76&quot;</span> <span class="c1"># Yellow</span>
+<span class="n">warning_fg_color</span><span class="p">:</span> <span class="s2">&quot;#212121&quot;</span> <span class="c1"># Black</span>
+<span class="n">error_color</span><span class="p">:</span> <span class="s2">&quot;#cc0000&quot;</span> <span class="c1"># Red</span>
+<span class="n">error_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># White</span>
+<span class="n">success_color</span><span class="p">:</span> <span class="s2">&quot;#4e9a06&quot;</span> <span class="c1"># Green</span>
+<span class="n">success_fg_color</span><span class="p">:</span> <span class="s2">&quot;#f5f5f5&quot;</span> <span class="c1"># Green</span>
+<span class="c1"># END GreybirdBlue/config.yaml</span>
+</pre></div>
+</div>
+</section>
+<section id="global-themes-configuration-file-example">
+<h3>Global themes configuration file example<a class="headerlink" href="#global-themes-configuration-file-example" title="Permalink to this headline">¶</a></h3>
+<p>The options in this file can be overwritten by simply making a copy of this file inside the <strong>cinnamon_tools_repository/tmp</strong> folder and editing its content. Only the options that one wants to override need to be specified.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># START theme_config.yaml</span>
+<span class="o">%</span><span class="n">YAML</span> <span class="mf">1.1</span>
+<span class="o">---</span>
+<span class="c1"># To override these defaults, make a copy of this file into REPOSITORY_FOLDER/tmp and</span>
+<span class="c1"># modify the values on the copied file.</span>
+
+<span class="c1"># Opacity values range: 0 (fully transparent) to 1 (fully opaque).</span>
+<span class="c1"># Spread/Distance values range in pixels: Any positive integer.</span>
+
+<span class="c1"># CSD (Client Side Decorations) shadows.</span>
+<span class="c1"># Affects Gtk3+ themes only.</span>
+<span class="n">csd_shadow_spread</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">csd_shadow_opacity</span><span class="p">:</span> <span class="mf">0.4</span>
+<span class="n">csd_backdrop_shadow_spread</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">csd_backdrop_shadow_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
+
+<span class="c1"># Popovers shadows.</span>
+<span class="c1"># Affects Gtk3+ themes only.</span>
+<span class="n">popover_shadow_spread</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">popover_shadow_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
+
+<span class="c1"># Visual hints that happen where content is &quot;scrolled off&quot; and can be made visible by scrolling.</span>
+<span class="c1"># Affects Gtk3+ themes only.</span>
+<span class="c1"># Set to zero to get rid of it.</span>
+<span class="n">undershoots_opacity</span><span class="p">:</span> <span class="mf">0.2</span>
+<span class="c1"># Distance in pixels from a scrolled view border.</span>
+<span class="n">undershoots_distance</span><span class="p">:</span> <span class="mi">0</span>
+
+<span class="c1"># Tooltips opacity.</span>
+<span class="c1"># Affects all themes.</span>
+<span class="n">tooltip_background_opacity</span><span class="p">:</span> <span class="mi">1</span>
+<span class="c1"># Affects Cinnamon and Gtk3+ themes only.</span>
+<span class="n">tooltip_border_opacity</span><span class="p">:</span> <span class="mf">0.3</span>
+
+<span class="c1"># Focus outline.</span>
+<span class="c1"># Affects all Gtk themes.</span>
+<span class="n">outline_opacity</span><span class="p">:</span> <span class="mf">0.3</span>
+
+<span class="c1"># Display scrollbar arrows.</span>
+<span class="c1"># true or 1 to display arrows.</span>
+<span class="c1"># false or 0 to hide them.</span>
+<span class="c1"># Affects all Gtk themes.</span>
+<span class="n">display_scrollbar_arrows</span><span class="p">:</span> <span class="n">true</span>
+<span class="c1"># END theme_config.yaml</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="01-usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="03-tips-and-tricks.html" class="btn btn-neutral float-right" title="Cinnamon tips and tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Odyseus..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+
+        </div>
+      </div>
+
+      <a id="to-top-of-page" href="#top">
+        <i class="fa fa-chevron-circle-up"></i>
+      </a>
+
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

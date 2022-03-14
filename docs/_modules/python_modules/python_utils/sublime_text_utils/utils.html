@@ -35,11 +35,12 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../includes/01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../includes/03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../includes/04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -151,17 +152,19 @@
 
 
 <div class="viewcode-block" id="remove_bad_chars"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.remove_bad_chars">[docs]</a><span class="k">def</span> <span class="nf">remove_bad_chars</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">bad_chars</span><span class="o">=</span><span class="p">[]):</span>
-    <span class="sd">&quot;&quot;&quot;Remove bad characters from selection.</span>
+    <span class="sd">&quot;&quot;&quot;Remove *bad characters* from selection.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    text : str</span>
 <span class="sd">        The string to clean.</span>
+<span class="sd">    bad_chars : list, optional</span>
+<span class="sd">        A list of *bad characters* to remove.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    str</span>
-<span class="sd">        String with bad characters removed.</span>
+<span class="sd">        String with *bad characters* removed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">bad_chars</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bad_chars</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">bad_chars</span><span class="p">:</span>
@@ -179,6 +182,8 @@
 <span class="sd">        A Sublime Text view.</span>
 <span class="sd">    extract_words : bool, optional</span>
 <span class="sd">        If no selection is found at region&#39;s coordinates, extract words from regions.</span>
+<span class="sd">    bad_chars : list, optional</span>
+<span class="sd">        A list of *bad characters* to remove.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -418,14 +423,39 @@
     <span class="k">return</span> <span class="n">context</span></div>
 
 
-<span class="k">def</span> <span class="nf">distinct_until_buffer_changed</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
-    <span class="c1"># Sublime has problems to hold the distinction between buffers and views.</span>
-    <span class="c1"># It usually emits multiple identical events if you have multiple views</span>
-    <span class="c1"># into the same buffer.</span>
+<div class="viewcode-block" id="distinct_until_buffer_changed"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.distinct_until_buffer_changed">[docs]</a><span class="k">def</span> <span class="nf">distinct_until_buffer_changed</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Distinct until buffer changed.</span>
+
+<span class="sd">    Sublime has problems to hold the distinction between buffers and views.</span>
+<span class="sd">    It usually emits multiple identical events if you have multiple views</span>
+<span class="sd">    into the same buffer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    method : method</span>
+<span class="sd">        Method to wrap.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    method</span>
+<span class="sd">        Wrapped method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">last_call</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wrapper.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        view : object</span>
+<span class="sd">            An instance of ``sublime.View``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Halt execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">nonlocal</span> <span class="n">last_call</span>
 
         <span class="n">this_call</span> <span class="o">=</span> <span class="p">(</span><span class="n">view</span><span class="o">.</span><span class="n">buffer_id</span><span class="p">(),</span> <span class="n">view</span><span class="o">.</span><span class="n">change_count</span><span class="p">())</span>
@@ -435,11 +465,17 @@
         <span class="n">last_call</span> <span class="o">=</span> <span class="n">this_call</span>
         <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
 
 
 <div class="viewcode-block" id="reload_plugins"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.reload_plugins">[docs]</a><span class="k">def</span> <span class="nf">reload_plugins</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reload Sublime &#39;plugins&#39; using official API.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Reload Sublime &#39;plugins&#39; using official API.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    prefix : str</span>
+<span class="sd">        Python module prefix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">toplevel</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
@@ -493,13 +529,27 @@
 <span class="sd">&#39;&#39;&#39;</span>
 
 
-<span class="k">class</span> <span class="nc">CompletionsSuperClass</span><span class="p">():</span>
+<div class="viewcode-block" id="CompletionsSuperClass"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass">[docs]</a><span class="k">class</span> <span class="nc">CompletionsSuperClass</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Register completions from a plugin settings file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_completions_scope</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="n">_completions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">_settings</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">_logger</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">__enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if completions should be triggered.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        location : int</span>
+<span class="sd">            A ``sublime.View`` point.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            If an auto completions should be triggered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_completions</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
@@ -512,7 +562,22 @@
 
         <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">on_query_completions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
+<div class="viewcode-block" id="CompletionsSuperClass.on_query_completions"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.on_query_completions">[docs]</a>    <span class="k">def</span> <span class="nf">on_query_completions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">locations</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;On query completions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        prefix : str</span>
+<span class="sd">            Text to complete.</span>
+<span class="sd">        locations : tuple</span>
+<span class="sd">            A list of points (a point is an :py:class:`int` that represents the offset from the</span>
+<span class="sd">            beginning of the editor buffer).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tuple, None</span>
+<span class="sd">            A completions object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__enabled</span><span class="p">(</span><span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="k">return</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_completions</span><span class="p">,</span>
@@ -522,10 +587,12 @@
                 <span class="n">sublime</span><span class="o">.</span><span class="n">INHIBIT_EXPLICIT_COMPLETIONS</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="CompletionsSuperClass.update_completions"><a class="viewcode-back" href="../../../../modules/python_modules/python_modules.python_utils.sublime_text_utils.utils.html#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.update_completions">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">update_completions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update completions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_completions</span> <span class="o">=</span> <span class="p">[[</span><span class="n">c</span><span class="p">[</span><span class="s2">&quot;trigger&quot;</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s2">&quot;contents&quot;</span><span class="p">]]</span>
                                  <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;completions&quot;</span><span class="p">,</span> <span class="p">[])]</span>
@@ -534,7 +601,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_completions</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
                 <span class="s2">&quot;Completions must be a list of dictionaries with only two keys (&#39;trigger&#39; and &#39;contents&#39;).&quot;</span>
-            <span class="p">)</span>
+            <span class="p">)</span></div></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -552,7 +619,7 @@
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

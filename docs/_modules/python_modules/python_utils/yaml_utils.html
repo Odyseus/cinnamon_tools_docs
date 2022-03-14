@@ -35,11 +35,12 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../includes/01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../includes/03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../includes/04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -69,7 +70,15 @@
   <h1>Source code for python_modules.python_utils.yaml_utils</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;YAML utils.</span>
+
+<span class="sd">Note</span>
+<span class="sd">----</span>
+<span class="sd">The PyYaml module has not one single docstring anywhere! A total and absolute waste use of</span>
+<span class="sd">the only programing language in existence that has native documentation capabilities! And its</span>
+<span class="sd">manually written documentation (¬¬) is perfect for explaining absolutely nothing with a trillion</span>
+<span class="sd">words! Since I don&#39;t have a f*cking magic ball to divine what the f*ck each thing is or does, the</span>
+<span class="sd">incomplete docstrings on this module can stay as they are.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
@@ -84,13 +93,15 @@
 
 
 <div class="viewcode-block" id="load"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.load">[docs]</a><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Summary</span>
+    <span class="sd">&quot;&quot;&quot;Parse the first YAML document in a stream and produce the corresponding Python object.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    stream : str, byte, object</span>
 <span class="sd">        The YAML data to parse into a Python object. It could be a string,</span>
 <span class="sd">        bytes or a file object.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Extra keyword arguments to pass to ``yaml.load``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -101,7 +112,7 @@
 
 
 <div class="viewcode-block" id="dump"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.dump">[docs]</a><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Summary</span>
+    <span class="sd">&quot;&quot;&quot;Serialize a Python object into a YAML stream.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -109,6 +120,8 @@
 <span class="sd">        Description</span>
 <span class="sd">    stream : object, None, optional</span>
 <span class="sd">        Description</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Extra keyword arguments to pass to ``yaml.dump``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -118,35 +131,104 @@
     <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">SafeDumper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">ordered_load</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">SafeLoader</span><span class="p">,</span> <span class="n">object_pairs_hook</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">OrderedLoader</span><span class="p">(</span><span class="n">Loader</span><span class="p">):</span>
-        <span class="k">pass</span>
+<div class="viewcode-block" id="OrderedLoader"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.OrderedLoader">[docs]</a><span class="k">class</span> <span class="nc">OrderedLoader</span><span class="p">(</span><span class="n">SafeLoader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ordered YAML loader.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
 
-    <span class="k">def</span> <span class="nf">construct_mapping</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
-        <span class="n">loader</span><span class="o">.</span><span class="n">flatten_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">object_pairs_hook</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_pairs</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
 
-    <span class="n">OrderedLoader</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span>
+<div class="viewcode-block" id="_construct_mapping"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils._construct_mapping">[docs]</a><span class="k">def</span> <span class="nf">_construct_mapping</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct mapping.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    loader : TYPE</span>
+<span class="sd">        Description</span>
+<span class="sd">    node : TYPE</span>
+<span class="sd">        Description</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    OrderedDict</span>
+<span class="sd">        Description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">loader</span><span class="o">.</span><span class="n">flatten_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">construct_pairs</span><span class="p">(</span><span class="n">node</span><span class="p">))</span></div>
+
+
+<span class="n">OrderedLoader</span><span class="o">.</span><span class="n">add_constructor</span><span class="p">(</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">BaseResolver</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_TAG</span><span class="p">,</span>
+    <span class="n">_construct_mapping</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="OrderedDumper"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.OrderedDumper">[docs]</a><span class="k">class</span> <span class="nc">OrderedDumper</span><span class="p">(</span><span class="n">SafeDumper</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ordered YAML dumper.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="_dict_representer"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils._dict_representer">[docs]</a><span class="k">def</span> <span class="nf">_dict_representer</span><span class="p">(</span><span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dict representer.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dumper : TYPE</span>
+<span class="sd">        Description</span>
+<span class="sd">    data : TYPE</span>
+<span class="sd">        Description</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    TYPE</span>
+<span class="sd">        Description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span>
         <span class="n">yaml</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">BaseResolver</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_TAG</span><span class="p">,</span>
-        <span class="n">construct_mapping</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">OrderedLoader</span><span class="p">)</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">ordered_dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">SafeDumper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">OrderedDumper</span><span class="p">(</span><span class="n">Dumper</span><span class="p">):</span>
-        <span class="k">pass</span>
+<span class="n">OrderedDumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="n">_dict_representer</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_dict_representer</span><span class="p">(</span><span class="n">dumper</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">dumper</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span>
-            <span class="n">yaml</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">BaseResolver</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_TAG</span><span class="p">,</span>
-            <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">)</span>
 
-    <span class="n">OrderedDumper</span><span class="o">.</span><span class="n">add_representer</span><span class="p">(</span><span class="n">OrderedDict</span><span class="p">,</span> <span class="n">_dict_representer</span><span class="p">)</span>
+<div class="viewcode-block" id="ordered_load"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.ordered_load">[docs]</a><span class="k">def</span> <span class="nf">ordered_load</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Same as :any:`yaml_utils.load`.</span>
 
-    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">OrderedDumper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    stream : str, byte, object</span>
+<span class="sd">        The YAML data to parse into a Python object. It could be a string,</span>
+<span class="sd">        bytes or a file object.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Extra keyword arguments to pass to ``yaml.load``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    object</span>
+<span class="sd">        A Python object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">OrderedLoader</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ordered_dump"><a class="viewcode-back" href="../../../modules/python_modules/python_modules.python_utils.yaml_utils.html#python_modules.python_utils.yaml_utils.ordered_dump">[docs]</a><span class="k">def</span> <span class="nf">ordered_dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Same as :any:`yaml_utils.dump`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : object</span>
+<span class="sd">        Description</span>
+<span class="sd">    stream : object, None, optional</span>
+<span class="sd">        Description</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Extra keyword arguments to pass to ``yaml.dump``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str, byte, None</span>
+<span class="sd">        The serialized data if ``stream`` is ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">stream</span><span class="p">,</span> <span class="n">Dumper</span><span class="o">=</span><span class="n">OrderedDumper</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -164,7 +246,7 @@
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

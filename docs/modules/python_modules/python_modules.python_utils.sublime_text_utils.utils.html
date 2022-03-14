@@ -38,11 +38,12 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -128,13 +129,16 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.remove_bad_chars">
 <span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">remove_bad_chars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#remove_bad_chars"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.remove_bad_chars" title="Permalink to this definition">¶</a></dt>
-<dd><p>Remove bad characters from selection.</p>
+<dd><p>Remove <em>bad characters</em> from selection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- The string to clean.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- The string to clean.</p></li>
+<li><p><strong>bad_chars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) -- A list of <em>bad characters</em> to remove.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>String with bad characters removed.</p>
+<dd class="field-even"><p>String with <em>bad characters</em> removed.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
@@ -151,6 +155,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>view</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) -- A Sublime Text view.</p></li>
 <li><p><strong>extract_words</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) -- If no selection is found at region's coordinates, extract words from regions.</p></li>
+<li><p><strong>bad_chars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>, </em><em>optional</em>) -- A list of <em>bad characters</em> to remove.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -313,9 +318,85 @@ files/folders names/paths.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.distinct_until_buffer_changed">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">distinct_until_buffer_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#distinct_until_buffer_changed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.distinct_until_buffer_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distinct until buffer changed.</p>
+<p>Sublime has problems to hold the distinction between buffers and views.
+It usually emits multiple identical events if you have multiple views
+into the same buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>method</em>) -- Method to wrap.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Wrapped method.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.reload_plugins">
 <span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">reload_plugins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#reload_plugins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.reload_plugins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reload Sublime 'plugins' using official API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Python module prefix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.utils.</span></span><span class="sig-name descname"><span class="pre">CompletionsSuperClass</span></span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#CompletionsSuperClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Register completions from a plugin settings file.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.__enabled">
+<span class="sig-name descname"><span class="pre">__enabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.__enabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if completions should be triggered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>location</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- A <code class="docutils literal notranslate"><span class="pre">sublime.View</span></code> point.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If an auto completions should be triggered.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.on_query_completions">
+<span class="sig-name descname"><span class="pre">on_query_completions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#CompletionsSuperClass.on_query_completions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.on_query_completions" title="Permalink to this definition">¶</a></dt>
+<dd><p>On query completions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prefix</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Text to complete.</p></li>
+<li><p><strong>locations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a>) -- A list of points (a point is an <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> that represents the offset from the
+beginning of the editor buffer).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A completions object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a>, None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.update_completions">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_completions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/utils.html#CompletionsSuperClass.update_completions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.utils.CompletionsSuperClass.update_completions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update completions.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -335,7 +416,7 @@ files/folders names/paths.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

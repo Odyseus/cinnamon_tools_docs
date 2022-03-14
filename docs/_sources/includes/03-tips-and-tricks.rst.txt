@@ -5,7 +5,7 @@ Cinnamon tips and tricks
 
 .. note::
 
-    Here are listed some tips, tricks and some basic concepts related to the Cinnamon desktop environment.
+    Here are listed some tips, tricks and some basic concepts related to the Cinnamon desktop environment and other topics that might be of use to *new comers*.
 
 .. _restart-cinnamon-reference:
 

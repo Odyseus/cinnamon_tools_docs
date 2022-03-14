@@ -38,11 +38,12 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -79,6 +80,98 @@
   <section id="module-python_modules.python_utils.sublime_text_utils.events">
 <span id="python-modules-python-utils-sublime-text-utils-events-module"></span><h1>python_modules.python_utils.sublime_text_utils.events module<a class="headerlink" href="#module-python_modules.python_utils.sublime_text_utils.events" title="Permalink to this headline">¶</a></h1>
 <p>Events.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.listeners">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">listeners</span></span><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.listeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registered listeners storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/collections.html#collections.defaultdict" title="(in Python v3.10)">collections.defaultdict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.map_fn_to_topic">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">map_fn_to_topic</span></span><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.map_fn_to_topic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registered functions storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.subscribe">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/events.html#subscribe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.subscribe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Event name.</p></li>
+<li><p><strong>fn</strong> (<em>method</em>) -- Method to register.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.unsubscribe">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">unsubscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/events.html#unsubscribe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.unsubscribe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregister event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Event name.</p></li>
+<li><p><strong>fn</strong> (<em>method</em>) -- Method to unregister.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.broadcast">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">broadcast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/events.html#broadcast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.broadcast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Emit event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topic</strong> (<em>srt</em>) -- Event name.</p></li>
+<li><p><strong>payload</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) -- Parameters passed to executed method.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.on">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/events.html#on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event registration decorator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>topic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Event name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Decorator function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>method</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.events.off">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.events.</span></span><span class="sig-name descname"><span class="pre">off</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/events.html#off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.events.off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>method</em>) -- Method to unregister.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -96,7 +189,7 @@
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 

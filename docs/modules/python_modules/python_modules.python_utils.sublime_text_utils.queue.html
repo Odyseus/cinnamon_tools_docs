@@ -38,11 +38,12 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/00-requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../includes/01-usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/02-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/03-development-notes.html">Development notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/04-code-styling.html">Code styling/guidelines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/05-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../includes/06-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/02-theme.html">Themes development/building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/03-tips-and-tricks.html">Cinnamon tips and tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/04-development-notes.html">Development notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/05-code-styling.html">Code styling/guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/06-EOL.html"><abbr title="end-of-life">EOL</abbr> ideas/plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../includes/07-xlets-settings-custom-framework.html">Xlets settings custom framework</a></li>
 </ul>
 
         </div>
@@ -79,6 +80,74 @@
   <section id="module-python_modules.python_utils.sublime_text_utils.queue">
 <span id="python-modules-python-utils-sublime-text-utils-queue-module"></span><h1>python_modules.python_utils.sublime_text_utils.queue module<a class="headerlink" href="#module-python_modules.python_utils.sublime_text_utils.queue" title="Permalink to this headline">¶</a></h1>
 <p>Queue.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.queue.MYPY">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.queue.</span></span><span class="sig-name descname"><span class="pre">MYPY</span></span><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.queue.MYPY" title="Permalink to this definition">¶</a></dt>
+<dd><p>MyPy module utilization(?).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.queue.timers">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.queue.</span></span><span class="sig-name descname"><span class="pre">timers</span></span><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.queue.timers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map from key to <a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Timer" title="(in Python v3.10)"><code class="xref any docutils literal notranslate"><span class="pre">threading.Timer</span></code></a> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.queue.debounce">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.queue.</span></span><span class="sig-name descname"><span class="pre">debounce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/queue.html#debounce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.queue.debounce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a method after a delay.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback</strong> (<em>method</em>) -- Method to execute.</p></li>
+<li><p><strong>delay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- Execution delay.</p></li>
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Timer registration key.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Instantiated timer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Timer" title="(in Python v3.10)">threading.Timer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.queue.cleanup">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.queue.</span></span><span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/queue.html#cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.queue.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregister a timer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- Timer registration key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="python_modules.python_utils.sublime_text_utils.queue.unload">
+<span class="sig-prename descclassname"><span class="pre">python_modules.python_utils.sublime_text_utils.queue.</span></span><span class="sig-name descname"><span class="pre">unload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/python_modules/python_utils/sublime_text_utils/queue.html#unload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#python_modules.python_utils.sublime_text_utils.queue.unload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregister all timers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Continue loop(?).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -96,7 +165,7 @@
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://gitlab.com/Odyseus/sphinx_rtd_theme_mod">theme</a>
     provided by <a href="https://readthedocs.org">Read the Docs</a>.
    
 
