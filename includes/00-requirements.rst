@@ -28,6 +28,12 @@ Requirements
 
 .. contextual-admonition::
     :context: warning
+    :title: ``dev_xlets update_pot_files`` command requirement
+
+    This task requires the command ``make-cinnamon-xlet-pot-cli`` to be available on **PATH**. The command is provided by the `Make Cinnamon Xlet POT <https://gitlab.com/PythonCLIApplications/MakeCinnamonXletPOT>`__ application. This application is a drop-in replacement for the ``cinnamon-xlet-makepot`` command provided by Cinnamon, but with more features designed to assist in the development of the xlets found in the Cinnamon Tools repository.
+
+.. contextual-admonition::
+    :context: warning
     :title: Documentation building requirements
 
     - **Python 3.7+**

@@ -23,6 +23,11 @@ Almost all development tasks require the Cinnamon Tools' repository to be *deep 
 - ``--recurse-submodules`` argument will also clone the sub-modules and all sub-modules that a sub-module might have.
 - ``--shallow-submodules`` argument is to clone the sub-modules to a depth of one commit to avoid downloading a huge amount of ``git`` history.
 
+``dev_xlets update_pot_files`` command requirement
+--------------------------------------------------
+
+This task requires the command ``make-cinnamon-xlet-pot-cli`` to be available on **PATH**. The command is provided by the `Make Cinnamon Xlet POT <https://gitlab.com/PythonCLIApplications/MakeCinnamonXletPOT>`__ application. This application is a drop-in replacement for the ``cinnamon-xlet-makepot`` command provided by Cinnamon, but with more features designed to assist in the development of the xlets found in the Cinnamon Tools repository.
+
 Documentation building requirements
 -----------------------------------
 
